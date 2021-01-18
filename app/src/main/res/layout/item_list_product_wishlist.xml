@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:paddingStart="16dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/im_image_product"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/product_favourite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:riv_corner_radius="16dp"
+            app:riv_mutate_background="true"
+            app:riv_oval="false"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/tv_name_dress_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/im_image_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:text="Dahlia Cascade Layered Jumpsuit" />
+
+        <TextView
+            android:id="@+id/tv_price_dress_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/colorBlack"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_dress_product"
+            tools:ignore="MissingConstraints"
+            tools:text="Rp. 12.000.000" />
+
+        <TextView
+            android:id="@+id/tv_discount_product"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="5dp"
+            tools:text="25%"
+            android:gravity="center"
+            android:textSize="8sp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/bg_button_rounded_gold"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintStart_toEndOf="@+id/tv_price_dress_product"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_dress_product"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints"/>
+
+        <TextView
+            android:id="@+id/tv_price_old_dress_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/colorDarkGrey"
+            tools:text="Rp. 8.000.000"
+            android:foreground="@drawable/strikethrough_foreground"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_dress_product"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints,UnusedAttribute" />
+
+
+        <Button
+            android:id="@+id/btn_booking_now"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            style="@style/ButtonRoundedOutlinedGold"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/btn_book_now"
+            android:textColor="@color/text_color_selector_address"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_old_dress_product"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

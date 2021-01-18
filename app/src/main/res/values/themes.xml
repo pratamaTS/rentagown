@@ -1,0 +1,96 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark"  tools:targetApi="23">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+
+    </style>
+
+    <style name="ButtonRoundedFilledGold" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">28dp</item>
+    </style>
+
+    <style name="ButtonRoundedOutlinedGold" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="cornerRadius">28dp</item>
+    </style>
+
+    <style name="ButtonInvoice" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorSecondary</item>
+        <item name="cornerRadius">4dp</item>
+    </style>
+
+    <style name="ButtonRoundedOutlinedWhite" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorWhite</item>
+        <item name="cornerRadius">4dp</item>
+    </style>
+
+    <style name="ButtonRoundedOutlinedGold2" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorSecondary</item>
+        <item name="cornerRadius">4dp</item>
+    </style>
+
+    <!-- Bottom Sheet Bar -->
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+        <item name="android:windowContentOverlay">@color/colorWhite</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/colorWhite</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+    </style>
+
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <!-- Text Size -->
+        <item name="android:textSize">14sp</item>
+        <!-- Query Text Color -->
+        <item name="android:textColorPrimary">@color/colorDarkGrey</item>
+        <!-- Hint Color -->
+        <item name="android:textColorHint">@color/colorDarkGrey</item>
+    </style>
+
+    <!-- Tab Layout -->
+    <style name="CustomTextApprearance" parent="Widget.Design.TabLayout">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+    <!-- Switch Compact -->
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorSecondary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/colorSoftGrey</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/colorSoftGrey</item>
+    </style>
+
+    <!-- Chip Choice Custom -->
+    <style name="CustomChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+        <item name="android:textColor">@color/text_color_chip_state_list</item>
+        <item name="chipStrokeColor">@color/stroke_color_chip_state_list</item>
+    </style>
+
+    <!-- Rating Bar Custom -->
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlActivated">#E9B90A</item>
+        <item name="colorControlNormal">@color/colorSoftGrey</item>
+    </style>
+
+</resources>

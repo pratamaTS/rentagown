@@ -1,0 +1,27 @@
+package com.example.rentagown.Connection.Interface
+
+import com.example.rentagown.Response.Product.ResponseProduct
+import com.example.rentagown.Response.ProductCategory.ResponseProductCategory
+import com.example.rentagown.Response.Promo.ResponsePromo
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.HeaderMap
+import retrofit2.http.Url
+
+interface RentaGownServices {
+    //Get All Product
+    @GET("api/v/1/product/findall")
+    fun getAllProduct(@HeaderMap map: MutableMap<String, String>?): Call<ResponseProduct>
+
+    //Get All Product by Category
+    @GET
+    fun getAllProductByCategory(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseProduct>
+
+    //Get All Promo
+    @GET("api/v/1/promo/findall")
+    fun getAllPromo(@HeaderMap map: MutableMap<String, String>?): Call<ResponsePromo>
+
+    //Get All Product Category
+    @GET("api/v/1/prodcat/findall")
+    fun getAllProductCategory(@HeaderMap map: MutableMap<String, String>?): Call<ResponseProductCategory>
+}

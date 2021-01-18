@@ -1,0 +1,253 @@
+<resources>
+    <string name="app_name">Rent a Gown</string>
+
+    <string name="todo">todo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- menu botnav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_booking">Booking</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- item booking -->
+    <string name="price_booking">Price :</string>
+    <string name="dp_paid_booking">DP Paid :</string>
+    <string name="remaining_bills_booking">Remaining Bills :</string>
+    <string name="btn_fitting_size">Fitting Size</string>
+
+    <!-- item product slider-->
+    <string name="btn_book_now">BOOK NOW</string>
+
+    <!-- on boarding screen -->
+    <string name="btn_next">Next</string>
+    <string name="btn_get_started">Get Started</string>
+    <string name="btn_skip">Skip</string>
+
+    <!-- fragment home -->
+    <string name="discover">Discover</string>
+    <string name="btn_see_all_main">See All</string>
+    <string name="tv_title_special_promo_for_you">Special Promo For You</string>
+    <string name="tv_title_favorite_gown">Favorite Gown</string>
+    <string name="tv_title_new_gown">New Gown</string>
+
+    <!-- fragment cart -->
+    <string name="appbar_cart">Cart</string>
+    <string name="info_cart">Maximum return of goods is 7 days after the date of booking, which is 16 September 2020 (Office Hours).</string>
+    <string name="tv_title_total_price">Total Price</string>
+    <string name="tv_total_price">Rp. 0</string>
+    <string name="btn_checkout_cart">Checkout</string>
+
+    <!-- fragment profile -->
+    <string name="title_personal">Personal</string>
+    <string name="menu_invoice_history">Invoice History</string>
+    <string name="menu_transaction_status">Transaction Status</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_support">Support</string>
+    <string name="menu_help_center">Help Center</string>
+    <string name="menu_privacy_policy">Privacy Policy</string>
+    <string name="menu_terms_and_conditions">Terms and Conditions</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="app_version_1_0">App version 1.0</string>
+    <string name="name_user">John Doe</string>
+    <string name="email_user">john.doe@gmail.com</string>
+
+    <!-- fragment booking -->
+    <string name="my_booking">My Booking</string>
+    <string name="btn_history">History</string>
+    <string name="tv_desc_booking_empty">Add your booking to booking list and start ordering</string>
+    <string name="btn_browse">Browse</string>
+    <string name="tv_title_booking_empty">Your Booking Is Currently Empty</string>
+
+    <!-- activity history booking -->
+    <string name="appbar_history">History</string>
+
+    <!-- activity notification-->
+    <string name="appbar_notification">Notification</string>
+
+    <!-- activity invoice history -->
+    <string name="appbar_invoice_history">Invoice History</string>
+
+    <!-- activity setting -->
+    <string name="appbar_settings">Settings</string>
+    <string name="title_general">General</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_address">Change Address</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="catalog_updates">Catalog Updates</string>
+    <string name="promo">Promo</string>
+    <string name="transactions">Transactions</string>
+
+    <!-- activity edit profile -->
+    <string name="appbar_edit_profile">Edit Profile</string>
+    <string name="btn_edit">Edit</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="btn_save">Save</string>
+
+    <!-- activity change password -->
+    <string name="appbar_change_password">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="create_a_strong_password_for_the_account_by_email">Create a strong password for the account by email</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_re_password">Re-Password</string>
+    <string name="after_password_has_been_changed_please_log_in_again_with_the_new_on_all_of_your_devices">After password has been changed, please log in again with the new on all of your devices</string>
+
+
+    <!-- activity change address -->
+    <string name="appbar_change_address">Change Address</string>
+    <string name="btn_choose_address">Choose Address</string>
+
+
+    <!-- activity add address -->
+    <string name="appbar_add_address">Add Address</string>
+    <string name="hint_address_label">Address Label</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_name_address">Name</string>
+    <string name="hint_no_handphone_address">No. Handphone</string>
+
+    <!-- activity wishlist -->
+    <string name="appbar_wishlist">Wishlist</string>
+    <string name="tv_title_wishlist_empty">YOUR WISHLIST IS CURRENTLY EMPTY</string>
+    <string name="tv_desc_wishlist_empty">Add your favorites to wishlist and start building your personal collections</string>
+
+    <!-- activity gown -->
+    <string name="appbar_gown">Gown</string>
+
+    <!-- activity filter -->
+    <string name="appbar_filter">Filter</string>
+    <string name="btn_reset_filter">Reset</string>
+    <string name="btn_apply">Apply</string>
+    <string name="chip_paling_sesuai">Paling Sesuai</string>
+    <string name="chip_terbaru">Terbaru</string>
+    <string name="chip_harga_tertinggi">Harga Tertinggi</string>
+    <string name="chip_harga_terendah">Harga Terendah</string>
+    <string name="title_price">Price</string>
+    <string name="et_harga_terendah">Terendah</string>
+    <string name="et_harga_tertinggi">Tertinggi</string>
+    <string name="chip_50_rb_100_rb">50 rb - 100 rb</string>
+    <string name="chip_100_rb_150_rb">100 rb - 150 rb</string>
+    <string name="chip_150_rb_200_rb">150 rb - 200 rb</string>
+
+    <!-- activity sign in -->
+    <string name="tv_title_login">Login</string>
+    <string name="et_email_login">Email</string>
+    <string name="et_password_login">Password</string>
+    <string name="btn_forgot_password">Forgot Password ?</string>
+    <string name="btn_sign_in">SIGN IN</string>
+    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="btn_to_sign_up">Sign Up</string>
+
+    <!-- activity sign up -->
+    <string name="tv_title_register">Register</string>
+    <string name="et_name_register">Name</string>
+    <string name="et_email_register">Email</string>
+    <string name="et_no_handphone">No. Handphone</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="btn_to_sign_in">Sign In</string>
+
+    <!-- activity forgot password -->
+    <string name="tv_title_forgot_password">Forgot Password</string>
+    <string name="enter_the_email_address_associated_with_your_account">Enter the email address associated with your account.</string>
+    <string name="we_will_email_you_a_link_reset_your_password">We will email you a link reset your password</string>
+    <string name="btn_send_email">Send</string>
+
+    <!-- activity email success -->
+    <string name="btn_back_sign_in">Sign In</string>
+    <string name="didn_t_receive_the_link">Didn\'t receive the link?</string>
+    <string name="btn_resend_link">Resend</string>
+    <string name="please_check_your_inbox_and_click_in_the_receive_link_to_reset_a_password">Please check your inbox and click in the receive link to reset a password</string>
+    <string name="tv_title_email_has_been_sent">Email has been sent!</string>
+
+    <!-- activity view product -->
+    <string name="title_price_product">PRICE</string>
+    <string name="title_date_booking">DATE BOOKING</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="special_treatment">Special Treatment</string>
+    <string name="one_day_service">One-day service</string>
+    <string name="harga_sudah_termasuk_veil_dan_balero_dan_gratis_peminjaman_aksesoris">Harga sudah termasuk veil dan balero, dan gratis peminjaman aksesoris</string>
+    <string name="name_view_product">Selina Colourblock Camisole Dress</string>
+    <string name="btn_booking_now">Book Now</string>
+
+    <!-- activity your booking -->
+    <string name="appbar_your_booking">Your Booking</string>
+    <string name="info_your_booking">Maximum return of goods is 7 days after the date of booking, which is 16 September 2020 (Office Hours).</string>
+    <string name="tv_title_total_price_your_booking">Total Price</string>
+    <string name="tv_total_price_your_booking">Rp. 0</string>
+    <string name="btn_checkout">Checkout</string>
+
+    <!-- activity payment -->
+    <string name="appbar_payment">Payment</string>
+    <string name="title_shipping_address">Shipping Address</string>
+    <string name="btn_change_address">Change Address</string>
+    <string name="label_rumah">Rumah</string>
+    <string name="label_name">John Doe</string>
+    <string name="label_no_hp">(6287871180436)</string>
+    <string name="label_address">Perum. Visenda, Jl. K.H. Hasyim, Kec. Kembangan, Kota Jakarta Barat, DKI Jakarta.</string>
+    <string name="title_payment_methods">Payment Methods</string>
+    <string name="current_method">CURRENT METHOD</string>
+    <string name="default_method">Default Method</string>
+    <string name="available_bank_account_number_you_transfer_to">Available bank account number you transfer to</string>
+    <string name="transfer_bank_bca">Transfer Bank BCA</string>
+    <string name="account_name">John Doe</string>
+    <string name="account_number">5496523645</string>
+    <string name="title_payment_summary">Payment Summary</string>
+    <string name="payment_deposit_booking">Deposit Booking</string>
+    <string name="payment_total">Total</string>
+
+    <!-- activity bottom sheet bar payment -->
+    <string name="title_select_payment_method">Select Payment Method</string>
+    <string name="deposit_booking_transfer">Deposit Booking (Transfer)</string>
+    <string name="full_payment_transfer">Full Payment (Transfer)</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_payment">Payment</string>
+
+    <!-- activity confirm payment -->
+    <string name="appbar_confirm_payment">Confirm Payment</string>
+    <string name="payment_deadline">Payment Deadline</string>
+    <string name="account_number_confirm">Account Number</string>
+    <string name="atas_nama">a.n John Doe</string>
+    <string name="btn_invoice">INVOICE</string>
+    <string name="total_price_confirm">Total</string>
+    <string name="last_2_digit_is_unique_code_for_bank_transfer">Last 2 digit is unique code for bank transfer</string>
+    <string name="payment_method_confirm">Payment Method</string>
+    <string name="btn_confirmation">Confirmation</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <!-- activity form confirmation -->
+    <string name="appbar_confirmation">Confirmation</string>
+    <string name="please_fill_out_this_page_after_performing_bank_transfer">Please fill out this page after performing bank transfer</string>
+    <string name="please_make_a_payment_transfer_to_the_following_account_and_fill_in_the_payment_confirmation_document_so_that_we_can_process_your_purchase">Please make a payment transfer to the following account and fill in the payment confirmation document so that we can process your purchase</string>
+    <string name="total_price">Total Price</string>
+    <string name="last_2_digit_is_unique_code_for_bank_transfer_confirm">Last 2 digit is unique code for bank transfer</string>
+    <string name="hint_your_bank_name">Your Bank Name</string>
+    <string name="hint_your_account_number">Your Account Number</string>
+    <string name="hint_your_account_name">Your Account Name</string>
+    <string name="hint_payment_amount">Payment Amount</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_continue_booking">Continue Booking</string>
+
+    <!-- activity booking success -->
+    <string name="booking_success">Booking Success</string>
+    <string name="your_dress_will_be_prepared_for_you_thanks_for_order">Your dress will be prepared for you, thanks for order!</string>
+    <string name="btn_invoice_success">Invoice</string>
+    <string name="btn_back_to_home">Back to Home</string>
+
+    <!-- activity invoice -->
+    <string name="appbar_invoice">Invoice</string>
+    <string name="title_no_invoice">Invoice#</string>
+    <string name="title_payment_date">Payment Date</string>
+    <string name="title_due_date">Due Date</string>
+    <string name="title_total_price_invoice">Total Price</string>
+    <string name="title_total_discount_invoice">Total Discount</string>
+    <string name="title_late_charges">Late Charges</string>
+    <string name="title_total_deposit_booking">Total Deposit Booking</string>
+    <string name="title_remaining_bill">Remaining Bill</string>
+    <string name="transfer_manual">Transfer Manual</string>
+    <string name="title_account_number_invoice">Account Number</string>
+</resources>

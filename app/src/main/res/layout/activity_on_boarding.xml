@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.OnBoardingActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/screen_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/logo_white"
+        android:contentDescription="@string/todo"/>
+
+    <Button
+        android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:text="@string/btn_skip"
+        android:textSize="14sp"
+        android:textColor="@color/colorWhite"
+        tools:ignore="RelativeOverlap" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/btn_next"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:drawableEnd="@drawable/ic_right_arrow_white"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        tools:ignore="RelativeOverlap" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tabBackground="@drawable/indicator_selector"
+        android:background="@android:color/transparent"
+        app:tabIndicator="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        app:tabPaddingStart="20dp"
+        app:tabPaddingEnd="20dp">
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <Button
+        android:id="@+id/btn_get_started"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/btn_get_started"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/poppins_medium"
+        style="@style/ButtonRoundedOutlinedWhite"
+        />
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_get_started"-->
+<!--        android:layout_width="130dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="invisible"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:text="@string/btn_get_started"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textColor="@color/colorWhite"-->
+<!--        android:fontFamily="@font/poppins_medium"-->
+<!--        android:background="@drawable/border_button_white"-->
+<!--        />-->
+
+</RelativeLayout>
