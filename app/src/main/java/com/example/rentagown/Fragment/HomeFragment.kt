@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -48,13 +49,15 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var adapterPromo: SliderPromoAdapter? = null
     var adapterFavoriteGown: SliderFavoriteGownAdapter? = null
     var adapterNewGown: SliderNewGownAdapter? = null
-    var categoryMenuList: ArrayList<DataProductCategory> = ArrayList()
-    var sliderMainMenuList: ArrayList<DataProduct> = ArrayList()
+    var categoryMenuList: ArrayList<DataProductCategory>? = null
+    var sliderMainMenuList: ArrayList<DataProduct>? = null
     var promoList: ArrayList<Promo> = ArrayList()
     var favoriteGownList: ArrayList<FavoriteGown> = ArrayList()
     var newGownList: ArrayList<NewGown> = ArrayList()
     var dummySliderMainMenus: ArrayList<DataProduct> = ArrayList()
     var itemDecorSet: Boolean = false
+    var tvvNoItemHome: TextView? = null
+
     private var selectedCategoryMenu: DataProductCategory? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +78,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         rvSliderPromo = view.findViewById(R.id.rv_slider_promo)
         rvSliderFavoriteGown = view.findViewById(R.id.rv_slider_favorite_gown)
         rvSliderNewGown = view.findViewById(R.id.rv_slider_new_gown)
+        tvvNoItemHome = view.findViewById(R.id.tv_no_item_home)
 
         getProductCategory()
 
@@ -300,7 +304,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         when (view!!.id) {
             R.id.category_menu_item_container -> {
                 val cm = adapterMenu!!.getItem(position)
-                adapterMainMenu!!.replaceItems(sliderMainMenuList)
+                adapterMainMenu!!.replaceItems(sliderMainMenuList!!)
             }
         }
     }
@@ -308,27 +312,31 @@ class HomeFragment : Fragment(), View.OnClickListener,
     override fun onSuccessGetProductCategory(dataProductCat: ArrayList<DataProductCategory>?) {
 
         //Title Menu
-        categoryMenuList = dataProductCat as ArrayList<DataProductCategory>
+        categoryMenuList = dataProductCat
 
-        //Bind Item to Adapter
-        adapterMenu = CategoryMenuAdapter(this, categoryMenuList, this)
-        rvTitleMenu!!.setLayoutManager(
+        if(categoryMenuList?.isNotEmpty() == true) {
+            //Bind Item to Adapter
+            adapterMenu = CategoryMenuAdapter(this, categoryMenuList!!, this)
+            rvTitleMenu!!.setLayoutManager(
                 LinearLayoutManager(
-                        context,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
                 )
-        )
-        rvTitleMenu!!.setAdapter(adapterMenu)
-        rvTitleMenu!!.addItemDecoration(ItemDecorationSlider(16))
-        adapterMenu!!.selectCategory(0)
+            )
+            rvTitleMenu!!.setAdapter(adapterMenu)
+            rvTitleMenu!!.addItemDecoration(ItemDecorationSlider(16))
+            adapterMenu!!.selectCategory(0)
 
-        // preselect first category
-        selectedCategoryMenu = adapterMenu!!.getItem(0)
+            // preselect first category
+            selectedCategoryMenu = adapterMenu!!.getItem(0)
 
 
-        //Slider Main Menu
-        ProductByCategoryPresenter(this).getAllProductByCategory(selectedCategoryMenu!!.nameProductCategory.toString())
+            //Slider Main Menu
+            ProductByCategoryPresenter(this).getAllProductByCategory(selectedCategoryMenu!!.nameProductCategory.toString())
+        } else{
+            Toast.makeText(context,"There is no category data", Toast.LENGTH_SHORT)
+        }
     }
 
     override fun onErrorGetProductCategory(msg: String) {
@@ -337,21 +345,28 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
 
-        sliderMainMenuList = dataProductByCat as ArrayList<DataProduct>
+        sliderMainMenuList = dataProductByCat
 
         //Setup Recycler View Slider Main Menu
-        adapterMainMenu = SliderMainMenuAdapter(context!!, sliderMainMenuList)
-        rvSliderMenu!!.setLayoutManager(
+        if(dataProductByCat?.isNotEmpty() == true) {
+            rvSliderMenu!!.visibility = View.VISIBLE
+            tvvNoItemHome!!.visibility = View.GONE
+            adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(context!!, it) }
+            rvSliderMenu!!.setLayoutManager(
                 LinearLayoutManager(
-                        context,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
                 )
-        )
-        rvSliderMenu!!.setAdapter(adapterMainMenu!!)
-        if (itemDecorSet == false) {
-            rvSliderMenu!!.addItemDecoration(ItemDecorationSlider(16))
-            itemDecorSet = true
+            )
+            rvSliderMenu!!.setAdapter(adapterMainMenu!!)
+            if (itemDecorSet == false) {
+                rvSliderMenu!!.addItemDecoration(ItemDecorationSlider(16))
+                itemDecorSet = true
+            }
+        }else{
+            rvSliderMenu!!.visibility = View.GONE
+            tvvNoItemHome!!.visibility = View.VISIBLE
         }
     }
 
