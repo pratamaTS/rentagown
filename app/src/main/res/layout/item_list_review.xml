@@ -28,7 +28,7 @@
         android:numStars="5"
         android:rating="3.5"
         android:stepSize="0.5"
-        style="@style/RatingBar"
+        style="@style/RatingBarSmall"
         android:isIndicator="true"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_user_review"
         tools:ignore="MissingConstraints" />
@@ -69,10 +69,5 @@
         tools:text="The booking process is fast, and the goods according to the order and the size are also very fitting"
         app:layout_constraintTop_toBottomOf="@+id/ratingbar_review_list"
         tools:ignore="MissingConstraints" />
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

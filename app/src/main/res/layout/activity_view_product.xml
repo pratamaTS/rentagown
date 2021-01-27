@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerActivityViewProduct"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ViewProductActivity">
@@ -41,7 +42,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_alignParentEnd="true"
                     android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_like_white_outlined"
+                    android:src="@drawable/btn_like_selected"
                     tools:ignore="MissingConstraints" />
 
             </RelativeLayout>

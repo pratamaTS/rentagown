@@ -14,7 +14,6 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvPriceOld: TextView
     var tvDiscount: TextView
     var imProduct: RoundedImageView
-    var btnLike: ImageButton
     var btnBooking: Button
 
     init {
@@ -23,7 +22,6 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvPriceOld = itemView.findViewById(R.id.tv_price_old_dress_product)
         tvDiscount = itemView.findViewById(R.id.tv_discount_product)
         imProduct = itemView.findViewById(R.id.im_image_product)
-        btnLike = itemView.findViewById(R.id.btn_like_product)
         btnBooking = itemView.findViewById(R.id.btn_booking_now)
     }
 }

@@ -34,6 +34,9 @@ class DataProduct: ResponseProduct() {
     @field:SerializedName("product_name")
     val productName: String? = null
 
+    @field:SerializedName("path_photo")
+    val pathPhoto: String? = null
+
     @field:SerializedName("id_promo")
     val idPromo: String? = null
 

@@ -1,5 +1,6 @@
 package com.example.rentagown.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -48,6 +49,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {

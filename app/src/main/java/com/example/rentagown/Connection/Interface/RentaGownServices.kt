@@ -1,5 +1,7 @@
 package com.example.rentagown.Connection.Interface
 
+import com.example.rentagown.Response.FavoriteGown.ResponseFavoriteGown
+import com.example.rentagown.Response.NewGown.ResponseNewGown
 import com.example.rentagown.Response.Product.ResponseProduct
 import com.example.rentagown.Response.ProductCategory.ResponseProductCategory
 import com.example.rentagown.Response.Promo.ResponsePromo
@@ -24,4 +26,12 @@ interface RentaGownServices {
     //Get All Product Category
     @GET("api/v/1/prodcat/findall")
     fun getAllProductCategory(@HeaderMap map: MutableMap<String, String>?): Call<ResponseProductCategory>
+
+    //Get All New Gown
+    @GET("api/v/1/product/findsort/desc")
+    fun getAllNewGown(@HeaderMap map: MutableMap<String, String>?): Call<ResponseNewGown>
+
+    //Get All Favorite Gown
+    @GET("api/v/1/user/favorite")
+    fun getAllFavoriteGown(@HeaderMap map: MutableMap<String, String>?): Call<ResponseFavoriteGown>
 }

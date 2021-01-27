@@ -6,6 +6,7 @@
     <color name="colorSecondary">#AE8200</color>
     <color name="colorDarkGold">#D9B650</color>
     <color name="colorGold">#FFDD67</color>
+    <color name="colorLightGold">#FFE599</color>
     <color name="colorDarkGray">#707070</color>
     <color name="colorDarkGrey">#747474</color>
     <color name="colorGray">#B0B0B0</color>
@@ -22,4 +23,6 @@
     <color name="colorMistyWhite">#F1F1F1</color>
     <color name="colorMistyBlack">#4F4F4F</color>
     <color name="colorGreen">#10D953</color>
+    <color name="colorSoftGreen">#64FF98</color>
+    <color name="colorDarkGreen">#086326</color>
 </resources>

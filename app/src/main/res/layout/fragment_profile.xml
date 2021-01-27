@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ProfileBeforeFragment">
+    tools:context=".Fragment.ProfileFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,55 +22,43 @@
                 android:background="@drawable/border_bottom"
                 tools:ignore="MissingConstraints">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/foto_profile"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="24dp"
-                    android:src="@drawable/ic_person"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="52dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/name_user"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toEndOf="@+id/foto_profile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/email_user"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/foto_profile">
-
-                    <Button
-                        android:id="@+id/btn_create_account"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Create Account"
-                        android:textColor="@color/colorDarkGrey"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="OR"
-                        android:textColor="@color/colorDarkGrey"
-                        android:textSize="18sp" />
-
-                    <Button
-                        android:id="@+id/btn_to_layout_login"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Sign In"
-                        android:textColor="@color/colorDarkGrey"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
+                    app:layout_constraintStart_toEndOf="@+id/foto_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    app:layout_constraintVertical_bias="0.031" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

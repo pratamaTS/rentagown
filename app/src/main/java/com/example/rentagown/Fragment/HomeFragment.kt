@@ -6,33 +6,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentagown.Activity.NotificationActivity
-import com.example.rentagown.Activity.ProductGownActivity
-import com.example.rentagown.Activity.WishlistActivity
+import com.example.rentagown.Activity.*
 import com.example.rentagown.Adapter.*
-import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
-import com.example.rentagown.Connection.Interface.ProductCategoryInterface
-import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
-import com.example.rentagown.Connection.Presenter.ProductCategoryPresenter
+import com.example.rentagown.Connection.Interface.*
+import com.example.rentagown.Connection.Presenter.*
 import com.example.rentagown.Decoration.ItemDecorationSlider
 import com.example.rentagown.Interface.ItemClickListener
 import com.example.rentagown.Model.*
 import com.example.rentagown.R
+import com.example.rentagown.Response.FavoriteGown.DataFavoriteGown
+import com.example.rentagown.Response.NewGown.DataNewGown
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.Response.ProductCategory.DataProductCategory
+import com.example.rentagown.Response.Promo.DataPromo
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), View.OnClickListener,
-    ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, CategoryMenuAdapter.ReloadItemInterface {
+    ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, PromoInterface, FavoriteGownInterface, NewGownInterface, CategoryMenuAdapter.ReloadItemInterface {
     var imWishlist: ImageButton? = null
     var imNotification: ImageButton? = null
     var btnSeeAllCategory: Button? = null
@@ -42,6 +40,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var rvTitleMenu: RecyclerView? = null
     var rvSliderMenu: RecyclerView? = null
     var rvSliderPromo: RecyclerView? = null
+    var layoutPromoEmpty: ImageView? = null
+    var searchView: SearchView? = null
+    var layoutPromo: ConstraintLayout? = null
     var rvSliderFavoriteGown: RecyclerView? = null
     var rvSliderNewGown: RecyclerView? = null
     var adapterMenu: CategoryMenuAdapter? = null
@@ -51,9 +52,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var adapterNewGown: SliderNewGownAdapter? = null
     var categoryMenuList: ArrayList<DataProductCategory>? = null
     var sliderMainMenuList: ArrayList<DataProduct>? = null
-    var promoList: ArrayList<Promo> = ArrayList()
-    var favoriteGownList: ArrayList<FavoriteGown> = ArrayList()
-    var newGownList: ArrayList<NewGown> = ArrayList()
+    var promoList: ArrayList<DataPromo> = ArrayList()
+    var favoriteGownList: ArrayList<DataFavoriteGown> = ArrayList()
+    var newGownList: ArrayList<DataNewGown>?= null
     var dummySliderMainMenus: ArrayList<DataProduct> = ArrayList()
     var itemDecorSet: Boolean = false
     var tvvNoItemHome: TextView? = null
@@ -67,10 +68,15 @@ class HomeFragment : Fragment(), View.OnClickListener,
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         //INIT VIEW
+
+        //INIT VIEW
         imWishlist = view.findViewById(R.id.im_wishlist)
         imNotification = view.findViewById(R.id.im_notification)
+        layoutPromoEmpty = view.findViewById(R.id.layout_promo_empty)
+        layoutPromo = view.findViewById(R.id.layout_promo)
         btnSeeAllCategory = view.findViewById(R.id.btn_see_all_category)
         btnSeeAllPromo = view.findViewById(R.id.btn_see_all_promo)
+        searchView = view.findViewById(R.id.search_view)
         btnSeeAllFavoriteGown = view.findViewById(R.id.btn_see_all_favorite)
         btnSeeAllNewGown = view.findViewById(R.id.btn_see_all_new)
         rvTitleMenu = view.findViewById(R.id.rv_title_menu)
@@ -78,212 +84,31 @@ class HomeFragment : Fragment(), View.OnClickListener,
         rvSliderPromo = view.findViewById(R.id.rv_slider_promo)
         rvSliderFavoriteGown = view.findViewById(R.id.rv_slider_favorite_gown)
         rvSliderNewGown = view.findViewById(R.id.rv_slider_new_gown)
-        tvvNoItemHome = view.findViewById(R.id.tv_no_item_home)
 
-        getProductCategory()
+        getData()
 
-        //Slider Promo]
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-
-        //Setup Recycler View Promo
-        adapterPromo = SliderPromoAdapter(context!!, promoList)
-        rvSliderPromo!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-        rvSliderPromo!!.setAdapter(adapterPromo)
-        rvSliderPromo!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
-
-
-        //Slider Favorite Gown
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-
-        //Setup Recycler View Favorite Gown
-        adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
-        rvSliderFavoriteGown!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-        rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
-        rvSliderFavoriteGown!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
-
-        //Slider New Gown
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-
-        //Setup Recycler View New Gown
-        adapterNewGown = SliderNewGownAdapter(context!!, newGownList)
-        rvSliderNewGown!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-        rvSliderNewGown!!.setAdapter(adapterNewGown)
-        rvSliderNewGown!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
         imWishlist!!.setOnClickListener(this@HomeFragment)
         imNotification!!.setOnClickListener(this@HomeFragment)
         btnSeeAllCategory!!.setOnClickListener(this@HomeFragment)
+        searchView!!.setOnClickListener(this@HomeFragment)
+
         return view
     }
 
-    private fun getProductCategory(){
+    private fun getData(){
         ProductCategoryPresenter(this).getAllProductCategory()
+        PromoPresenter(this).getAllPromo()
+        FavoriteGownPresenter(this).getAllFavoriteGown()
+        NewGownPresenter(this).getAllNewGown()
     }
 
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.search_view -> {
+                val search = Intent(activity, SearchViewActivity::class.java)
+                startActivity(search)
+            }
             R.id.im_wishlist -> {
                 val wishlist = Intent(activity, WishlistActivity::class.java)
                 startActivity(wishlist)
@@ -295,6 +120,14 @@ class HomeFragment : Fragment(), View.OnClickListener,
             R.id.btn_see_all_category -> {
                 val categoryProduct = Intent(activity, ProductGownActivity::class.java)
                 startActivity(categoryProduct)
+            }
+            R.id.btn_see_all_favorite -> {
+                val favoriteGown = Intent(activity, FavoriteGownActivity::class.java)
+                startActivity(favoriteGown)
+            }
+            R.id.btn_see_all_new -> {
+                val newGown = Intent(activity, NewGownActivity::class.java)
+                startActivity(newGown)
             }
         }
     }
@@ -335,12 +168,12 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Slider Main Menu
             ProductByCategoryPresenter(this).getAllProductByCategory(selectedCategoryMenu!!.nameProductCategory.toString())
         } else{
-            Toast.makeText(context,"There is no category data", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "There is no category data", Toast.LENGTH_SHORT)
         }
     }
 
     override fun onErrorGetProductCategory(msg: String) {
-        Toast.makeText(context,"Failed to get data category", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data category", Toast.LENGTH_SHORT)
     }
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
@@ -350,7 +183,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
         //Setup Recycler View Slider Main Menu
         if(dataProductByCat?.isNotEmpty() == true) {
             rvSliderMenu!!.visibility = View.VISIBLE
-            tvvNoItemHome!!.visibility = View.GONE
             adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(context!!, it) }
             rvSliderMenu!!.setLayoutManager(
                 LinearLayoutManager(
@@ -366,15 +198,95 @@ class HomeFragment : Fragment(), View.OnClickListener,
             }
         }else{
             rvSliderMenu!!.visibility = View.GONE
-            tvvNoItemHome!!.visibility = View.VISIBLE
         }
     }
 
     override fun onErrorGetProductByCategory(msg: String) {
-        Toast.makeText(context,"Failed to get data product", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data product", Toast.LENGTH_SHORT)
     }
 
     override fun passReloadItem(namaCategory: String) {
         ProductByCategoryPresenter(this).getAllProductByCategory(namaCategory)
+    }
+
+    override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown?>?) {
+        //Slider New Gown
+        newGownList = dataNewGown as ArrayList<DataNewGown>
+        //Setup Recycler View New Gown
+        adapterNewGown = SliderNewGownAdapter(context!!, newGownList!!)
+        rvSliderNewGown!!.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        rvSliderNewGown!!.setAdapter(adapterNewGown)
+        rvSliderNewGown!!.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
+    }
+
+    override fun onErrorGetNewGown(msg: String) {
+        Toast.makeText(context, "Failed to get data new gown", Toast.LENGTH_SHORT)
+    }
+
+    override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
+        //Slider Favorite Gown
+        favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
+        //Setup Recycler View Favorite Gown
+        adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
+        rvSliderFavoriteGown!!.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
+        rvSliderFavoriteGown!!.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
+
+    }
+
+    override fun onErrorGetFavoriteGown(msg: String) {
+        Toast.makeText(context, "Failed to get data favorite gown", Toast.LENGTH_SHORT)
+    }
+
+    override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
+        promoList = dataPromo as ArrayList<DataPromo>
+
+        //Setup Recycler View Promo
+        adapterPromo = SliderPromoAdapter(context!!, promoList)
+        rvSliderPromo!!.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        rvSliderPromo!!.setAdapter(adapterPromo)
+        rvSliderPromo!!.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
+
+        if (adapterPromo!!.itemCount > 0) {
+            layoutPromoEmpty?.setVisibility(View.GONE)
+            layoutPromo?.setVisibility(View.VISIBLE)
+        }
+    }
+
+    override fun onErrorGetPromo(msg: String) {
+        Toast.makeText(context, "Failed to get data promo", Toast.LENGTH_SHORT)
     }
 }

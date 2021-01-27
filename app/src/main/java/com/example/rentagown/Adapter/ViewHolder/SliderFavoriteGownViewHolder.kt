@@ -11,15 +11,17 @@ import com.makeramen.roundedimageview.RoundedImageView
 class SliderFavoriteGownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvItemName: TextView
     var tvPrice: TextView
+    var tvOldPrice: TextView
+    var tvDisc: TextView
     var imProduct: RoundedImageView
-    var btnLike: ImageButton
     var btnBooking: Button
 
     init {
         tvItemName = itemView.findViewById(R.id.tv_name_dress_product)
         tvPrice = itemView.findViewById(R.id.tv_price_dress_product)
+        tvOldPrice = itemView.findViewById(R.id.tv_price_old_dress_product)
+        tvDisc = itemView.findViewById(R.id.tv_discount_product)
         imProduct = itemView.findViewById(R.id.im_image_product)
-        btnLike = itemView.findViewById(R.id.btn_like_product)
         btnBooking = itemView.findViewById(R.id.btn_booking_now)
     }
 }

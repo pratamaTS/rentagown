@@ -1,5 +1,6 @@
 package com.example.rentagown.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -26,7 +27,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     var rvProduct: RecyclerView? = null
     var categoryProductAdapter: CategoryProductAdapter? = null
     var categoryMenuList: ArrayList<CategoryMenu> = ArrayList()
-    var productList: ArrayList<Product>? = null
+    var productList: ArrayList<Product> = ArrayList()
     var productAdapter: ProductAdapter? = null
     private var selectedCategoryMenu: CategoryMenu? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,23 +41,24 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         rvProduct = findViewById(R.id.rv_product)
 
         //Title Menu
-        categoryMenuList.add(CategoryMenu(0, "All"))
-        categoryMenuList.add(CategoryMenu(1, "Prewedding"))
-        categoryMenuList.add(CategoryMenu(2, "Wedding"))
-        categoryMenuList.add(CategoryMenu(3, "Family"))
-        categoryMenuList.add(CategoryMenu(4, "Maternity"))
+        categoryMenuList = java.util.ArrayList()
+        categoryMenuList?.add(CategoryMenu(0, "All"))
+        categoryMenuList?.add(CategoryMenu(1, "Prewedding"))
+        categoryMenuList?.add(CategoryMenu(2, "Wedding"))
+        categoryMenuList?.add(CategoryMenu(3, "Family"))
+        categoryMenuList?.add(CategoryMenu(4, "Maternity"))
 
         //Setup Recycler View Title Menu
         categoryProductAdapter = CategoryProductAdapter(categoryMenuList, this)
-        rvMenuCategory!!.setLayoutManager(
+        rvMenuCategory?.setLayoutManager(
             LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
         )
-        rvMenuCategory!!.setAdapter(categoryProductAdapter)
-        rvMenuCategory!!.addItemDecoration(ItemDecorationSlider(16))
+        rvMenuCategory?.setAdapter(categoryProductAdapter)
+        rvMenuCategory?.addItemDecoration(ItemDecorationSlider(16))
         categoryProductAdapter!!.selectCategory(0)
 
         //Preselect first category
@@ -66,17 +68,19 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         productList = getCategoryProduct(selectedCategoryMenu!!.idCategory)
 
         //Setup Recycler View Product
-        productAdapter = ProductAdapter(this, productList!!)
-        rvProduct!!.setLayoutManager(GridLayoutManager(this, 2))
-        rvProduct!!.setAdapter(productAdapter)
+        productAdapter = ProductAdapter(this, productList)
+        val gridLayoutManager = GridLayoutManager(this, 2)
+        rvProduct?.setLayoutManager(gridLayoutManager)
+        rvProduct?.setAdapter(productAdapter)
+
 
         //SET LISTENER
-        back!!.setOnClickListener(this)
-        filter!!.setOnClickListener(this)
+        back?.setOnClickListener(this)
+        filter?.setOnClickListener(this)
     }
 
-    private fun getCategoryProduct(categoryId: Int): ArrayList<Product>? {
-        val dummyProduct = ArrayList<Product>()
+    private fun getCategoryProduct(categoryId: Int): ArrayList<Product> {
+        val dummyProduct = java.util.ArrayList<Product>()
         when (categoryId) {
             0 -> {
                 dummyProduct.add(
@@ -508,6 +512,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         return dummyProduct
     }
 
+    @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()

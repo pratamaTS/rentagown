@@ -12,13 +12,11 @@ class SliderMainMenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
     var tvItemName: TextView
     var tvPrice: TextView
     var imContent: RoundedImageView
-    var btnWishlist: ImageButton
     private val sliderMainMenu: SliderMainMenu? = null
 
     init {
         tvItemName = itemView.findViewById(R.id.tv_name_dress_main)
         tvPrice = itemView.findViewById(R.id.tv_harga_dress_main)
         imContent = itemView.findViewById(R.id.im_content_main)
-        btnWishlist = itemView.findViewById(R.id.btn_like_main)
     }
 }

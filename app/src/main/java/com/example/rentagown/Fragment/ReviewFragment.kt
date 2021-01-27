@@ -1,6 +1,5 @@
 package com.example.rentagown.Fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ReviewAdapter
 import com.example.rentagown.Model.Review
 import com.example.rentagown.R
-import java.util.*
-import kotlin.collections.ArrayList
 
 class ReviewFragment : Fragment() {
     var rvReview: RecyclerView? = null
@@ -51,11 +48,15 @@ class ReviewFragment : Fragment() {
         reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
         reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
         reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
+        reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
+        reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
+        reviewList.add(Review("Randy Palmet", "3.5", "5 days ago", "the material is pretty good"))
 
         //Setup Recycler View
         reviewAdapter = ReviewAdapter(context!!, reviewList)
         rvReview!!.setLayoutManager(LinearLayoutManager(activity))
         rvReview!!.setAdapter(reviewAdapter)
+
         return view
     }
 }

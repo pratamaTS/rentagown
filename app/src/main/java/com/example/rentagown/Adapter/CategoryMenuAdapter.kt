@@ -28,7 +28,7 @@ class CategoryMenuAdapter(internal val reloadItemInterface: ReloadItemInterface,
     }
 
     override fun onBindViewHolder(holder: CategoryMenuViewHolder, position: Int) {
-        holder.tvTitle.setText(categoryMenuList[position].nameProductCategory)
+        holder.tvTitle.setText(categoryMenuList[position].nameProductCategory?.capitalize()?.trimEnd())
         if (selectedCategory != null) {
             if (selectedCategory!!.nameProductCategory == categoryMenuList[position].nameProductCategory) {
                 holder.tvTitle.setTextColor(Color.parseColor("#E6B31E")) //warna kuning

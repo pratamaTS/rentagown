@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -87,10 +86,28 @@
         <item name="chipStrokeColor">@color/stroke_color_chip_state_list</item>
     </style>
 
-    <!-- Rating Bar Custom -->
-    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+    <!-- Rating Bar Small Custom -->
+    <style name="RatingBarSmall" parent="Widget.AppCompat.RatingBar.Small">
         <item name="colorControlActivated">#E9B90A</item>
         <item name="colorControlNormal">@color/colorSoftGrey</item>
     </style>
+
+    <!-- Rating Bar Medium Custom -->
+    <style name="RatingBarMedium" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="colorControlActivated">#E9B90A</item>
+        <item name="colorControlNormal">@color/colorSoftGrey</item>
+    </style>
+
+    <!-- Rating Bar write Custom -->
+    <style name="customRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:minHeight">24dip</item>
+        <item name="android:maxHeight">24dip</item>
+    </style>
+
+    <!-- ... -->
+
+    <declare-styleable name="AutoGridLayout">
+        <attr name="columnWidth" format="dimension" />
+    </declare-styleable>
 
 </resources>

@@ -61,14 +61,12 @@
     <string name="btn_browse">Browse</string>
     <string name="tv_title_booking_empty">Your Booking Is Currently Empty</string>
 
-    <!-- activity history booking -->
-    <string name="appbar_history">History</string>
-
     <!-- activity notification-->
     <string name="appbar_notification">Notification</string>
 
     <!-- activity invoice history -->
     <string name="appbar_invoice_history">Invoice History</string>
+    <string name="text_invoice_empty">Sorry, currently we can\'t display your requested invoice. Please try again by reloading this page.</string>
 
     <!-- activity setting -->
     <string name="appbar_settings">Settings</string>
@@ -185,6 +183,7 @@
     <string name="appbar_payment">Payment</string>
     <string name="title_shipping_address">Shipping Address</string>
     <string name="btn_change_address">Change Address</string>
+    <string name="btn_add_address">Add Address</string>
     <string name="label_rumah">Rumah</string>
     <string name="label_name">John Doe</string>
     <string name="label_no_hp">(6287871180436)</string>
@@ -250,4 +249,88 @@
     <string name="title_remaining_bill">Remaining Bill</string>
     <string name="transfer_manual">Transfer Manual</string>
     <string name="title_account_number_invoice">Account Number</string>
+
+    <!-- activity fitting size -->
+    <string name="appbar_size_gown">Size Gown</string>
+    <string name="btn_template">Template</string>
+    <string name="et_bust">Bust</string>
+    <string name="et_arm_hole">Arm Hole</string>
+    <string name="et_waist">Waist</string>
+    <string name="et_hip">Hip</string>
+    <string name="title_note">Note :</string>
+    <string name="semua_ukuran_dalam_sentimeter_cm">- Semua ukuran dalam sentimeter (cm)</string>
+    <string name="ukur_secara_melingkar">- Ukur secara melingkar</string>
+    <string name="btn_custom_size">Custom Size</string>
+
+    <!-- activity history booking -->
+    <string name="appbar_history">History</string>
+    <string name="btn_review_history">Review</string>
+    <string name="titile_booking_history">Booking</string>
+    <string name="title_total_price_history">Total Price</string>
+
+    <!-- activity review -->
+    <string name="appbar_reviews">Reviews</string>
+    <string name="tv_number_rate_review">4.0</string>
+    <string name="based_on">Based on</string>
+    <string name="_23_reviews">23 Reviews</string>
+
+    <!-- activity write review -->
+    <string name="appbar_write_review">Write Review</string>
+    <string name="review_helps_other_user">Review helps other user</string>
+    <string name="title_reviews_comment">Reviews</string>
+    <string name="et_hint_comments">Comments</string>
+    <string name="notice_1000_characters_left">1000 characters left</string>
+    <string name="recommed_item">Recommed item ?</string>
+    <string name="rd_yes">Yes</string>
+    <string name="rd_no">No</string>
+    <string name="btn_submit_review">Submit Review</string>
+
+    <!-- activity detail booking -->
+    <string name="appbar_detail">Detail</string>
+    <string name="title_schedule_time_amp_date"><![CDATA[Schedule Time & Date]]></string>
+    <string name="btn_edit_schedule_time">Edit</string>
+    <string name="title_item_detail_booking">Item</string>
+    <string name="title_price_detail_booking">Price</string>
+    <string name="title_sub_total_detal_booking">Sub Total</string>
+    <string name="title_total_discount_detail_booking">Total Discount</string>
+    <string name="title_dp_paid_detail_booking">Deposit Booking Paid</string>
+    <string name="title_remaining_bills_detail_booking">Remaining Bills</string>
+    <string name="pay_after_service">Pay after service</string>
+    <string name="btn_pay">Pay</string>
+    <string name="btn_fitting_size_detail">Fitting Size</string>
+
+    <!-- activity transaction status -->
+    <string name="appbar_transaction_status">Transaction Status</string>
+    <string name="total_bill_amount">Total Bill Amount</string>
+    <string name="title_transactions">Transactions</string>
+    <string name="btn_repayment">Repayment</string>
+    <string name="text_transaction_empty">Sorry, you currently have no transactions. Please try again by reloading this page.</string>
+
+    <!-- activity detail promo -->
+    <string name="appbar_detail_promo">Detail Promo</string>
+    <string name="title_list_promo">Promo</string>
+    <string name="decs_promo">The wait is over 🎉 Massive sale! 90% off for third purchase on any dress (except wedding dress), Booking period until 15 September 2020. Rental period until December 2021.</string>
+    <string name="title_terms_and_conditions_promo">Terms and Conditions</string>
+    <string name="field_terms_conditions_promo">
+        1. Promo period for booking periods until 15 Sep  2020, and for rental periods up to 31 Dec 2020
+        \n 2. Promo is applicable for new users that register to RAG using referral code
+        \n 3. Promo is only valid for 1 device and 1 user account only
+        \n 4. Promo is valid for all RAG users
+        \n 5. The voucher will be automatically available in Pocket</string>
+    <string name="title_for_referrers_promo">For Referrers</string>
+    <string name="field_for_referrers_promo">
+        1. To get the promo, referrals have to refer their friends to register to RAG using referral code
+        \n 2. Referrers can refer as many friend as they want to win the main prizes
+</string>
+    <string name="btn_use_promo">Use Promo</string>
+
+    <!-- activity promo -->
+    <string name="appbar_promo">Promo</string>
+
+    <!-- activity favorite gown -->
+    <string name="appbar_favorite_gown">Favorite Gown</string>
+
+    <!-- activity new gown -->
+    <string name="appbar_new_gown">New Gown</string>
+
 </resources>

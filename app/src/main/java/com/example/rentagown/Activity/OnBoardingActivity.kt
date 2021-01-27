@@ -13,7 +13,6 @@ import com.example.rentagown.Model.OnBoardingItem
 import com.example.rentagown.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import java.util.*
 import kotlin.collections.ArrayList
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -143,7 +142,7 @@ class OnBoardingActivity : AppCompatActivity() {
             .putBoolean("onboarding_complete", true).apply()
 
         // Launch the main Activity, called MainActivity
-        val main = Intent(this, MainBeforeActivity::class.java)
+        val main = Intent(this, MainActivity::class.java)
         startActivity(main)
 
         // Close the OnboardingActivity
