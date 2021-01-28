@@ -35,8 +35,8 @@ class SliderPromoAdapter(private val mContext: Context, private val promoList: A
                 "                \"Booking period until 15 September 2020. Rental period until December 2021.")
 
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, "Promo", Toast.LENGTH_SHORT).show()
             val promo = Intent(v.context, DetailPromoActivity::class.java)
+            promo.putExtra("id_promo", promoList[position].idPromo)
             v.context.startActivity(promo)
         }
     }

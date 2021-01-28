@@ -2,8 +2,10 @@ package com.example.rentagown.Connection.Interface
 
 import com.example.rentagown.Response.FavoriteGown.ResponseFavoriteGown
 import com.example.rentagown.Response.NewGown.ResponseNewGown
+import com.example.rentagown.Response.Product.ResponseDetailProduct
 import com.example.rentagown.Response.Product.ResponseProduct
 import com.example.rentagown.Response.ProductCategory.ResponseProductCategory
+import com.example.rentagown.Response.Promo.PromoDetail.ResponsePromoDetail
 import com.example.rentagown.Response.Promo.ResponsePromo
 import retrofit2.Call
 import retrofit2.http.GET
@@ -34,4 +36,12 @@ interface RentaGownServices {
     //Get All Favorite Gown
     @GET("api/v/1/user/favorite")
     fun getAllFavoriteGown(@HeaderMap map: MutableMap<String, String>?): Call<ResponseFavoriteGown>
+
+    //Get Detail Product By ID
+    @GET
+    fun getDetailProduct(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseDetailProduct>
+
+    //Get Detail Promo By ID
+    @GET
+    fun getPromoById(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponsePromoDetail>
 }

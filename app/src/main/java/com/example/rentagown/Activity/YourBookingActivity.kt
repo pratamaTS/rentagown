@@ -12,6 +12,7 @@ import com.example.rentagown.R
 class YourBookingActivity : AppCompatActivity(), View.OnClickListener {
     var back: ImageButton? = null
     var btnWhatsapp: ImageButton? = null
+    var btnDelete: ImageButton? = null
     var btnCheckout: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +22,19 @@ class YourBookingActivity : AppCompatActivity(), View.OnClickListener {
         back = findViewById(R.id.im_back)
         btnWhatsapp = findViewById(R.id.btn_whatsapp)
         btnCheckout = findViewById(R.id.btn_checkout)
+        btnDelete = findViewById(R.id.btn_delete_your_booking)
 
         //SET LISTENER
         back!!.setOnClickListener(this)
         btnWhatsapp!!.setOnClickListener(this)
+        btnDelete!!.setOnClickListener(this)
         btnCheckout!!.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()
+            R.id.btn_delete_your_booking -> finish()
             R.id.btn_checkout -> {
                 val checkout = Intent(this@YourBookingActivity, PaymentActivity::class.java)
                 startActivity(checkout)

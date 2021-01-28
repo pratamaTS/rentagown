@@ -9,13 +9,18 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.rentagown.Adapter.PageAdapterDetailProduct
 import com.example.rentagown.Adapter.SliderViewProductAdapter
+import com.example.rentagown.Connection.Interface.DetailProductInterface
+import com.example.rentagown.Connection.Presenter.DetailProductPresenter
 import com.example.rentagown.Model.SliderItemProduct
 import com.example.rentagown.R
+import com.example.rentagown.Response.Product.DataDetailProduct
+import com.example.rentagown.Response.Product.DataPhoto
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -26,16 +31,19 @@ import com.smarteist.autoimageslider.SliderView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ViewProductActivity : AppCompatActivity(), View.OnClickListener {
+class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailProductInterface {
     var sliderViewProductAdapter: SliderViewProductAdapter? = null
     var sliderView: SliderView? = null
     var sliderItemProductList: ArrayList<SliderItemProduct> = ArrayList()
+    var detailProduct: DataDetailProduct? = null
+    var photoItem: ArrayList<DataPhoto> = ArrayList()
     var tabDetailProduct: TabLayout? = null
     var back: ImageButton? = null
-    var like: ImageButton? = null
     var btnWhatsapp: ImageButton? = null
     var btnBookNow: Button? = null
     var bottomSheet: LinearLayout? = null
+    var idProduct: String? = null
+    var viewPager: ViewPager? = null
 
     //tambahan variable
     var containerViewProduct: CoordinatorLayout? = null
@@ -50,51 +58,21 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener {
         sliderView = findViewById(R.id.slider_view_product)
         tabDetailProduct = findViewById(R.id.tab_detail_product)
         back = findViewById(R.id.im_back)
-        like = findViewById(R.id.im_like)
         btnWhatsapp = findViewById(R.id.btn_whatsapp)
         btnBookNow = findViewById(R.id.btn_book_now)
         bottomSheet = findViewById(R.id.bottom_sheet)
-        val viewPager = findViewById<ViewPager>(R.id.vp_detail_product)
-        val params = viewPager.layoutParams
-        params.height = 5000
-        viewPager.layoutParams = params
-        sliderView!!.setIndicatorAnimation(IndicatorAnimationType.SLIDE)
-        sliderView!!.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
-
-        sliderItemProductList.add(SliderItemProduct(R.drawable.image_product_slide_1))
-        sliderItemProductList.add(SliderItemProduct(R.drawable.image_product_slide_2))
-        sliderItemProductList.add(SliderItemProduct(R.drawable.image_product_slide_3))
-
-        //Setup adapter
-        sliderViewProductAdapter = SliderViewProductAdapter(this, sliderItemProductList)
-        sliderView!!.setSliderAdapter(sliderViewProductAdapter!!)
-
-        //Set Tab Layout
-        tabDetailProduct!!.addTab(tabDetailProduct?.newTab()!!.setText("Overview"))
-        tabDetailProduct!!.addTab(tabDetailProduct?.newTab()!!.setText("Review"))
-        val pageAdapterDetailProduct = PageAdapterDetailProduct(
-            this,
-            supportFragmentManager, tabDetailProduct!!.getTabCount()
-        )
-        viewPager.adapter = pageAdapterDetailProduct
-        viewPager.addOnPageChangeListener(TabLayoutOnPageChangeListener(tabDetailProduct))
-        tabDetailProduct!!.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                viewPager.currentItem = tab.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
+        idProduct = intent.getStringExtra("id_product")
+        viewPager = findViewById(R.id.vp_detail_product)
 
 //        BottomSheetUtils.setupViewPager(viewPager);
 
         //untuk membuat bottom sheet dinamis
         setupBottomSheet()
 
+        getDetailProduct()
+
         //Set Listener
         back!!.setOnClickListener(this)
-        like!!.setOnClickListener(this)
         btnWhatsapp!!.setOnClickListener(this)
         btnBookNow!!.setOnClickListener(this)
 
@@ -117,21 +95,21 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener {
                     override fun onGlobalLayout() {
                         containerViewProduct!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
                         val containerHeight = containerViewProduct!!.height
-                        behavior?.setPeekHeight(containerHeight - sliderViewHeight + 150)
+                        behavior?.setPeekHeight(containerHeight - sliderViewHeight + 100)
                     }
                 })
             }
         })
     }
 
+    private fun getDetailProduct() {
+        DetailProductPresenter(this).getDetailProduct(idProduct.toString())
+    }
+
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()
-            R.id.im_like ->
-                if (v == like) {
-                    like?.setBackgroundResource(R.drawable.btn_like_selected);
-                }
             R.id.btn_book_now -> {
                 val bookNow = Intent(this@ViewProductActivity, YourBookingActivity::class.java)
                 startActivity(bookNow)
@@ -144,5 +122,46 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(i)
             }
         }
+    }
+
+    override fun onSuccessGetDetailProduct(dataDetailProduct: DataDetailProduct?) {
+        detailProduct = dataDetailProduct
+
+        //get photo
+        photoItem = detailProduct!!.photo!!
+
+        //Setup adapter
+        sliderViewProductAdapter = SliderViewProductAdapter(this, photoItem)
+        sliderView!!.setSliderAdapter(sliderViewProductAdapter!!)
+
+        val params = viewPager!!.layoutParams
+        params.height = 5000
+        viewPager!!.layoutParams = params
+        sliderView!!.setIndicatorAnimation(IndicatorAnimationType.SLIDE)
+        sliderView!!.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
+
+        //Set Tab Layout
+        tabDetailProduct!!.addTab(tabDetailProduct?.newTab()!!.setText("Overview"))
+        tabDetailProduct!!.addTab(tabDetailProduct?.newTab()!!.setText("Review"))
+        val pageAdapterDetailProduct = PageAdapterDetailProduct(
+            this,
+            supportFragmentManager, tabDetailProduct!!.getTabCount(),
+            detailProduct
+        )
+        viewPager!!.adapter = pageAdapterDetailProduct
+        viewPager!!.addOnPageChangeListener(TabLayoutOnPageChangeListener(tabDetailProduct))
+        tabDetailProduct!!.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager!!.currentItem = tab.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+
+    }
+
+    override fun onErrorGetDetailProduct(msg: String) {
+        Toast.makeText(this, "Failed to get data detail product", Toast.LENGTH_SHORT)
     }
 }

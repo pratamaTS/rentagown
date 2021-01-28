@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ViewHolder.CategoryMenuViewHolder
-import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
 import com.example.rentagown.Interface.ItemClickListener
-import com.example.rentagown.Model.CategoryMenu
 import com.example.rentagown.R
 import com.example.rentagown.Response.ProductCategory.DataProductCategory
 

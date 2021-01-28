@@ -13,12 +13,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.NewGownActivity"></activity>
-        <activity android:name=".Activity.FavoriteGownActivity" />
-        <activity android:name=".Activity.DetailPromoActivity" />
-        <activity android:name=".Activity.PromoActivity" />
-        <activity android:name=".Activity.TransactionStatusActivity" />
-        <activity android:name=".Activity.DetailBookingActivity" />
+        <activity android:name=".Activity.SeeNoAvailableDateActivity"></activity>
+        <activity
+            android:name=".Activity.SearchViewActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.NewGownActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.FavoriteGownActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.DetailPromoActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.PromoActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.TransactionStatusActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Activity.DetailBookingActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".Activity.WriteReviewActivity"
             android:screenOrientation="portrait"

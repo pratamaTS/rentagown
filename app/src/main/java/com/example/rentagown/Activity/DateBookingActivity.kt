@@ -30,7 +30,7 @@ class DateBookingActivity : AppCompatActivity(), View.OnClickListener {
         calendarView!!.setFirstDayOfWeek(Calendar.SUNDAY)
 
         //Set Orientation 0 = Horizontal | 1 = Vertical
-        calendarView!!.setCalendarOrientation(0)
+        calendarView!!.setCalendarOrientation(1)
         calendarView!!.setWeekendDays(object : HashSet<Long?>() {
             init {
                 Calendar.SUNDAY.toLong()
@@ -38,7 +38,7 @@ class DateBookingActivity : AppCompatActivity(), View.OnClickListener {
         })
 
         //Range SelectionType
-        calendarView!!.setSelectionType(SelectionType.RANGE)
+        calendarView!!.setSelectionType(SelectionType.SINGLE)
 
         //Set days you want to connect
         val calendar = Calendar.getInstance()
@@ -60,6 +60,9 @@ class DateBookingActivity : AppCompatActivity(), View.OnClickListener {
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.im_close -> {
+                finish()
+            }
             R.id.im_set_date -> {
             }
         }

@@ -124,10 +124,25 @@
                     android:orientation="horizontal"
                     tools:ignore="MissingConstraints" />
 
+                <com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
+                    android:id="@+id/pb_procat"
+                    android:layout_width="260dp"
+                    android:layout_height="30dp"
+                    app:rcBackgroundColor="#0A000000"
+                    app:rcBackgroundPadding="2dp"
+                    app:rcProgressColor="@color/colorLightGold"
+                    app:rcAnimationSpeedScale="1.4"
+                    app:rcSecondaryProgressColor="@color/colorLightGold"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_promo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_title_menu"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_slider_main_menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="invisible"
                     app:layout_constraintTop_toBottomOf="@+id/rv_title_menu"
                     android:orientation="horizontal"
                     android:clipToPadding="false"
@@ -181,12 +196,28 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
+                        android:id="@+id/pb_promo"
+                        android:layout_width="260dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="50dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_slider_promo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_header_promo"
+                        app:rcAnimationSpeedScale="1.4"
+                        app:rcBackgroundColor="#0A000000"
+                        app:rcBackgroundPadding="2dp"
+                        app:rcProgressColor="@color/colorLightGold"
+                        app:rcSecondaryProgressColor="@color/colorLightGold" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_slider_promo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_gradient"
                         android:orientation="horizontal"
+                        android:visibility="invisible"
                         app:layout_constraintTop_toBottomOf="@+id/layout_header_promo"
                         tools:ignore="MissingConstraints"
                         />
@@ -198,6 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/im_promo_empty"
+                    android:visibility="gone"
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/rv_slider_main_menu"
                     tools:ignore="MissingConstraints"/>
@@ -249,11 +281,27 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
+                        android:id="@+id/pb_fav_gown"
+                        android:layout_width="260dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="50dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_slider_favorite_gown"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_header_favorite"
+                        app:rcAnimationSpeedScale="1.4"
+                        app:rcBackgroundColor="#0A000000"
+                        app:rcBackgroundPadding="2dp"
+                        app:rcProgressColor="@color/colorLightGold"
+                        app:rcSecondaryProgressColor="@color/colorLightGold" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_slider_favorite_gown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:visibility="invisible"
                         app:layout_constraintTop_toBottomOf="@+id/layout_header_favorite"
                         tools:ignore="MissingConstraints"
                         />
@@ -307,11 +355,28 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
+                        android:id="@+id/pb_new_gown"
+                        android:layout_width="260dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_header_new_gown"
+                        app:rcAnimationSpeedScale="1.4"
+                        app:rcBackgroundColor="#0A000000"
+                        app:rcBackgroundPadding="2dp"
+                        app:rcProgressColor="@color/colorLightGold"
+                        app:rcSecondaryProgressColor="@color/colorLightGold" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_slider_new_gown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:visibility="invisible"
                         app:layout_constraintTop_toBottomOf="@+id/layout_header_new_gown"
                         tools:ignore="MissingConstraints"
                         />
@@ -322,8 +387,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

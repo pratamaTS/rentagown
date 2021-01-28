@@ -38,7 +38,6 @@ class SliderNewGownAdapter(
 
     override fun onBindViewHolder(holder: SliderNewGownViewHolder, position: Int) {
         holder.tvItemName.setText(newGownList[position].productName?.capitalize()?.trimEnd())
-        holder.tvPrice.setText(numberFormat.format(newGownList[position].productPrice))
 
         if(newGownList[position].idPromo?.isNotEmpty() == true) {
             holder.tvPrice.setText(numberFormat.format(newGownList[position].finalPrice))
@@ -58,8 +57,8 @@ class SliderNewGownAdapter(
         }
 
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, "Product", Toast.LENGTH_SHORT).show()
             val product = Intent(v.context, ViewProductActivity::class.java)
+            product.putExtra("id_product", newGownList[position].idProduct)
             v.context.startActivity(product)
         }
     }

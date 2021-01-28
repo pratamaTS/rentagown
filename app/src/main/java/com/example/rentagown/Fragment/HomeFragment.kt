@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.akexorcist.roundcornerprogressbar.CenteredRoundCornerProgressBar
+import com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
 import com.example.rentagown.Activity.*
 import com.example.rentagown.Adapter.*
 import com.example.rentagown.Connection.Interface.*
@@ -58,6 +61,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var dummySliderMainMenus: ArrayList<DataProduct> = ArrayList()
     var itemDecorSet: Boolean = false
     var tvvNoItemHome: TextView? = null
+    var swipeRefreshHome: SwipeRefreshLayout? = null
+    var pbProcat: IndeterminateCenteredRoundCornerProgressBar? = null
+    var pbPromo: IndeterminateCenteredRoundCornerProgressBar? = null
+    var pbFavGown: IndeterminateCenteredRoundCornerProgressBar? = null
+    var pbNewGown: IndeterminateCenteredRoundCornerProgressBar? = null
 
     private var selectedCategoryMenu: DataProductCategory? = null
     override fun onCreateView(
@@ -66,8 +74,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-
-        //INIT VIEW
 
         //INIT VIEW
         imWishlist = view.findViewById(R.id.im_wishlist)
@@ -84,6 +90,16 @@ class HomeFragment : Fragment(), View.OnClickListener,
         rvSliderPromo = view.findViewById(R.id.rv_slider_promo)
         rvSliderFavoriteGown = view.findViewById(R.id.rv_slider_favorite_gown)
         rvSliderNewGown = view.findViewById(R.id.rv_slider_new_gown)
+        swipeRefreshHome = view.findViewById(R.id.swipe_refresh_home)
+        pbProcat = view.findViewById(R.id.pb_procat)
+        pbPromo = view.findViewById(R.id.pb_promo)
+        pbFavGown = view.findViewById(R.id.pb_fav_gown)
+        pbNewGown = view.findViewById(R.id.pb_new_gown)
+
+        swipeRefreshHome!!.setOnRefreshListener {
+            getData()
+            swipeRefreshHome!!.isRefreshing = false
+        }
 
         getData()
 
@@ -178,7 +194,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
 
+        pbProcat!!.visibility = View.GONE
         sliderMainMenuList = dataProductByCat
+        rvSliderMenu!!.visibility = View.VISIBLE
 
         //Setup Recycler View Slider Main Menu
         if(dataProductByCat?.isNotEmpty() == true) {
@@ -211,7 +229,10 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown?>?) {
         //Slider New Gown
+        pbNewGown!!.visibility = View.GONE
         newGownList = dataNewGown as ArrayList<DataNewGown>
+        rvSliderNewGown!!.visibility = View.VISIBLE
+
         //Setup Recycler View New Gown
         adapterNewGown = SliderNewGownAdapter(context!!, newGownList!!)
         rvSliderNewGown!!.setLayoutManager(
@@ -236,7 +257,10 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
         //Slider Favorite Gown
+        pbFavGown!!.visibility = View.GONE
         favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
+        rvSliderFavoriteGown!!.visibility = View.VISIBLE
+
         //Setup Recycler View Favorite Gown
         adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
         rvSliderFavoriteGown!!.setLayoutManager(
@@ -261,28 +285,30 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
+        pbPromo!!.visibility = View.GONE
         promoList = dataPromo as ArrayList<DataPromo>
+        rvSliderPromo!!.visibility = View.VISIBLE
 
-        //Setup Recycler View Promo
-        adapterPromo = SliderPromoAdapter(context!!, promoList)
-        rvSliderPromo!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
-        rvSliderPromo!!.setAdapter(adapterPromo)
-        rvSliderPromo!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
-
-        if (adapterPromo!!.itemCount > 0) {
+        if(promoList.isEmpty()){
             layoutPromoEmpty?.setVisibility(View.GONE)
             layoutPromo?.setVisibility(View.VISIBLE)
+        }else {
+            //Setup Recycler View Promo
+            adapterPromo = SliderPromoAdapter(context!!, promoList)
+            rvSliderPromo!!.setLayoutManager(
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            )
+            rvSliderPromo!!.setAdapter(adapterPromo)
+            rvSliderPromo!!.addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    LinearLayoutManager.HORIZONTAL
+                )
+            )
         }
     }
 

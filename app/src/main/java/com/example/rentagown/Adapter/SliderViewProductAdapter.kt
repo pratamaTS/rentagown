@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import com.example.rentagown.Adapter.ViewHolder.SliderViewProductViewHolder
 import com.example.rentagown.Model.SliderItemProduct
 import com.example.rentagown.R
+import com.example.rentagown.Response.Product.DataDetailProduct
+import com.example.rentagown.Response.Product.DataPhoto
 import com.smarteist.autoimageslider.SliderViewAdapter
+import com.squareup.picasso.Picasso
 
 class SliderViewProductAdapter(
     private val context: Context,
-    private var mSliderItems: ArrayList<SliderItemProduct>
+    private var mSliderItems: ArrayList<DataPhoto>
 ) :
     SliderViewAdapter<SliderViewProductViewHolder>() {
-    fun renewItems(sliderItems: ArrayList<SliderItemProduct>) {
+    fun renewItems(sliderItems: ArrayList<DataPhoto>) {
         mSliderItems = sliderItems
         notifyDataSetChanged()
     }
@@ -24,7 +27,7 @@ class SliderViewProductAdapter(
         notifyDataSetChanged()
     }
 
-    fun addItem(sliderItem: SliderItemProduct) {
+    fun addItem(sliderItem: DataPhoto) {
         mSliderItems.add(sliderItem)
         notifyDataSetChanged()
     }
@@ -37,8 +40,8 @@ class SliderViewProductAdapter(
 
     override fun onBindViewHolder(viewHolder: SliderViewProductViewHolder, position: Int) {
 //        SliderItemProduct sliderItemProduct = mSliderItems.get(position);
-        viewHolder.imageSlider.setImageResource(mSliderItems[position].imageProduct)
-
+        val imgURL: String = "http://absdigital.id:5000" + mSliderItems[position].pathPhoto
+        Picasso.get().load(imgURL).into(viewHolder.imageSlider)
 //        Glide.with(viewHolder.itemView)
 //                .load(sliderItemProduct.getImageProduct())
 //                .fitCenter()

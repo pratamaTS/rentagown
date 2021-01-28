@@ -5,23 +5,49 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.rentagown.Connection.Interface.PromoByIdInterface
+import com.example.rentagown.Connection.Presenter.PromoByIdPresenter
 import com.example.rentagown.R
+import com.example.rentagown.Response.Promo.PromoDetail.DataPromoDetail
+import com.makeramen.roundedimageview.RoundedImageView
+import com.squareup.picasso.Picasso
 
-class DetailPromoActivity : AppCompatActivity(), View.OnClickListener {
+class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoByIdInterface {
     var back: ImageButton? = null
     var btnUsePromo: Button? = null
+    var promoDetail: DataPromoDetail? = null
+    var idPromo: String? = null
+    var imPromo: RoundedImageView? = null
+    var tvTitleDetailProno: TextView? = null
+    var tvDescDetailPromo: TextView? = null
+    var tvTermCondition: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_promo)
 
         //INIT VIEW
+        imPromo = findViewById(R.id.im_item_promo)
+        tvTitleDetailProno = findViewById(R.id.tv_title_item_detail_promo)
+        tvDescDetailPromo = findViewById(R.id.tv_desc_item_list_promo)
+        tvTermCondition = findViewById(R.id.field_tems_and_conditions_promo)
         back = findViewById(R.id.im_back)
         btnUsePromo = findViewById(R.id.btn_use_promo)
+
+        idPromo = intent.getStringExtra("id_promo")
+
+        getDetailPromo()
 
         //SET LISTENER
         back?.setOnClickListener(this)
         btnUsePromo?.setOnClickListener(this)
+    }
+
+    private fun getDetailPromo() {
+        PromoByIdPresenter(this).getPromoById(idPromo.toString())
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -31,5 +57,34 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_use_promo -> {
             }
         }
+    }
+
+    override fun onSuccessGetPromoById(dataPromoById: DataPromoDetail?) {
+        promoDetail = dataPromoById
+
+        tvTitleDetailProno!!.text = promoDetail?.promoName?.capitalize()?.trim()
+
+        if(promoDetail!!.promoDesc?.isNotEmpty() == true){
+            tvDescDetailPromo!!.text = promoDetail!!.promoDesc
+        }
+
+        if(promoDetail!!.promoDesc?.isNotEmpty() == true){
+            tvDescDetailPromo!!.text = promoDetail!!.promoDesc
+        }
+
+        if(promoDetail!!.termsConditions?.isNotEmpty() == true){
+            tvTermCondition!!.text = promoDetail!!.termsConditions
+        }
+
+        if(promoDetail!!.pathPhoto?.isNotEmpty() == true) {
+            val imgURL: String = "http://absdigital.id:5000" + promoDetail!!.pathPhoto
+            Picasso.get().load(imgURL).resize(200, 200).into(imPromo)
+        }else {
+            imPromo!!.setImageResource(R.drawable.promo)
+        }
+    }
+
+    override fun onErrorGetPromoById(msg: String) {
+        Toast.makeText(this, "Failed to get data detail promo", Toast.LENGTH_SHORT)
     }
 }

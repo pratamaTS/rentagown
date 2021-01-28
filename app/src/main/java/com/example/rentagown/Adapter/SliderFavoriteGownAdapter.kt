@@ -55,8 +55,8 @@ class SliderFavoriteGownAdapter(
 
 
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, "Product", Toast.LENGTH_SHORT).show()
             val product = Intent(v.context, ViewProductActivity::class.java)
+            product.putExtra("id_product", favoriteGownList[position].idProduct)
             v.context.startActivity(product)
         }
     }

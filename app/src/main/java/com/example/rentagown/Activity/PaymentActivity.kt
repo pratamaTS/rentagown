@@ -1,7 +1,6 @@
 package com.example.rentagown.Activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +19,8 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
     var back: ImageButton? = null
     var btnWhatsaap: ImageButton? = null
     var btnPayment: Button? = null
+    var btnAddAddress: Button? = null
+    var btnChangeAddress: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
@@ -29,18 +30,30 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
         btnChoosePaymentMethod = findViewById(R.id.btn_choose_payment_method)
         btnPayment = findViewById(R.id.btn_payment)
         btnWhatsaap = findViewById(R.id.btn_whatsapp)
+        btnAddAddress = findViewById(R.id.btn_add_address)
+        btnChangeAddress = findViewById(R.id.btn_change_address)
 
         //SET LISTENER
         back!!.setOnClickListener(this)
         btnChoosePaymentMethod!!.setOnClickListener(this)
         btnPayment!!.setOnClickListener(this)
         btnWhatsaap!!.setOnClickListener(this)
+        btnAddAddress!!.setOnClickListener(this)
+        btnChangeAddress!!.setOnClickListener(this)
     }
 
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()
+            R.id.btn_add_address -> {
+                val addAddress = Intent(this@PaymentActivity, AddAddressActivity::class.java)
+                startActivity(addAddress)
+            }
+            R.id.btn_change_address -> {
+                val changeAddress = Intent(this@PaymentActivity, ChangeAddressActivity::class.java)
+                startActivity(changeAddress)
+            }
             R.id.btn_choose_payment_method -> {
                 val bottomSheetDialog =
                     BottomSheetDialog(this@PaymentActivity, R.style.BottomSheetDialogTheme)
