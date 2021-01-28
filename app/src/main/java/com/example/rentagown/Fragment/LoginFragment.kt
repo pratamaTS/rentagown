@@ -11,21 +11,33 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.auth0.android.jwt.JWT
 import com.example.rentagown.Activity.ForgotPasswordActivity
 import com.example.rentagown.Activity.MainAfterActivity
 import com.example.rentagown.Activity.SignUpActivity
+import com.example.rentagown.Body.LoginBody
+import com.example.rentagown.Connection.Interface.LoginInterface
+import com.example.rentagown.Connection.Presenter.LoginPresenter
 import com.example.rentagown.R
+import com.example.rentagown.Response.Login.DataLogin
+import java.util.*
 
-class LoginFragment : Fragment(), View.OnClickListener {
+
+class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     var etEmail: EditText? = null
     var etPassword: EditText? = null
     var btnSignIn: Button? = null
     var btnForgotPassword: Button? = null
     var btnToSignUp: Button? = null
     var btnShowHidePass: ImageView? = null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    var loginBody: LoginBody? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_login, container, false)
 
@@ -49,8 +61,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {
-                val login = Intent(activity, MainAfterActivity::class.java)
-                startActivity(login)
+                loginBody?.email = etEmail?.text.toString()
+                loginBody?.password = etPassword?.text.toString()
+
+                LoginPresenter(this).login(loginBody!!)
             }
             R.id.btn_forgot_password -> {
                 val forgotPassword = Intent(activity, ForgotPasswordActivity::class.java)
@@ -64,7 +78,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 if (etPassword!!.transformationMethod == PasswordTransformationMethod.getInstance()) {
                     (v as ImageView).setImageResource(R.drawable.ic_show)
                     //Show Password
-                    etPassword!!.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    etPassword!!.transformationMethod =
+                        HideReturnsTransformationMethod.getInstance()
                 } else {
                     (v as ImageView).setImageResource(R.drawable.ic_hide)
                     //Hide Password
@@ -72,5 +87,20 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onSuccessGetLogin(dataLogin: DataLogin?) {
+        val jwt = JWT(dataLogin?.accessToken.toString())
+        val expiresAt: Date? = jwt.expiresAt
+
+        val login = Intent(activity, MainAfterActivity::class.java)
+        login.putExtra("token", dataLogin?.accessToken.toString())
+        login.putExtra("jwt", jwt)
+        login.putExtra("expires_at", expiresAt)
+        startActivity(login)
+    }
+
+    override fun onErrorGetLogin(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT)
     }
 }

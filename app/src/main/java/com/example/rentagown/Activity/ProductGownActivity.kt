@@ -15,6 +15,7 @@ import com.example.rentagown.Adapter.ProductAdapter
 import com.example.rentagown.Connection.Interface.ProductAllInterface
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
 import com.example.rentagown.Connection.Presenter.ProductAllPresenter
+import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
 import com.example.rentagown.Decoration.ItemDecorationSlider
 import com.example.rentagown.Interface.ItemClickListener
 import com.example.rentagown.Model.CategoryMenu
@@ -46,7 +47,6 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         rvProduct = findViewById(R.id.rv_product)
 
         //Title Menu
-        categoryMenuList = java.util.ArrayList()
         categoryMenuList?.add(CategoryMenu(0, "All"))
         categoryMenuList?.add(CategoryMenu(1, "Prewedding"))
         categoryMenuList?.add(CategoryMenu(2, "Wedding"))
@@ -102,7 +102,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun getAllProductByCat(category: String) {
-
+        ProductByCategoryPresenter(this).getAllProductByCategory(category)
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -120,7 +120,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         when (view!!.id) {
             R.id.category_menu_item_container -> {
                 val cm = categoryProductAdapter!!.getItem(position)
-                productAdapter!!.replaceItems(productList)
+                getCategoryProduct(cm.idCategory)
             }
         }
     }

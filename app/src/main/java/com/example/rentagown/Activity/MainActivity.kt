@@ -14,15 +14,26 @@ class MainActivity : AppCompatActivity() {
     private var bottomNavigationView: BottomNavigationView? = null
     var frameLayout: FrameLayout? = null
     var selectedFragment: Fragment? = null
+    var loginCheck: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
 
         //INIT VIEW
         bottomNavigationView = findViewById(R.id.bot_nav)
         frameLayout = findViewById(R.id.fragment_container)
         bottomNavigationView?.setOnNavigationItemSelectedListener(bottomNavMethod)
+        if(intent?.hasExtra("login_check") == true) {
+            loginCheck = intent?.getBooleanExtra("login_check", false) == true
+            if(loginCheck == true) {
+                selectedFragment = LoginFragment()
+                bottomNavigationView!!.itemIconTintList = null
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment()).commit()
+            }
+        }else {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+        }
     }
 
     private val bottomNavMethod = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->

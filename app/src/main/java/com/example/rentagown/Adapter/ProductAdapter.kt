@@ -49,8 +49,8 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
         }
 
         holder.itemView.setOnClickListener(View.OnClickListener { v ->
-            Toast.makeText(v.context, "Product", Toast.LENGTH_SHORT).show()
             val product = Intent(mContext, ViewProductActivity::class.java)
+            product.putExtra("id_product", productList[position].idProduct)
             mContext.startActivity(product)
         })
     }

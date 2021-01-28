@@ -67,4 +67,7 @@ dependencies {
 
     //Annotation
     implementation 'org.glassfish:javax.annotation:10.0-b28'
+
+    //Auth
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
 }

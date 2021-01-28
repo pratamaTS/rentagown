@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Activity.DateBookingActivity
+import com.example.rentagown.Activity.MainActivity
 import com.example.rentagown.Activity.SeeNoAvailableDateActivity
 import com.example.rentagown.Adapter.SimilarCategoryAdapter
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
@@ -43,6 +45,9 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     var productQuantity: Int? = null
     val localeID =  Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+    var token: String? = null
+    var loginFragment: LoginFragment = LoginFragment()
+    var supportFragmentManager: FragmentManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,7 +119,13 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
             }
             R.id.btn_like -> {
                 if (v === btnLike) {
-                    btnLike!!.setBackgroundResource(R.drawable.btn_like_selected)
+                    if(token != null) {
+                        btnLike!!.setBackgroundResource(R.drawable.btn_like_selected)
+                    }else{
+                        val mainActivity = Intent(activity, MainActivity::class.java)
+                        mainActivity.putExtra("login_check", true)
+                        startActivity(mainActivity)
+                    }
                 }
             }
             R.id.btn_see_no_available_date -> {
