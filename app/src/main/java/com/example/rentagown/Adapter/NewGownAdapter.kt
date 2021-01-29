@@ -11,9 +11,17 @@ import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.NewGownViewHolder
 import com.example.rentagown.Model.NewGown
 import com.example.rentagown.R
+import com.example.rentagown.Response.NewGown.DataNewGown
+import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class NewGownAdapter(private val mContext: Context, private val newGownList: ArrayList<NewGown>) :
+class NewGownAdapter(private val mContext: Context, private val newGownList: ArrayList<DataNewGown>) :
     RecyclerView.Adapter<NewGownViewHolder>() {
+    val localeID =  Locale("in", "ID")
+    val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewGownViewHolder {
         val v: View =
             LayoutInflater.from(parent.context).inflate(R.layout.item_list_product, parent, false)
@@ -21,12 +29,28 @@ class NewGownAdapter(private val mContext: Context, private val newGownList: Arr
     }
 
     override fun onBindViewHolder(holder: NewGownViewHolder, position: Int) {
-        holder.tvItemName.setText(newGownList[position].itemName)
-        holder.tvPrice.setText(newGownList[position].price)
-        holder.imProduct.setImageResource(newGownList[position].image)
+        holder.tvItemName.setText(newGownList[position].productName?.capitalize()?.trim())
+
+        if(newGownList[position].idPromo?.isNotEmpty() == true) {
+            holder.tvPrice.setText(numberFormat.format(newGownList[position].finalPrice))
+            holder.tvDiscount.setText(newGownList[position].promoAmount.toString() + "%")
+            holder.tvPriceOld.setText(numberFormat.format(newGownList[position].productPrice))
+        }else{
+            holder.tvPriceOld.visibility = View.INVISIBLE
+            holder.tvDiscount.visibility = View.INVISIBLE
+            holder.tvPrice.setText(numberFormat.format(newGownList[position].productPrice))
+        }
+
+        if(newGownList[position].pathPhoto?.isNotEmpty() == true) {
+            val imgURL: String = "http://absdigital.id:5000" + newGownList[position].pathPhoto
+            Picasso.get().load(imgURL).into(holder.imProduct)
+        }else {
+            holder.imProduct.setImageResource(R.drawable.family_1)
+        }
+
         holder.itemView.setOnClickListener(View.OnClickListener { v ->
-            Toast.makeText(v.context, "Product", Toast.LENGTH_SHORT).show()
             val product = Intent(mContext, ViewProductActivity::class.java)
+            product.putExtra("id_product", newGownList[position].idProduct)
             mContext.startActivity(product)
         })
     }

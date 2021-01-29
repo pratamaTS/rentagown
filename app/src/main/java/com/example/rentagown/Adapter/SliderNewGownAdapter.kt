@@ -4,14 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rentagown.Activity.BookingSuccessActivity
+import com.example.rentagown.Activity.MainActivity
 import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderNewGownViewHolder
+import com.example.rentagown.Body.BookingBody
+import com.example.rentagown.Fragment.BookFragment
+import com.example.rentagown.Fragment.OverviewFragment
 import com.example.rentagown.R
 import com.example.rentagown.Response.NewGown.DataNewGown
 import com.squareup.picasso.Picasso
@@ -29,6 +36,9 @@ class SliderNewGownAdapter(
 
     val localeID =  Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+    var token: String? = null
+    var bookFragment: BookFragment = BookFragment()
+    var bundle: Bundle = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderNewGownViewHolder {
         val v: View =
@@ -57,6 +67,12 @@ class SliderNewGownAdapter(
         }
 
         holder.itemView.setOnClickListener { v ->
+            val product = Intent(v.context, ViewProductActivity::class.java)
+            product.putExtra("id_product", newGownList[position].idProduct)
+            v.context.startActivity(product)
+        }
+
+        holder.btnBooking.setOnClickListener{ v ->
             val product = Intent(v.context, ViewProductActivity::class.java)
             product.putExtra("id_product", newGownList[position].idProduct)
             v.context.startActivity(product)

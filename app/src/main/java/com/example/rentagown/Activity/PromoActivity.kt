@@ -4,18 +4,22 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.PromoAdapter
+import com.example.rentagown.Connection.Interface.PromoInterface
+import com.example.rentagown.Connection.Presenter.PromoPresenter
 import com.example.rentagown.Model.Promo
 import com.example.rentagown.R
+import com.example.rentagown.Response.Promo.DataPromo
 import kotlin.collections.ArrayList
 
-class PromoActivity : AppCompatActivity(), View.OnClickListener {
+class PromoActivity : AppCompatActivity(), View.OnClickListener, PromoInterface {
     var back: ImageButton? = null
     var rvListPromo: RecyclerView? = null
-    var promoList: ArrayList<Promo> = ArrayList()
+    var promoList: ArrayList<DataPromo> = ArrayList()
     var promoAdapter: PromoAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,64 +29,14 @@ class PromoActivity : AppCompatActivity(), View.OnClickListener {
         back = findViewById(R.id.im_back)
         rvListPromo = findViewById(R.id.rv_list_promo)
 
-        //List Promo
-        promoList = ArrayList()
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-        promoList.add(
-            Promo(
-                R.drawable.promo,
-                "Promo",
-                "The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), " +
-                        "Booking period until 15 September 2020. Rental period until December 2021."
-            )
-        )
-
-        //Setup Recycler View Product
-        promoAdapter = PromoAdapter(this, promoList)
-        rvListPromo?.setLayoutManager(GridLayoutManager(this, 2))
-        rvListPromo?.setAdapter(promoAdapter)
+        getPromo()
 
         //SET LISTENER
         back?.setOnClickListener(this)
+    }
+
+    private fun getPromo() {
+        PromoPresenter(this).getAllPromo()
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -90,5 +44,18 @@ class PromoActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.im_back -> finish()
         }
+    }
+
+    override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
+        promoList = dataPromo as ArrayList<DataPromo>
+
+        //Setup Recycler View Product
+        promoAdapter = PromoAdapter(this, promoList)
+        rvListPromo?.setLayoutManager(GridLayoutManager(this, 2))
+        rvListPromo?.setAdapter(promoAdapter)
+    }
+
+    override fun onErrorGetPromo(msg: String) {
+        Toast.makeText(this, "Failed to get data promo", Toast.LENGTH_SHORT)
     }
 }

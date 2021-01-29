@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Activity.DetailPromoActivity
+import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderPromoViewHolder
 import com.example.rentagown.Model.Promo
 import com.example.rentagown.R

@@ -106,6 +106,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
         imWishlist!!.setOnClickListener(this@HomeFragment)
         imNotification!!.setOnClickListener(this@HomeFragment)
         btnSeeAllCategory!!.setOnClickListener(this@HomeFragment)
+        btnSeeAllPromo!!.setOnClickListener(this@HomeFragment)
+        btnSeeAllFavoriteGown!!.setOnClickListener(this@HomeFragment)
+        btnSeeAllNewGown!!.setOnClickListener(this@HomeFragment)
         searchView!!.setOnClickListener(this@HomeFragment)
 
         return view
@@ -136,6 +139,10 @@ class HomeFragment : Fragment(), View.OnClickListener,
             R.id.btn_see_all_category -> {
                 val categoryProduct = Intent(activity, ProductGownActivity::class.java)
                 startActivity(categoryProduct)
+            }
+            R.id.btn_see_all_promo -> {
+                val promo = Intent(activity, PromoActivity::class.java)
+                startActivity(promo)
             }
             R.id.btn_see_all_favorite -> {
                 val favoriteGown = Intent(activity, FavoriteGownActivity::class.java)

@@ -53,8 +53,13 @@ class SliderFavoriteGownAdapter(
             holder.imProduct.setImageResource(R.drawable.family_1)
         }
 
-
         holder.itemView.setOnClickListener { v ->
+            val product = Intent(v.context, ViewProductActivity::class.java)
+            product.putExtra("id_product", favoriteGownList[position].idProduct)
+            v.context.startActivity(product)
+        }
+
+        holder.btnBooking.setOnClickListener{ v ->
             val product = Intent(v.context, ViewProductActivity::class.java)
             product.putExtra("id_product", favoriteGownList[position].idProduct)
             v.context.startActivity(product)
