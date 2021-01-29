@@ -106,8 +106,7 @@
                                 android:id="@+id/img_product_review"
                                 android:layout_width="165dp"
                                 android:layout_height="165dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/prewedding_1" />
+                                android:scaleType="centerCrop" />
 
                         </LinearLayout>
 

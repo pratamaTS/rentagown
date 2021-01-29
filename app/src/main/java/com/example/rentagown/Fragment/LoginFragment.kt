@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,6 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     var btnForgotPassword: Button? = null
     var btnToSignUp: Button? = null
     var btnShowHidePass: ImageView? = null
-    var loginBody: LoginBody? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,10 +61,7 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {
-                loginBody?.email = etEmail?.text.toString()
-                loginBody?.password = etPassword?.text.toString()
-
-                LoginPresenter(this).login(loginBody!!)
+                LoginPresenter(this).login(LoginBody(etEmail?.text.toString(), etPassword?.text.toString()))
             }
             R.id.btn_forgot_password -> {
                 val forgotPassword = Intent(activity, ForgotPasswordActivity::class.java)

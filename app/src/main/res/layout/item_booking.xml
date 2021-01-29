@@ -34,7 +34,6 @@
             android:layout_height="127dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="22dp"
-            tools:src="@drawable/prewedding_1"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             app:riv_corner_radius="8dp"

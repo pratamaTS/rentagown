@@ -111,7 +111,8 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     override fun onClick(v: View) {
         when (v.id) {
             R.id.layout_detail_start_date -> {
-
+                val startDate = Intent(activity, DateBookingActivity::class.java)
+                startActivity(startDate)
             }
             R.id.layout_detail_end_date -> {
                 val endDate = Intent(activity, DateBookingActivity::class.java)

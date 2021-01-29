@@ -44,7 +44,6 @@
                 android:id="@+id/im_product_transaction"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                tools:src="@drawable/prewedding_1"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:riv_mutate_background="true"

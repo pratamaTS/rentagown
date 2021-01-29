@@ -44,6 +44,7 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailPro
     var bottomSheet: LinearLayout? = null
     var idProduct: String? = null
     var viewPager: ViewPager? = null
+    var token: String ? = null
 
     //tambahan variable
     var containerViewProduct: CoordinatorLayout? = null
@@ -111,8 +112,14 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailPro
         when (v.id) {
             R.id.im_back -> finish()
             R.id.btn_book_now -> {
-                val bookNow = Intent(this@ViewProductActivity, YourBookingActivity::class.java)
-                startActivity(bookNow)
+                if(token != null) {
+                    val bookNow = Intent(this@ViewProductActivity, YourBookingActivity::class.java)
+                    startActivity(bookNow)
+                }else{
+                    val mainActivity = Intent(this, MainActivity::class.java)
+                    mainActivity.putExtra("login_check", true)
+                    startActivity(mainActivity)
+                }
             }
             R.id.btn_whatsapp -> {
                 val number = "+6281806155676"

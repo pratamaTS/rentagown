@@ -86,7 +86,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
     }
 
     override fun onSuccessGetPromo(dataProfile: DataProfile?) {
-        tvName!!.text = dataProfile?.name
+        tvName!!.text = dataProfile?.name?.capitalize()?.trim()
         tvEmail!!.text = dataProfile?.email
 
         if(dataProfile?.pathPhoto?.isNotEmpty() == true) {

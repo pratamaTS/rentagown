@@ -30,64 +30,6 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener {
         layoutEmpty = findViewById(R.id.layout_wishlist_empty)
 
         //List Product Wishlist
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Rp. 5.000.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Rp. 5.000.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.wedding_1,
-                "Trixie Lace Panel Pleated Dress",
-                "Rp. 5.000.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.wedding_1,
-                "Trixie Lace Panel Pleated Dress",
-                "Rp. 5.000.000"
-            )
-        )
-        wishlistList!!.add(Wishlist(R.drawable.family_1, "Family of Ceminata Gown", "Rp. 10.000.000"))
-        wishlistList!!.add(Wishlist(R.drawable.family_1, "Family of Ceminata Gown", "Rp. 10.000.000"))
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.maternity_1,
-                "Blue Ocean elegant maternity gown",
-                "Rp. 2.200.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.maternity_1,
-                "Blue Ocean elegant maternity gown",
-                "Rp. 2.200.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Rp. 5.000.000"
-            )
-        )
-        wishlistList!!.add(
-            Wishlist(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Rp. 5.000.000"
-            )
-        )
 
         //Setup Adapter
         wishlistAdapter = WishlistAdapter(this, wishlistList!!)

@@ -27,49 +27,6 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener {
         rvNewGown = findViewById(R.id.rv_list_new_gown)
 
         //Slider New Gown
-        newGownList = ArrayList()
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
-        newGownList.add(
-            NewGown(
-                R.drawable.new_product,
-                "Nude Embellishment Mermaid Gown",
-                "Rp. 4.000.000"
-            )
-        )
 
         //Setup Recycler View New Gown
         newGownAdapter = NewGownAdapter(this, newGownList)

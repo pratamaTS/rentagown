@@ -33,63 +33,6 @@ class TransactionStatusActivity : AppCompatActivity(), View.OnClickListener {
         layoutEmpty = findViewById(R.id.layout_transaction_empty)
 
         //List Invoice History
-        transactionStatusList = ArrayList()
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
-        transactionStatusList?.add(TransactionStatus(
-                "08 SEP 2020",
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "10:15",
-                "Deposit Booking",
-                "Rp. 500.000"))
 
         //Set up Adapter
         transactionStatusAdapter = TransactionStatusAdapter(this, transactionStatusList)

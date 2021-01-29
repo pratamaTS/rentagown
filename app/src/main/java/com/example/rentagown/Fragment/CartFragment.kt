@@ -35,57 +35,17 @@ class CartFragment : Fragment(), View.OnClickListener {
         btnWhatsapp = view.findViewById(R.id.btn_whatsapp)
 
         //List Cart
-        cartList = ArrayList()
-        cartList!!.add(
-            Cart(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Prewedding Gown",
-                "One Day Service",
-                "Rp. 5.000.000",
-                "9 September 2020 - 12 September 2020"
-            )
-        )
-        cartList!!.add(
-            Cart(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Wedding Gown",
-                "One Day Service",
-                "Rp. 10.000.000",
-                "9 September 2020 - 12 September 2020"
-            )
-        )
-        cartList!!.add(
-            Cart(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Family Gown",
-                "One Day Service",
-                "Rp. 20.000.000",
-                "9 September 2020 - 12 September 2020"
-            )
-        )
-        cartList!!.add(
-            Cart(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Prewedding Gown",
-                "One Day Service",
-                "Rp. 16.000.000",
-                "9 September 2020 - 12 September 2020"
-            )
-        )
-        cartList!!.add(
-            Cart(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "Prewedding Gown",
-                "One Day Service",
-                "Rp. 2.500.000",
-                "9 September 2020 - 12 September 2020"
-            )
-        )
+//        cartList = ArrayList()
+//        cartList!!.add(
+//            Cart(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "Prewedding Gown",
+//                "One Day Service",
+//                "Rp. 5.000.000",
+//                "9 September 2020 - 12 September 2020"
+//            )
+//        )
 
         //Setup Recycler View
         cartAdapter = CartAdapter(context!!, cartList!!)

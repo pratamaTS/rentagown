@@ -27,49 +27,14 @@ class FavoriteGownActivity : AppCompatActivity(), View.OnClickListener {
         rvFavoriteGown = findViewById(R.id.rv_list_favorite_gown)
 
         //List Product Favorite
-        favoriteGownList = ArrayList()
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
-        favoriteGownList.add(
-            FavoriteGown(
-                R.drawable.product_favourite,
-                "Dahlia Cascade Layered Jumpsuit",
-                "Rp. 12.000.000"
-            )
-        )
+//        favoriteGownList = ArrayList()
+//        favoriteGownList.add(
+//            FavoriteGown(
+//                R.drawable.product_favourite,
+//                "Dahlia Cascade Layered Jumpsuit",
+//                "Rp. 12.000.000"
+//            )
+//        )
 
         //Setup Recycler View Favorite
         favoriteGownAdapter = FavoriteGownAdapter(this, favoriteGownList)

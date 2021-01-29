@@ -41,85 +41,85 @@ class BookFragment : Fragment(), View.OnClickListener {
 
 
         //List My Booking
-        myBookingList = ArrayList()
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
-        myBookingList!!.add(
-            MyBooking(
-                R.drawable.prewedding_1,
-                "Selina Colourblock Camisole Dress",
-                "On-Progress",
-                "08 Sep 2020",
-                "09 Sep 2020 -",
-                "16 Sep 2020",
-                "Rp. 5.000.000",
-                "Rp. 2.000.000",
-                "Rp. 3.000.000"
-            )
-        )
+//        myBookingList = ArrayList()
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
+//        myBookingList!!.add(
+//            MyBooking(
+//                R.drawable.prewedding_1,
+//                "Selina Colourblock Camisole Dress",
+//                "On-Progress",
+//                "08 Sep 2020",
+//                "09 Sep 2020 -",
+//                "16 Sep 2020",
+//                "Rp. 5.000.000",
+//                "Rp. 2.000.000",
+//                "Rp. 3.000.000"
+//            )
+//        )
 
 
         //Setup Recycler View
