@@ -22,6 +22,10 @@ interface RentaGownServices {
     @GET
     fun getAllProductByCategory(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseProduct>
 
+    //Get All Product by Category
+    @GET
+    fun getAllProductByPromo(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseProduct>
+
     //Get All Promo
     @GET("api/v/1/promo/findall")
     fun getAllPromo(@HeaderMap map: MutableMap<String, String>?): Call<ResponsePromo>

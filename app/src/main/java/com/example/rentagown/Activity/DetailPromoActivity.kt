@@ -1,6 +1,7 @@
 package com.example.rentagown.Activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -55,6 +56,9 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
         when (v.id) {
             R.id.im_back -> finish()
             R.id.btn_use_promo -> {
+                val categoryProduct = Intent(this, ProductGownActivity::class.java)
+                categoryProduct.putExtra("check_promo", true)
+                startActivity(categoryProduct)
             }
         }
     }
