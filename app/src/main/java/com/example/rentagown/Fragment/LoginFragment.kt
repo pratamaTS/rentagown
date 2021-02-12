@@ -61,7 +61,7 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {
-                LoginPresenter(this).login(LoginBody(etEmail?.text.toString(), etPassword?.text.toString()))
+                LoginPresenter(this).login(context!!, LoginBody(etEmail?.text.toString(), etPassword?.text.toString()))
             }
             R.id.btn_forgot_password -> {
                 val forgotPassword = Intent(activity, ForgotPasswordActivity::class.java)
@@ -86,14 +86,8 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         }
     }
 
-    override fun onSuccessGetLogin(dataLogin: DataLogin?) {
-        val jwt = JWT(dataLogin?.accessToken.toString())
-        val expiresAt: Date? = jwt.expiresAt
-
+    override fun onSuccessGetLogin() {
         val login = Intent(activity, MainAfterActivity::class.java)
-        login.putExtra("token", dataLogin?.accessToken.toString())
-        login.putExtra("jwt", jwt)
-        login.putExtra("expires_at", expiresAt)
         startActivity(login)
     }
 

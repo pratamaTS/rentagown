@@ -35,7 +35,7 @@ import kotlin.collections.ArrayList
 class HomeFragment : Fragment(), View.OnClickListener,
     ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, PromoInterface, FavoriteGownInterface, NewGownInterface, CategoryMenuAdapter.ReloadItemInterface {
     var imWishlist: ImageButton? = null
-    var imNotification: ImageButton? = null
+    var imNotification: ImageView? = null
     var btnSeeAllCategory: Button? = null
     var btnSeeAllPromo: Button? = null
     var btnSeeAllFavoriteGown: Button? = null
@@ -250,12 +250,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
             )
         )
         rvSliderNewGown!!.setAdapter(adapterNewGown)
-        rvSliderNewGown!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
     }
 
     override fun onErrorGetNewGown(msg: String) {
@@ -278,12 +272,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
             )
         )
         rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
-        rvSliderFavoriteGown!!.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
 
     }
 
@@ -310,12 +298,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
                 )
             )
             rvSliderPromo!!.setAdapter(adapterPromo)
-            rvSliderPromo!!.addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    LinearLayoutManager.HORIZONTAL
-                )
-            )
         }
     }
 

@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.rentagown.Activity.InvoiceHistoryActivity
 import com.example.rentagown.Activity.SettingActivity
+import com.example.rentagown.Connection.Constants
 import com.example.rentagown.Connection.Interface.ProfileInterface
 import com.example.rentagown.Connection.Presenter.ProfilePresenter
 import com.example.rentagown.R
@@ -27,8 +28,6 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
     var privacyPolicy: ConstraintLayout? = null
     var termsConditions: ConstraintLayout? = null
     var signOut: ConstraintLayout? = null
-    var tokenType: String? = null
-    var token: String? = null
     var tvName: TextView? = null
     var tvEmail: TextView? = null
     var imProfile: CircleImageView? = null
@@ -52,9 +51,6 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         tvEmail = v.findViewById(R.id.tv_email)
         imProfile = v.findViewById(R.id.foto_profile)
 
-        tokenType = arguments?.getString("token_type")
-        token = arguments?.getString("token")
-
         getProfile()
 
         //SET LISTENER
@@ -65,7 +61,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
     }
 
     private fun getProfile() {
-        ProfilePresenter(this).getProfile(tokenType.toString(), token.toString())
+        ProfilePresenter(this).getProfile(context!!)
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -90,7 +86,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         tvEmail!!.text = dataProfile?.email
 
         if(dataProfile?.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + dataProfile?.pathPhoto
+            val imgURL: String = Constants.SERVER_URL + dataProfile?.pathPhoto
             Picasso.get().load(imgURL).into(imProfile)
         }else {
             imProfile?.setImageResource(R.drawable.family_1)

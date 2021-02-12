@@ -1,9 +1,11 @@
  package com.example.rentagown.Connection.Presenter
 
+import android.content.Context
 import com.example.rentagown.Connection.Interface.DetailProductInterface
 import com.example.rentagown.Connection.Interface.ProfileInterface
 import com.example.rentagown.Connection.Interface.PromoByIdInterface
 import com.example.rentagown.Connection.NetworkConfig
+import com.example.rentagown.Connection.NetworkConfigAfterLogin
 import com.example.rentagown.Response.Product.ResponseDetailProduct
 import com.example.rentagown.Response.Profile.ResponseProfile
 import com.example.rentagown.Response.Promo.PromoDetail.ResponsePromoDetail
@@ -12,17 +14,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfilePresenter(val profileInterface: ProfileInterface) {
-    fun getProfile(tokenType: String, token: String){
+    fun getProfile(context: Context){
         //Header
-        val tokenHeader: String = tokenType + " " + token
         val map: MutableMap<String, String> = HashMap()
-        map["Authorization"] = tokenHeader
         map["Accept-Encoding"] = "gzip, deflate, br"
         map["Content-Type"] = "application/json"
         map["Host"] = "absdigital.id"
 
         //Connect
-        NetworkConfig.service()
+        NetworkConfigAfterLogin.service(context)
                 .getProfile(map)
                 .enqueue(object : Callback<ResponseProfile> {
 

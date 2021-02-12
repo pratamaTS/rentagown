@@ -13,7 +13,6 @@ import com.example.rentagown.Model.OnBoardingItem
 import com.example.rentagown.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import kotlin.collections.ArrayList
 
 class OnBoardingActivity : AppCompatActivity() {
     private var screenPager: ViewPager? = null
@@ -39,41 +38,48 @@ class OnBoardingActivity : AppCompatActivity() {
 
 
         //Fill list screen
+
+
+        //Fill list screen
         mList.add(
             OnBoardingItem(
                 "Prewedding",
-                "The special day that is coming soon will not be memorable without stunning clothes, " +
-                        "we are here to bring that to you.",
+                "The chapter where the solitude ends and togetherness begins is about to start. " +
+                        "Welcoming this chapter with special dress, sincere smiles, and loving memories.",
                 R.drawable.bg_prewedding
             )
         )
+
         mList.add(
             OnBoardingItem(
                 "Wedding",
-                "A dazzling collection available for you to use on your special day, creating unforgettable memories for a lifetime.",
+                "We are here to help you find the perfect dress for the day that you will cherish for the rest of your life.",
                 R.drawable.bg_wedding
             )
         )
+
         mList.add(
             OnBoardingItem(
                 "Family",
-                "Looking different is about showing inner beauty from another perspective, and that's what someone like you needs.",
+                "Nothing is more important than making a wonderful memory with your loved ones. " +
+                        "Find your stunning dress to make it even memorable.",
                 R.drawable.bg_family
             )
         )
+
         mList.add(
             OnBoardingItem(
                 "Maternity",
-                "Looking different is about showing inner beauty from another perspective, and that's what someone like you needs.",
+                "Wrapped yourself in magical dresses to welcome a grand adventure of your life.",
                 R.drawable.bg_maternity
             )
         )
+
         mList.add(
             OnBoardingItem(
                 "A more flexible way to rent",
-                "We are here to make it easy for you to choose clothes that are suitable for " +
-                        "all your important activities so that you appear different from the others.",
-                R.drawable.bg_get_started
+                "We want to give our customers the best experience, and now we have made renting a dress way simpler and easier. ",
+                R.drawable.bg_getstarted
             )
         )
 

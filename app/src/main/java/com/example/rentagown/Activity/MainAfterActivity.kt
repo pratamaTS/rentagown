@@ -14,9 +14,6 @@ class MainAfterActivity : AppCompatActivity() {
     private var bottomNavigationView: BottomNavigationView? = null
     var frameLayout: FrameLayout? = null
     var selectedFragment: Fragment? = null
-    var tokenType: String? = null
-    var token: String? = null
-    var bundle: Bundle = Bundle()
     var profileAfterFragment: ProfileAfterFragment = ProfileAfterFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +26,6 @@ class MainAfterActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bot_nav)
         frameLayout = findViewById(R.id.fragment_container)
         bottomNavigationView!!.setOnNavigationItemSelectedListener(bottomNavMethod)
-
-        tokenType = "Bearer"
-        token = intent.getStringExtra("token")
-        bundle.putString("token_type", tokenType)
-        bundle.putString("token", token)
 
     }
 
@@ -50,7 +42,6 @@ class MainAfterActivity : AppCompatActivity() {
                 }
                 R.id.nav_profile -> {
                     selectedFragment = profileAfterFragment
-                    profileAfterFragment.arguments = bundle
                     bottomNavigationView!!.itemIconTintList = null
                 }
             }
