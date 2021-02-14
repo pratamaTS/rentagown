@@ -13,4 +13,5 @@ object Constants {
     const val LOGIN = "api/v/1/user/login"
     const val REGISTER = "api/v/1/user"
     const val UPLOAD_PROFILE_PICT = "api/v/1/user/avatar"
+    const val MY_BOOKING = "api/v/1/booking/byuser"
 }

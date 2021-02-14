@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -135,14 +136,14 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
 
         // create RequestBody instance from file
         val requestFile = RequestBody.create(
-            MediaType.parse("image/*"),
+            MediaType.parse(contentResolver.getType(uri!!)),
             photo
         )
 
         // MultipartBody.Part is used to send also the actual file name
         val body = MultipartBody.Part.createFormData("avatar", photo!!.name, requestFile)
 
-        UploadPictPresenter(this).uploadProfilePict(this, myImageJPG!!)
+        UploadPictPresenter(this).uploadProfilePict(this, body)
     }
 
     private fun createImageData(uri: Uri) {
@@ -169,31 +170,21 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         }
 
         myImageJPG = Bitmap.createBitmap(myImage!!.width, myImage!!.height, Bitmap.Config.ARGB_8888)
-        val bos = ByteArrayOutputStream()
-        myImageJPG!!.compress(Bitmap.CompressFormat.JPEG, 100, bos)
     }
 
     private fun createTempFile(bitmap: Bitmap): File? {
         val file = File(
             getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-            System.currentTimeMillis().toString() + "_image.webp"
+            System.currentTimeMillis().toString() + "_image_profile.jpeg"
         )
-        val bos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
-        val bitmapdata = bos.toByteArray()
-        //write the bytes in file
-        try {
-            val fos = FileOutputStream(file)
-            fos.write(bitmapdata)
-            fos.flush()
-            fos.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        Log.d("file", file.toString())
+        val fos = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+
         return file
     }
 
-    override fun onSuccessGetPromo(dataProfile: DataProfile?) {
+    override fun onSuccessGetProfile(dataProfile: DataProfile?) {
         edtName!!.setText(dataProfile?.name?.capitalize()?.trim())
         name = dataProfile?.name
         edtEmail!!.setText(dataProfile?.email)
@@ -207,7 +198,7 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         }
     }
 
-    override fun onErrorGetPromo(msg: String) {
+    override fun onErrorGetProfile(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT)
     }
 

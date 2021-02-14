@@ -155,6 +155,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_start_date_vp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
@@ -176,8 +177,8 @@
                     android:orientation="horizontal"
                     android:paddingTop="14dp"
                     android:paddingBottom="14dp"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:foreground="?android:attr/selectableItemBackground"
                     tools:ignore="MissingConstraints,UnusedAttribute">
 
@@ -202,7 +203,7 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/tv_date_booking_detail_product"
+                            android:id="@+id/tv_end_date_vp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"

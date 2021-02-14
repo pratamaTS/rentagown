@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private val bottomNavMethod = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
         when (menuItem.itemId) {
             R.id.nav_home -> {
+                var bundle: Bundle = Bundle()
                 selectedFragment = HomeFragment()
                 bottomNavigationView!!.itemIconTintList = null
             }

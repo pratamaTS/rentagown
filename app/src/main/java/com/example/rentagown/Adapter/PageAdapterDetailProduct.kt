@@ -13,7 +13,9 @@ class PageAdapterDetailProduct(
     viewProductActivity: ViewProductActivity?,
     fm: FragmentManager?,
     var counttab: Int,
-    var detailProduct: DataDetailProduct? = null
+    var detailProduct: DataDetailProduct? = null,
+    var startDate: String,
+    var endDate: String
 ) :
     FragmentStatePagerAdapter(fm!!) {
     override fun getItem(position: Int): Fragment {
@@ -29,6 +31,8 @@ class PageAdapterDetailProduct(
         bundle.putInt("final_price", detailProduct?.finalPrice!!)
         bundle.putInt("promo_amount", detailProduct?.promoAmount!!)
         bundle.putInt("product_quantity", detailProduct?.productQuantity!!)
+        bundle.putString("start_date", startDate)
+        bundle.putString("end_date", endDate)
 
         return when (position) {
             0 -> {

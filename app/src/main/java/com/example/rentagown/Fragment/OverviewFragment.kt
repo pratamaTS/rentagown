@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.CompoundButton
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,14 +17,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Activity.DateBookingActivity
 import com.example.rentagown.Activity.MainActivity
 import com.example.rentagown.Activity.SeeNoAvailableDateActivity
+import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.SimilarCategoryAdapter
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
 import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInterface {
     var rvSimilarCategory: RecyclerView? = null
@@ -30,10 +35,12 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     var tvProductPrice: TextView? = null
     var tvProductFinalPrice: TextView? = null
     var tvDiscount: TextView? = null
+    var tvStartDate: TextView? = null
+    var tvEndDate: TextView? = null
+    var switchServices: SwitchCompat? = null
     var productList: ArrayList<DataProduct> = ArrayList()
     var similarCategoryAdapter: SimilarCategoryAdapter? = null
     var btnStartDate: LinearLayout? = null
-    var btnEndDate:LinearLayout? = null
     var btnLike: ImageButton? = null
     var btnSeeNoAvailableDate: Button? = null
     var idProduct: String? = null
@@ -43,6 +50,9 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     var productFinalPrice: Int? = null
     var productPromoAmount: Int? = null
     var productQuantity: Int? = null
+    var services: Int? = null
+    var startDate: String? = null
+    var endDate: String? = null
     val localeID =  Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
     var token: String? = null
@@ -50,11 +60,13 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     var supportFragmentManager: FragmentManager? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_overview, container, false)
+
+        val sessionManager = SessionManager(context!!)
 
         //INIT VIEW
         rvSimilarCategory = view.findViewById(R.id.rv_similar_category)
@@ -62,10 +74,16 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
         tvProductFinalPrice = view.findViewById(R.id.tv_price_detail_product)
         tvProductPrice = view.findViewById(R.id.tv_price_old_dress_detail_product)
         tvDiscount = view.findViewById(R.id.tv_discount_detail_product)
+        tvStartDate = view.findViewById(R.id.tv_start_date_vp)
+        tvEndDate = view.findViewById(R.id.tv_end_date_vp)
         btnLike = view.findViewById(R.id.btn_like)
+        switchServices = view.findViewById(R.id.toogle_switch_special_treatment)
         btnStartDate = view.findViewById(R.id.layout_detail_start_date)
-        btnEndDate = view.findViewById(R.id.layout_detail_end_date)
         btnSeeNoAvailableDate = view.findViewById(R.id.btn_see_no_available_date)
+
+        sessionManager.fetchAuthToken()?.let {
+            token = it
+        }
 
         //Get Value
         idProduct = arguments?.getString("id_product")
@@ -75,9 +93,29 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
         productFinalPrice = arguments?.getInt("final_price")
         productPromoAmount = arguments?.getInt("promo_amount")
         productQuantity = arguments?.getInt("product_quantity")
+        startDate = arguments?.getString("start_date")
+        endDate = arguments?.getString("end_date")
 
         //Set Value
         tvProductName!!.text = productName?.capitalize()?.trimEnd()
+        if(startDate != "null" && endDate != "null"){
+            tvStartDate!!.text = startDate
+            tvEndDate!!.text = endDate
+        }
+
+        switchServices!!.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+
+            when(isChecked){
+                true -> {
+                    services = 1
+                    (activity as ViewProductActivity?)!!.setServices(services!!)
+                }
+                false -> {
+                    services = 0
+                    (activity as ViewProductActivity?)!!.setServices(services!!)
+                }
+            }
+        })
 
         when(productPromoAmount) {
             0 -> {
@@ -94,7 +132,6 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
 
         //SET LISTENER
         btnStartDate?.setOnClickListener(this@OverviewFragment)
-        btnEndDate?.setOnClickListener(this@OverviewFragment)
         btnLike?.setOnClickListener(this@OverviewFragment)
         btnSeeNoAvailableDate?.setOnClickListener(this@OverviewFragment)
 
@@ -111,18 +148,30 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     override fun onClick(v: View) {
         when (v.id) {
             R.id.layout_detail_start_date -> {
-                val startDate = Intent(activity, DateBookingActivity::class.java)
-                startActivity(startDate)
-            }
-            R.id.layout_detail_end_date -> {
-                val endDate = Intent(activity, DateBookingActivity::class.java)
-                startActivity(endDate)
+                if (token != null) {
+                    val date = Intent(activity, DateBookingActivity::class.java)
+
+                    date.putExtra("id_product", idProduct)
+                    date.putExtra("name_product_category", productCategory)
+                    date.putExtra("product_name", productName)
+                    date.putExtra("product_price", productPrice)
+                    date.putExtra("final_price", productFinalPrice)
+                    date.putExtra("promo_amount", productPromoAmount)
+                    date.putExtra("product_quantity", productQuantity)
+
+                    startActivity(date)
+                    activity?.finish()
+                } else {
+                    val mainActivity = Intent(activity, MainActivity::class.java)
+                    mainActivity.putExtra("login_check", true)
+                    startActivity(mainActivity)
+                }
             }
             R.id.btn_like -> {
                 if (v === btnLike) {
-                    if(token != null) {
-                        btnLike!!.setBackgroundResource(R.drawable.btn_like_selected)
-                    }else{
+                    if (token != null) {
+                        btnLike!!.setBackgroundResource(R.drawable.ic_like_gold_filled)
+                    } else {
                         val mainActivity = Intent(activity, MainActivity::class.java)
                         mainActivity.putExtra("login_check", true)
                         startActivity(mainActivity)

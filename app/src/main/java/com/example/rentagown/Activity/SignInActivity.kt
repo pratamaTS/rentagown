@@ -55,6 +55,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_sign_in -> {
                 val login = Intent(this@SignInActivity, MainAfterActivity::class.java)
                 startActivity(login)
+                finish()
             }
             R.id.btn_forgot_password -> {
                 val forgotPassword = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)

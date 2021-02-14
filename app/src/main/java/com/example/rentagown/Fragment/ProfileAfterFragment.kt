@@ -47,8 +47,8 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         privacyPolicy = v.findViewById(R.id.menu_privacy_policy)
         termsConditions = v.findViewById(R.id.menu_terms_condition)
         signOut = v.findViewById(R.id.btn_logout)
-        tvName = v.findViewById(R.id.tv_name)
-        tvEmail = v.findViewById(R.id.tv_email)
+        tvName = v.findViewById(R.id.tv_name_profile)
+        tvEmail = v.findViewById(R.id.tv_email_profile)
         imProfile = v.findViewById(R.id.foto_profile)
 
         getProfile()
@@ -81,9 +81,9 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         }
     }
 
-    override fun onSuccessGetPromo(dataProfile: DataProfile?) {
-        tvName!!.text = dataProfile?.name?.capitalize()?.trim()
-        tvEmail!!.text = dataProfile?.email
+    override fun onSuccessGetProfile(dataProfile: DataProfile?) {
+        tvName?.text = dataProfile?.name?.capitalize()?.trim()
+        tvEmail?.text = dataProfile?.email
 
         if(dataProfile?.pathPhoto?.isNotEmpty() == true) {
             val imgURL: String = Constants.SERVER_URL + dataProfile?.pathPhoto
@@ -93,7 +93,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         }
     }
 
-    override fun onErrorGetPromo(msg: String) {
+    override fun onErrorGetProfile(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT)
     }
 }

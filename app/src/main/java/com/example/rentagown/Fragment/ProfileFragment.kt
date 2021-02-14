@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.rentagown.Activity.InvoiceHistoryActivity
 import com.example.rentagown.Activity.SettingActivity
 import com.example.rentagown.Activity.TransactionStatusActivity
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
 import java.util.*
 
@@ -23,6 +24,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     var privacyPolicy: ConstraintLayout? = null
     var termsConditions: ConstraintLayout? = null
     var signOut: ConstraintLayout? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment\

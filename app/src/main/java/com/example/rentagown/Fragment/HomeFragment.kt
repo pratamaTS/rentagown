@@ -46,6 +46,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var layoutPromoEmpty: ImageView? = null
     var searchView: SearchView? = null
     var layoutPromo: ConstraintLayout? = null
+    var layoutFavoriteGown: ConstraintLayout? = null
     var rvSliderFavoriteGown: RecyclerView? = null
     var rvSliderNewGown: RecyclerView? = null
     var adapterMenu: CategoryMenuAdapter? = null
@@ -60,7 +61,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var newGownList: ArrayList<DataNewGown>?= null
     var dummySliderMainMenus: ArrayList<DataProduct> = ArrayList()
     var itemDecorSet: Boolean = false
-    var tvvNoItemHome: TextView? = null
+    var tvNoItemHome: TextView? = null
     var swipeRefreshHome: SwipeRefreshLayout? = null
     var pbProcat: IndeterminateCenteredRoundCornerProgressBar? = null
     var pbPromo: IndeterminateCenteredRoundCornerProgressBar? = null
@@ -80,6 +81,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         imNotification = view.findViewById(R.id.im_notification)
         layoutPromoEmpty = view.findViewById(R.id.layout_promo_empty)
         layoutPromo = view.findViewById(R.id.layout_promo)
+        layoutFavoriteGown = view.findViewById(R.id.layout_favorite_gown)
         btnSeeAllCategory = view.findViewById(R.id.btn_see_all_category)
         btnSeeAllPromo = view.findViewById(R.id.btn_see_all_promo)
         searchView = view.findViewById(R.id.search_view)
@@ -259,19 +261,24 @@ class HomeFragment : Fragment(), View.OnClickListener,
     override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
         //Slider Favorite Gown
         pbFavGown!!.visibility = View.GONE
-        favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
-        rvSliderFavoriteGown!!.visibility = View.VISIBLE
+        if(dataFavoriteGown?.isNotEmpty() == true){
+            favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
+            rvSliderFavoriteGown!!.visibility = View.VISIBLE
 
-        //Setup Recycler View Favorite Gown
-        adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
-        rvSliderFavoriteGown!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
+
+            //Setup Recycler View Favorite Gown
+            adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
+            rvSliderFavoriteGown!!.setLayoutManager(
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             )
-        )
-        rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
+            rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
+        } else {
+            layoutFavoriteGown!!.visibility = View.GONE
+        }
 
     }
 
@@ -281,13 +288,12 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
         pbPromo!!.visibility = View.GONE
-        promoList = dataPromo as ArrayList<DataPromo>
-        rvSliderPromo!!.visibility = View.VISIBLE
+        if(dataPromo?.isNotEmpty() == true){
+            promoList = dataPromo as ArrayList<DataPromo>
 
-        if(promoList.isEmpty()){
-            layoutPromoEmpty?.setVisibility(View.GONE)
-            layoutPromo?.setVisibility(View.VISIBLE)
-        }else {
+            layoutPromoEmpty?.visibility = View.GONE
+            rvSliderPromo!!.visibility = View.VISIBLE
+
             //Setup Recycler View Promo
             adapterPromo = SliderPromoAdapter(context!!, promoList)
             rvSliderPromo!!.setLayoutManager(
@@ -297,9 +303,14 @@ class HomeFragment : Fragment(), View.OnClickListener,
                     false
                 )
             )
+
             rvSliderPromo!!.setAdapter(adapterPromo)
+        }else {
+            layoutPromoEmpty?.setVisibility(View.VISIBLE)
+            layoutPromo?.setVisibility(View.GONE)
         }
     }
+
 
     override fun onErrorGetPromo(msg: String) {
         Toast.makeText(context, "Failed to get data promo", Toast.LENGTH_SHORT)

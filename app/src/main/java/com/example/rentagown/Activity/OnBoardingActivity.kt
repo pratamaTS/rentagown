@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.rentagown.Adapter.OnBoardingAdapter
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.Model.OnBoardingItem
 import com.example.rentagown.R
 import com.google.android.material.tabs.TabLayout
@@ -24,9 +25,13 @@ class OnBoardingActivity : AppCompatActivity() {
     var btnAnim: Animation? = null
     var position = 0
     var mList: MutableList<OnBoardingItem> = ArrayList<OnBoardingItem>()
+    var token: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+
+        val sessionManager = SessionManager(this)
 
         //Init View
         screenPager = findViewById(R.id.screen_viewpager)
@@ -36,9 +41,9 @@ class OnBoardingActivity : AppCompatActivity() {
         btnSkip = findViewById(R.id.btn_skip)
         btnAnim = AnimationUtils.loadAnimation(applicationContext, R.anim.button_animation)
 
-
-        //Fill list screen
-
+        sessionManager.fetchAuthToken()?.let {
+            token = it
+        }
 
         //Fill list screen
         mList.add(
@@ -148,9 +153,13 @@ class OnBoardingActivity : AppCompatActivity() {
             .putBoolean("onboarding_complete", true).apply()
 
         // Launch the main Activity, called MainActivity
-        val main = Intent(this, MainActivity::class.java)
-        startActivity(main)
-
+        if(token == null) {
+            val main = Intent(this, MainActivity::class.java)
+            startActivity(main)
+        }else{
+            val main = Intent(this, MainAfterActivity::class.java)
+            startActivity(main)
+        }
         // Close the OnboardingActivity
         finish()
     }

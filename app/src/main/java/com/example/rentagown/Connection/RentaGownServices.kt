@@ -6,6 +6,7 @@ import com.example.rentagown.Body.RegisterBody
 import com.example.rentagown.Response.EditProfile.ResponseUploadPict
 import com.example.rentagown.Response.FavoriteGown.ResponseFavoriteGown
 import com.example.rentagown.Response.Login.ResponseLogin
+import com.example.rentagown.Response.MyBooking.ResponseMyBooking
 import com.example.rentagown.Response.NewGown.ResponseNewGown
 import com.example.rentagown.Response.Product.ResponseDetailProduct
 import com.example.rentagown.Response.Product.ResponseProduct
@@ -51,6 +52,10 @@ interface RentaGownServices {
     @GET(Constants.PROFILE)
     fun getProfile(@HeaderMap map: MutableMap<String, String>?): Call<ResponseProfile>
 
+    //Get My Booking
+    @GET(Constants.MY_BOOKING)
+    fun getMyBooking(@HeaderMap map: MutableMap<String, String>?): Call<ResponseMyBooking>
+
     //Get Detail Product By ID
     @GET
     fun getDetailProduct(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseDetailProduct>
@@ -70,5 +75,5 @@ interface RentaGownServices {
 
     @Multipart
     @PUT(Constants.UPLOAD_PROFILE_PICT) // end point dari upload
-    fun uploadProfilePict(@PartMap bodyMap: HashMap<String, Bitmap>?) : Call<ResponseUploadPict>
+    fun uploadProfilePict(@Part body: MultipartBody.Part) : Call<ResponseUploadPict>
 }

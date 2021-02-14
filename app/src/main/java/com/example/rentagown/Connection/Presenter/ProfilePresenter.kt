@@ -27,16 +27,16 @@ class ProfilePresenter(val profileInterface: ProfileInterface) {
                 .enqueue(object : Callback<ResponseProfile> {
 
                     override fun onFailure(call: Call<ResponseProfile>, t: Throwable) {
-                        profileInterface.onErrorGetPromo(t.localizedMessage)
+                        profileInterface.onErrorGetProfile(t.localizedMessage)
                     }
 
                     override fun onResponse(call: Call<ResponseProfile>, response: Response<ResponseProfile>) {
                         if(response.isSuccessful){
                             val dataDetail = response.body()?.data
-                            profileInterface.onSuccessGetPromo(dataDetail)
+                            profileInterface.onSuccessGetProfile(dataDetail)
                         }else{
                             val error = response.errorBody().toString()
-                            profileInterface.onErrorGetPromo(error)
+                            profileInterface.onErrorGetProfile(error)
                         }
                     }
 

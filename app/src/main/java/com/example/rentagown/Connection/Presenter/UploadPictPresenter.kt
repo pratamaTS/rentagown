@@ -21,15 +21,11 @@ import retrofit2.Response
 import java.io.File
 
  class UploadPictPresenter(val uploadPictInterface: UploadPictInterface) {
-    fun uploadProfilePict(context: Context, body: Bitmap){
-        val bodyMap = HashMap<String, Bitmap>()
-
-        // Body
-        bodyMap.put("avatar", body)
+    fun uploadProfilePict(context: Context, body: MultipartBody.Part){
 
         //Connect
         NetworkConfigAfterLogin.service(context)
-                .uploadProfilePict(bodyMap)
+                .uploadProfilePict(body)
                 .enqueue(object : Callback<ResponseUploadPict> {
 
                     override fun onFailure(call: Call<ResponseUploadPict>, t: Throwable) {
