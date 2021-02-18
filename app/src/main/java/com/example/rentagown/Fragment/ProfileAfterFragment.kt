@@ -10,17 +10,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.rentagown.Activity.InvoiceHistoryActivity
-import com.example.rentagown.Activity.SettingActivity
+import com.example.rentagown.Activity.*
 import com.example.rentagown.Connection.Constants
 import com.example.rentagown.Connection.Interface.ProfileInterface
 import com.example.rentagown.Connection.Presenter.ProfilePresenter
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
 import com.example.rentagown.Response.Profile.DataProfile
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface {
+    private lateinit var sessionManager: SessionManager
+
     var invoiceHistory: ConstraintLayout? = null
     var transactionStatus: ConstraintLayout? = null
     var settings: ConstraintLayout? = null
@@ -77,6 +79,12 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
                 Toast.makeText(activity!!.applicationContext, "Settings", Toast.LENGTH_SHORT).show()
                 val settings = Intent(activity, SettingActivity::class.java)
                 startActivity(settings)
+            }
+            R.id.btn_logout -> {
+                sessionManager = SessionManager(context!!)
+                sessionManager.deleteAuthToken()
+                val mainActivity = Intent(activity, MainActivity::class.java)
+                startActivity(mainActivity)
             }
         }
     }
