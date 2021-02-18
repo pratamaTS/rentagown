@@ -26,6 +26,8 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
     var PACKAGE_NAME = "com.example.rentagown"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences =
+            applicationContext.getSharedPreferences(PACKAGE_NAME + "SETTING_NOTIF", MODE_PRIVATE)
         setContentView(R.layout.activity_setting)
 
         //INIT VIEW
@@ -36,21 +38,18 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
         pushCatalogUpdate = findViewById(R.id.toogle_switch_catalog_update)
         pushPromo = findViewById(R.id.toogle_switch_promo)
         pushTransactions = findViewById(R.id.toogle_switch_transactions)
+        pushCatalogUpdate!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"catalog_update", false)
+        pushPromo!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"promo", false)
+        pushTransactions!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"transactions", false)
 
         //SET LISTENER
         back!!.setOnClickListener(this)
         editProfile!!.setOnClickListener(this)
         changePassword!!.setOnClickListener(this)
         changeAddress!!.setOnClickListener(this)
-        if (pushCatalogUpdate != null) {
-            pushCatalogUpdate!!.setOnCheckedChangeListener(this)
-        }
-        if (pushPromo != null) {
-            pushPromo!!.setOnCheckedChangeListener(this)
-        }
-        if (pushTransactions != null) {
-            pushTransactions!!.setOnCheckedChangeListener(this)
-        }
+        pushCatalogUpdate!!.setOnCheckedChangeListener(this)
+        pushPromo!!.setOnCheckedChangeListener(this)
+        pushTransactions!!.setOnCheckedChangeListener(this)
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -86,12 +85,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
                     pushCatalogUpdate!!.isChecked = true
-                    saveNotifSetting(true)
+                    saveNotifSetting(true,"catalog_update")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
                     pushCatalogUpdate!!.isChecked = false
-                    saveNotifSetting(false)
+                    saveNotifSetting(false,"catalog_update")
                 }
             }
             R.id.toogle_switch_promo -> {
@@ -104,12 +103,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
                     pushPromo!!.isChecked = true
-                    saveNotifSetting(true)
+                    saveNotifSetting(true,"promo")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
                     pushPromo!!.isChecked = false
-                    saveNotifSetting(false)
+                    saveNotifSetting(false,"promo")
                 }
             }
             R.id.toogle_switch_transactions -> {
@@ -122,23 +121,21 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
                     pushTransactions!!.isChecked = true
-                    saveNotifSetting(true)
+                    saveNotifSetting(true,"transactions")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
                     pushTransactions!!.isChecked = false
-                    saveNotifSetting(false)
+                    saveNotifSetting(false,"transactions")
                 }
             }
         }
     }
 
-    private fun saveNotifSetting(notification: Boolean) {
-        sharedPreferences =
-            applicationContext.getSharedPreferences(PACKAGE_NAME + "SETTING_NOTIF", MODE_PRIVATE)
-        sharedPreferences!!.getBoolean("notif", false)
+    private fun saveNotifSetting(notification: Boolean,tipe: String) {
+//        sharedPreferences!!.getBoolean("notif", false)
         val editor = sharedPreferences!!.edit()
-        editor.putBoolean("notif", notification)
+        editor.putBoolean("notif-"+tipe, notification)
         editor.apply()
     }
 }
