@@ -137,9 +137,12 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailPro
             R.id.im_back -> finish()
             R.id.btn_book_now -> {
                 if(token != null) {
-                    if(services != null && startDate != null && endDate != null) {
+                    if(startDate != null && endDate != null) {
                         val yourBookingActivity = Intent(this, YourBookingActivity::class.java)
                         yourBookingActivity.putExtra("paid_price", detailProduct!!.finalPrice)
+                        if(services == null){
+                            services == 0
+                        }
                         yourBookingActivity.putExtra("services", services)
                         yourBookingActivity.putExtra("path_photo", path)
                         yourBookingActivity.putExtra("product_name", detailProduct!!.productName)

@@ -1,10 +1,8 @@
 package com.example.rentagown.Connection
 
 import android.graphics.Bitmap
-import com.example.rentagown.Body.AddAddressBody
-import com.example.rentagown.Body.LoginBody
-import com.example.rentagown.Body.RegisterBody
-import com.example.rentagown.Body.WishlistBody
+import com.example.rentagown.Body.*
+import com.example.rentagown.Response.CheckDate.ResponseCheckDate
 import com.example.rentagown.Response.CreateAddress.ResponseAddAddress
 import com.example.rentagown.Response.CreateWishlist.ResponseCreateWishlist
 import com.example.rentagown.Response.EditProfile.ResponseUploadPict
@@ -113,4 +111,8 @@ interface RentaGownServices {
     //Add Wishlist
     @POST(Constants.ADD_WISHLIST)
     fun addWishlist(@HeaderMap map: MutableMap<String, String>?, @Body wishlistBody: WishlistBody): Call<ResponseCreateWishlist>
+
+    //Get Check Date
+    @POST
+    fun checkDate(@Url url: String, @HeaderMap map: MutableMap<String, String>?, @Body checkDateBody: CheckDateBody): Call<ResponseCheckDate>
 }

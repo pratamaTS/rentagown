@@ -143,11 +143,13 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
                         .setOnClickListener { bottomSheetDialog.dismiss() }
                 bottomSheetView.findViewById<View>(R.id.btn_continue).setOnClickListener {
                     // get selected radio button from radioGroup
-                    val selectedId = radioGroup?.checkedRadioButtonId
+                    val selectedId: Int? = radioGroup?.checkedRadioButtonId
+
+                    Log.d("selected", selectedId.toString())
 
                     // find the radiobutton by returned id
-                    radioButton = selectedId?.let { findViewById<View>(it) } as RadioButton
-                    Log.d("Payment method", radioButton?.text.toString())
+//                    radioButton = selectedId?.let { findViewById<View>(it) } as RadioButton
+//                    Log.d("Payment method", radioButton?.text.toString())
                 }
 
                 bottomSheetDialog.setContentView(bottomSheetView)
