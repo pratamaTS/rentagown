@@ -5,18 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.NotifPromoAdapter
+import com.example.rentagown.Connection.Interface.GetNotifPromoInterface
+import com.example.rentagown.Connection.Presenter.GetNotifPromoPresenter
 import com.example.rentagown.Model.NotifPromo
 import com.example.rentagown.R
+import com.example.rentagown.Response.Notification.DataNotifPromo
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NotifPromoFragment : Fragment() {
+class NotifPromoFragment : Fragment(), GetNotifPromoInterface {
     var rvNotifPromo: RecyclerView? = null
-    var notifPromoList: ArrayList<NotifPromo>? = null
+    var notifPromoList: ArrayList<DataNotifPromo> = ArrayList()
     var notifPromoAdapter: NotifPromoAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,92 +32,25 @@ class NotifPromoFragment : Fragment() {
         //INIT VIEW
         rvNotifPromo = view.findViewById(R.id.rv_notif_promo)
 
-        //List
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
-        notifPromoList!!.add(
-            NotifPromo(
-                "17 AGT 2020",
-                "Promo Spesial HUT RI Ke 71",
-                "Diskon hingga 80%",
-                "Dari style Prewedding produk terbaik dengan diskon hingga 80% lho! Cek sekarang, cuma di HUT RI ke 71 ini."
-            )
-        )
+        getNotifPromo()
+
+        return view
+    }
+
+    private fun getNotifPromo() {
+        GetNotifPromoPresenter(this).getAllNotifPromo(context!!)
+    }
+
+    override fun onSuccessGetNotifPromo(dataNotifPromo: ArrayList<DataNotifPromo>?) {
+        notifPromoList = dataNotifPromo as ArrayList<DataNotifPromo>
 
         //Setup Recycler View
-        notifPromoAdapter = NotifPromoAdapter(context!!, notifPromoList!!)
+        notifPromoAdapter = NotifPromoAdapter(context!!, notifPromoList)
         rvNotifPromo!!.setLayoutManager(LinearLayoutManager(activity))
         rvNotifPromo!!.setAdapter(notifPromoAdapter)
-        return view
+    }
+
+    override fun onErrorGetNotifPromo(msg: String) {
+        Toast.makeText(context, "Failed to get notification promo", Toast.LENGTH_SHORT)
     }
 }

@@ -14,4 +14,11 @@ object Constants {
     const val REGISTER = "api/v/1/user"
     const val UPLOAD_PROFILE_PICT = "api/v/1/user/avatar"
     const val MY_BOOKING = "api/v/1/booking/byuser"
+    const val ADD_ADDRESS = "api/v/1/userdetail"
+    const val GET_ADDRESS = "api/v/1/userdetail/find"
+    const val GET_BANK = "api/v/1/bank/findall"
+    const val ADD_WISHLIST = "api/v/1/wishlist"
+    const val GET_WISHLIST = "api/v/1/wishlist/findid"
+    const val GET_NOTIFICATION = "api/v/1/booking/notif/1"
+    const val GET_NOTIF_PROMO = "api/v/1/promo/notif"
 }

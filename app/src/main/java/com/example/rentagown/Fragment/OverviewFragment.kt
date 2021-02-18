@@ -19,17 +19,22 @@ import com.example.rentagown.Activity.MainActivity
 import com.example.rentagown.Activity.SeeNoAvailableDateActivity
 import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.SimilarCategoryAdapter
+import com.example.rentagown.Body.WishlistBody
+import com.example.rentagown.Connection.Interface.AddWishlistInterface
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
+import com.example.rentagown.Connection.Presenter.AddAddressPresenter
+import com.example.rentagown.Connection.Presenter.AddWishlistPresenter
 import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
 import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
+import com.example.rentagown.Response.CreateWishlist.DataAddWishlist
 import com.example.rentagown.Response.Product.DataProduct
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInterface {
+class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInterface, AddWishlistInterface {
     var rvSimilarCategory: RecyclerView? = null
     var tvProductName: TextView? = null
     var tvProductPrice: TextView? = null
@@ -170,7 +175,7 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
             R.id.btn_like -> {
                 if (v === btnLike) {
                     if (token != null) {
-                        btnLike!!.setBackgroundResource(R.drawable.ic_like_gold_filled)
+                        AddWishlistPresenter(this).addWishlist(context!!, WishlistBody(idProduct))
                     } else {
                         val mainActivity = Intent(activity, MainActivity::class.java)
                         mainActivity.putExtra("login_check", true)
@@ -199,5 +204,13 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
 
     override fun onErrorGetProductByCategory(msg: String) {
         Toast.makeText(context, "Failed to get data similar product", Toast.LENGTH_SHORT)
+    }
+
+    override fun onSuccessAddWishlist(dataAddWishlist: DataAddWishlist) {
+        btnLike!!.setBackgroundResource(R.drawable.ic_like_gold_filled)
+    }
+
+    override fun onErrorAddWishlist(msg: String) {
+        Toast.makeText(context, "Failed to add wishlist", Toast.LENGTH_SHORT)
     }
 }

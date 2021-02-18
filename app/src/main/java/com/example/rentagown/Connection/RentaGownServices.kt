@@ -1,13 +1,22 @@
 package com.example.rentagown.Connection
 
 import android.graphics.Bitmap
+import com.example.rentagown.Body.AddAddressBody
 import com.example.rentagown.Body.LoginBody
 import com.example.rentagown.Body.RegisterBody
+import com.example.rentagown.Body.WishlistBody
+import com.example.rentagown.Response.CreateAddress.ResponseAddAddress
+import com.example.rentagown.Response.CreateWishlist.ResponseCreateWishlist
 import com.example.rentagown.Response.EditProfile.ResponseUploadPict
 import com.example.rentagown.Response.FavoriteGown.ResponseFavoriteGown
+import com.example.rentagown.Response.GetAddress.ResponseGetAddress
+import com.example.rentagown.Response.GetBank.ResponseGetBank
+import com.example.rentagown.Response.GetWishlist.ResponseGetWishlist
 import com.example.rentagown.Response.Login.ResponseLogin
 import com.example.rentagown.Response.MyBooking.ResponseMyBooking
 import com.example.rentagown.Response.NewGown.ResponseNewGown
+import com.example.rentagown.Response.Notification.ResponseNotifPromo
+import com.example.rentagown.Response.Notification.ResponseNotification
 import com.example.rentagown.Response.Product.ResponseDetailProduct
 import com.example.rentagown.Response.Product.ResponseProduct
 import com.example.rentagown.Response.ProductCategory.ResponseProductCategory
@@ -68,12 +77,40 @@ interface RentaGownServices {
     @POST(Constants.LOGIN)
     fun login(@HeaderMap map: MutableMap<String, String>?, @Body loginBody: LoginBody): Call<ResponseLogin>
 
+    //Add Address
+    @POST(Constants.ADD_ADDRESS)
+    fun addAddress(@HeaderMap map: MutableMap<String, String>?, @Body addressBody: AddAddressBody): Call<ResponseAddAddress>
+
     //Login
     @POST(Constants.REGISTER)
     fun register(@HeaderMap map: MutableMap<String, String>?, @Body registerBody: RegisterBody): Call<ResponseRegister>
 
-
+    //Upload Picture
     @Multipart
     @PUT(Constants.UPLOAD_PROFILE_PICT) // end point dari upload
     fun uploadProfilePict(@Part body: MultipartBody.Part) : Call<ResponseUploadPict>
+
+    //Get Address
+    @GET(Constants.GET_ADDRESS)
+    fun getAddress(@HeaderMap map: MutableMap<String, String>?): Call<ResponseGetAddress>
+
+    //Get Wishlist
+    @GET(Constants.GET_WISHLIST)
+    fun getWishlist(@HeaderMap map: MutableMap<String, String>?): Call<ResponseGetWishlist>
+
+    //Get Notification
+    @GET(Constants.GET_NOTIFICATION)
+    fun getNotification(@HeaderMap map: MutableMap<String, String>?): Call<ResponseNotification>
+
+    //Get Notification Promo
+    @GET(Constants.GET_NOTIF_PROMO)
+    fun getNotifPromo(@HeaderMap map: MutableMap<String, String>?): Call<ResponseNotifPromo>
+
+    //Get Bank
+    @GET(Constants.GET_BANK)
+    fun getBank(@HeaderMap map: MutableMap<String, String>?): Call<ResponseGetBank>
+
+    //Add Wishlist
+    @POST(Constants.ADD_WISHLIST)
+    fun addWishlist(@HeaderMap map: MutableMap<String, String>?, @Body wishlistBody: WishlistBody): Call<ResponseCreateWishlist>
 }

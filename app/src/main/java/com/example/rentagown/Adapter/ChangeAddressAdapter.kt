@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ViewHolder.ChangeAddressViewHolder
 import com.example.rentagown.Model.ChangeAddress
 import com.example.rentagown.R
+import com.example.rentagown.Response.GetAddress.DataAddress
 
 class ChangeAddressAdapter(
-    private val changeAddressList: ArrayList<ChangeAddress>,
+    private val changeAddressList: ArrayList<DataAddress>,
     var context: Context
 ) :
     RecyclerView.Adapter<ChangeAddressViewHolder>() {
@@ -21,10 +22,10 @@ class ChangeAddressAdapter(
     }
 
     override fun onBindViewHolder(holder: ChangeAddressViewHolder, position: Int) {
-        holder.tvLabelAddress.setText(changeAddressList[position].labelAddress)
+        holder.tvLabelAddress.setText(changeAddressList[position].addressLabel)
         holder.tvName.setText(changeAddressList[position].name)
-        holder.tvNoHp.setText(changeAddressList[position].noHandphone)
-        holder.tvDetailAddress.setText(changeAddressList[position].detailAddress)
+        holder.tvNoHp.setText(changeAddressList[position].phone)
+        holder.tvDetailAddress.setText(changeAddressList[position].address)
     }
 
     override fun getItemCount(): Int {

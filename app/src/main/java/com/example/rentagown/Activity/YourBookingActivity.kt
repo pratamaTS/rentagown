@@ -100,7 +100,14 @@ class YourBookingActivity : AppCompatActivity(), View.OnClickListener {
             R.id.im_back -> finish()
             R.id.btn_delete_your_booking -> finish()
             R.id.btn_checkout -> {
-                val checkout = Intent(this@YourBookingActivity, PaymentActivity::class.java)
+                val checkout = Intent(this, PaymentActivity::class.java)
+                checkout.putExtra("paid_price", productPrice)
+                checkout.putExtra("services", services)
+                checkout.putExtra("product_name", productName)
+                checkout.putExtra("id_product", idProduct)
+                checkout.putExtra("phone", phone)
+                checkout.putExtra("start_date", startDate)
+                checkout.putExtra("end_date", endDate)
                 startActivity(checkout)
             }
             R.id.btn_whatsapp -> {
