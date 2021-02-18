@@ -56,15 +56,21 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_up -> {
-                RegisterPresenter(this).register(
-                    RegisterBody(
-                        etName!!.text.toString(),
-                        etEmail!!.text.toString(),
-                        etPassword!!.text.toString(),
-                        etNoHp!!.text.toString(),
-                        "Android"
+                val email = etEmail!!.text.toString()
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                {
+                    RegisterPresenter(this).register(
+                        RegisterBody(
+                            etName!!.text.toString(),
+                            etEmail!!.text.toString(),
+                            etPassword!!.text.toString(),
+                            etNoHp!!.text.toString(),
+                            "Android"
+                        )
                     )
-                )
+                }else{
+                    Toast.makeText(this, "$email is INVALID EMAIL !!", Toast.LENGTH_LONG).show()
+                }
             }
             R.id.btn_to_layout_signin -> {
                 val toLogin = Intent(this@SignUpActivity, SignInActivity::class.java)
