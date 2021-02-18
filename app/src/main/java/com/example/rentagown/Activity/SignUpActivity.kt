@@ -80,6 +80,7 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
     }
 
     override fun onSuccessGetRegister() {
+        Toast.makeText(this, "Signup berhasil, silahkan periksa email untuk mengaktifkan akun", Toast.LENGTH_LONG).show()
         val toLogin = Intent(this@SignUpActivity, SignInActivity::class.java)
         startActivity(toLogin)
     }
