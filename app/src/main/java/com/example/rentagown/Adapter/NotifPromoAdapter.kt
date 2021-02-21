@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ViewHolder.NotifPromoViewHolder
-import com.example.rentagown.Model.NotifPromo
 import com.example.rentagown.R
 import com.example.rentagown.Response.Notification.DataNotifPromo
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NotifPromoAdapter(
     private val mContext: Context,
@@ -29,7 +28,11 @@ class NotifPromoAdapter(
     }
 
     override fun onBindViewHolder(holder: NotifPromoViewHolder, position: Int) {
-        holder.tvDatePromo.setText(notifPromoList[position].createdAt)
+//        holder.tvDatePromo.setText(notifPromoList[position].createdAt)
+        val oldstring = notifPromoList[position].promoExp
+        val xdate: Date = SimpleDateFormat("yyyy-MM-dd").parse(oldstring)
+        val newstring = SimpleDateFormat("dd MMM yyyy").format(xdate)
+        holder.tvDatePromo.setText(newstring)
         holder.tvNamePromo.setText(notifPromoList[position].promoName)
         holder.tvDiscountPromo.setText(notifPromoList[position].promoAmount.toString() + "%")
         holder.tvDescPromo.setText(notifPromoList[position].promoDesc)
