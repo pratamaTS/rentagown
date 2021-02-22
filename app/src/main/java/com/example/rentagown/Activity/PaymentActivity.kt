@@ -11,6 +11,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rentagown.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.text.NumberFormat
+import java.util.*
 
 
 class PaymentActivity : AppCompatActivity(), View.OnClickListener {
@@ -19,13 +21,18 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
     var btnWhatsaap: ImageButton? = null
     var btnPayment: Button? = null
     var btnAddAddress: Button? = null
-    var radioGroup: RadioGroup? = null
-    var radioButton: RadioButton? = null
     var btnChangeAddress: Button? = null
+    var layoutDP: RelativeLayout? = null
+    var tvPaymentMethod: TextView? = null
+    var tvFullPaymentPrice: TextView? = null
+    var tvDownPaymentPrice: TextView? = null
+    var tvDPPrice: TextView? = null
+    var tvTotalPayment: TextView? = null
     var tvAddressLabel: TextView? = null
     var tvAddressName: TextView? = null
     var tvAddressNoHP: TextView? = null
     var tvAddressDetail: TextView? = null
+    var tvServices: TextView? = null
     var layoutAddAddress: LinearLayout? = null
     var layoutShowAddress: RelativeLayout? = null
     var idProduct: String? = null
@@ -52,7 +59,13 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
         tvAddressName = findViewById(R.id.tv_address_name)
         tvAddressNoHP = findViewById(R.id.tv_address_nohp)
         tvAddressDetail = findViewById(R.id.tv_address_detail)
-        radioGroup = findViewById(R.id.radio_group)
+        tvPaymentMethod = findViewById(R.id.tv_payment_method_selected)
+        tvFullPaymentPrice = findViewById(R.id.tv_price_dress_payment_1)
+        tvDownPaymentPrice = findViewById(R.id.tv_price_dress_payment_2)
+        tvDPPrice = findViewById(R.id.tv_price_deposit_booking)
+        tvTotalPayment = findViewById(R.id.tv_price_total_payment)
+        tvServices = findViewById(R.id.tv_services)
+        layoutDP = findViewById(R.id.summary_price_deposit_booking)
         btnChoosePaymentMethod = findViewById(R.id.btn_choose_payment_method)
         btnPayment = findViewById(R.id.btn_payment)
         btnWhatsaap = findViewById(R.id.btn_whatsapp)
@@ -67,6 +80,11 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
         services = intent.getIntExtra("services", 0)
         startDate = intent.getStringExtra("start_date")
         endDate = intent.getStringExtra("end_date")
+
+        when(services){
+            0 -> tvServices!!.text = "Regular Services"
+            1 -> tvServices!!.text = "One Day Services"
+        }
 
         if(intent.hasExtra("id_address")){
             idAddress = intent.getStringExtra("id_address")
@@ -139,17 +157,38 @@ class PaymentActivity : AppCompatActivity(), View.OnClickListener {
 //                } else {
 //                    Toast.makeText(PaymentActivity.this, selectPaymentButton.getText(), Toast.LENGTH_SHORT).show();
 //                }
+
+                val radioGroupB = bottomSheetView.findViewById<RadioGroup>(R.id.radio_group)
                 bottomSheetView.findViewById<View>(R.id.btn_close)
                         .setOnClickListener { bottomSheetDialog.dismiss() }
                 bottomSheetView.findViewById<View>(R.id.btn_continue).setOnClickListener {
                     // get selected radio button from radioGroup
-                    val selectedId: Int? = radioGroup?.checkedRadioButtonId
+                    val localeID =  Locale("in", "ID")
+                    val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+                    val selectedId: Int = radioGroupB.checkedRadioButtonId
 
                     Log.d("selected", selectedId.toString())
 
                     // find the radiobutton by returned id
-//                    radioButton = selectedId?.let { findViewById<View>(it) } as RadioButton
-//                    Log.d("Payment method", radioButton?.text.toString())
+                    val radioButton = bottomSheetView.findViewById<View>(selectedId) as RadioButton
+
+                    tvPaymentMethod!!.text = radioButton.text
+
+                    when(selectedId){
+                        2131296771 -> {
+                            tvDPPrice!!.text = numberFormat.format(500000)
+                            val minusPrice = productPrice?.minus(500000)
+                            tvDownPaymentPrice!!.text = "-" + numberFormat.format(minusPrice)
+                            tvTotalPayment!!.text = numberFormat.format(500000)
+                        }
+                        else -> {
+                            layoutDP!!.visibility = View.GONE
+                            tvDownPaymentPrice!!.visibility = View.GONE
+                            tvFullPaymentPrice!!.visibility = View.VISIBLE
+                            tvFullPaymentPrice!!.text = numberFormat.format(productPrice)
+                            tvTotalPayment!!.text = numberFormat.format(productPrice)
+                        }
+                    }
                 }
 
                 bottomSheetDialog.setContentView(bottomSheetView)
