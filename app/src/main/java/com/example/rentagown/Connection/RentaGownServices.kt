@@ -22,6 +22,7 @@ import com.example.rentagown.Response.Profile.ResponseProfile
 import com.example.rentagown.Response.Promo.PromoDetail.ResponsePromoDetail
 import com.example.rentagown.Response.Promo.ResponsePromo
 import com.example.rentagown.Response.Register.ResponseRegister
+import com.example.rentagown.Response.SeeUnDate.ResponseSeeUnDate
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -70,6 +71,10 @@ interface RentaGownServices {
     //Get Detail Promo By ID
     @GET
     fun getPromoById(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponsePromoDetail>
+
+    //Get See Un Date
+    @GET
+    fun getSeeUnDate(@Url url: String, @HeaderMap map: MutableMap<String, String>?): Call<ResponseSeeUnDate>
 
     //Login
     @POST(Constants.LOGIN)

@@ -185,6 +185,13 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
             }
             R.id.btn_see_no_available_date -> {
                 val noAvailbleDate = Intent(activity, SeeNoAvailableDateActivity::class.java)
+                noAvailbleDate.putExtra("id_product", idProduct)
+                noAvailbleDate.putExtra("name_product_category", productCategory)
+                noAvailbleDate.putExtra("product_name", productName)
+                noAvailbleDate.putExtra("product_price", productPrice)
+                noAvailbleDate.putExtra("final_price", productFinalPrice)
+                noAvailbleDate.putExtra("promo_amount", productPromoAmount)
+                noAvailbleDate.putExtra("product_quantity", productQuantity)
                 startActivity(noAvailbleDate)
             }
         }
