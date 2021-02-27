@@ -27,6 +27,24 @@ import java.util.*
 
 
 class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
+
+    companion object {
+        const val TAG = "LoginFragment"
+
+        fun newInstance(listener: Listener? = null): LoginFragment {
+            val f = LoginFragment()
+            f.listener = listener
+
+            return f
+        }
+    }
+
+    interface Listener {
+        fun onLoggedIn()
+    }
+
+    var listener: Listener? = null
+
     var etEmail: EditText? = null
     var etPassword: EditText? = null
     var btnSignIn: Button? = null
@@ -54,6 +72,7 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         btnForgotPassword?.setOnClickListener(this@LoginFragment)
         btnToSignUp?.setOnClickListener(this@LoginFragment)
         btnShowHidePass?.setOnClickListener(this@LoginFragment)
+
         return view
     }
 
@@ -87,8 +106,12 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     }
 
     override fun onSuccessGetLogin() {
-        val login = Intent(activity, MainAfterActivity::class.java)
-        startActivity(login)
+        if(listener != null) {
+            listener?.onLoggedIn()
+        } else {
+            val login = Intent(activity, MainAfterActivity::class.java)
+            startActivity(login)
+        }
     }
 
     override fun onErrorGetLogin(msg: String) {

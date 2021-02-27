@@ -13,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.rentagown.R
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
+
+    companion object {
+        const val REQ_SIGN_IN_TO_REDIRECT = 1341
+        const val SIGNED_IN = 1342
+    }
+
     var etEmail: EditText? = null
     var etPassword: EditText? = null
     var btnSignIn: Button? = null

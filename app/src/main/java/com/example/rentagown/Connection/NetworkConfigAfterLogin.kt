@@ -2,6 +2,9 @@ package com.example.rentagown.Connection
 
 import android.content.Context
 import com.example.rentagown.Connection.Interceptor.AuthInterceptor
+import com.example.rentagown.v2.base.BasePresenter
+import com.example.rentagown.v2.base.BaseView
+import com.example.rentagown.v2.data.model.BaseModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,6 +33,7 @@ object NetworkConfigAfterLogin {
             .client(getInterceptor(context))
             .addConverterFactory(GsonConverterFactory.create()) //convert data Json yang diterima dari server menjadi objek
             .build()
+
     }
 
     fun service(context: Context) = getRetrofit(context).create(RentaGownServices::class.java)

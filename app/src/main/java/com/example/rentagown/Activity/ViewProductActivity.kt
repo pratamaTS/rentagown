@@ -27,6 +27,7 @@ import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataDetailProduct
 import com.example.rentagown.Response.Product.DataPhoto
 import com.example.rentagown.Response.Profile.DataProfile
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -38,6 +39,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailProductInterface, ProfileInterface {
+    private lateinit var appBar: AppBarLayout
     var sliderViewProductAdapter: SliderViewProductAdapter? = null
     var sliderView: SliderView? = null
     var sliderItemProductList: ArrayList<SliderItemProduct> = ArrayList()
@@ -68,6 +70,7 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailPro
         val sessionManager = SessionManager(this)
 
         //INIT VIEW
+        appBar = findViewById(R.id.app_bar)
         containerViewProduct = findViewById(R.id.containerActivityViewProduct)
         sliderView = findViewById(R.id.slider_view_product)
         tabDetailProduct = findViewById(R.id.tab_detail_product)
@@ -81,6 +84,8 @@ class ViewProductActivity : AppCompatActivity(), View.OnClickListener, DetailPro
             endDate = intent.getStringExtra("end_date")
         }
         viewPager = findViewById(R.id.vp_detail_product)
+
+        appBar.bringToFront()
 
         sessionManager.fetchAuthToken()?.let {
             token = it

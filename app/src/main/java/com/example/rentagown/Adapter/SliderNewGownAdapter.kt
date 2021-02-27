@@ -1,35 +1,22 @@
 package com.example.rentagown.Adapter
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentagown.Activity.BookingSuccessActivity
-import com.example.rentagown.Activity.MainActivity
-import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderNewGownViewHolder
-import com.example.rentagown.Body.BookingBody
-import com.example.rentagown.Fragment.BookFragment
-import com.example.rentagown.Fragment.OverviewFragment
 import com.example.rentagown.R
 import com.example.rentagown.Response.NewGown.DataNewGown
+import com.example.rentagown.v2.ui.home.mybookings.MyBookingsFragment
+import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.squareup.picasso.Picasso
-import java.io.InputStream
-import java.net.URL
 import java.text.NumberFormat
 import java.util.*
 
 
 class SliderNewGownAdapter(
-    private val mContext: Context,
     private val newGownList: ArrayList<DataNewGown>
 ) :
     RecyclerView.Adapter<SliderNewGownViewHolder>() {
@@ -37,7 +24,7 @@ class SliderNewGownAdapter(
     val localeID =  Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
     var token: String? = null
-    var bookFragment: BookFragment = BookFragment()
+    var bookFragment: MyBookingsFragment = MyBookingsFragment.newInstance()
     var bundle: Bundle = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderNewGownViewHolder {
@@ -67,14 +54,18 @@ class SliderNewGownAdapter(
         }
 
         holder.itemView.setOnClickListener { v ->
-            val product = Intent(v.context, ViewProductActivity::class.java)
+            val product = Intent(v.context, ProductDetailActivity::class.java)
             product.putExtra("id_product", newGownList[position].idProduct)
+            product.putExtra("product_id", newGownList[position].idProduct)
+            product.putExtra("category", newGownList[position].nameProductCategory)
             v.context.startActivity(product)
         }
 
         holder.btnBooking.setOnClickListener{ v ->
-            val product = Intent(v.context, ViewProductActivity::class.java)
+            val product = Intent(v.context, ProductDetailActivity::class.java)
             product.putExtra("id_product", newGownList[position].idProduct)
+            product.putExtra("product_id", newGownList[position].idProduct)
+            product.putExtra("category", newGownList[position].nameProductCategory)
             v.context.startActivity(product)
         }
     }

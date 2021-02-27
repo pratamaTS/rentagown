@@ -12,6 +12,7 @@ import com.example.rentagown.Adapter.ViewHolder.ProductViewHolder
 import com.example.rentagown.Model.Product
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
+import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
@@ -49,8 +50,10 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
         }
 
         holder.itemView.setOnClickListener(View.OnClickListener { v ->
-            val product = Intent(mContext, ViewProductActivity::class.java)
+            val product = Intent(mContext, ProductDetailActivity::class.java)
             product.putExtra("id_product", productList[position].idProduct)
+            product.putExtra("product_id", productList[position].idProduct)
+            product.putExtra("category", productList[position].nameProductCategory)
             mContext.startActivity(product)
         })
     }

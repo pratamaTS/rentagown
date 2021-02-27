@@ -47,7 +47,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_time_review"
+        android:id="@+id/tv_review_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -60,7 +60,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_comment_review"
+        android:id="@+id/tv_review_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"

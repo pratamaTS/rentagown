@@ -12,13 +12,13 @@ import com.example.rentagown.Adapter.ViewHolder.SliderFavoriteGownViewHolder
 import com.example.rentagown.Model.FavoriteGown
 import com.example.rentagown.R
 import com.example.rentagown.Response.FavoriteGown.DataFavoriteGown
+import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SliderFavoriteGownAdapter(
-    private val mContext: Context,
     private val favoriteGownList: ArrayList<DataFavoriteGown>
 ) :
     RecyclerView.Adapter<SliderFavoriteGownViewHolder>() {
@@ -54,14 +54,18 @@ class SliderFavoriteGownAdapter(
         }
 
         holder.itemView.setOnClickListener { v ->
-            val product = Intent(v.context, ViewProductActivity::class.java)
+            val product = Intent(v.context, ProductDetailActivity::class.java)
             product.putExtra("id_product", favoriteGownList[position].idProduct)
+            product.putExtra("product_id", favoriteGownList[position].idProduct)
+            product.putExtra("category", favoriteGownList[position].nameProductCategory)
             v.context.startActivity(product)
         }
 
         holder.btnBooking.setOnClickListener{ v ->
-            val product = Intent(v.context, ViewProductActivity::class.java)
+            val product = Intent(v.context, ProductDetailActivity::class.java)
             product.putExtra("id_product", favoriteGownList[position].idProduct)
+            product.putExtra("product_id", favoriteGownList[position].idProduct)
+            product.putExtra("category", favoriteGownList[position].nameProductCategory)
             v.context.startActivity(product)
         }
     }

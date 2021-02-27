@@ -53,17 +53,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.menu_invoice_history -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!.applicationContext, "Invoice History", Toast.LENGTH_SHORT).show()
+                Toast.makeText(Objects.requireNonNull(activity)!!, "Invoice History", Toast.LENGTH_SHORT).show()
                 val invoiceHistory = Intent(activity, InvoiceHistoryActivity::class.java)
                 startActivity(invoiceHistory)
             }
             R.id.menu_transaction_status -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!.applicationContext, "Transaction Status", Toast.LENGTH_SHORT).show()
+                Toast.makeText(Objects.requireNonNull(activity)!!, "Transaction Status", Toast.LENGTH_SHORT).show()
                 val transactionStatus = Intent(activity, TransactionStatusActivity::class.java)
                 startActivity(transactionStatus)
             }
             R.id.menu_setting -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!.applicationContext, "Settings", Toast.LENGTH_SHORT).show()
+                Toast.makeText(Objects.requireNonNull(activity)!!, "Settings", Toast.LENGTH_SHORT).show()
                 val settings = Intent(activity, SettingActivity::class.java)
                 startActivity(settings)
             }

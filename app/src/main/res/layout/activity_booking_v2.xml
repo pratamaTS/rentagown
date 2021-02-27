@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                android:background="@color/colorWhite">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_back_black"
+                        android:background="#00000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/appbar_payment"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_xlg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:layout_constraintBottom_toTopOf="@id/container_bottom_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/container_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/padding_md"
+                        android:paddingTop="@dimen/padding_md"
+                        android:paddingEnd="@dimen/padding_md">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="@string/title_shipping_address"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/font_lg" />
+
+                        <Button
+                            android:visibility="gone"
+                            android:id="@+id/btn_change_address"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/btn_change_address"
+                            android:textAlignment="textEnd"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorSecondary"
+                            android:textSize="@dimen/font_md" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_button_add_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/padding_md"
+                        android:paddingEnd="@dimen/padding_md">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_add_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            style="@style/ButtonRoundedOutlinedGold2"
+                            android:text="@string/btn_add_address"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorSecondary"
+                            android:textSize="16sp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:ignore="UnusedAttribute" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/container_address_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/padding_md"
+                        android:paddingEnd="@dimen/padding_md"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tv_address_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            tools:text="@string/label_rumah"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_receiver_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_address_name"
+                            android:fontFamily="@font/poppins_regular"
+                            tools:text="@string/label_name"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/font_md" />
+
+                        <TextView
+                            android:id="@+id/tv_receiver_phone_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_address_name"
+                            android:layout_marginStart="@dimen/margin_xsm"
+                            android:layout_toEndOf="@+id/tv_receiver_name"
+                            android:fontFamily="@font/poppins_regular"
+                            tools:text="@string/label_no_hp"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/font_md" />
+
+                        <TextView
+                            android:id="@+id/tv_address_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:layout_below="@+id/tv_receiver_phone_number"
+                            android:fontFamily="@font/poppins_regular"
+                            tools:text="@string/label_address"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/font_sm" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:layout_marginEnd="@dimen/margin_md"
+                        android:background="@color/colorMistyGray" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/container_payment_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_payment_method_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="@string/title_payment_methods"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_lg" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="@string/current_method"
+                        android:textColor="@color/colorSoftGrey"
+                        android:textSize="@dimen/font_sm" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_choose_payment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="92dp"
+                        android:layout_marginTop="@dimen/margin_sm"
+                        android:layout_marginBottom="@dimen/margin_sm"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginEnd="@dimen/margin_md"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/iv_payment_type"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_payment" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2.5"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_payment_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_semi_bold"
+                                    tools:text="Deposit Booking"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="@dimen/font_md" />
+
+                                <TextView
+                                    android:id="@+id/tv_lbl_default_method"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="@string/default_method"
+                                    android:textColor="@color/colorSoftGray"
+                                    android:visibility="invisible"
+                                    android:textSize="@dimen/font_sm" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingStart="@dimen/padding_md"
+                                tools:ignore="RtlSymmetry">
+
+                                <ImageView
+                                    android:id="@+id/checkbox_dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_check_rectangle" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginEnd="@dimen/margin_md"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/available_bank_account_number_you_transfer_to"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_md" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_payment_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        style="@style/ButtonRoundedOutlinedGold2"
+                        android:text="@string/btn_add_payment_method"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="16sp"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginEnd="@dimen/margin_md"
+                        tools:ignore="UnusedAttribute" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_change_payment_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="92dp"
+                        android:layout_marginTop="@dimen/margin_sm"
+                        android:layout_marginBottom="@dimen/margin_sm"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:layout_marginEnd="@dimen/margin_md"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardElevation="4dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/iv_payment_method_logo"
+                                    android:layout_width="56dp"
+                                    android:layout_height="32dp"
+                                    android:contentDescription="@string/todo"
+                                    tools:src="@drawable/logo_bca" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_payment_method"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_semi_bold"
+                                    tools:text="@string/transfer_bank_bca"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_account_dest_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    tools:text="@string/account_name"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_account_dest_number"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    tools:text="@string/account_number"
+                                    android:textColor="@color/colorSoftGray"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/container_payment_method"
+                    >
+
+                    <TextView
+                        android:id="@+id/title_payment_summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="@string/title_payment_summary"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_lg" />
+
+                    <LinearLayout
+                        android:id="@+id/payment_type_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_sm">
+
+                        <TextView
+                            android:id="@+id/tv_lbl_selected_payment_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_md"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/payment_deposit_booking"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_selected_payment_type_price"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/margin_md"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="end|center_vertical"
+                            android:layout_marginStart="@dimen/margin_md"
+                            android:text="@string/sym_no_text"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/summary_price_gown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_sm"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_product_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            tools:text="Prewedding Gown"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_product_final_price"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_md"
+                            android:layout_marginStart="@dimen/margin_md"
+                            android:fontFamily="@font/poppins_medium"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:gravity="end|center_vertical"
+                            android:text="@string/sym_no_text"
+                            android:textColor="@color/colorRed"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/container_special_treatment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/lbl_one_day_service"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/summary_price_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_sm">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/payment_total"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_total_payment"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_md"
+                            android:layout_marginEnd="@dimen/margin_md"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/sym_no_text"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/container_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_whatsapp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_chatting"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="@dimen/margin_md"
+                android:contentDescription="@string/todo"
+                tools:ignore="UnusedAttribute" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_pay"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/bg_button_rounded_gold"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/btn_payment"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                android:layout_margin="@dimen/margin_md"
+                tools:ignore="UnusedAttribute" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

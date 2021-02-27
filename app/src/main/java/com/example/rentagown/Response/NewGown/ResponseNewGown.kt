@@ -11,7 +11,7 @@ open class ResponseNewGown {
 	val code: Int? = null
 
 	@field:SerializedName("data")
-	val data: ArrayList<DataNewGown?>? = null
+	val data: ArrayList<DataNewGown>? = null
 
 	@field:SerializedName("size")
 	val size: Int? = null

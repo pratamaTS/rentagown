@@ -14,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfilePresenter(val profileInterface: ProfileInterface) {
+
     fun getProfile(context: Context){
         //Header
         val map: MutableMap<String, String> = HashMap()
@@ -42,4 +43,5 @@ class ProfilePresenter(val profileInterface: ProfileInterface) {
 
                 })
     }
+
 }

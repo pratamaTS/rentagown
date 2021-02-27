@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment.OverviewFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_final_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:fontFamily="@font/poppins_medium"
+                        tools:text="Rp. 5.000.000"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="24sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_discount_value"
+                            android:layout_width="@dimen/icon_sm"
+                            android:layout_height="@dimen/icon_sm"
+                            android:layout_marginStart="16dp"
+                            tools:text="25%"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:textColor="@color/colorWhite"
+                            android:background="@drawable/bg_button_rounded_gold"
+                            android:fontFamily="@font/poppins_regular"
+                            tools:ignore="SmallSp"
+                            android:visibility="invisible"
+                            app:layout_constraintTop_toBottomOf="@id/tv_final_price"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/colorDarkGrey"
+                            tools:text="Rp. 8.000.000"
+                            android:visibility="invisible"
+                            android:foreground="@drawable/strikethrough_foreground"
+                            app:layout_constraintTop_toTopOf="@id/tv_discount_value"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_discount_value"
+                            app:layout_constraintStart_toEndOf="@id/tv_discount_value"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/btn_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/btn_like_selected" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:lines="3"
+                android:minLines="1"
+                android:singleLine="false"
+                tools:text="@string/name_view_product"
+                android:textSize="14sp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/poppins_medium"/>
+
+
+            <LinearLayout
+                android:id="@+id/layout_detail_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:id="@+id/container_booking_start_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    tools:ignore="UnusedAttribute">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_date_gold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/title_start_date"
+                            android:textColor="@color/colorSoftGrey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_booking_start_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/dd_mm_yyyy"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/container_booking_end_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    tools:ignore="UnusedAttribute">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_date_gold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/title_end_date"
+                            android:textColor="@color/colorSoftGrey"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_booking_end_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="@string/dd_mm_yyyy"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_see_no_available_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                style="@style/ButtonRoundedOutlinedGold2"
+                android:text="@string/btn_see_no_available_dates"
+                android:textColor="@color/colorSecondary"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:id="@+id/tv_special_treatment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/special_treatment"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/one_day_service"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_special_treatment" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/sw_special_treatment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:theme="@style/SCBSwitch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:switchMinWidth="25dp"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md">
+
+                <TextView
+                    android:id="@+id/tv_keterangan_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/harga_sudah_termasuk_veil_dan_balero_dan_gratis_peminjaman_aksesoris"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/font_sm"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:layout_marginEnd="@dimen/margin_md" />
+
+                <TextView
+                    android:id="@+id/tv_title_similar_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/lbl_similar_category"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_md"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:layout_below="@id/tv_keterangan_product"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_similar_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_below="@id/tv_title_similar_category"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.NoAvailableDateAdapter
 import com.example.rentagown.Connection.Interface.GetSeeUnDateInterface
 import com.example.rentagown.Connection.Presenter.GetSeeUnDatePresenter
-import com.example.rentagown.Model.NoAvailableDate
 import com.example.rentagown.R
 import com.example.rentagown.Response.SeeUnDate.DataSeeUnDate
 import java.util.*
@@ -35,7 +34,7 @@ class SeeNoAvailableDateActivity : AppCompatActivity(), GetSeeUnDateInterface, V
 
         //INIT VIEW
         back = findViewById(R.id.im_back)
-        rvNoAvailableDate = findViewById(R.id.rv_no_available_date)
+        rvNoAvailableDate = findViewById(R.id.rv_unavailable_dates)
 
         idProduct = intent.getStringExtra("id_product")
         productCategory = intent.getStringExtra("name_product_category")

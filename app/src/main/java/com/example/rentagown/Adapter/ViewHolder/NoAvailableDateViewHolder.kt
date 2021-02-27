@@ -10,7 +10,7 @@ class NoAvailableDateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     var tvEndDate: TextView
 
     init {
-        tvStartDate = itemView.findViewById(R.id.tv_start_date_available)
-        tvEndDate = itemView.findViewById(R.id.tv_end_date_available)
+        tvStartDate = itemView.findViewById(R.id.tv_start_date_not_available)
+        tvEndDate = itemView.findViewById(R.id.tv_end_date_not_available)
     }
 }

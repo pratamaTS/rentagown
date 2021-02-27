@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.rentagown.Fragment.BookFragment
 import com.example.rentagown.Fragment.HomeFragment
 import com.example.rentagown.Fragment.ProfileAfterFragment
 import com.example.rentagown.R
+import com.example.rentagown.v2.ui.home.mybookings.MyBookingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainAfterActivity : AppCompatActivity() {
@@ -37,7 +37,7 @@ class MainAfterActivity : AppCompatActivity() {
                     bottomNavigationView!!.itemIconTintList = null
                 }
                 R.id.nav_booking -> {
-                    selectedFragment = BookFragment()
+                    selectedFragment = MyBookingsFragment.newInstance()
                     bottomNavigationView!!.itemIconTintList = null
                 }
                 R.id.nav_profile -> {
@@ -53,4 +53,9 @@ class MainAfterActivity : AppCompatActivity() {
             }
             true
         }
+
+    fun setSelectedNavId(navId: Int) {
+        bottomNavigationView?.selectedItemId = R.id.nav_home
+    }
+
 }

@@ -22,7 +22,6 @@ import com.example.rentagown.Adapter.SimilarCategoryAdapter
 import com.example.rentagown.Body.WishlistBody
 import com.example.rentagown.Connection.Interface.AddWishlistInterface
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
-import com.example.rentagown.Connection.Presenter.AddAddressPresenter
 import com.example.rentagown.Connection.Presenter.AddWishlistPresenter
 import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
 import com.example.rentagown.Connection.SessionManager
@@ -76,14 +75,14 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
         //INIT VIEW
         rvSimilarCategory = view.findViewById(R.id.rv_similar_category)
         tvProductName = view.findViewById(R.id.tv_name_dress_detail_product)
-        tvProductFinalPrice = view.findViewById(R.id.tv_price_detail_product)
-        tvProductPrice = view.findViewById(R.id.tv_price_old_dress_detail_product)
-        tvDiscount = view.findViewById(R.id.tv_discount_detail_product)
-        tvStartDate = view.findViewById(R.id.tv_start_date_vp)
-        tvEndDate = view.findViewById(R.id.tv_end_date_vp)
+        tvProductFinalPrice = view.findViewById(R.id.tv_product_final_price)
+        tvProductPrice = view.findViewById(R.id.tv_product_price)
+        tvDiscount = view.findViewById(R.id.tv_discount_value)
+        tvStartDate = view.findViewById(R.id.tv_booking_start_date)
+        tvEndDate = view.findViewById(R.id.tv_booking_end_date)
         btnLike = view.findViewById(R.id.btn_like)
         switchServices = view.findViewById(R.id.toogle_switch_special_treatment)
-        btnStartDate = view.findViewById(R.id.layout_detail_start_date)
+        btnStartDate = view.findViewById(R.id.container_booking_start_date)
         btnSeeNoAvailableDate = view.findViewById(R.id.btn_see_no_available_date)
 
         sessionManager.fetchAuthToken()?.let {
@@ -152,7 +151,7 @@ class OverviewFragment : Fragment(), View.OnClickListener, ProductByCategoryInte
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.layout_detail_start_date -> {
+            R.id.container_booking_start_date -> {
                 if (token != null) {
                     val date = Intent(activity, DateBookingActivity::class.java)
 

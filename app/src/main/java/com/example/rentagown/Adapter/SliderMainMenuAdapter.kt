@@ -11,12 +11,12 @@ import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderMainMenuViewHolder
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
+import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 
 class SliderMainMenuAdapter(
-    private val mContext: Context,
     private val sliderMainMenuList: ArrayList<DataProduct>
 ) :
     RecyclerView.Adapter<SliderMainMenuViewHolder>() {
@@ -36,9 +36,10 @@ class SliderMainMenuAdapter(
         Picasso.get().load(imgURL).into(holder.imContent)
 
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, "Product", Toast.LENGTH_SHORT).show()
-            val product = Intent(v.context, ViewProductActivity::class.java)
+            val product = Intent(v.context, ProductDetailActivity::class.java)
             product.putExtra("id_product", sliderMainMenuList[position].idProduct)
+            product.putExtra("product_id", sliderMainMenuList[position].idProduct)
+            product.putExtra("category", sliderMainMenuList[position].nameProductCategory)
             v.context.startActivity(product)
         }
     }

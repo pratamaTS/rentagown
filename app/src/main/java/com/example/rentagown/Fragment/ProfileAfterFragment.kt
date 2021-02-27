@@ -70,21 +70,23 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.menu_invoice_history -> {
-                Toast.makeText(activity!!.applicationContext, "Invoice History", Toast.LENGTH_SHORT)
+                Toast.makeText(activity!!, "Invoice History", Toast.LENGTH_SHORT)
                     .show()
                 val invoiceHistory = Intent(activity, InvoiceHistoryActivity::class.java)
                 startActivity(invoiceHistory)
             }
             R.id.menu_setting -> {
-                Toast.makeText(activity!!.applicationContext, "Settings", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity!!, "Settings", Toast.LENGTH_SHORT).show()
                 val settings = Intent(activity, SettingActivity::class.java)
                 startActivity(settings)
             }
             R.id.btn_logout -> {
                 sessionManager = SessionManager(context!!)
-                sessionManager.deleteAuthToken()
-                val mainActivity = Intent(activity, MainActivity::class.java)
-                startActivity(mainActivity)
+                sessionManager.logOut()
+
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }

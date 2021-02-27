@@ -47,8 +47,8 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterf
         }
     }
 
-    override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown?>?) {
-        newGownList = dataNewGown as ArrayList<DataNewGown>
+    override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown>?) {
+        newGownList = dataNewGown ?: arrayListOf()
 
         //Setup Recycler View New Gown
         newGownAdapter = NewGownAdapter(this, newGownList)
@@ -60,4 +60,5 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterf
     override fun onErrorGetNewGown(msg: String) {
         Toast.makeText(this, "Failed to get data new gown", Toast.LENGTH_SHORT)
     }
+
 }

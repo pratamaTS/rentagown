@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_back_black"
+                        android:background="#00000000"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/appbar_confirmation"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_lg"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="50dp">
+
+                <TextView
+                    android:id="@+id/tv_hint1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/please_fill_out_this_page_after_performing_bank_transfer"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/font_sm"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                     />
+
+                <TextView
+                    android:id="@+id/tv_hint2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:layout_marginEnd="@dimen/margin_md"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="@string/please_make_a_payment_transfer_to_the_following_account_and_fill_in_the_payment_confirmation_document_so_that_we_can_process_your_purchase"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/font_sm"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hint1"/>
+
+                <LinearLayout
+                    android:id="@+id/container_booking_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hint2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/total_price"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="@dimen/font_sm" />
+
+                    <TextView
+                        android:id="@+id/tv_total_price_confimation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        tools:text="Rp. 500.050"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/last_2_digit_is_unique_code_for_bank_transfer_confirm"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="@dimen/font_md"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:background="@color/colorSoftGrey"
+                    app:layout_constraintTop_toBottomOf="@+id/container_booking_amount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingTop="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md"
+                    app:layout_constraintTop_toBottomOf="@+id/line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <EditText
+                        android:id="@+id/et_bank_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_edit_text_filled"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:hint="@string/hint_your_bank_name"
+                        android:inputType="text"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <EditText
+                        android:id="@+id/et_account_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_edit_text_filled"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:hint="@string/hint_your_account_number"
+                        android:inputType="number"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <EditText
+                        android:id="@+id/et_account_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_edit_text_filled"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:hint="@string/hint_your_account_name"
+                        android:inputType="text"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <EditText
+                        android:id="@+id/et_payment_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_edit_text_filled"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:hint="@string/hint_payment_amount"
+                        android:inputType="number"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlSymmetry" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/btn_confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:strokeWidth="1dp"
+                app:cornerRadius="28dp"
+                app:strokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/margin_md"
+                android:layout_marginBottom="@dimen/margin_md"
+                android:layout_marginStart="@dimen/margin_md"
+                android:layout_marginEnd="@dimen/margin_md" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continue_booking"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/margin_md"
+                android:background="@drawable/bg_button_rounded_gold"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/btn_continue_booking"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:backgroundTint="@null"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+</LinearLayout>

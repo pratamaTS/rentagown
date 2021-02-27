@@ -18,6 +18,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val SPLASH_SCREEN = 5000
+        private const val SPLASH_SCREEN = 1500
     }
 }

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginStart="@dimen/margin_md"
+    android:layout_marginTop="@dimen/margin_sm"
+    android:layout_marginEnd="@dimen/margin_md"
+    android:layout_marginBottom="@dimen/margin_sm"
+    app:contentPadding="@dimen/padding_md">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ic_bag_logo"
+                android:layout_width="@dimen/icon_sm"
+                android:layout_height="@dimen/icon_sm"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="@dimen/margin_md"
+                android:src="@drawable/ic_bag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_lbl_booking_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/title_booking_history"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm"
+                android:layout_marginStart="@dimen/margin_md"
+                android:singleLine="true"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ic_bag_logo"
+                app:layout_constraintEnd_toStartOf="@id/barrier"
+                app:layout_constraintBottom_toTopOf="@id/tv_booking_start_end_date"/>
+
+            <TextView
+                android:id="@+id/tv_booking_start_end_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/font_sm"
+                tools:text="8 Jan 2020 - 10 Feb 2020"
+                android:singleLine="true"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@id/tv_lbl_booking_history"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_lbl_booking_history"
+                app:layout_constraintEnd_toStartOf="@id/barrier"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tv_lbl_booking_history, tv_booking_start_end_date"/>
+            <TextView
+                android:id="@+id/tv_status_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_status_history_cancel"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:paddingStart="12dp"
+                android:paddingTop="@dimen/padding_sm"
+                android:paddingEnd="12dp"
+                android:paddingBottom="@dimen/padding_sm"
+                android:layout_marginStart="@dimen/margin_md"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_sm"
+                tools:text="Cancelled"
+                app:layout_constraintStart_toEndOf="@id/barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/margin_xsm"
+            android:layout_marginBottom="12dp"
+            android:background="@color/colorSoftGrey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_product_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="centerCrop"
+                    android:src="@color/colorGray"
+                    app:riv_corner_radius="8dp"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_md"
+                    tools:text="Selina Colourblock Camisole Dress" />
+
+                <TextView
+                    android:id="@+id/tv_product_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:singleLine="true"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/font_sm"
+                    app:layout_constraintStart_toEndOf="@+id/iv_product_image"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+                    tools:text="Preweeding" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_sm"
+            android:gravity="center_vertical|end"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/title_total_price_history"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="@dimen/font_sm" />
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_md"
+                tools:text="Rp. 5.000.000" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

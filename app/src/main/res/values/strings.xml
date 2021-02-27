@@ -269,7 +269,7 @@
     <!-- activity history booking -->
     <string name="appbar_history">History</string>
     <string name="btn_review_history">Review</string>
-    <string name="titile_booking_history">Booking</string>
+    <string name="title_booking_history">Booking</string>
     <string name="title_total_price_history">Total Price</string>
 
     <!-- activity review -->
@@ -340,5 +340,35 @@
     <!-- activity no available date -->
     <string name="appbar_no_available_date">No Available Date</string>
     <string name="no_available_dates">No available dates</string>
+
+
+    <!--  added by raymon  -->
+    <string name="title_add_address">Add Address</string>
+    <string name="title_edit_address">Edit Address</string>
+    <string name="title_choose_address">Choose Address</string>
+    <string name="title_choose_date">Choose Date</string>
+
+
+    <string name="sym_discount_amount">%</string>
+    <string name="sym_no_text">-</string>
+
+    <string name="lbl_pick_date">Pick Date</string>
+    <string name="lbl_dates_not_available">Not available</string>
+    <string name="lbl_unit_cm">cm</string>\
+    <string name="lbl_similar_category">Similar Category</string>\
+    <string name="lbl_one_day_service">One day service</string>\
+
+
+    <string name="btn_see_template">See Template</string>
+    <string name="btn_add_payment_method">Add Payment Method</string>
+
+
+    <string name="err_booking_date_not_valid">Booking date not valid…</string>
+    <string name="err_not_selected_any_address">Not selected any address yet…</string>
+    <string name="err_not_selected_any_payment_type">Not selected any payment type yet…</string>
+    <string name="err_not_selected_any_payment_method">Not selected any payment method yet…</string>
+    <string name="err_booking_not_found">Booking data not found…</string>
+    <string name="err_product_not_found">Product not found…</string>
+
 
 </resources>

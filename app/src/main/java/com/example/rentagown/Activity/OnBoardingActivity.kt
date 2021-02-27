@@ -39,7 +39,7 @@ class OnBoardingActivity : AppCompatActivity() {
         btnNext = findViewById(R.id.btn_next)
         btnGetStarted = findViewById(R.id.btn_get_started)
         btnSkip = findViewById(R.id.btn_skip)
-        btnAnim = AnimationUtils.loadAnimation(applicationContext, R.anim.button_animation)
+        btnAnim = AnimationUtils.loadAnimation(this, R.anim.button_animation)
 
         sessionManager.fetchAuthToken()?.let {
             token = it

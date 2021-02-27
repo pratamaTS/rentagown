@@ -27,7 +27,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences =
-            applicationContext.getSharedPreferences(PACKAGE_NAME + "SETTING_NOTIF", MODE_PRIVATE)
+            getSharedPreferences(PACKAGE_NAME + "SETTING_NOTIF", MODE_PRIVATE)
         setContentView(R.layout.activity_setting)
 
         //INIT VIEW

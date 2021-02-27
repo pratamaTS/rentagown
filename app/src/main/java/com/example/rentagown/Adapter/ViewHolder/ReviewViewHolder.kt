@@ -14,7 +14,7 @@ class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     init {
         tvNameUserReview = itemView.findViewById(R.id.tv_name_user_review)
         tvRatingsReview = itemView.findViewById(R.id.tv_ratings_review)
-        tvTimeReview = itemView.findViewById(R.id.tv_time_review)
-        tvCommentReview = itemView.findViewById(R.id.tv_comment_review)
+        tvTimeReview = itemView.findViewById(R.id.tv_review_time)
+        tvCommentReview = itemView.findViewById(R.id.tv_review_comment)
     }
 }

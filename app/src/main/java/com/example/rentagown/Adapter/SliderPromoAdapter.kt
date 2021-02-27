@@ -15,7 +15,7 @@ import com.example.rentagown.R
 import com.example.rentagown.Response.Promo.DataPromo
 import com.squareup.picasso.Picasso
 
-class SliderPromoAdapter(private val mContext: Context, private val promoList: ArrayList<DataPromo>) :
+class SliderPromoAdapter(private val promoList: ArrayList<DataPromo>) :
     RecyclerView.Adapter<SliderPromoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderPromoViewHolder {
         val view: View =

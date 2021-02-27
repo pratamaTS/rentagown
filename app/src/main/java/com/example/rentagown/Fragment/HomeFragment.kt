@@ -210,7 +210,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         //Setup Recycler View Slider Main Menu
         if(dataProductByCat?.isNotEmpty() == true) {
             rvSliderMenu!!.visibility = View.VISIBLE
-            adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(context!!, it) }
+            adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(it) }
             rvSliderMenu!!.setLayoutManager(
                 LinearLayoutManager(
                     context,
@@ -236,14 +236,13 @@ class HomeFragment : Fragment(), View.OnClickListener,
         ProductByCategoryPresenter(this).getAllProductByCategory(namaCategory)
     }
 
-    override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown?>?) {
+    override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown>?) {
         //Slider New Gown
         pbNewGown!!.visibility = View.GONE
-        newGownList = dataNewGown as ArrayList<DataNewGown>
         rvSliderNewGown!!.visibility = View.VISIBLE
 
         //Setup Recycler View New Gown
-        adapterNewGown = SliderNewGownAdapter(context!!, newGownList!!)
+        adapterNewGown = SliderNewGownAdapter(newGownList ?: arrayListOf())
         rvSliderNewGown!!.setLayoutManager(
             LinearLayoutManager(
                 context,
@@ -267,7 +266,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
 
             //Setup Recycler View Favorite Gown
-            adapterFavoriteGown = SliderFavoriteGownAdapter(context!!, favoriteGownList)
+            adapterFavoriteGown = SliderFavoriteGownAdapter(favoriteGownList ?: arrayListOf())
             rvSliderFavoriteGown!!.setLayoutManager(
                 LinearLayoutManager(
                     context,
@@ -288,14 +287,16 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
         pbPromo!!.visibility = View.GONE
-        if(dataPromo?.isNotEmpty() == true){
-            promoList = dataPromo as ArrayList<DataPromo>
+
+        promoList = dataPromo ?: arrayListOf()
+
+        if(promoList.isNotEmpty()){
 
             layoutPromoEmpty?.visibility = View.GONE
             rvSliderPromo!!.visibility = View.VISIBLE
 
             //Setup Recycler View Promo
-            adapterPromo = SliderPromoAdapter(context!!, promoList)
+            adapterPromo = SliderPromoAdapter(promoList ?: arrayListOf())
             rvSliderPromo!!.setLayoutManager(
                 LinearLayoutManager(
                     context,
