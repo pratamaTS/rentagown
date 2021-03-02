@@ -10,6 +10,7 @@ import com.example.rentagown.Model.NotifTransaction
 import com.example.rentagown.R
 import com.example.rentagown.Response.Notification.DataNotification
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,10 +28,18 @@ class NotifTransactionAdapter(
     }
 
     override fun onBindViewHolder(holder: NotifTransactionViewHolder, position: Int) {
-        holder.tvDateTransaction.setText(notifTransactionList[position].createdAt)
-        holder.tvNameProduct.setText(notifTransactionList[position].productName)
-        holder.tvDateBooking.setText(notifTransactionList[position].startDate)
-        holder.tvTimeBooking.setText(notifTransactionList[position].startDate)
+        // Format Date
+        val createdAtOld: Date = SimpleDateFormat("yyyy-MM-dd").parse(notifTransactionList[position].createdAt)
+        val startDateOld: Date = SimpleDateFormat("yyyy-MM-dd").parse(notifTransactionList[position].startDate)
+        val startTimeOld: Date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(notifTransactionList[position].startDate)
+        val createdAtNew = SimpleDateFormat("dd MMM yyyy").format(createdAtOld)
+        val startDateNew = SimpleDateFormat("dd MMM yyyy").format(startDateOld)
+        val startTimeNew = SimpleDateFormat("HH:mm:ss").format(startTimeOld)
+
+        holder.tvDateTransaction.setText(createdAtNew)
+        holder.tvNameProduct.setText(notifTransactionList[position].productName?.capitalize()?.trim())
+        holder.tvDateBooking.setText(startDateNew)
+        holder.tvTimeBooking.setText(startTimeNew)
         holder.tvStatusPayment.setText(notifTransactionList[position].statusTransaction)
         holder.tvPriceProduct.setText(numberFormat.format(notifTransactionList[position].paidPrice))
         holder.tvStatusNotif.setText(notifTransactionList[position].statusTransaction)

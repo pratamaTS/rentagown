@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     var frameLayout: FrameLayout? = null
     var selectedFragment: Fragment? = null
     var loginCheck: Boolean = false
+    var message: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +28,14 @@ class MainActivity : AppCompatActivity() {
         if(intent?.hasExtra("login_check") == true) {
             loginCheck = intent?.getBooleanExtra("login_check", false) == true
             if(loginCheck == true) {
+                val bundle: Bundle = Bundle()
                 selectedFragment = LoginFragment()
-                bottomNavigationView!!.itemIconTintList = null
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment()).commit()
+                if(intent.hasExtra("message")){
+                    message = intent.getStringExtra("message")
+                    bundle.putString("message", message)
+                }
+
+                bottomNavigationView?.selectedItemId = R.id.nav_profile
             }
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()

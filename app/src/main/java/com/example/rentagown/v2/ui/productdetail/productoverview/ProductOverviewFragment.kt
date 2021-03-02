@@ -4,14 +4,20 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rentagown.Activity.MainActivity
+import com.example.rentagown.Activity.MainAfterActivity
+import com.example.rentagown.Body.WishlistBody
+import com.example.rentagown.Connection.Interface.AddWishlistInterface
+import com.example.rentagown.Connection.Presenter.AddWishlistPresenter
+import com.example.rentagown.Connection.SessionManager
+import com.example.rentagown.Fragment.LoginFragment
 import com.example.rentagown.R
+import com.example.rentagown.Response.CreateWishlist.DataAddWishlist
 import com.example.rentagown.v2.base.BaseRAGFragment
 import com.example.rentagown.v2.data.model.Product
 import com.example.rentagown.v2.data.network.RAGApi
@@ -27,7 +33,7 @@ import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.addClickListener
 import java.util.*
 
-class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presenter>(), ProductOverviewContract.View,
+class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presenter>(), ProductOverviewContract.View, AddWishlistInterface,
         View.OnClickListener {
 
     companion object {
@@ -62,8 +68,11 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
 
     private lateinit var swSpecialTreatment: SwitchCompat
 
+    private lateinit var btnLike: ImageButton
+
     private var selectedStartDate: Calendar? = null
     private var selectedEndDate: Calendar? = null
+    private var token: String? = null
 
 
     override fun init() {
@@ -89,6 +98,8 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
     override fun setupWidgets(v: View) {
         super.setupWidgets(v)
 
+        val sessionManager = SessionManager(context!!)
+
         tvFinalPrice = v.findViewById(R.id.tv_final_price)
         tvDiscountValue = v.findViewById(R.id.tv_discount_value)
         tvProductName = v.findViewById(R.id.tv_product_name)
@@ -104,10 +115,16 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
 
         swSpecialTreatment = v.findViewById(R.id.sw_special_treatment)
 
+        btnLike = v.findViewById(R.id.btn_like)
+
+        sessionManager.fetchAuthToken()?.let {
+            token = it
+        }
 
         containerBookingStartDate.setOnClickListener(this)
         containerBookingEndDate.setOnClickListener(this)
         btnSeeNoAvailableDates.setOnClickListener(this)
+        btnLike.setOnClickListener(this)
 
     }
 
@@ -174,6 +191,10 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
         tvDiscountValue.text = product.promoAmount.toString() + getString(R.string.sym_discount_amount)
         tvPrice.text = Utils.formatMoney(product.productPrice)
         tvProductName.text = product.productName
+
+        when(product.isWishList){
+            1 -> btnLike.setBackgroundResource(R.drawable.ic_like_gold_filled)
+        }
     }
 
     override fun navigateToOtherProduct(product: Product) {
@@ -197,6 +218,20 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
             R.id.btn_see_no_available_date -> {
                 getSelectedProductId()?.apply { presenter.onBtnSeeNoAvailableDateClicked(this) }
             }
+            R.id.btn_like -> {
+                if(token != null) {
+                    var productID = ""
+                    getSelectedProductId()?.apply { productID = this }
+                    AddWishlistPresenter(this).addWishlist(context!!, WishlistBody(productID))
+                }else{
+                    activity?.let { act ->
+                        Intent(act, MainActivity::class.java).apply {
+                            putExtra("login_check", true)
+                            startActivity(this)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -209,6 +244,14 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onSuccessAddWishlist(dataAddWishlist: DataAddWishlist) {
+        btnLike.setBackgroundResource(R.drawable.ic_like_gold_filled)
+    }
+
+    override fun onErrorAddWishlist(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
 

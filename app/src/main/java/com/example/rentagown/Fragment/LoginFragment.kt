@@ -51,6 +51,7 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     var btnForgotPassword: Button? = null
     var btnToSignUp: Button? = null
     var btnShowHidePass: ImageView? = null
+    var message: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +67,12 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         btnForgotPassword = view.findViewById(R.id.btn_forgot_password)
         btnToSignUp = view.findViewById(R.id.btn_to_layout_signup)
         btnShowHidePass = view.findViewById(R.id.show_pass_btn)
+
+        message = arguments?.getString("message")
+
+        if(message != null){
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
 
         //Set Listener
         btnSignIn?.setOnClickListener(this@LoginFragment)
