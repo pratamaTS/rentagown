@@ -2,6 +2,7 @@ package com.example.rentagown.Activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -16,6 +17,7 @@ import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.Model.Wishlist
 import com.example.rentagown.R
 import com.example.rentagown.Response.GetWishlist.DataWishlist
+import com.example.rentagown.v2.ui.home.mybookings.MyBookingsContract
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,21 +27,30 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistI
     var layoutEmpty: LinearLayout? = null
     var wishlistList: ArrayList<DataWishlist> = ArrayList()
     var wishlistAdapter: WishlistAdapter? = null
+    private lateinit var btnBrowse: Button
     var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wishlist)
 
+        val sessionManager = SessionManager(this)
+
         //INIT VIEW
         back = findViewById(R.id.im_back)
         rvWishlist = findViewById(R.id.rv_wishlist)
         layoutEmpty = findViewById(R.id.layout_wishlist_empty)
+        btnBrowse = findViewById(R.id.btn_browse)
+
+        sessionManager.fetchAuthToken()?.let {
+            token = it
+        }
 
         getWishlist()
 
         //SET LISTENER
         back!!.setOnClickListener(this)
+        btnBrowse.setOnClickListener(this)
     }
 
     private fun getWishlist() {
@@ -49,8 +60,17 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistI
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()
+            R.id.btn_browse -> {
+                if(token != null) {
+//                    MainAfterActivity().setSelectedNavId(R.id.nav_home)
+//                    return
+                    onBackPressed()
+                }else {
+                    onBackPressed()
+                }
+            }
         }
-    }
+}
 
     override fun onSuccessGetWishlist(dataWishlist: ArrayList<DataWishlist>?) {
         wishlistList = dataWishlist as ArrayList<DataWishlist>

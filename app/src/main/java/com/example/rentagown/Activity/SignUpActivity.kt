@@ -80,9 +80,16 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
     }
 
     override fun onSuccessGetRegister() {
-        Toast.makeText(this, "Signup berhasil, silahkan periksa email untuk mengaktifkan akun", Toast.LENGTH_LONG).show()
-        val toLogin = Intent(this@SignUpActivity, SignInActivity::class.java)
-        startActivity(toLogin)
+//        val toLogin = Intent(this@SignUpActivity, SignInActivity::class.java)
+//        toLogin.putExtra("message", "Signup berhasil")
+//        startActivity(toLogin)
+//        finish()
+
+        val mainActivity = Intent(this, MainActivity::class.java)
+        mainActivity.putExtra("login_check", true)
+        mainActivity.putExtra("message", "Signup berhasil")
+        startActivity(mainActivity)
+        finish()
     }
 
     override fun onErrorGetRegister(msg: String) {

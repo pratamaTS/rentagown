@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rentagown.R
 
@@ -24,6 +25,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
     var btnSignIn: Button? = null
     var btnForgotPassword: Button? = null
     var btnToSignUp: Button? = null
+    var message: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -34,6 +37,11 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         btnSignIn = findViewById(R.id.btn_sign_in)
         btnForgotPassword = findViewById(R.id.btn_forgot_password)
         btnToSignUp = findViewById(R.id.btn_to_layout_signup)
+
+        if(intent.hasExtra("message")){
+            message = intent.getStringExtra("message")
+            Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        }
 
         //Set Listener
         btnSignIn!!.setOnClickListener(this)
@@ -70,6 +78,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_to_layout_signup -> {
                 val toRegister = Intent(this@SignInActivity, SignUpActivity::class.java)
                 startActivity(toRegister)
+                finish()
             }
         }
     }
