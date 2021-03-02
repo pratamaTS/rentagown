@@ -17,6 +17,7 @@ import com.example.rentagown.Connection.Presenter.ProfilePresenter
 import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
 import com.example.rentagown.Response.Profile.DataProfile
+import com.example.rentagown.v2.ui.myinvoices.MyInvoicesActivity
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -70,9 +71,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.menu_invoice_history -> {
-                Toast.makeText(activity!!, "Invoice History", Toast.LENGTH_SHORT)
-                    .show()
-                val invoiceHistory = Intent(activity, InvoiceHistoryActivity::class.java)
+                val invoiceHistory = Intent(activity, MyInvoicesActivity::class.java)
                 startActivity(invoiceHistory)
             }
             R.id.menu_setting -> {

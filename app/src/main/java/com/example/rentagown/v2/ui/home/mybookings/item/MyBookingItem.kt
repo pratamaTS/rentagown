@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
+import com.example.rentagown.v2.data.enums.PaymentTypeEnum
 import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.util.Utils
 import com.example.rentagown.v2.util.to64BitHash
@@ -36,7 +37,14 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
 
         holder.tvProductName.text = model.productName
         holder.tvProductPrice.text = Utils.formatMoney(model.paidPrice)
-        holder.tvDpPaid.text = Utils.formatMoney(model.downPayment)
+
+        val firstPay = model.paymentAmount ?: 0
+        if(PaymentTypeEnum.getByTypeId(model.paymentMethod) == PaymentTypeEnum.DOWN_PAYMENT && firstPay > 0) {
+            holder.tvDpPaid.text = Utils.formatMoney(firstPay)
+        } else {
+            holder.tvDpPaid.text = Utils.formatMoney(0)
+        }
+
         holder.tvRemainingBill.text = Utils.formatMoney(model.remainingBills)
         holder.tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(model.startDate, model.endDate)
         holder.tvBookingStatus.text = model.statusTransaction

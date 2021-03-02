@@ -1,10 +1,10 @@
-package com.example.rentagown.v2.ui.mybookinghistory
+package com.example.rentagown.v2.ui.mybookingshistory
 
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.data.source.BookingDataSource
 
-class MyBookingHistoryPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<MyBookingHistoryConstract.View>(), MyBookingHistoryConstract.Presenter {
+class MyBookingsHistoryPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<MyBookingsHistoryConstract.View>(), MyBookingsHistoryConstract.Presenter {
 
     override fun start() {
         super.start()
@@ -28,6 +28,14 @@ class MyBookingHistoryPresenter(private val repository: BookingDataSource) : Bas
 
     override fun onBtnBrowseClicked() {
         view?.navigateToBrowseProducts()
+    }
+
+    override fun onBookingHistoryItemClicked(booking: Booking) {
+        view?.navigateToBookingHistoryDetail(booking)
+    }
+
+    override fun onBookingDataChanged(booking: Booking?) {
+        booking?.apply { view?.setDataBookingChanged(this) }
     }
 
 

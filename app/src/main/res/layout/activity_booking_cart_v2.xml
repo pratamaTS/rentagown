@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:backgroundTint="@color/colorWhite"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:background="#00000000"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back_black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/title_your_booking"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_xlg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <ScrollView
+            android:id="@+id/sv_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/container_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_md"
+                android:layout_marginTop="@dimen/margin_md"
+                android:layout_marginEnd="@dimen/margin_md"
+                android:layout_marginBottom="@dimen/margin_md"
+                app:contentPadding="@dimen/padding_md">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/iv_product_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:contentDescription="@string/todo"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorGray"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:riv_corner_radius="8dp"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="false" />
+
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:maxLines="2"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_md"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_product_image"
+                        app:layout_constraintTop_toTopOf="@id/iv_product_image"
+                        tools:text="Selina Colourblock Camisole Dress" />
+
+                    <ImageView
+                        android:id="@+id/ic_calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_sm"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_date_grey"
+                        app:layout_constraintStart_toStartOf="@id/tv_product_name"
+                        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
+
+                    <TextView
+                        android:id="@+id/tv_booking_start_end_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_sm"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSoftGray"
+                        android:textSize="@dimen/font_xs"
+                        app:layout_constraintBottom_toBottomOf="@id/ic_calendar"
+                        app:layout_constraintEnd_toEndOf="@id/tv_product_name"
+                        app:layout_constraintStart_toEndOf="@id/ic_calendar"
+                        app:layout_constraintTop_toTopOf="@id/ic_calendar"
+                        tools:text="9 Sep 2020 - 12 Sep 2020" />
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="0dp"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:background="@color/colorSoftGrey"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_product_image" />
+
+                    <TextView
+                        android:id="@+id/tv_product_category"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:singleLine="true"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/line"
+                        tools:text="Prewedding Gown" />
+
+                    <TextView
+                        android:id="@+id/tv_special_treatment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_sm"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:singleLine="true"
+                        android:text="@string/one_day_service"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        app:layout_constraintEnd_toStartOf="@id/btn_delete"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_product_price" />
+
+                    <TextView
+                        android:id="@+id/tv_product_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_product_category"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_product_category"
+                        app:layout_constraintTop_toTopOf="@id/tv_product_category"
+                        tools:text="Rp. 5.000.000" />
+
+
+                    <ImageButton
+                        android:id="@+id/btn_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_delete"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_special_treatment"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_special_treatment" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_content">
+
+            <LinearLayout
+                android:id="@+id/container_cart_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/padding_md"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:id="@+id/tv_cart_info"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/info_cart"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_xs"
+                    android:layout_marginEnd="@dimen/margin_md"
+                    app:layout_constraintEnd_toStartOf="@id/iv_more_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_more_info"
+                    android:layout_width="@dimen/icon_button_sm"
+                    android:layout_height="@dimen/icon_button_sm"
+                    android:padding="@dimen/padding_xsm"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_cart_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_cart_info"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_whatsapp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/margin_md"
+                android:background="@drawable/bg_chatting"
+                android:clickable="true"
+                android:contentDescription="@string/todo"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_cart_info" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_pay"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_margin="@dimen/margin_md"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_button_rounded_gold"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/btn_payment"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@id/btn_whatsapp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_whatsapp"
+                app:layout_constraintTop_toTopOf="@id/btn_whatsapp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

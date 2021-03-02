@@ -9,11 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.rentagown.Activity.InvoiceHistoryActivity
 import com.example.rentagown.Activity.SettingActivity
 import com.example.rentagown.Activity.TransactionStatusActivity
-import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
+import com.example.rentagown.v2.ui.myinvoices.MyInvoicesActivity
 import java.util.*
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -53,8 +52,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.menu_invoice_history -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!, "Invoice History", Toast.LENGTH_SHORT).show()
-                val invoiceHistory = Intent(activity, InvoiceHistoryActivity::class.java)
+                val invoiceHistory = Intent(activity, MyInvoicesActivity::class.java)
                 startActivity(invoiceHistory)
             }
             R.id.menu_transaction_status -> {

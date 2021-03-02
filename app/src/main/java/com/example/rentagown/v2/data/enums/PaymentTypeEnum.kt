@@ -21,6 +21,10 @@ enum class PaymentTypeEnum(
             return values()[ordinal]
         }
 
+        fun getByTypeId(typeId: String?): PaymentTypeEnum? {
+            return values().find { pt -> pt.typeId == typeId }
+        }
+
     }
 
 }

@@ -65,7 +65,7 @@
             android:scrollbars="vertical"/>
         <include
             android:id="@+id/container_empty_data"
-            layout="@layout/layout_empty_placeholder_booking"
+            layout="@layout/layout_empty_bookings"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:visibility="gone"/>

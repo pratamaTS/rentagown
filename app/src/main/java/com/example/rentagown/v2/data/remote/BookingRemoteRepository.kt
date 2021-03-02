@@ -31,4 +31,20 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.getMyBookingsHistory()
     }
 
+    override fun confirmPayment(transactionId: String, reqConfirmPayment: ReqConfirmPayment): Single<BaseResp<Booking>> {
+        return apiService.confirmPayment(transactionId, reqConfirmPayment)
+    }
+
+    override fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment): Single<BaseResp<Booking>> {
+        return apiService.confirm2ndPayment(transactionId, reqConfirmPayment)
+    }
+
+    override fun reviewBooking(reqCreateReviewBooking: ReqReviewBooking): Single<BaseResp<ProductReview>> {
+        return apiService.reviewBooking(reqCreateReviewBooking)
+    }
+
+    override fun getMyInvoices(): Single<BasePagingResp<Invoice>> {
+        return apiService.getMyInvoices()
+    }
+
 }

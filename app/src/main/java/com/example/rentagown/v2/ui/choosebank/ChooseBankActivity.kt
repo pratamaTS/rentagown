@@ -23,6 +23,7 @@ class ChooseBankActivity : BaseRAGActivity<ChooseBankContract.Presenter>(), Choo
     }
 
     override val layoutId = R.layout.activity_choose_bank_v2
+    override var contentContainerId: Int = R.id.rv_list_bank
 
     override var btnBackId: Int = R.id.btn_back
 
@@ -61,7 +62,7 @@ class ChooseBankActivity : BaseRAGActivity<ChooseBankContract.Presenter>(), Choo
         rvListBank.layoutManager = LinearLayoutManager(this)
         rvListBank.adapter = adapter
 
-        adapter.addClickListener(resolveView = {null}, resolveViews = { vh: BankItem.ViewHolder -> listOf(vh.container)}) {
+        adapter.addClickListener(resolveView = { null }, resolveViews = { vh: BankItem.ViewHolder -> listOf(vh.container)}) {
             _, _, _, item ->
             presenter.selectBank(item.model)
         }

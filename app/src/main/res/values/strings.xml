@@ -35,7 +35,7 @@
 
     <!-- fragment cart -->
     <string name="appbar_cart">Cart</string>
-    <string name="info_cart">Maximum return of goods is 7 days after the date of booking, which is 16 September 2020 (Office Hours).</string>
+    <string name="info_cart">Maximum return of goods is 7 days after the date of booking, which is #returnDeadLine (Office Hours).</string>
     <string name="tv_title_total_price">Total Price</string>
     <string name="tv_total_price">Rp. 0</string>
     <string name="btn_checkout_cart">Checkout</string>
@@ -291,7 +291,7 @@
 
     <!-- activity detail booking -->
     <string name="appbar_detail">Detail</string>
-    <string name="title_schedule_time_amp_date"><![CDATA[Schedule Time & Date]]></string>
+    <string name="title_schedule_time_amp_date"><![CDATA[Schedule Date]]></string>
     <string name="btn_edit_schedule_time">Edit</string>
     <string name="title_item_detail_booking">Item</string>
     <string name="title_price_detail_booking">Price</string>
@@ -347,21 +347,26 @@
     <string name="title_edit_address">Edit Address</string>
     <string name="title_choose_address">Choose Address</string>
     <string name="title_choose_date">Choose Date</string>
+    <string name="title_your_booking">Your Booking</string>
 
 
     <string name="sym_discount_amount">%</string>
-    <string name="sym_no_text">-</string>
+    <string name="lbl_no_text">-</string>
 
     <string name="lbl_pick_date">Pick Date</string>
     <string name="lbl_dates_not_available">Not available</string>
-    <string name="lbl_unit_cm">cm</string>\
-    <string name="lbl_similar_category">Similar Category</string>\
-    <string name="lbl_one_day_service">One day service</string>\
+    <string name="lbl_unit_cm">cm</string>
+    <string name="lbl_similar_category">Similar Category</string>
+    <string name="lbl_one_day_service">One day service</string>
+    <string name="lbl_characters_left">characters left</string>
+    <string name="lbl_500_characters_left">500 characters left</string>
+    <string name="lbl_no_invoice">No invoice found</string>
 
 
     <string name="btn_see_template">See Template</string>
     <string name="btn_add_payment_method">Add Payment Method</string>
-
+    <string name="btn_review_booking">Review</string>
+    <string name="btn_confirm_payment">Confirmation</string>
 
     <string name="err_booking_date_not_valid">Booking date not valid…</string>
     <string name="err_not_selected_any_address">Not selected any address yet…</string>
@@ -369,6 +374,12 @@
     <string name="err_not_selected_any_payment_method">Not selected any payment method yet…</string>
     <string name="err_booking_not_found">Booking data not found…</string>
     <string name="err_product_not_found">Product not found…</string>
+    <string name="err_source_bank_name_empty">Bank name cannot be empty…</string>
+    <string name="err_source_acc_number_empty">Account number cannot be empty…</string>
+    <string name="err_source_acc_name_empty">Account name cannot be empty…</string>
+    <string name="err_payment_amount_empty">Payment amount cannot be empty…</string>
+
+    <string name="msg_success_review_booking">Success review booking, thank you for your review…</string>
 
 
 </resources>

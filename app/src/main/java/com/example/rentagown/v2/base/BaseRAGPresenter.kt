@@ -2,7 +2,6 @@ package com.example.rentagown.v2.base
 
 import com.example.rentagown.v2.data.model.BasePagingResp
 import com.example.rentagown.v2.data.model.BaseResp
-import com.example.rentagown.v2.data.model.Product
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single

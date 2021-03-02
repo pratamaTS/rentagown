@@ -26,5 +26,4 @@ class AddressRemoteRepository(private val apiService: RAGApiService): AddressDat
         return apiService.updateUserAddress(addressId, address)
     }
 
-
 }

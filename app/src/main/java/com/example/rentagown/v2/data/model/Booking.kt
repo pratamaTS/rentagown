@@ -45,6 +45,9 @@ data class Booking (
     @SerializedName("account_name")
     val accountName: String? = null,
 
+    @SerializedName("bank_path_photo")
+    val bankPathPhoto: String? = null,
+
     @SerializedName("phone")
     val phone: String? = null,
 
@@ -74,6 +77,9 @@ data class Booking (
 
     @SerializedName("status_transaction")
     val statusTransaction: String? = null,
+
+    @SerializedName("status_payment")
+    val paymentStatus: String? = null,
 
     @SerializedName("remaining_bills")
     val remainingBills: Long? = null,
@@ -111,6 +117,9 @@ data class Booking (
     @SerializedName("id_fitting")
     val fittingId: String? = null,
 
+    @SerializedName("id_rating")
+    val ratingId: String? = null,
+
     @SerializedName("fcm_id")
     val fcmId: String? = null,
 
@@ -118,46 +127,47 @@ data class Booking (
     val bookingDetail: BookingDetail? = null,
 
 ) : BaseModel(), Parcelable {
-
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readParcelable(BookingDetail::class.java.classLoader)
-    ) {
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readParcelable(BookingDetail::class.java.classLoader)) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -174,6 +184,7 @@ data class Booking (
         parcel.writeString(bankName)
         parcel.writeString(accountNumber)
         parcel.writeString(accountName)
+        parcel.writeString(bankPathPhoto)
         parcel.writeString(phone)
         parcel.writeString(startDate)
         parcel.writeString(endDate)
@@ -184,6 +195,7 @@ data class Booking (
         parcel.writeString(paymentMethod)
         parcel.writeValue(status)
         parcel.writeString(statusTransaction)
+        parcel.writeString(paymentStatus)
         parcel.writeValue(remainingBills)
         parcel.writeString(paymentDeadline)
         parcel.writeString(paymentBankName)
@@ -196,6 +208,7 @@ data class Booking (
         parcel.writeValue(repaymentAmount)
         parcel.writeValue(totalBillAmount)
         parcel.writeString(fittingId)
+        parcel.writeString(ratingId)
         parcel.writeString(fcmId)
         parcel.writeParcelable(bookingDetail, flags)
     }

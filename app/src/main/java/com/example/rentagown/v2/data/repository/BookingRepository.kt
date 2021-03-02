@@ -30,4 +30,20 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.getMyBookingsHistory()
     }
 
+    override fun confirmPayment(transactionId: String, reqConfirmPayment: ReqConfirmPayment): Single<BaseResp<Booking>> {
+        return remoteRepository.confirmPayment(transactionId, reqConfirmPayment)
+    }
+
+    override fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment): Single<BaseResp<Booking>> {
+        return remoteRepository.confirm2ndPayment(transactionId, reqConfirmPayment)
+    }
+
+    override fun reviewBooking(reqCreateReviewBooking: ReqReviewBooking): Single<BaseResp<ProductReview>> {
+        return remoteRepository.reviewBooking(reqCreateReviewBooking)
+    }
+
+    override fun getMyInvoices(): Single<BasePagingResp<Invoice>> {
+        return remoteRepository.getMyInvoices()
+    }
+
 }

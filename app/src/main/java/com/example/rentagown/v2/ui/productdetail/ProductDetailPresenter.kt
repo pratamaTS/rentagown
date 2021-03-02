@@ -5,10 +5,8 @@ import com.example.rentagown.v2.data.model.Product
 import com.example.rentagown.v2.data.model.ReqCreateBooking
 import com.example.rentagown.v2.data.source.ProductDataSource
 import com.example.rentagown.v2.util.Utils
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.*
 
 class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRAGPresenter<ProductDetailContract.View>(), ProductDetailContract.Presenter {
 
@@ -38,7 +36,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
         val bookingDates = view?.getBookingDates()
 
         val startDate = bookingDates?.first
-        val endDate = bookingDates?.first
+        val endDate = bookingDates?.second
 
         if (startDate != null && endDate != null) {
             if (view?.isUserLoggedIn() == false) {
@@ -46,11 +44,11 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
                 return
             }
 
-            view?.navigateToBooking(ReqCreateBooking(
+            view?.navigateToCart(ReqCreateBooking(
                     productId = productDetail?.productId,
                     paidPrice = productDetail?.finalPrice,
-                    startDate = Utils.formatDateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
-                    endDate = Utils.formatDateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
+                    startDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
+                    endDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     oneDayService = if (view?.getSpecialTreatmentSelected() == true) 1 else 0
             ), productDetail)
         } else {

@@ -51,4 +51,16 @@ interface RAGApiService {
     @GET("booking/myhistory")
     fun getMyBookingsHistory(): Single<BasePagingResp<Booking>>
 
+    @PUT("booking/updatepayment/{transactionId}")
+    fun confirmPayment(@Path("transactionId") transactionId: String, @Body reqConfirmPayment: ReqConfirmPayment): Single<BaseResp<Booking>>
+
+    @PUT("booking/updaterepayment/{transactionId}")
+    fun confirm2ndPayment(@Path("transactionId") transactionId: String, @Body reqConfirmPayment: ReqConfirm2ndPayment): Single<BaseResp<Booking>>
+
+    @POST("rating")
+    fun reviewBooking(@Body createReview: ReqReviewBooking): Single<BaseResp<ProductReview>>
+
+    @GET("booking/invoice")
+    fun getMyInvoices(): Single<BasePagingResp<Invoice>>
+
 }

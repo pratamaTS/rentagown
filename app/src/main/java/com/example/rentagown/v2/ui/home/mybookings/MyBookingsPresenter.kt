@@ -1,6 +1,7 @@
 package com.example.rentagown.v2.ui.home.mybookings
 
 import com.example.rentagown.v2.base.BaseRAGPresenter
+import com.example.rentagown.v2.data.enums.BookingStatusEnum
 import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.data.source.BookingDataSource
 
@@ -35,7 +36,7 @@ class MyBookingsPresenter(private val repository: BookingDataSource) : BaseRAGPr
     }
 
     override fun onItemClicked(booking: Booking) {
-
+        view?.navigateToBookingDetail(booking)
     }
 
     override fun onBtnFittingClicked(booking: Booking) {
@@ -48,6 +49,20 @@ class MyBookingsPresenter(private val repository: BookingDataSource) : BaseRAGPr
         transactionId?.apply {
             view?.updateFittingData(this, fittingId)
         }
+    }
+
+    override fun onBookingDataChanged(booking: Booking?) {
+        booking?.apply {
+            if(BookingStatusEnum.isCompleted(status) || BookingStatusEnum.isCancelled(status)) {
+                view?.removeBookingData(this)
+            } else {
+                view?.updateBookingData(this)
+            }
+        }
+    }
+
+    override fun onPaymentConfirmed(booking: Booking?) {
+        booking?.apply { view?.updateBookingData(this) }
     }
 
 }

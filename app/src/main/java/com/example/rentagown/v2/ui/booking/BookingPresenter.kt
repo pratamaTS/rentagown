@@ -109,7 +109,7 @@ class BookingPresenter(private val createBooking: ReqCreateBooking?,
             paymentMethod = paymentType.typeId,
             bankId = paymentMethod.bankId,
             phoneNumber = address.receiverPhoneNumber,
-            downPayment = paymentType.dpValue
+            downPayment = if(paymentType == PaymentTypeEnum.DOWN_PAYMENT) paymentType.dpValue else product.finalPrice
         )
 
         safeCall(repository.createBooking(mReqCreateBooking), object : Listener<Booking> {

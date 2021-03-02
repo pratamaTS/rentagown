@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_invoice_empty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:ignore="MissingConstraints,UseCompoundDrawables">
+
+    <ImageView
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:src="@drawable/ic_invoice_empty"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_md"
+        android:layout_marginTop="@dimen/margin_md"
+        android:layout_marginEnd="@dimen/margin_md"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="@string/lbl_no_invoice"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_sm" />
+
+
+</LinearLayout>

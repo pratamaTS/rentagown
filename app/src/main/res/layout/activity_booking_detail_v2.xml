@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="@id/sv_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:background="#00000000"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back_black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/appbar_detail"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_xlg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/container_confirm_payment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_detail_item"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/iv_product_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/todo"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorGray"
+                        app:riv_corner_radius="8dp"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="false" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_md">
+
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:maxLines="2"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_lg"
+                        tools:text="Selina Colourblock Camisole Dress" />
+
+                    <TextView
+                        android:id="@+id/tv_product_category_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="PREWEDDING" />
+
+                    <TextView
+                        android:id="@+id/tv_booking_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_booking_status_on_going"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:layout_marginTop="@dimen/margin_xsm"
+                        android:paddingStart="12dp"
+                        android:paddingTop="@dimen/padding_sm"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="@dimen/padding_sm"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="On-Progress" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_schedule_time_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="@string/title_schedule_time_amp_date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_booking_start_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"
+                    tools:text="9 Sep 2020 - 10 Sep 2020" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_item_price_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/title_item_detail_booking"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:text="@string/title_price_detail_booking"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:layout_marginEnd="@dimen/margin_md"
+                    android:background="@drawable/border_bottom"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/padding_sm"
+                    android:paddingBottom="@dimen/padding_sm"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_product_name2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="start|top"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="Selina Colourblock Camisole Dress" />
+
+                    <TextView
+                        android:id="@+id/tv_product_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end|top"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="Rp. 5.000.000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_md"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/title_sub_total_detal_booking"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm" />
+
+                    <TextView
+                        android:id="@+id/tv_product_price2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/margin_sm"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="Rp. 5.000.000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/title_total_discount_detail_booking"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm" />
+
+                    <TextView
+                        android:id="@+id/tv_discount_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/margin_sm"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="- Rp. 0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/title_dp_paid_detail_booking"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm" />
+
+                    <TextView
+                        android:id="@+id/tv_booking_dp_paid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/margin_sm"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="Rp. 500.000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/title_total_price_history"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm" />
+
+                    <TextView
+                        android:id="@+id/tv_total_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/margin_sm"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/font_sm"
+                        tools:text="Rp. 5.000.000" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/container_confirm_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_md"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_md"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:singleLine="true"
+            android:text="@string/pay_after_service"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/font_md" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pay"
+            style="@style/ButtonRoundedOutlinedGold2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="@string/btn_pay"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/font_md" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_action"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/margin_md"
+        android:background="@drawable/bg_button_rounded_gold"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_confirm_payment"
+        tools:ignore="UnusedAttribute" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

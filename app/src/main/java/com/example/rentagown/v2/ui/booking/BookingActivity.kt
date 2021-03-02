@@ -20,10 +20,12 @@ import com.example.rentagown.v2.data.model.*
 import com.example.rentagown.v2.data.network.RAGApi
 import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
 import com.example.rentagown.v2.data.repository.RepositoryLocator
+import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.example.rentagown.v2.ui.bookingsummary.BookingSummaryActivity
 import com.example.rentagown.v2.ui.chooseaddress.ChooseAddressActivity
 import com.example.rentagown.v2.ui.choosebank.ChooseBankActivity
 import com.example.rentagown.v2.ui.choosepaymenttype.ChoosePaymentTypeDialog
+import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.util.Utils
 
 class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingContract.View,
@@ -222,6 +224,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
 
     override fun navigateToBookingSummary(booking: Booking) {
         Intent(this, BookingSummaryActivity::class.java).apply {
+            putExtra("booking", booking)
             startActivity(this)
             finish()
         }
@@ -316,9 +319,9 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         tvLblSelectedPaymentType.visibility = View.INVISIBLE
         tvSelectedPaymentTypePrice.visibility = View.INVISIBLE
 
-        tvSelectedPaymentTypePrice.text = getString(R.string.sym_no_text)
-        tvProductFinalPrice.text = getString(R.string.sym_no_text)
-        tvTotalPayment.text = getString(R.string.sym_no_text)
+        tvSelectedPaymentTypePrice.text = getString(R.string.lbl_no_text)
+        tvProductFinalPrice.text = getString(R.string.lbl_no_text)
+        tvTotalPayment.text = getString(R.string.lbl_no_text)
 
         tvProductName.text = product?.productName
         tvProductFinalPrice.text = " - ${Utils.formatMoney(reqCreateBooking?.paidPrice)}"
@@ -361,6 +364,17 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         } else if(requestCode == ChooseBankActivity.REQ_CHOOSE_BANK) {
             if(resultCode == ChooseBankActivity.RES_BANK_CHOSEN) {
                 presenter.onBankSelected(data?.getParcelableExtra("selected_bank"))
+            }
+        } else if(requestCode == ConfirmPaymentActivity.REQ_CONFIRM_PAYMENT) {
+            if(resultCode == ConfirmPaymentActivity.RES_CONFIRM_PAYMENT_SUCCESS) {
+                data?.getParcelableExtra<Booking>("booking")?.apply {
+                    setResultBookingCreated()
+
+                    val intent = Intent(this@BookingActivity, BookingSuccessActivity::class.java)
+                    startActivity(intent)
+
+                    finish()
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

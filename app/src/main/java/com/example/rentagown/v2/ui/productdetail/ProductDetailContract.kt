@@ -17,7 +17,7 @@ class ProductDetailContract {
         fun navigateToWhatsapp(phoneNumber: String)
         fun getBookingDates(): Pair<Calendar?, Calendar?>
         fun getSpecialTreatmentSelected(): Boolean
-        fun navigateToBooking(createBooking: ReqCreateBooking, product: Product?)
+        fun navigateToCart(createBooking: ReqCreateBooking, product: Product?)
         fun setProductDataToView(product: Product)
         fun getSelectedCategory(): String?
         fun isUserLoggedIn(): Boolean

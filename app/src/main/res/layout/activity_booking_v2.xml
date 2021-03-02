@@ -454,7 +454,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:gravity="end|center_vertical"
                             android:layout_marginStart="@dimen/margin_md"
-                            android:text="@string/sym_no_text"
+                            android:text="@string/lbl_no_text"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp" />
 
@@ -488,7 +488,7 @@
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:gravity="end|center_vertical"
-                            android:text="@string/sym_no_text"
+                            android:text="@string/lbl_no_text"
                             android:textColor="@color/colorRed"
                             android:textSize="16sp" />
 
@@ -535,7 +535,7 @@
                             android:layout_marginStart="@dimen/margin_md"
                             android:layout_marginEnd="@dimen/margin_md"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="@string/sym_no_text"
+                            android:text="@string/lbl_no_text"
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:gravity="end|center_vertical"

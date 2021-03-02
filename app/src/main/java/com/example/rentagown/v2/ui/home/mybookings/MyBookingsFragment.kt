@@ -13,9 +13,11 @@ import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.data.network.RAGApi
 import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
 import com.example.rentagown.v2.data.repository.RepositoryLocator
+import com.example.rentagown.v2.ui.bookingdetail.BookingDetailActivity
+import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.ui.fittingsize.FittingSizeActivity
 import com.example.rentagown.v2.ui.home.mybookings.item.MyBookingItem
-import com.example.rentagown.v2.ui.mybookinghistory.MyBookingHistoryActivity
+import com.example.rentagown.v2.ui.mybookingshistory.MyBookingsHistoryActivity
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.addClickListener
@@ -31,7 +33,7 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
 
     }
 
-    override val layoutId: Int = R.layout.fragment_my_booking
+    override val layoutId: Int = R.layout.fragment_my_bookings
 
     override var contentContainerId: Int = R.id.rv_my_bookings
     override var emptyPlaceholderId: Int = R.id.container_empty_data
@@ -80,6 +82,7 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
 
 
         adapter.onClickListener = { _, _, item, _ ->
+            // later remove
             presenter.onItemClicked(item.model)
             false
         }
@@ -118,8 +121,8 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
     }
 
     override fun navigateToBookingHistory() {
-        Intent(activity, MyBookingHistoryActivity::class.java).apply {
-            startActivityForResult(this, MyBookingHistoryActivity.REQ_VIEW_BOOKINGS_HISTORY)
+        Intent(activity, MyBookingsHistoryActivity::class.java).apply {
+            startActivityForResult(this, MyBookingsHistoryActivity.REQ_VIEW_BOOKINGS_HISTORY)
         }
     }
 
@@ -138,18 +141,60 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
         }
     }
 
+    override fun navigateToConfirmPayment(booking: Booking) {
+        Intent(activity, ConfirmPaymentActivity::class.java).apply {
+            putExtra("booking", booking)
+            startActivityForResult(this, ConfirmPaymentActivity.REQ_CONFIRM_PAYMENT)
+        }
+    }
+
+    override fun navigateToBookingDetail(booking: Booking) {
+        Intent(activity, BookingDetailActivity::class.java).apply {
+            putExtra("booking", booking)
+            startActivityForResult(this, BookingDetailActivity.REQ_VIEW_BOOKING_DETAIL)
+        }
+    }
+
+    override fun updateBookingData(booking: Booking) {
+        itemAdapter.adapterItems.find { i -> !i.model.transactionId.isNullOrBlank() && i.model.transactionId == booking.transactionId}?.apply {
+            model = booking
+            adapter.notifyItemChanged(itemAdapter.getAdapterPosition(this))
+        }
+    }
+
+    override fun removeBookingData(booking: Booking) {
+        itemAdapter.adapterItems
+                .indexOfFirst { i -> !i.model.transactionId.isNullOrBlank() && i.model.transactionId == booking.transactionId }
+                .takeIf { idx -> idx > -1 }
+                ?.apply {
+                    itemAdapter.remove(this)
+                }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == FittingSizeActivity.REQ_EDIT_FITTING) {
             if(resultCode == FittingSizeActivity.RES_FITTING_SAVED) {
                 presenter.onFittingSaved(data?.getStringExtra("transaction_id"), data?.getStringExtra("fitting_id"))
             }
-        } else if(requestCode == MyBookingHistoryActivity.REQ_VIEW_BOOKINGS_HISTORY) {
-            if(resultCode == MyBookingHistoryActivity.RES_BROWSE_PRODUCT) {
+        } else if(requestCode == MyBookingsHistoryActivity.REQ_VIEW_BOOKINGS_HISTORY) {
+            if(resultCode == MyBookingsHistoryActivity.RES_BROWSE_PRODUCT) {
                 // nanti diubah kalo sudah jelas
                 navigateToBrowse()
             }
+
+        } else if(requestCode == ConfirmPaymentActivity.REQ_CONFIRM_PAYMENT) {
+            if(resultCode == ConfirmPaymentActivity.RES_CONFIRM_PAYMENT_SUCCESS) {
+                // new booking data
+                // nanti pindahkan ke tempat seharusnya
+                presenter.onPaymentConfirmed(data?.getParcelableExtra("booking"))
+            }
+        } else if(requestCode == BookingDetailActivity.REQ_VIEW_BOOKING_DETAIL) {
+            if(resultCode == BookingDetailActivity.RES_BOOKING_DETAIL_CHANGED) {
+                presenter.onBookingDataChanged(data?.getParcelableExtra("booking"))
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+
         }
     }
 }

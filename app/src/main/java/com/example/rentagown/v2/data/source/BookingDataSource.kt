@@ -11,7 +11,9 @@ interface BookingDataSource {
     fun createBooking(createBooking: ReqCreateBooking) : Single<BaseResp<Booking>>
     fun getMyBookings() : Single<BasePagingResp<Booking>>
     fun getMyBookingsHistory() : Single<BasePagingResp<Booking>>
-//    fun confirmPayment() : Single<BasePagingResp<Booking>>
-//    fun confirm2ndPayment() : Single<BasePagingResp<Booking>>
+    fun confirmPayment(transactionId: String, reqConfirmPayment: ReqConfirmPayment) : Single<BaseResp<Booking>>
+    fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment) : Single<BaseResp<Booking>>
+    fun reviewBooking(reqCreateReviewBooking: ReqReviewBooking) : Single<BaseResp<ProductReview>>
+    fun getMyInvoices() : Single<BasePagingResp<Invoice>>
 
 }

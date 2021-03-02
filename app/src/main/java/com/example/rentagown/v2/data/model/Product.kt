@@ -74,27 +74,27 @@ data class Product (
 
 ) : BaseModel(), Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.createTypedArrayList(ProductImage),
-            parcel.readValue(Int::class.java.classLoader) as? Int) {
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.createTypedArrayList(ProductImage),
+        parcel.readValue(Int::class.java.classLoader) as? Int) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -134,5 +134,4 @@ data class Product (
             return arrayOfNulls(size)
         }
     }
-
 }

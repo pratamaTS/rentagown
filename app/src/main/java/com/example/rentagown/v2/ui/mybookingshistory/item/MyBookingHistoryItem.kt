@@ -1,4 +1,4 @@
-package com.example.rentagown.v2.ui.mybookinghistory.item
+package com.example.rentagown.v2.ui.mybookingshistory.item
 
 import android.view.View
 import android.widget.ImageView
@@ -39,10 +39,10 @@ class MyBookingHistoryItem(model: Booking) : ModelAbstractItem<Booking,MyBooking
 
         if(BookingStatusEnum.isCancelled(model.status)) {
             holder.tvStatusHistory.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.colorWhite))
-            holder.tvStatusHistory.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_status_history_cancel)
+            holder.tvStatusHistory.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_booking_status_cancelled)
         } else {
             holder.tvStatusHistory.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.colorDarkGreen))
-            holder.tvStatusHistory.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_status_history_done)
+            holder.tvStatusHistory.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_booking_status_done)
         }
 
         holder.tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(model.startDate, model.endDate)

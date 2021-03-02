@@ -36,7 +36,7 @@ class ProductOverviewPresenter(private val repository: ProductDataSource) : Base
         val dtEnd = LocalDate.of(cEnd.get(Calendar.YEAR), cEnd.get(Calendar.MONTH) + 1, cEnd.get(Calendar.DAY_OF_MONTH))
 
         view?.setBookingDatesValue(cStart, cEnd)
-        view?.showValueOrDefaultBookingDate(Utils.DATE_TIME_FORMAT2.format(dtStart), Utils.DATE_TIME_FORMAT2.format(dtEnd))
+        view?.showValueOrDefaultBookingDate(Utils.DATE_FORMAT_PRODUCT.format(dtStart), Utils.DATE_FORMAT_PRODUCT.format(dtEnd))
     }
 
     override fun onBtnStartBookingDateClicked(startDate: Calendar?, endDate: Calendar?) {

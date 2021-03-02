@@ -22,11 +22,11 @@ class ProductReviewItem(model: ProductReview) : ModelAbstractItem<ProductReview,
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
 
-        holder.tvUserName.text = model.userName
-        holder.rbTransactionRatingStar.rating = model.score ?: 0f
-        holder.tvTransactionRatingStar.text = (model.score ?: 0f).toString()
+        holder.tvUserName.text = model.name
+        holder.rbTransactionRatingStar.rating = model.reviewStar ?: 0f
+        holder.tvTransactionRatingStar.text = (model.reviewStar ?: 0f).toString()
         holder.tvReviewTime.text = model.reviewDateTime
-        holder.tvReviewComment.text = model.message
+        holder.tvReviewComment.text = model.reviewComment
     }
 
     override fun unbindView(holder: ViewHolder) {

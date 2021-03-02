@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="Activity.WriteReviewActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_md"
+                        android:background="#00000000"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_back_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="@string/appbar_write_review"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_md"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md"
+            app:layout_constraintBottom_toTopOf="@id/btn_submit_review"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/review_helps_other_user"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="@dimen/font_md" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/padding_md"
+                        android:paddingBottom="@dimen/padding_md">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/iv_product_image"
+                            android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            app:riv_corner_radius="8dp"
+                            android:scaleType="fitCenter"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="false"
+                            android:contentDescription="@string/todo"
+                            android:src="@color/colorGray" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_md"
+                            android:gravity="start|top"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_product_name"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                tools:text="Selina Colourblock Camisole Dress"
+                                android:textColor="@color/colorSecondary"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_product_category_name"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/poppins_regular"
+                                tools:text="Prewedding Gown asdfasdfasdfasdfasdf"
+                                android:textColor="@color/colorSoftGray"
+                                android:textSize="@dimen/font_sm" />
+
+                            <TextView
+                                android:id="@+id/tv_product_price"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins_medium"
+                                tools:text="Rp. 5.000.000"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/font_md" />
+
+                            <androidx.appcompat.widget.AppCompatRatingBar
+                                android:id="@+id/rb_booking"
+                                style="@style/RatingBarMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:numStars="5"
+                                android:isIndicator="false"
+                                android:stepSize="1" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_title_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/title_reviews_comment"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_md"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout6" />
+
+                <EditText
+                    android:id="@+id/et_review_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:background="@drawable/bg_edit_text_outlined"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="top"
+                    android:hint="@string/et_hint_comments"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="text|textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:paddingStart="@dimen/padding_md"
+                    android:paddingEnd="@dimen/padding_md"
+                    android:paddingTop="@dimen/padding_sm"
+                    android:paddingBottom="@dimen/padding_sm"
+                    android:maxLength="500"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorSoftGray"
+                    android:textSize="@dimen/font_md"
+                    android:typeface="normal"
+                    tools:ignore="RtlSymmetry">
+
+                </EditText>
+
+                <TextView
+                    android:id="@+id/tv_review_comment_characters_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_500_characters_left"
+                    android:textColor="@color/colorSoftGray"
+                    android:textSize="@dimen/font_xs"
+                    tools:ignore="SmallSp" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_md"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView10">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="@string/recommed_item"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toEndOf="@id/textView11"
+                        app:layout_constraintTop_toBottomOf="@id/textView10">
+
+                        <RadioButton
+                            android:id="@+id/radio_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:checked="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:text="@string/rd_yes"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+                            android:id="@+id/radio_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:checked="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:text="@string/rd_no"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btn_submit_review"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="@string/btn_submit_review"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondary"
+            android:textSize="16sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

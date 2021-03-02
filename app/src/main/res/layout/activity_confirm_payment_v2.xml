@@ -113,7 +113,7 @@
                         android:textSize="@dimen/font_sm" />
 
                     <TextView
-                        android:id="@+id/tv_total_price_confimation"
+                        android:id="@+id/tv_confirmation_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semi_bold"
@@ -127,6 +127,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="@string/last_2_digit_is_unique_code_for_bank_transfer_confirm"
                         android:textColor="@color/colorDarkGray"
+                        android:visibility="gone"
                         android:textSize="@dimen/font_md"/>
 
                 </LinearLayout>

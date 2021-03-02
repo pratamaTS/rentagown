@@ -26,6 +26,10 @@ enum class BookingStatusEnum(
             return false
         }
 
+        fun isCompleted(status: Int?): Boolean {
+            return status == SUCCESS.statusId
+        }
+
         fun getByStatusId(statusId: Int?): BookingStatusEnum? {
             return BookingStatusEnum.values().find { e -> e.statusId == statusId }
         }

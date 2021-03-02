@@ -18,6 +18,7 @@ import com.example.rentagown.v2.data.network.RAGApi
 import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
 import com.example.rentagown.v2.data.repository.RepositoryLocator
 import com.example.rentagown.v2.ui.booking.BookingActivity
+import com.example.rentagown.v2.ui.bookingcart.BookingCartActivity
 import com.example.rentagown.v2.ui.productdetail.adapter.ProductDetailPagerAdapter
 import com.example.rentagown.v2.ui.productdetail.adapter.ProductImageAdapter
 import com.example.rentagown.v2.ui.productdetail.productoverview.ProductOverviewContract
@@ -118,10 +119,8 @@ class ProductDetailActivity : BaseRAGActivity<ProductDetailContract.Presenter>()
         productImageAdapter.replaceData(images.map { pi -> pi.photoPath })
     }
 
-//    override fun getSelectedProductId(): String? = intent.getStringExtra("product_id")
-    override fun getSelectedProductId(): String? = intent.getStringExtra("product_id") ?: "rag1"
-//    override fun getSelectedCategory(): String? = intent.getStringExtra("category")
-    override fun getSelectedCategory(): String? = intent.getStringExtra("category") ?: "prewedding"
+    override fun getSelectedProductId(): String? = intent.getStringExtra("product_id")
+    override fun getSelectedCategory(): String? = intent.getStringExtra("category")
 
     override fun isUserLoggedIn(): Boolean {
         return sessionManager.isLoggedIn()
@@ -189,12 +188,12 @@ class ProductDetailActivity : BaseRAGActivity<ProductDetailContract.Presenter>()
         return false
     }
 
-    override fun navigateToBooking(createBooking: ReqCreateBooking, product: Product?) {
-        Intent(this, BookingActivity::class.java).apply {
+    override fun navigateToCart(createBooking: ReqCreateBooking, product: Product?) {
+        Intent(this, BookingCartActivity::class.java).apply {
             putExtra("req_create_booking", createBooking)
             putExtra("product", product)
 
-            startActivityForResult(this, BookingActivity.REQ_CREATE_BOOKING)
+            startActivityForResult(this, BookingCartActivity.REQ_CREATE_BOOKING)
         }
     }
 
@@ -214,8 +213,8 @@ class ProductDetailActivity : BaseRAGActivity<ProductDetailContract.Presenter>()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == BookingActivity.REQ_CREATE_BOOKING) {
-            if(resultCode == BookingActivity.RES_BOOKING_CREATED) {
+        if(requestCode == BookingCartActivity.REQ_CREATE_BOOKING) {
+            if(resultCode == BookingCartActivity.RES_BOOKING_CREATED) {
                 presenter.onBookingCreated()
             }
         } else if(requestCode == REQ_VIEW_PRODUCT_DETAIL) {
