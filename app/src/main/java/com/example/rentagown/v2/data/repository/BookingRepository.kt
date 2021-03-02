@@ -22,6 +22,10 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.createBooking(createBooking)
     }
 
+    override fun cancelBooking(transactionId: String): Single<BaseResp<Booking>> {
+        return remoteRepository.cancelBooking(transactionId)
+    }
+
     override fun getMyBookings(): Single<BasePagingResp<Booking>> {
         return remoteRepository.getMyBookings()
     }

@@ -294,7 +294,17 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:textAllCaps="false"
+                android:text="@string/btn_cancel_transaction"
+                android:textSize="@dimen/font_md"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

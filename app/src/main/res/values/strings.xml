@@ -367,18 +367,21 @@
     <string name="btn_add_payment_method">Add Payment Method</string>
     <string name="btn_review_booking">Review</string>
     <string name="btn_confirm_payment">Confirmation</string>
+    <string name="btn_cancel_transaction">Cancel Transaction</string>
 
     <string name="err_booking_date_not_valid">Booking date not valid…</string>
     <string name="err_not_selected_any_address">Not selected any address yet…</string>
     <string name="err_not_selected_any_payment_type">Not selected any payment type yet…</string>
     <string name="err_not_selected_any_payment_method">Not selected any payment method yet…</string>
     <string name="err_booking_not_found">Booking data not found…</string>
+    <string name="err_invoice_not_found">Invoice data not found…</string>
     <string name="err_product_not_found">Product not found…</string>
     <string name="err_source_bank_name_empty">Bank name cannot be empty…</string>
     <string name="err_source_acc_number_empty">Account number cannot be empty…</string>
     <string name="err_source_acc_name_empty">Account name cannot be empty…</string>
     <string name="err_payment_amount_empty">Payment amount cannot be empty…</string>
 
+    <string name="msg_success_cancel_booking">Success cancel transaction</string>
     <string name="msg_success_review_booking">Success review booking, thank you for your review…</string>
 
 

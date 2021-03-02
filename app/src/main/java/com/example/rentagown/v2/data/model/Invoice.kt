@@ -126,7 +126,16 @@ data class Invoice(
     @SerializedName("bookingdetails")
     val bookingDetail: BookingDetail? = null,
 
-) : BaseModel(), Parcelable {
+    @SerializedName("created_at")
+    val createdAt: String? = null,
+
+    @SerializedName("updated_at")
+    val updatedAt: String? = null,
+
+    @SerializedName("deleted_at")
+    val deletedAt: String? = null,
+
+) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
@@ -167,7 +176,10 @@ data class Invoice(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readParcelable(BookingDetail::class.java.classLoader)) {
+            parcel.readParcelable(BookingDetail::class.java.classLoader),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -211,6 +223,9 @@ data class Invoice(
         parcel.writeString(ratingId)
         parcel.writeString(fcmId)
         parcel.writeParcelable(bookingDetail, flags)
+        parcel.writeString(createdAt)
+        parcel.writeString(updatedAt)
+        parcel.writeString(deletedAt)
     }
 
     override fun describeContents(): Int {
@@ -226,4 +241,5 @@ data class Invoice(
             return arrayOfNulls(size)
         }
     }
+
 }

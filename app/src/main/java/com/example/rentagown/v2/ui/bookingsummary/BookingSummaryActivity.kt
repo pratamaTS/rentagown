@@ -10,6 +10,9 @@ import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGActivity
 import com.example.rentagown.v2.data.model.Booking
+import com.example.rentagown.v2.data.network.RAGApi
+import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
+import com.example.rentagown.v2.data.repository.RepositoryLocator
 import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.util.Utils
@@ -33,11 +36,16 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     private lateinit var tvTotalPrice: TextView
     private lateinit var tvPaymentType: TextView
 
+    private lateinit var btnCancelTransaction: Button
     private lateinit var btnConfirmPayment: Button
     private lateinit var btnBackToHome: Button
 
     override fun init() {
-        presenter = BookingSummaryPresenter()
+        presenter = BookingSummaryPresenter(RepositoryLocator
+                .getInstance(RemoteRepositoryLocator
+                        .getInstance(RAGApi
+                                .apiService(this)))
+                .bookingRepository)
     }
 
     override fun setupWidgets() {
@@ -54,9 +62,11 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         tvTotalPrice = findViewById(R.id.tv_total_price)
         tvPaymentType = findViewById(R.id.tv_payment_type)
 
+        btnCancelTransaction = findViewById(R.id.btn_cancel_transaction)
         btnConfirmPayment = findViewById(R.id.btn_confirm_payment)
         btnBackToHome = findViewById(R.id.btn_back_to_home)
 
+        btnCancelTransaction.setOnClickListener(this)
         btnConfirmPayment.setOnClickListener(this)
         btnBackToHome.setOnClickListener(this)
     }
@@ -91,6 +101,10 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
 
     override fun getBookingData(): Booking? = intent.getParcelableExtra("booking")
 
+    override fun showMsgSuccessCancelBooking() {
+        showMessage(getString(R.string.msg_success_cancel_booking))
+    }
+
     override fun showMsgBookingNotFound() {
         showMessage(getString(R.string.err_booking_not_found))
     }
@@ -106,6 +120,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         when (v?.id) {
             R.id.btn_confirm_payment -> presenter.onBtnConfirmPaymentClicked()
             R.id.btn_back_to_home -> presenter.onBtnBackToHomeClicked()
+            R.id.btn_cancel_transaction -> presenter.onBtnCancelTransactionClicked()
         }
     }
 

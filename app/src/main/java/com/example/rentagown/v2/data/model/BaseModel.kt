@@ -11,6 +11,5 @@ open class BaseModel(
 
     @SerializedName("deleted_at")
     val deletedAt: String? = null,
+
 )
-
-

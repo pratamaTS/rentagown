@@ -45,6 +45,9 @@ interface RAGApiService {
     @POST("booking")
     fun createBooking(@Body createBooking: ReqCreateBooking): Single<BaseResp<Booking>>
 
+    @PUT("booking/cancel/{transactionId}")
+    fun cancelBooking(@Path("transactionId") transactionId: String, @Body cancelBooking: ReqCancelBooking): Single<BaseResp<Booking>>
+
     @GET("booking/mybooking")
     fun getMyBookings(): Single<BasePagingResp<Booking>>
 

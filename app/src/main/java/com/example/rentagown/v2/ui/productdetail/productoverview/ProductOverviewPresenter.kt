@@ -1,9 +1,5 @@
 package com.example.rentagown.v2.ui.productdetail.productoverview
 
-import com.example.rentagown.Body.WishlistBody
-import com.example.rentagown.Connection.Interface.AddWishlistInterface
-import com.example.rentagown.Connection.Presenter.AddWishlistPresenter
-import com.example.rentagown.Response.CreateWishlist.DataAddWishlist
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.model.Product
 import com.example.rentagown.v2.data.source.ProductDataSource

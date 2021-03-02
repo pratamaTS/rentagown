@@ -12,6 +12,7 @@ interface BookingSummaryContract {
         fun setDataBookingToView(booking: Booking)
         fun getBookingData(): Booking?
 
+        fun showMsgSuccessCancelBooking()
         fun showMsgBookingNotFound()
         fun navigateToBookingSuccess()
 
@@ -21,6 +22,7 @@ interface BookingSummaryContract {
 
         fun onBtnConfirmPaymentClicked()
         fun onBtnBackToHomeClicked()
+        fun onBtnCancelTransactionClicked()
         fun onPaymentConfirmed(booking: Booking?)
 
     }
