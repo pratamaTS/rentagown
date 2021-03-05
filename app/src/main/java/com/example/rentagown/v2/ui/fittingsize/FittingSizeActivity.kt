@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Lifecycle
 import com.example.rentagown.R
@@ -104,7 +105,19 @@ class FittingSizeActivity : BaseRAGActivity<FittingSizeContract.Presenter>(), Fi
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_show_body_template -> presenter.onBtnShowBodyTemplateClicked()
-            R.id.btn_submit_fitting -> presenter.onBtnSubmitFittingClicked()
+            R.id.btn_submit_fitting -> {
+                if(etBustSize.text.length == 0){
+                    Toast.makeText(this, "Bust size cannot be empty", Toast.LENGTH_SHORT).show()
+                }else if(etArmHoleSize.text.length == 0){
+                    Toast.makeText(this, "Arm hole size cannot be empty", Toast.LENGTH_SHORT).show()
+                }else if(etWaistSize.text.length == 0){
+                    Toast.makeText(this, "Waist size cannot be empty", Toast.LENGTH_SHORT).show()
+                }else if(etHipSize.text.length == 0){
+                    Toast.makeText(this, "Hip size cannot be empty", Toast.LENGTH_SHORT).show()
+                }else{
+                    presenter.onBtnSubmitFittingClicked()
+                }
+            }
         }
     }
 

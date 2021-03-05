@@ -45,47 +45,49 @@ class OnBoardingActivity : AppCompatActivity() {
             token = it
         }
 
+        showSystemUI()
+
         //Fill list screen
         mList.add(
-            OnBoardingItem(
-                "Prewedding",
-                "The chapter where the solitude ends and togetherness begins is about to start. " +
-                        "Welcoming this chapter with special dress, sincere smiles, and loving memories.",
-                R.drawable.bg_prewedding
-            )
+                OnBoardingItem(
+                        "Prewedding",
+                        "The chapter where the solitude ends and togetherness begins is about to start. " +
+                                "Welcoming this chapter with special dress, sincere smiles, and loving memories.",
+                        R.drawable.bg_prewedding
+                )
         )
 
         mList.add(
-            OnBoardingItem(
-                "Wedding",
-                "We are here to help you find the perfect dress for the day that you will cherish for the rest of your life.",
-                R.drawable.bg_wedding
-            )
+                OnBoardingItem(
+                        "Wedding",
+                        "We are here to help you find the perfect dress for the day that you will cherish for the rest of your life.",
+                        R.drawable.bg_wedding
+                )
         )
 
         mList.add(
-            OnBoardingItem(
-                "Family",
-                "Nothing is more important than making a wonderful memory with your loved ones. " +
-                        "Find your stunning dress to make it even memorable.",
-                R.drawable.bg_family
-            )
+                OnBoardingItem(
+                        "Family",
+                        "Nothing is more important than making a wonderful memory with your loved ones. " +
+                                "Find your stunning dress to make it even memorable.",
+                        R.drawable.bg_family
+                )
         )
 
         mList.add(
-            OnBoardingItem(
-                "Maternity",
-                "Wrapped yourself in magical dresses to welcome a grand adventure of your life.",
-                R.drawable.bg_maternity
-            )
+                OnBoardingItem(
+                        "Maternity",
+                        "Wrapped yourself in magical dresses to welcome a grand adventure of your life.",
+                        R.drawable.bg_maternity
+                )
         )
 
         mList.add(
-            OnBoardingItem(
-                "A more flexible way to rent",
-                "We want to give our customers the best experience, and now we have made renting a dress way simpler and easier. ",
-                R.drawable.bg_getstarted
-            )
+                OnBoardingItem(
+                        "A more flexible way to rent",
+                        "We want to give our customers the best experience, and now we have made renting a dress way simpler and easier. ",
+                        R.drawable.bg_getstarted
+                )
         )
 
 
@@ -144,6 +146,13 @@ class OnBoardingActivity : AppCompatActivity() {
         })
     }
 
+    private fun showSystemUI() {
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
     private fun finishOnboarding() {
         // Get the shared preferences
         val preferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
@@ -184,5 +193,26 @@ class OnBoardingActivity : AppCompatActivity() {
 
         //TODO: ADD an animation the get started button
         btnGetStarted!!.animation = btnAnim
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemUI()
+        }
+    }
+
+    private fun hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 }

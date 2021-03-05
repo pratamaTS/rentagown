@@ -50,7 +50,9 @@
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/poppins_medium"
             android:button="@null"
+            android:drawableStart="@drawable/ic_deposit_booking"
             android:drawableEnd="@drawable/custom_radio_button"
+            android:drawablePadding="16dp"
             android:paddingStart="@dimen/padding_md"
             android:paddingEnd="@dimen/padding_md"/>
 
@@ -64,6 +66,8 @@
             android:fontFamily="@font/poppins_medium"
             android:button="@null"
             android:drawableEnd="@drawable/custom_radio_button"
+            android:drawableStart="@drawable/ic_full_booking"
+            android:drawablePadding="16dp"
             android:paddingStart="@dimen/padding_md"
             android:paddingEnd="@dimen/padding_md"/>
 

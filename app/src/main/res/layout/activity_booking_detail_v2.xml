@@ -133,7 +133,7 @@
                         android:id="@+id/tv_booking_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_booking_status_on_going"
+                        android:background="@drawable/bg_status_detail_booking"
                         android:ellipsize="end"
                         android:fontFamily="@font/poppins_semi_bold"
                         android:layout_marginTop="@dimen/margin_xsm"
@@ -431,10 +431,28 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/btn_whatsapp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="@dimen/margin_md"
+        android:background="@drawable/bg_button_wa_outlined"
+        android:clickable="true"
+        android:contentDescription="@string/todo"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_whatsapp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_action"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_confirm_payment"
+        tools:ignore="UnusedAttribute" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_action"
         style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_margin="@dimen/margin_md"
         android:background="@drawable/bg_button_rounded_gold"
@@ -445,10 +463,11 @@
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
+        android:text="@string/btn_fitting_size_detail"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_whatsapp"
         app:layout_constraintTop_toBottomOf="@id/container_confirm_payment"
         tools:ignore="UnusedAttribute" />
 

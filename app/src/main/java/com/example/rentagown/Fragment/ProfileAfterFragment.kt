@@ -44,7 +44,6 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
 
         //INIT VIEW
         invoiceHistory = v.findViewById(R.id.menu_invoice_history)
-        transactionStatus = v.findViewById(R.id.menu_transaction_status)
         settings = v.findViewById(R.id.menu_setting)
         helpCenter = v.findViewById(R.id.menu_help_center)
         privacyPolicy = v.findViewById(R.id.menu_privacy_policy)
@@ -58,6 +57,9 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
 
         //SET LISTENER
         invoiceHistory!!.setOnClickListener(this@ProfileAfterFragment)
+        helpCenter!!.setOnClickListener(this)
+        privacyPolicy!!.setOnClickListener(this)
+        termsConditions!!.setOnClickListener(this)
         settings!!.setOnClickListener(this@ProfileAfterFragment)
         signOut!!.setOnClickListener(this@ProfileAfterFragment)
         return v
@@ -75,7 +77,6 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
                 startActivity(invoiceHistory)
             }
             R.id.menu_setting -> {
-                Toast.makeText(activity!!, "Settings", Toast.LENGTH_SHORT).show()
                 val settings = Intent(activity, SettingActivity::class.java)
                 startActivity(settings)
             }
@@ -86,6 +87,18 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+            }
+            R.id.menu_help_center -> {
+                val helpCenterActivity = Intent(activity, HelpCenterActivity::class.java)
+                startActivity(helpCenterActivity)
+            }
+            R.id.menu_privacy_policy -> {
+                val privacyPolicyActivity = Intent(activity, PrivacyPolicyActivity::class.java)
+                startActivity(privacyPolicyActivity)
+            }
+            R.id.menu_terms_condition -> {
+                val termsConditionActivity = Intent(activity, TermsConditionActivity::class.java)
+                startActivity(termsConditionActivity)
             }
         }
     }

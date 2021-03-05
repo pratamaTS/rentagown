@@ -193,6 +193,7 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
         tvProductName.text = product.productName
 
         when(product.isWishList){
+            0 -> btnLike.setBackgroundResource(R.drawable.btn_like_selected)
             1 -> btnLike.setBackgroundResource(R.drawable.ic_like_gold_filled)
         }
     }
@@ -247,7 +248,17 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
     }
 
     override fun onSuccessAddWishlist(dataAddWishlist: DataAddWishlist) {
-        btnLike.setBackgroundResource(R.drawable.ic_like_gold_filled)
+        when(dataAddWishlist.isWishlist){
+            0 -> {
+                btnLike.setBackgroundResource(R.drawable.btn_like_selected)
+                Toast.makeText(context, "Remove from wishlist", Toast.LENGTH_SHORT).show()
+            }
+            1 -> {
+                btnLike.setBackgroundResource(R.drawable.ic_like_gold_filled)
+                Toast.makeText(context, "Added to wishlist", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     override fun onErrorAddWishlist(msg: String) {

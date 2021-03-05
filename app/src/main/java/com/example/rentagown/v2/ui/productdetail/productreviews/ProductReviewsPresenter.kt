@@ -10,7 +10,7 @@ class ProductReviewsPresenter(private val repository: ProductDataSource) : BaseR
     override fun loadProductReviews(productId: String) {
 
         view?.showLoadingContent(true)
-        safeCall(repository.getProductRatings(productId), object : Listener<List<ProductReview>> {
+        safeCallPaging(repository.getProductRatings(productId), object : Listener<List<ProductReview>> {
             override fun onSuccess(data: List<ProductReview>?) {
                 view?.showProductReviews(data ?: listOf())
             }

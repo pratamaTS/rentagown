@@ -3,6 +3,7 @@ package com.example.rentagown.v2.ui.confirmpayment
 import android.content.Intent
 import android.view.View
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.TextView
 import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGActivity
@@ -28,6 +29,7 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
     override lateinit var presenter: ConfirmPaymentContract.Presenter
 
     private lateinit var tvConfirmationAmount: TextView
+//    private lateinit var spBankName: Spinner
     private lateinit var etBankName: TextView
     private lateinit var etAccountNumber: TextView
     private lateinit var etAccountName: TextView
@@ -49,6 +51,7 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
         super.setupWidgets()
 
         tvConfirmationAmount = findViewById(R.id.tv_confirmation_amount)
+//        spBankName = findViewById(R.id.spinner_bank_name)
         etBankName = findViewById(R.id.et_bank_name)
         etAccountNumber = findViewById(R.id.et_account_number)
         etAccountName = findViewById(R.id.et_account_name)

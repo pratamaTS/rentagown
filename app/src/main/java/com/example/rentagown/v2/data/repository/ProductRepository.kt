@@ -17,7 +17,7 @@ class ProductRepository(private val remoteRepository: ProductDataSource) : Produ
         return remoteRepository.getProductDetail(productId)
     }
 
-    override fun getProductRatings(productId: String): Single<BaseResp<List<ProductReview>>> {
+    override fun getProductRatings(productId: String): Single<BasePagingResp<ProductReview>> {
         return remoteRepository.getProductRatings(productId)
     }
 

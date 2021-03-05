@@ -10,6 +10,6 @@
         android:id="@+id/ssiv_body_template"
         android:layout_width="400dp"
         android:layout_height="300dp"
-        app:src="@drawable/body_size_template"/>
+        app:src="@drawable/image_template"/>
 
 </FrameLayout>

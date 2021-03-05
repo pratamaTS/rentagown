@@ -16,7 +16,7 @@
     <string name="price_booking">Price :</string>
     <string name="dp_paid_booking">DP Paid :</string>
     <string name="remaining_bills_booking">Remaining Bills :</string>
-    <string name="btn_fitting_size">Fitting Size</string>
+    <string name="btn_fitting_size">Fitting Size Gown</string>
 
     <!-- item product slider-->
     <string name="btn_book_now">BOOK NOW</string>
@@ -35,7 +35,9 @@
 
     <!-- fragment cart -->
     <string name="appbar_cart">Cart</string>
-    <string name="info_cart">Maximum return of goods is 7 days after the date of booking, which is #returnDeadLine (Office Hours).</string>
+    <string name="info_cart">Maximum return of goods is 7 days from start date of booking.
+        25% charge will be applied for 14 days booking from start date of booking. 50% charge will be
+        applied for 21 days booking from start date.</string>
     <string name="tv_title_total_price">Total Price</string>
     <string name="tv_total_price">Rp. 0</string>
     <string name="btn_checkout_cart">Checkout</string>
@@ -78,6 +80,15 @@
     <string name="catalog_updates">Catalog Updates</string>
     <string name="promo">Promo</string>
     <string name="transactions">Transactions</string>
+
+    <!-- activity help center -->
+    <string name="appbar_help_center">Help Center</string>
+
+    <!-- activity privacy policy -->
+    <string name="appbar_privacy_policy">Privacy Policy</string>
+
+    <!-- activity terms condition -->
+    <string name="appbar_terms_condition">Terms and Condition</string>
 
     <!-- activity edit profile -->
     <string name="appbar_edit_profile">Edit Profile</string>
@@ -172,9 +183,10 @@
     <string name="name_view_product">Selina Colourblock Camisole Dress</string>
     <string name="btn_booking_now">Book Now</string>
     <string name="btn_see_all_review">See All</string>
-    <string name="btn_see_no_available_dates">See No Available Dates</string>
+    <string name="btn_see_no_available_dates">See Unavailable Dates</string>
     <string name="title_start_date">START DATE</string>
     <string name="title_end_date">END DATE</string>
+    <string name="btn_add_to_wishlist">Add to Wishlist</string>
 
     <!-- activity your booking -->
     <string name="appbar_your_booking">Your Booking</string>
@@ -225,7 +237,8 @@
     <!-- activity form confirmation -->
     <string name="appbar_confirmation">Confirmation</string>
     <string name="please_fill_out_this_page_after_performing_bank_transfer">Please fill out this page after performing bank transfer</string>
-    <string name="please_make_a_payment_transfer_to_the_following_account_and_fill_in_the_payment_confirmation_document_so_that_we_can_process_your_purchase">Please make a payment transfer to the following account and fill in the payment confirmation document so that we can process your purchase</string>
+    <string name="please_make_a_payment_transfer_to_the_following_account_and_fill_in_the_payment_confirmation_document_so_that_we_can_process_your_purchase">Please fill-in payment confirmation
+                below so that we can process your booking.</string>
     <string name="total_price">Total Price</string>
     <string name="last_2_digit_is_unique_code_for_bank_transfer_confirm">Last 2 digit is unique code for bank transfer</string>
     <string name="hint_your_bank_name">Your Bank Name</string>
@@ -255,16 +268,16 @@
     <string name="title_account_number_invoice">Account Number</string>
 
     <!-- activity fitting size -->
-    <string name="appbar_size_gown">Size Gown</string>
+    <string name="appbar_size_gown">Fitting Size Gown</string>
     <string name="btn_template">Template</string>
     <string name="et_bust">Bust</string>
     <string name="et_arm_hole">Arm Hole</string>
     <string name="et_waist">Waist</string>
     <string name="et_hip">Hip</string>
     <string name="title_note">Note :</string>
-    <string name="semua_ukuran_dalam_sentimeter_cm">- Semua ukuran dalam sentimeter (cm)</string>
-    <string name="ukur_secara_melingkar">- Ukur secara melingkar</string>
-    <string name="btn_custom_size">Custom Size</string>
+    <string name="semua_ukuran_dalam_sentimeter_cm">All sizes are in centimeter (cm)</string>
+    <string name="ukur_secara_melingkar">Measure in circle</string>
+    <string name="btn_custom_size">Submit</string>
 
     <!-- activity history booking -->
     <string name="appbar_history">History</string>
@@ -283,7 +296,7 @@
     <string name="review_helps_other_user">Review helps other user</string>
     <string name="title_reviews_comment">Reviews</string>
     <string name="et_hint_comments">Comments</string>
-    <string name="notice_1000_characters_left">1000 characters left</string>
+    <string name="notice_1000_charactrs_left">1000 characters left</string>
     <string name="recommed_item">Recommed item ?</string>
     <string name="rd_yes">Yes</string>
     <string name="rd_no">No</string>
@@ -299,8 +312,8 @@
     <string name="title_total_discount_detail_booking">Total Discount</string>
     <string name="title_dp_paid_detail_booking">Deposit Booking Paid</string>
     <string name="title_remaining_bills_detail_booking">Remaining Bills</string>
-    <string name="pay_after_service">Pay after service</string>
-    <string name="btn_pay">Pay</string>
+    <string name="pay_after_service">Down payment/Repayment</string>
+    <string name="btn_pay">Confirm</string>
     <string name="btn_fitting_size_detail">Fitting Size</string>
 
     <!-- activity transaction status -->
@@ -338,7 +351,7 @@
     <string name="appbar_new_gown">New Gown</string>
 
     <!-- activity no available date -->
-    <string name="appbar_no_available_date">No Available Date</string>
+    <string name="appbar_no_available_date">Unavailable Date</string>
     <string name="no_available_dates">No available dates</string>
 
 
@@ -356,14 +369,14 @@
     <string name="lbl_pick_date">Pick Date</string>
     <string name="lbl_dates_not_available">Not available</string>
     <string name="lbl_unit_cm">cm</string>
-    <string name="lbl_similar_category">Similar Category</string>
+    <string name="lbl_similar_category">Similar Product</string>
     <string name="lbl_one_day_service">One day service</string>
     <string name="lbl_characters_left">characters left</string>
     <string name="lbl_500_characters_left">500 characters left</string>
     <string name="lbl_no_invoice">No invoice found</string>
 
 
-    <string name="btn_see_template">See Template</string>
+    <string name="btn_see_template">Fitting Size Guidance</string>
     <string name="btn_add_payment_method">Add Payment Method</string>
     <string name="btn_review_booking">Review</string>
     <string name="btn_confirm_payment">Confirmation</string>

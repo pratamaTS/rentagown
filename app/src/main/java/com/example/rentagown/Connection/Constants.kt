@@ -19,6 +19,6 @@ object Constants {
     const val GET_BANK = "api/v/1/bank/findall"
     const val ADD_WISHLIST = "api/v/1/wishlist"
     const val GET_WISHLIST = "api/v/1/wishlist/findid"
-    const val GET_NOTIFICATION = "api/v/1/booking/notif/1"
+    const val GET_NOTIFICATION = "api/v/1/booking/notif/2"
     const val GET_NOTIF_PROMO = "api/v/1/promo/notif"
 }

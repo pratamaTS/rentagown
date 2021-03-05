@@ -134,7 +134,7 @@
                                 android:paddingStart="12dp"
                                 android:paddingEnd="12dp"
                                 android:layout_marginEnd="16dp"
-                                android:background="@drawable/bg_booking_status_on_going"
+                                android:background="@drawable/bg_status_detail_booking"
                                 android:text="On-Progress"
                                 android:textSize="12sp"
                                 android:textColor="@color/colorSecondary"

@@ -16,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.HelpCenterActivity"></activity>
+        <activity android:name=".Activity.PrivacyPolicyActivity"></activity>
+        <activity android:name=".Activity.TermsConditionActivity"></activity>
+        <activity android:name=".v2.ui.productdetail.viewphoto.FullScreenActivity"></activity>
         <activity android:name=".Activity.SeeNoAvailableDateActivity"/>
         <activity
             android:name=".Activity.SearchViewActivity"

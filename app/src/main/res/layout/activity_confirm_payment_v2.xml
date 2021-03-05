@@ -66,20 +66,6 @@
                 android:paddingBottom="50dp">
 
                 <TextView
-                    android:id="@+id/tv_hint1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_md"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/please_fill_out_this_page_after_performing_bank_transfer"
-                    android:textColor="@color/colorGray"
-                    android:textSize="@dimen/font_sm"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                     />
-
-                <TextView
                     android:id="@+id/tv_hint2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -91,9 +77,9 @@
                     android:text="@string/please_make_a_payment_transfer_to_the_following_account_and_fill_in_the_payment_confirmation_document_so_that_we_can_process_your_purchase"
                     android:textColor="@color/colorGray"
                     android:textSize="@dimen/font_sm"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_hint1"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <LinearLayout
                     android:id="@+id/container_booking_amount"
@@ -154,10 +140,36 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/container_spinner_bank_name"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/style_spinner">-->
+
+<!--                        <Spinner-->
+<!--                            android:id="@+id/spinner_bank_name"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="56dp"-->
+<!--                            android:layout_marginStart="16dp"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:spinnerMode="dropdown"-->
+<!--                            android:background="@android:color/transparent"/>-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="16dp"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@drawable/ic_round_arrow_drop_down" />-->
+
+<!--                    </RelativeLayout>-->
                     <EditText
                         android:id="@+id/et_bank_name"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/margin_md"
                         android:autofillHints=""
                         android:background="@drawable/bg_edit_text_filled"
                         android:fontFamily="@font/poppins_semi_bold"
@@ -227,15 +239,16 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_confirm"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
+                android:background="@drawable/bg_button_rounded_gold"
                 android:layout_height="56dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="@string/btn_confirm"
                 android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 app:strokeWidth="1dp"
                 app:cornerRadius="28dp"

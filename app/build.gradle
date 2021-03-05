@@ -145,6 +145,7 @@ dependencies {
     implementation 'com.uber.autodispose2:autodispose-android:2.0.0'
 
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 
 }

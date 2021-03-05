@@ -324,7 +324,7 @@
                             android:id="@+id/see_template"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/body_size_template"
+                            android:src="@drawable/image_template"
                             tools:ignore="ContentDescription" />
                     </com.google.android.material.card.MaterialCardView>
                     <TextView

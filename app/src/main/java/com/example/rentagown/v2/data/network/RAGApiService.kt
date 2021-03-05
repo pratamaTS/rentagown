@@ -66,4 +66,7 @@ interface RAGApiService {
     @GET("booking/invoice")
     fun getMyInvoices(): Single<BasePagingResp<Invoice>>
 
+    @GET("rating/{productId}")
+    fun getProductRatings(@Path("productId") productId: String): Single<BasePagingResp<ProductReview>>
+
 }

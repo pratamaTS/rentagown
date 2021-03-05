@@ -10,6 +10,6 @@ interface ProductDataSource {
 
     fun getSimilarProducts(categoryName: String): Single<BasePagingResp<Product>>
     fun getProductDetail(productId: String): Single<BaseResp<Product>>
-    fun getProductRatings(productId: String): Single<BaseResp<List<ProductReview>>>
+    fun getProductRatings(productId: String): Single<BasePagingResp<ProductReview>>
 
 }

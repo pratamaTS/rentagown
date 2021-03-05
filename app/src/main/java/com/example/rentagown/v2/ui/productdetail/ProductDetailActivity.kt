@@ -103,7 +103,7 @@ class ProductDetailActivity : BaseRAGActivity<ProductDetailContract.Presenter>()
             }
         }.attach()
 
-        productImageAdapter = ProductImageAdapter(arrayListOf())
+        productImageAdapter = ProductImageAdapter(this, getSelectedProductId().toString(), arrayListOf())
         svProductImages.setSliderAdapter(productImageAdapter)
     }
 

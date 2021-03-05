@@ -31,7 +31,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         //INIT VIEW
         invoiceHistory = v.findViewById(R.id.menu_invoice_history)
-        transactionStatus = v.findViewById(R.id.menu_transaction_status)
         settings = v.findViewById(R.id.menu_setting)
         helpCenter = v.findViewById(R.id.menu_help_center)
         privacyPolicy = v.findViewById(R.id.menu_privacy_policy)
@@ -54,11 +53,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             R.id.menu_invoice_history -> {
                 val invoiceHistory = Intent(activity, MyInvoicesActivity::class.java)
                 startActivity(invoiceHistory)
-            }
-            R.id.menu_transaction_status -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!, "Transaction Status", Toast.LENGTH_SHORT).show()
-                val transactionStatus = Intent(activity, TransactionStatusActivity::class.java)
-                startActivity(transactionStatus)
             }
             R.id.menu_setting -> {
                 Toast.makeText(Objects.requireNonNull(activity)!!, "Settings", Toast.LENGTH_SHORT).show()

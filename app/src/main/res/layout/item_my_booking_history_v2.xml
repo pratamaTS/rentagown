@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/icon_sm"
                 android:contentDescription="@string/todo"
                 android:layout_marginStart="@dimen/margin_md"
-                android:src="@drawable/ic_bag"
+                android:src="@drawable/ic_bag_history"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -75,7 +75,7 @@
                 android:id="@+id/tv_status_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_booking_status_cancelled"
+                android:background="@drawable/bg_status_history"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:paddingStart="12dp"
                 android:paddingTop="@dimen/padding_sm"

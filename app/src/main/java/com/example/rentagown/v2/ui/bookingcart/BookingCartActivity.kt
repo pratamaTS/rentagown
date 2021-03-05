@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.bookingcart
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.view.View
@@ -36,6 +37,7 @@ class BookingCartActivity : BaseRAGActivity<BookingCartContract.Presenter>(), Bo
     private lateinit var tvProductCategory: TextView
     private lateinit var tvProductPrice: TextView
     private lateinit var tvSpecialTreatment: TextView
+    private lateinit var tvTotalPrice: TextView
     private lateinit var btnDelete: ImageButton
 
     private lateinit var tvCartInfo: TextView
@@ -60,6 +62,7 @@ class BookingCartActivity : BaseRAGActivity<BookingCartContract.Presenter>(), Bo
         tvProductCategory = findViewById(R.id.tv_product_category)
         tvProductPrice = findViewById(R.id.tv_product_price)
         tvSpecialTreatment = findViewById(R.id.tv_special_treatment)
+        tvTotalPrice = findViewById(R.id.tv_total_price_cart)
         btnDelete = findViewById(R.id.btn_delete)
 
         tvCartInfo = findViewById(R.id.tv_cart_info)
@@ -84,6 +87,7 @@ class BookingCartActivity : BaseRAGActivity<BookingCartContract.Presenter>(), Bo
         tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(createBooking.startDate, createBooking.endDate, Utils.DATE_FORMAT_CREATE_BOOKING)
         tvProductCategory.text = product.productCategoryName
         tvProductPrice.text = Utils.formatMoney(product.finalPrice)
+        tvTotalPrice.text = Utils.formatMoney(product.finalPrice)
         tvSpecialTreatment.visibility = if(createBooking.oneDayService == 1) View.VISIBLE else View.INVISIBLE
 
         val endBooking = Utils.parseDate(createBooking.endDate, Utils.DATE_FORMAT_CREATE_BOOKING)
@@ -130,7 +134,21 @@ class BookingCartActivity : BaseRAGActivity<BookingCartContract.Presenter>(), Bo
     override fun onClick(v: View?) {
         when (v?.id) {
 
-            R.id.btn_delete -> presenter.onBtnDeleteClicked()
+            R.id.btn_delete -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Are you sure to remove the item ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { dialog, id ->
+                            // Delete selected note from database
+                            presenter.onBtnDeleteClicked()
+                        }
+                        .setNegativeButton("No") { dialog, id ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                val alert = builder.create()
+                alert.show()
+            }
             R.id.btn_whatsapp -> presenter.onBtnWhatsappClicked()
             R.id.btn_pay -> presenter.onBtnPayClicked()
 

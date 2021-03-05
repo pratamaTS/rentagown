@@ -10,11 +10,9 @@ import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.akexorcist.roundcornerprogressbar.CenteredRoundCornerProgressBar
 import com.akexorcist.roundcornerprogressbar.indeterminate.IndeterminateCenteredRoundCornerProgressBar
 import com.example.rentagown.Activity.*
 import com.example.rentagown.Adapter.*
@@ -70,8 +68,8 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     private var selectedCategoryMenu: DataProductCategory? = null
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
@@ -105,13 +103,18 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
         getData()
 
+        searchView!!.setOnSearchClickListener {
+            val search = Intent(activity, SearchViewActivity::class.java)
+            startActivity(search)
+        }
+
         imWishlist!!.setOnClickListener(this@HomeFragment)
         imNotification!!.setOnClickListener(this@HomeFragment)
         btnSeeAllCategory!!.setOnClickListener(this@HomeFragment)
         btnSeeAllPromo!!.setOnClickListener(this@HomeFragment)
         btnSeeAllFavoriteGown!!.setOnClickListener(this@HomeFragment)
         btnSeeAllNewGown!!.setOnClickListener(this@HomeFragment)
-        searchView!!.setOnClickListener(this@HomeFragment)
+
 
         return view
     }
@@ -126,10 +129,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.search_view -> {
-                val search = Intent(activity, SearchViewActivity::class.java)
-                startActivity(search)
-            }
             R.id.im_wishlist -> {
                 val wishlist = Intent(activity, WishlistActivity::class.java)
                 startActivity(wishlist)
@@ -176,11 +175,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Bind Item to Adapter
             adapterMenu = CategoryMenuAdapter(this, categoryMenuList!!, this)
             rvTitleMenu!!.setLayoutManager(
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
+                    LinearLayoutManager(
+                            context,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                    )
             )
             rvTitleMenu!!.setAdapter(adapterMenu)
             rvTitleMenu!!.addItemDecoration(ItemDecorationSlider(16))
@@ -212,11 +211,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             rvSliderMenu!!.visibility = View.VISIBLE
             adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(it) }
             rvSliderMenu!!.setLayoutManager(
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
+                    LinearLayoutManager(
+                            context,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                    )
             )
             rvSliderMenu!!.setAdapter(adapterMainMenu!!)
             if (itemDecorSet == false) {
@@ -242,13 +241,13 @@ class HomeFragment : Fragment(), View.OnClickListener,
         rvSliderNewGown!!.visibility = View.VISIBLE
 
         //Setup Recycler View New Gown
-        adapterNewGown = SliderNewGownAdapter(newGownList ?: arrayListOf())
+        adapterNewGown = SliderNewGownAdapter(dataNewGown ?: arrayListOf())
         rvSliderNewGown!!.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
+                LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
         )
         rvSliderNewGown!!.setAdapter(adapterNewGown)
     }
@@ -268,11 +267,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Setup Recycler View Favorite Gown
             adapterFavoriteGown = SliderFavoriteGownAdapter(favoriteGownList ?: arrayListOf())
             rvSliderFavoriteGown!!.setLayoutManager(
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
+                    LinearLayoutManager(
+                            context,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                    )
             )
             rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
         } else {
@@ -298,11 +297,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Setup Recycler View Promo
             adapterPromo = SliderPromoAdapter(promoList ?: arrayListOf())
             rvSliderPromo!!.setLayoutManager(
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
+                    LinearLayoutManager(
+                            context,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                    )
             )
 
             rvSliderPromo!!.setAdapter(adapterPromo)
