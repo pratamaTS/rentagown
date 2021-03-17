@@ -45,16 +45,19 @@ interface RAGApiService {
     @POST("booking")
     fun createBooking(@Body createBooking: ReqCreateBooking): Single<BaseResp<Booking>>
 
-    @PUT("booking/cancel/{transactionId}")
-    fun cancelBooking(@Path("transactionId") transactionId: String, @Body cancelBooking: ReqCancelBooking): Single<BaseResp<Booking>>
+    @PUT("booking/usercancel")
+    fun cancelBooking(@Body cancelBooking: ReqCancelBooking): Single<BaseResp<Booking>>
 
     @GET("booking/mybooking")
     fun getMyBookings(): Single<BasePagingResp<Booking>>
 
+    @GET("mstbank/findall")
+    fun getBank(): Single<BasePagingResp<MasterBank>>
+
     @GET("booking/myhistory")
     fun getMyBookingsHistory(): Single<BasePagingResp<Booking>>
 
-    @PUT("booking/updatepayment/{transactionId}")
+    @PUT("booking/update/confirm/{transactionId}")
     fun confirmPayment(@Path("transactionId") transactionId: String, @Body reqConfirmPayment: ReqConfirmPayment): Single<BaseResp<Booking>>
 
     @PUT("booking/updaterepayment/{transactionId}")
@@ -63,8 +66,12 @@ interface RAGApiService {
     @POST("rating")
     fun reviewBooking(@Body createReview: ReqReviewBooking): Single<BaseResp<ProductReview>>
 
-    @GET("booking/invoice")
-    fun getMyInvoices(): Single<BasePagingResp<Invoice>>
+    @GET("invoice/myinvoice")
+    fun getMyInvoices(): Single<BasePagingResp<InvoiceHistory>>
+
+    @GET("invoice/findid/{invoiceId}")
+    fun getInvoiceDetail(@Path("invoiceId") productId: String): Single<BaseResp<Invoice>>
+
 
     @GET("rating/{productId}")
     fun getProductRatings(@Path("productId") productId: String): Single<BasePagingResp<ProductReview>>

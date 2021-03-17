@@ -16,7 +16,7 @@ class DetailProductPresenter(val detailProductInterface: DetailProductInterface)
         map["Host"] = "absdigital.id"
 
         //URL
-        val url: String = "api/v/1/product/findid/" + idProduct
+        val url: String = "api/v/2/product/findid/" + idProduct
 
         //Connect
         NetworkConfig.service()

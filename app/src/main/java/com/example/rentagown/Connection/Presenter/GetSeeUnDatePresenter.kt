@@ -22,7 +22,7 @@ class GetSeeUnDatePresenter(val seeUnDateInterface: GetSeeUnDateInterface) {
         map["Host"] = "absdigital.id"
 
         //URL
-        val url: String = "api/v/1/booking/date/" + idProduct
+        val url: String = "api/v/2/booking/date/" + idProduct
 
         //Connect
         NetworkConfigAfterLogin.service(context)

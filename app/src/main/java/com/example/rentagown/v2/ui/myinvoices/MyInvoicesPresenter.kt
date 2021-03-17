@@ -2,6 +2,7 @@ package com.example.rentagown.v2.ui.myinvoices
 
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.model.Invoice
+import com.example.rentagown.v2.data.model.InvoiceHistory
 import com.example.rentagown.v2.data.source.BookingDataSource
 
 class MyInvoicesPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<MyInvoicesContract.View>(), MyInvoicesContract.Presenter {
@@ -9,8 +10,8 @@ class MyInvoicesPresenter(private val repository: BookingDataSource) : BaseRAGPr
     override fun loadMyInvoices(refreshing: Boolean) {
         if(!refreshing) view?.showLoadingContent(true)
 
-        safeCallPaging(repository.getMyInvoices(), object : Listener<List<Invoice>> {
-            override fun onSuccess(data: List<Invoice>?) {
+        safeCallPaging(repository.getMyInvoices(), object : Listener<List<InvoiceHistory>> {
+            override fun onSuccess(data: List<InvoiceHistory>?) {
                 view?.showContentRefreshing(false)
 
                 val mData = data ?: listOf()
@@ -31,7 +32,7 @@ class MyInvoicesPresenter(private val repository: BookingDataSource) : BaseRAGPr
         loadMyInvoices(true)
     }
 
-    override fun onItemClick(invoice: Invoice) {
+    override fun onItemClick(invoice: InvoiceHistory) {
         view?.navigateToInvoiceDetail(invoice)
     }
 

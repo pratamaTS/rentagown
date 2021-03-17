@@ -40,16 +40,16 @@ android {
             dimension "default"
             applicationIdSuffix = ".dev"
 
-            buildConfigField 'String', 'API_URL', '"http://absdigital.id:5000/api/v/1/"'
-            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:5000"'
+            buildConfigField 'String', 'API_URL', '"http://absdigital.id:55000/api/v/2/"'
+            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:55000"'
 
         }
 
         prod {
             dimension "default"
 
-            buildConfigField 'String', 'API_URL', '"http://absdigital.id:5000/api/v/1/"'
-            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:5000"'
+            buildConfigField 'String', 'API_URL', '"http://absdigital.id:55000/api/v/2/"'
+            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:55000"'
         }
     }
 
@@ -146,6 +146,8 @@ dependencies {
 
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation "com.github.skydoves:powerspinner:1.1.7"
+    implementation("io.coil-kt:coil:1.1.1")
 
 
 }

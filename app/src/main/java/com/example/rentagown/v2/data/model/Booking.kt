@@ -9,10 +9,10 @@ data class Booking (
     @SerializedName("id_transaction")
     val transactionId: String? = null,
 
-    @SerializedName("invoice")
+    @SerializedName("last_payment_invoice")
     val invoice: String? = null,
 
-    @SerializedName("paid_price")
+    @SerializedName("product_final_price")
     val paidPrice: Long? = null,
 
     @SerializedName("id_product")
@@ -21,13 +21,16 @@ data class Booking (
     @SerializedName("product_name")
     val productName: String? = null,
 
-    @SerializedName("path_photo")
+    @SerializedName("product_category")
+    val productCategory: String? = null,
+
+    @SerializedName("product_path_photo")
     val photoPath: String? = null,
 
     @SerializedName("id_user")
     val userId: String? = null,
 
-    @SerializedName("name")
+    @SerializedName("receiver_name")
     val name: String? = null,
 
     @SerializedName("address")
@@ -36,19 +39,19 @@ data class Booking (
     @SerializedName("address_detail")
     val addressDetail: String? = null,
 
-    @SerializedName("bank_name")
+    @SerializedName("bank_dest_name")
     val bankName: String? = null,
 
-    @SerializedName("account_number")
+    @SerializedName("account_dest_number")
     val accountNumber: String? = null,
 
-    @SerializedName("account_name")
+    @SerializedName("account_dest_name")
     val accountName: String? = null,
 
-    @SerializedName("bank_path_photo")
+    @SerializedName("bank_dest_path_photo")
     val bankPathPhoto: String? = null,
 
-    @SerializedName("phone")
+    @SerializedName("receiver_phone")
     val phone: String? = null,
 
     @SerializedName("start_date")
@@ -69,13 +72,22 @@ data class Booking (
     @SerializedName("forfeit")
     val forfeit: Int? = null,
 
-    @SerializedName("payment_method")
-    val paymentMethod: String? = null,
+    @SerializedName("payment_type")
+    val paymentMethod: Int? = null,
+
+    @SerializedName("payment_type_name")
+    val paymentMethodName: String? = null,
+
+    @SerializedName("last_payment_method")
+    val lastPaymentMethod: Int? = null,
+
+    @SerializedName("last_payment_method_name")
+    val lastPaymentMethodName: String? = null,
 
     @SerializedName("status")
     val status: Int? = null,
 
-    @SerializedName("status_transaction")
+    @SerializedName("status_name")
     val statusTransaction: String? = null,
 
     @SerializedName("status_payment")
@@ -84,7 +96,7 @@ data class Booking (
     @SerializedName("remaining_bills")
     val remainingBills: Long? = null,
 
-    @SerializedName("payment_deadline")
+    @SerializedName("last_payment_deadline")
     val paymentDeadline: String? = null,
 
     @SerializedName("payment_bank_name")
@@ -98,6 +110,12 @@ data class Booking (
 
     @SerializedName("payment_amount")
     val paymentAmount: Long? = null,
+
+    @SerializedName("last_payment_amount")
+    val lastPaymentAmount: Long? = null,
+
+    @SerializedName("next_payment_amount")
+    val nextPaymentAmount: Long? = null,
 
     @SerializedName("repayment_bank_name")
     val repaymentBankName: String? = null,
@@ -123,8 +141,14 @@ data class Booking (
     @SerializedName("fcm_id")
     val fcmId: String? = null,
 
-    @SerializedName("bookingdetails")
-    val bookingDetail: BookingDetail? = null,
+    @SerializedName("able_fitting")
+    val ableToFitting: Int? = null,
+
+    @SerializedName("able_rate")
+    val ableToRating: Int? = null,
+
+    @SerializedName("able_pay")
+    val ableToPay: Int? = null
 
 ) : BaseModel(), Parcelable {
     constructor(parcel: Parcel) : this(
@@ -146,28 +170,36 @@ data class Booking (
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readString(),
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
             parcel.readString(),
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readParcelable(BookingDetail::class.java.classLoader)) {
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -176,6 +208,7 @@ data class Booking (
         parcel.writeValue(paidPrice)
         parcel.writeString(productId)
         parcel.writeString(productName)
+        parcel.writeString(productCategory)
         parcel.writeString(photoPath)
         parcel.writeString(userId)
         parcel.writeString(name)
@@ -192,7 +225,10 @@ data class Booking (
         parcel.writeValue(downPayment)
         parcel.writeValue(fullPayment)
         parcel.writeValue(forfeit)
-        parcel.writeString(paymentMethod)
+        parcel.writeValue(paymentMethod)
+        parcel.writeString(paymentMethodName)
+        parcel.writeValue(lastPaymentMethod)
+        parcel.writeString(lastPaymentMethodName)
         parcel.writeValue(status)
         parcel.writeString(statusTransaction)
         parcel.writeString(paymentStatus)
@@ -202,6 +238,8 @@ data class Booking (
         parcel.writeString(paymentAccountNumber)
         parcel.writeString(paymentAccountName)
         parcel.writeValue(paymentAmount)
+        parcel.writeValue(lastPaymentAmount)
+        parcel.writeValue(nextPaymentAmount)
         parcel.writeString(repaymentBankName)
         parcel.writeString(repaymentAccoungNumber)
         parcel.writeString(repaymentAccountName)
@@ -210,7 +248,9 @@ data class Booking (
         parcel.writeString(fittingId)
         parcel.writeString(ratingId)
         parcel.writeString(fcmId)
-        parcel.writeParcelable(bookingDetail, flags)
+        parcel.writeValue(ableToFitting)
+        parcel.writeValue(ableToRating)
+        parcel.writeValue(ableToPay)
     }
 
     override fun describeContents(): Int {

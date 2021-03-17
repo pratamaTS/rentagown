@@ -5,16 +5,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.R
 import com.example.rentagown.v2.data.model.Invoice
+import com.example.rentagown.v2.data.model.InvoiceHistory
 import com.example.rentagown.v2.util.Utils
 import com.example.rentagown.v2.util.to64BitHash
 import com.mikepenz.fastadapter.items.ModelAbstractItem
 
-class MyInvoiceItem(model: Invoice) : ModelAbstractItem<Invoice, MyInvoiceItem.ViewHolder>(model) {
+class MyInvoiceItem(model: InvoiceHistory) : ModelAbstractItem<InvoiceHistory, MyInvoiceItem.ViewHolder>(model) {
 
     override val layoutRes: Int = R.layout.item_my_invoice_v2
     override val type: Int = R.id.item_my_invoice
 
-    override var identifier: Long = if(model.transactionId.isNullOrBlank()) -1 else model.transactionId.to64BitHash()
+    override var identifier: Long = if(model.idTransaction.isNullOrBlank()) -1 else model.idTransaction.to64BitHash()
 
     override fun getViewHolder(v: View): ViewHolder {
         return ViewHolder(v)
@@ -24,8 +25,8 @@ class MyInvoiceItem(model: Invoice) : ModelAbstractItem<Invoice, MyInvoiceItem.V
         super.bindView(holder, payloads)
 
         holder.tvInvoice.text = model.invoice ?: "-"
-        holder.tvInvoiceAmount.text = Utils.formatMoney(model.paidPrice, "Rp. -", true)
-        holder.tvInvoicePaymentMethod.text = model.paymentMethod ?: "-"
+        holder.tvInvoiceAmount.text = Utils.formatMoney(model.invoiceAmount, "Rp. -", true)
+        holder.tvInvoicePaymentMethod.text = model.paymentMethodName ?: "-"
         holder.tvInvoiceDate.text = Utils.formatDateTime(model.createdAt, Utils.DATE_TIME_FORMAT2)
     }
 

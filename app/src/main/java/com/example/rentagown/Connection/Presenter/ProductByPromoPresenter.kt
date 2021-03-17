@@ -11,7 +11,7 @@ import retrofit2.Response
 class ProductByPromoPresenter(val productByPromoInterface: ProductByPromoInterface) {
     fun getAllProductByPromo(){
         //Declare Variable
-        val url: String = "api/v/1/product/find/promo"
+        val url: String = "api/v/2/product/find/promo"
 
         //Header
         val map: MutableMap<String, String> = HashMap()

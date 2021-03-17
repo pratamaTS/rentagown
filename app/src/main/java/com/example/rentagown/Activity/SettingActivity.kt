@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.rentagown.R
+import com.example.rentagown.v2.ui.chooseaddress.ChooseAddressActivity
 
 class SettingActivity : AppCompatActivity(), View.OnClickListener,
     CompoundButton.OnCheckedChangeListener {
@@ -39,8 +40,8 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
         pushPromo = findViewById(R.id.toogle_switch_promo)
         pushTransactions = findViewById(R.id.toogle_switch_transactions)
         pushCatalogUpdate!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"catalog_update", false)
-        pushPromo!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"promo", false)
-        pushTransactions!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"transactions", false)
+        pushPromo!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"promo", true)
+        pushTransactions!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"transactions", true)
 
         //SET LISTENER
         back!!.setOnClickListener(this)
@@ -66,7 +67,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
                 startActivity(changePassword)
             }
             R.id.menu_change_address -> {
-                val changeAddress = Intent(this@SettingActivity, ChangeAddressActivity::class.java)
+                val changeAddress = Intent(this@SettingActivity, ChooseAddressActivity::class.java)
                 startActivity(changeAddress)
             }
         }

@@ -25,7 +25,7 @@ class CheckDatePresenter(val checkDateInterface: CheckDateInterface) {
         map["Host"] = "absdigital.id"
 
         //URL
-        val url: String = "api/v/1/booking/checkdate/" + idProduct
+        val url: String = "api/v/2/booking/checkdate/" + idProduct
 
         //Connect
         NetworkConfigAfterLogin.service(context)

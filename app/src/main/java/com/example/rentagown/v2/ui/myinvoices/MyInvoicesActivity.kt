@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGActivity
 import com.example.rentagown.v2.data.model.Invoice
+import com.example.rentagown.v2.data.model.InvoiceHistory
 import com.example.rentagown.v2.data.network.RAGApi
 import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
 import com.example.rentagown.v2.data.repository.RepositoryLocator
@@ -26,7 +27,7 @@ class MyInvoicesActivity : BaseRAGActivity<MyInvoicesContract.Presenter>(), MyIn
     override lateinit var presenter: MyInvoicesContract.Presenter
 
     private lateinit var adapter: FastAdapter<MyInvoiceItem>
-    private lateinit var itemAdapter: ModelAdapter<Invoice, MyInvoiceItem>
+    private lateinit var itemAdapter: ModelAdapter<InvoiceHistory, MyInvoiceItem>
 
     private lateinit var srRefreshContent: SwipeRefreshLayout
     private lateinit var rvMyInvoices: RecyclerView
@@ -69,7 +70,7 @@ class MyInvoicesActivity : BaseRAGActivity<MyInvoicesContract.Presenter>(), MyIn
 
     }
 
-    override fun showDataInvoices(invoices: List<Invoice>) {
+    override fun showDataInvoices(invoices: List<InvoiceHistory>) {
         itemAdapter.set(invoices)
     }
 
@@ -77,9 +78,9 @@ class MyInvoicesActivity : BaseRAGActivity<MyInvoicesContract.Presenter>(), MyIn
         srRefreshContent.isRefreshing = refreshing
     }
 
-    override fun navigateToInvoiceDetail(invoice: Invoice) {
+    override fun navigateToInvoiceDetail(invoice: InvoiceHistory) {
         Intent(this, InvoiceDetailActivity::class.java).apply {
-            putExtra("invoice", invoice)
+            putExtra("invoiceId", invoice.id)
             startActivityForResult(this, InvoiceDetailActivity.REQ_VIEW_INVOICE_DETAIL)
         }
     }

@@ -24,7 +24,7 @@ class PromoAdapter(private val mContext: Context, private val promoList: ArrayLi
 
     override fun onBindViewHolder(holder: PromoViewHolder, position: Int) {
         if(promoList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + promoList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + promoList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imPromoList)
         }else {
             holder.imPromoList.setImageResource(R.drawable.promo)

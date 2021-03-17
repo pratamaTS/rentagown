@@ -1,6 +1,7 @@
 package com.example.rentagown.v2.ui.invoicedetail
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -9,6 +10,9 @@ import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGActivity
 import com.example.rentagown.v2.data.enums.PaymentTypeEnum
 import com.example.rentagown.v2.data.model.Invoice
+import com.example.rentagown.v2.data.network.RAGApi
+import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
+import com.example.rentagown.v2.data.repository.RepositoryLocator
 import com.example.rentagown.v2.util.Utils
 import okhttp3.internal.Util
 import kotlin.math.abs
@@ -46,7 +50,17 @@ class InvoiceDetailActivity : BaseRAGActivity<InvoiceDetailContract.Presenter>()
     override fun init() {
         super.init()
 
-        presenter = InvoiceDetailPresenter()
+        presenter = InvoiceDetailPresenter(
+            RepositoryLocator
+                .getInstance(
+                    RemoteRepositoryLocator
+                        .getInstance(
+                            RAGApi
+                                .apiService(this)
+                        )
+                )
+                .bookingRepository
+        )
     }
 
     override fun setupWidgets() {
@@ -73,7 +87,7 @@ class InvoiceDetailActivity : BaseRAGActivity<InvoiceDetailContract.Presenter>()
     override fun setDataInvoiceToView(invoice: Invoice) {
 
         Glide.with(this)
-                .load(BuildConfig.BASE_PHOTO_URL + invoice.bankPathPhoto)
+                .load(BuildConfig.BASE_PHOTO_URL + invoice.booking?.bankPathPhoto)
                 .listener(Utils.getGlideException())
                 .fitCenter()
                 .error(R.color.colorGray)
@@ -82,26 +96,26 @@ class InvoiceDetailActivity : BaseRAGActivity<InvoiceDetailContract.Presenter>()
         tvInvoice.text = invoice.invoice
         tvPaymentDate.text = Utils.formatDateTime(invoice.createdAt, Utils.DATE_TIME_FORMAT2)
         tvPaymentDeadline.text = Utils.formatDateTime(invoice.paymentDeadline, Utils.DATE_TIME_FORMAT, Utils.DATE_TIME_FORMAT_PAYMENT_DEADLINE2)
-        tvProductName.text = invoice.productName
-        tvProductPrice.text = Utils.formatMoney(invoice.paidPrice, "Rp. - ", true)
-        tvTotalPriceInvoice.text = Utils.formatMoney(invoice.paidPrice, "Rp. - ", true)
+        tvProductName.text = invoice.booking?.productName
+        tvProductPrice.text = Utils.formatMoney(invoice.invoiceAmount, "Rp. - ", true)
+        tvTotalPriceInvoice.text = Utils.formatMoney(invoice.invoiceAmount, "Rp. - ", true)
 
-        val productPrice = invoice.bookingDetail?.productPrice ?: 0
-        val paidPrice = invoice.paidPrice ?: 0
+        val productPrice = invoice.booking?.paidPrice ?: 0
+        val paidPrice = invoice.booking?.paidPrice ?: 0
 
-        val paymentType = PaymentTypeEnum.getByTypeId(invoice.paymentMethod)
+        val paymentType = PaymentTypeEnum.getByTypeId(invoice.booking?.paymentMethod)
 
         tvDiscountAmount.text =  " - "  + if(productPrice > 0) Utils.formatMoney(abs(productPrice - paidPrice),"Rp. 0 ", true)
                                         else Utils.formatMoney(0, "Rp. -", true)
 
         tvLateChargeAmount.text = " - " + Utils.formatMoney(0,"Rp. 0 ")
-        tvDownPaymentAmount.text = if(paymentType == PaymentTypeEnum.DOWN_PAYMENT) Utils.formatMoney(invoice.downPayment,"Rp. - ", true) else Utils.formatMoney(0)
-        tvDestAccountNumber.text = invoice.accountNumber
-        tvDestAccountName.text = invoice.accountName
+        tvDownPaymentAmount.text = if(paymentType == PaymentTypeEnum.DOWN_PAYMENT) Utils.formatMoney(invoice.booking?.downPayment,"Rp. - ", true) else Utils.formatMoney(0)
+        tvDestAccountNumber.text = invoice.paymentSourceAccNumber
+        tvDestAccountName.text = invoice.paymentSourceAccName
 
     }
 
-    override fun getDataInvoice(): Invoice? = intent.getParcelableExtra("invoice")
+    override fun getInvoiceId(): String? = intent.getStringExtra("invoiceId")
 
     override fun showMsgInvoiceNotFound() {
         showMessage(getString(R.string.err_invoice_not_found))

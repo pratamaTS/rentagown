@@ -40,9 +40,9 @@ class NotifTransactionAdapter(
         holder.tvNameProduct.setText(notifTransactionList[position].productName?.capitalize()?.trim())
         holder.tvDateBooking.setText(startDateNew)
         holder.tvTimeBooking.setText(startTimeNew)
-        holder.tvStatusPayment.setText(notifTransactionList[position].statusTransaction)
-        holder.tvPriceProduct.setText(numberFormat.format(notifTransactionList[position].paidPrice))
-        holder.tvStatusNotif.setText(notifTransactionList[position].statusTransaction)
+        holder.tvStatusPayment.setText(notifTransactionList[position].statusName)
+        holder.tvPriceProduct.setText(numberFormat.format(notifTransactionList[position].productFinalPrice))
+        holder.tvStatusNotif.setText(notifTransactionList[position].statusName)
     }
 
     override fun getItemCount(): Int {

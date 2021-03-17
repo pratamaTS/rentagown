@@ -23,12 +23,16 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.createBooking(createBooking)
     }
 
-    override fun cancelBooking(transactionId: String): Single<BaseResp<Booking>> {
-        return apiService.cancelBooking(transactionId, ReqCancelBooking())
+    override fun cancelBooking(reqCancel: ReqCancelBooking): Single<BaseResp<Booking>> {
+        return apiService.cancelBooking(reqCancel)
     }
 
     override fun getMyBookings(): Single<BasePagingResp<Booking>> {
         return apiService.getMyBookings()
+    }
+
+    override fun getBank(): Single<BasePagingResp<MasterBank>> {
+        return apiService.getBank()
     }
 
     override fun getMyBookingsHistory(): Single<BasePagingResp<Booking>> {
@@ -47,8 +51,12 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.reviewBooking(reqCreateReviewBooking)
     }
 
-    override fun getMyInvoices(): Single<BasePagingResp<Invoice>> {
+    override fun getMyInvoices(): Single<BasePagingResp<InvoiceHistory>> {
         return apiService.getMyInvoices()
+    }
+
+    override fun getInvoiceDetail(invoiceId: String): Single<BaseResp<Invoice>> {
+        return apiService.getInvoiceDetail(invoiceId)
     }
 
 }

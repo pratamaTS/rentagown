@@ -6,16 +6,13 @@ import com.google.gson.annotations.SerializedName
 
 data class ReqCreateBooking (
 
-    @SerializedName("paid_price")
-    val paidPrice: Long? = null,
-
     @SerializedName("id_product")
     val productId: String? = null,
 
     @SerializedName("id_address")
     val addressId: String? = null,
 
-    @SerializedName("id_bank")
+    @SerializedName("id_dest_bank")
     val bankId: String? = null,
 
     @SerializedName("phone")
@@ -27,11 +24,8 @@ data class ReqCreateBooking (
     @SerializedName("end_date")
     val endDate: String? = null,
 
-    @SerializedName("down_payment")
-    val downPayment: Long? = null,
-
-    @SerializedName("payment_method")
-    val paymentMethod: String? = null,
+    @SerializedName("payment_type")
+    val paymentMethod: Int? = null,
 
     @SerializedName("one_day_service")
     val oneDayService: Int? = null
@@ -39,29 +33,25 @@ data class ReqCreateBooking (
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as? Long,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(paidPrice)
         parcel.writeString(productId)
         parcel.writeString(addressId)
         parcel.writeString(bankId)
         parcel.writeString(phoneNumber)
         parcel.writeString(startDate)
         parcel.writeString(endDate)
-        parcel.writeValue(downPayment)
-        parcel.writeString(paymentMethod)
+        parcel.writeValue(paymentMethod)
         parcel.writeValue(oneDayService)
     }
 

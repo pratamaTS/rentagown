@@ -47,7 +47,7 @@ class FavoriteGownAdapter(
         }
 
         if(favoriteGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + favoriteGownList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + favoriteGownList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
@@ -60,6 +60,14 @@ class FavoriteGownAdapter(
             product.putExtra("category", favoriteGownList[position].nameProductCategory)
             mContext.startActivity(product)
         })
+
+        holder.btnBooking.setOnClickListener{ v ->
+            val product = Intent(mContext, ProductDetailActivity::class.java)
+            product.putExtra("id_product", favoriteGownList[position].idProduct)
+            product.putExtra("product_id", favoriteGownList[position].idProduct)
+            product.putExtra("category", favoriteGownList[position].nameProductCategory)
+            mContext.startActivity(product)
+        }
     }
 
     override fun getItemCount(): Int {

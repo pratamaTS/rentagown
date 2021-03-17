@@ -120,7 +120,7 @@ class ReviewBookingActivity : BaseRAGActivity<ReviewBookingContract.Presenter>()
 
         tvProductName.text = booking.productName
         tvProductPrice.text = Utils.formatMoney(booking.paidPrice)
-        tvProductCategoryName.text = booking.bookingDetail?.productCategoryName
+        tvProductCategoryName.text = booking.productCategory
 
     }
 

@@ -6,125 +6,77 @@ import com.google.gson.annotations.SerializedName
 
 data class Invoice(
 
-    @SerializedName("id_transaction")
-    val transactionId: String? = null,
+    @field:SerializedName("payment_dest_bank_logo")
+    val paymentDestBankLogo: String? = null,
 
-    @SerializedName("invoice")
-    val invoice: String? = null,
+    @field:SerializedName("payment_method_type")
+    val paymentMethodType: Int? = null,
 
-    @SerializedName("paid_price")
-    val paidPrice: Long? = null,
+    @field:SerializedName("payment_status_name")
+    val paymentStatusName: String? = null,
 
-    @SerializedName("id_product")
-    val productId: String? = null,
+    @field:SerializedName("booking")
+    val booking: Booking? = null,
 
-    @SerializedName("product_name")
-    val productName: String? = null,
+    @field:SerializedName("notes")
+    val notes: String? = null,
 
-    @SerializedName("path_photo")
-    val photoPath: String? = null,
+    @field:SerializedName("payment_source_acc_number")
+    val paymentSourceAccNumber: String? = null,
 
-    @SerializedName("id_user")
-    val userId: String? = null,
+    @field:SerializedName("payment_source_bank_logo")
+    val paymentSourceBankLogo: String? = null,
 
-    @SerializedName("name")
-    val name: String? = null,
+    @field:SerializedName("payment_date_time")
+    val paymentDateTime: String? = null,
 
-    @SerializedName("address")
-    val address: String? = null,
+    @field:SerializedName("id_transaction")
+    val idTransaction: String? = null,
 
-    @SerializedName("address_detail")
-    val addressDetail: String? = null,
+    @field:SerializedName("invoice_amount")
+    val invoiceAmount: Long? = null,
 
-    @SerializedName("bank_name")
-    val bankName: String? = null,
+    @field:SerializedName("payment_dest_bank_id")
+    val paymentDestBankId: String? = null,
 
-    @SerializedName("account_number")
-    val accountNumber: String? = null,
+    @field:SerializedName("payment_source_bank_id")
+    val paymentSourceBankId: String? = null,
 
-    @SerializedName("account_name")
-    val accountName: String? = null,
+    @field:SerializedName("id")
+    val id: String? = null,
 
-    @SerializedName("bank_path_photo")
-    val bankPathPhoto: String? = null,
+    @field:SerializedName("payment_dest_acc_number")
+    val paymentDestAccNumber: String? = null,
 
-    @SerializedName("phone")
-    val phone: String? = null,
+    @field:SerializedName("payment_dest_bank_name")
+    val paymentDestBankName: String? = null,
 
-    @SerializedName("start_date")
-    val startDate: String? = null,
+    @field:SerializedName("payment_source_acc_name")
+    val paymentSourceAccName: String? = null,
 
-    @SerializedName("end_date")
-    val endDate: String? = null,
+    @field:SerializedName("payment_source_bank_name")
+    val paymentSourceBankName: String? = null,
 
-    @SerializedName("one_day_service")
-    val oneDayService: String? = null,
+    @field:SerializedName("payment_status")
+    val paymentStatus: Int? = null,
 
-    @SerializedName("down_payment")
-    val downPayment: Long? = null,
-
-    @SerializedName("full_payment")
-    val fullPayment: Long? = null,
-
-    @SerializedName("forfeit")
-    val forfeit: Int? = null,
-
-    @SerializedName("payment_method")
-    val paymentMethod: String? = null,
-
-    @SerializedName("status")
-    val status: Int? = null,
-
-    @SerializedName("status_transaction")
-    val statusTransaction: String? = null,
-
-    @SerializedName("status_payment")
-    val paymentStatus: String? = null,
-
-    @SerializedName("remaining_bills")
-    val remainingBills: Long? = null,
-
-    @SerializedName("payment_deadline")
-    val paymentDeadline: String? = null,
-
-    @SerializedName("payment_bank_name")
-    val paymentBankName: String? = null,
-
-    @SerializedName("payment_account_number")
-    val paymentAccountNumber: String? = null,
-
-    @SerializedName("payment_account_name")
-    val paymentAccountName: String? = null,
-
-    @SerializedName("payment_amount")
+    @field:SerializedName("payment_amount")
     val paymentAmount: Long? = null,
 
-    @SerializedName("repayment_bank_name")
-    val repaymentBankName: String? = null,
+    @field:SerializedName("id_user")
+    val idUser: String? = null,
 
-    @SerializedName("repayment_account_number")
-    val repaymentAccoungNumber: String? = null,
+    @field:SerializedName("payment_method_name")
+    val paymentMethodName: String? = null,
 
-    @SerializedName("repayment_account_name")
-    val repaymentAccountName: String? = null,
+    @field:SerializedName("payment_deadline")
+    val paymentDeadline: String? = null,
 
-    @SerializedName("repayment_amount")
-    val repaymentAmount: Long? = null,
+    @field:SerializedName("payment_dest_acc_name")
+    val paymentDestAccName: String? = null,
 
-    @SerializedName("total_bill_amount")
-    val totalBillAmount: Long? = null,
-
-    @SerializedName("id_fitting")
-    val fittingId: String? = null,
-
-    @SerializedName("id_rating")
-    val ratingId: String? = null,
-
-    @SerializedName("fcm_id")
-    val fcmId: String? = null,
-
-    @SerializedName("bookingdetails")
-    val bookingDetail: BookingDetail? = null,
+    @field:SerializedName("invoice")
+    val invoice: String? = null,
 
     @SerializedName("created_at")
     val createdAt: String? = null,
@@ -138,91 +90,59 @@ data class Invoice(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
+            parcel.readParcelable(Booking::class.java.classLoader),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readValue(Long::class.java.classLoader) as? Long,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readString(),
-            parcel.readString(),
             parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
             parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readValue(Long::class.java.classLoader) as? Long,
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readParcelable(BookingDetail::class.java.classLoader),
             parcel.readString(),
             parcel.readString(),
             parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(transactionId)
-        parcel.writeString(invoice)
-        parcel.writeValue(paidPrice)
-        parcel.writeString(productId)
-        parcel.writeString(productName)
-        parcel.writeString(photoPath)
-        parcel.writeString(userId)
-        parcel.writeString(name)
-        parcel.writeString(address)
-        parcel.writeString(addressDetail)
-        parcel.writeString(bankName)
-        parcel.writeString(accountNumber)
-        parcel.writeString(accountName)
-        parcel.writeString(bankPathPhoto)
-        parcel.writeString(phone)
-        parcel.writeString(startDate)
-        parcel.writeString(endDate)
-        parcel.writeString(oneDayService)
-        parcel.writeValue(downPayment)
-        parcel.writeValue(fullPayment)
-        parcel.writeValue(forfeit)
-        parcel.writeString(paymentMethod)
-        parcel.writeValue(status)
-        parcel.writeString(statusTransaction)
-        parcel.writeString(paymentStatus)
-        parcel.writeValue(remainingBills)
-        parcel.writeString(paymentDeadline)
-        parcel.writeString(paymentBankName)
-        parcel.writeString(paymentAccountNumber)
-        parcel.writeString(paymentAccountName)
+        parcel.writeString(paymentDestBankLogo)
+        parcel.writeValue(paymentMethodType)
+        parcel.writeString(paymentStatusName)
+        parcel.writeParcelable(booking, flags)
+        parcel.writeString(notes)
+        parcel.writeString(paymentSourceAccNumber)
+        parcel.writeString(paymentSourceBankLogo)
+        parcel.writeString(paymentDateTime)
+        parcel.writeString(idTransaction)
+        parcel.writeValue(invoiceAmount)
+        parcel.writeString(paymentDestBankId)
+        parcel.writeString(paymentSourceBankId)
+        parcel.writeString(id)
+        parcel.writeString(paymentDestAccNumber)
+        parcel.writeString(paymentDestBankName)
+        parcel.writeString(paymentSourceAccName)
+        parcel.writeString(paymentSourceBankName)
+        parcel.writeValue(paymentStatus)
         parcel.writeValue(paymentAmount)
-        parcel.writeString(repaymentBankName)
-        parcel.writeString(repaymentAccoungNumber)
-        parcel.writeString(repaymentAccountName)
-        parcel.writeValue(repaymentAmount)
-        parcel.writeValue(totalBillAmount)
-        parcel.writeString(fittingId)
-        parcel.writeString(ratingId)
-        parcel.writeString(fcmId)
-        parcel.writeParcelable(bookingDetail, flags)
+        parcel.writeString(idUser)
+        parcel.writeString(paymentMethodName)
+        parcel.writeString(paymentDeadline)
+        parcel.writeString(paymentDestAccName)
+        parcel.writeString(invoice)
         parcel.writeString(createdAt)
         parcel.writeString(updatedAt)
         parcel.writeString(deletedAt)

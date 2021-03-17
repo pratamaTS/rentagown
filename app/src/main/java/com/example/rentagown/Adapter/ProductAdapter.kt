@@ -43,7 +43,7 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
         }
 
         if(productList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + productList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + productList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
@@ -56,6 +56,14 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
             product.putExtra("category", productList[position].nameProductCategory)
             mContext.startActivity(product)
         })
+
+        holder.btnBooking.setOnClickListener{ v ->
+            val product = Intent(mContext, ProductDetailActivity::class.java)
+            product.putExtra("id_product", productList[position].idProduct)
+            product.putExtra("product_id", productList[position].idProduct)
+            product.putExtra("category", productList[position].nameProductCategory)
+            mContext.startActivity(product)
+        }
     }
 
     override fun getItemCount(): Int {

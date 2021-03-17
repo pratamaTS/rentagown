@@ -22,12 +22,16 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.createBooking(createBooking)
     }
 
-    override fun cancelBooking(transactionId: String): Single<BaseResp<Booking>> {
-        return remoteRepository.cancelBooking(transactionId)
+    override fun cancelBooking(reqCancel: ReqCancelBooking): Single<BaseResp<Booking>> {
+        return remoteRepository.cancelBooking(reqCancel)
     }
 
     override fun getMyBookings(): Single<BasePagingResp<Booking>> {
         return remoteRepository.getMyBookings()
+    }
+
+    override fun getBank(): Single<BasePagingResp<MasterBank>> {
+        return remoteRepository.getBank()
     }
 
     override fun getMyBookingsHistory(): Single<BasePagingResp<Booking>> {
@@ -46,8 +50,12 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.reviewBooking(reqCreateReviewBooking)
     }
 
-    override fun getMyInvoices(): Single<BasePagingResp<Invoice>> {
+    override fun getMyInvoices(): Single<BasePagingResp<InvoiceHistory>> {
         return remoteRepository.getMyInvoices()
+    }
+
+    override fun getInvoiceDetail(invoiceId: String): Single<BaseResp<Invoice>> {
+        return remoteRepository.getInvoiceDetail(invoiceId)
     }
 
 }

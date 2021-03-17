@@ -10,7 +10,7 @@ import retrofit2.Response
 class ProductByCategoryPresenter(val productByCategorvyInterface: ProductByCategoryInterface) {
     fun getAllProductByCategory(category: String){
         //Declare Variable
-        val url: String = "api/v/1/product/findcat/" + category
+        val url: String = "api/v/2/product/findcat/" + category
 
         //Header
         val map: MutableMap<String, String> = HashMap()

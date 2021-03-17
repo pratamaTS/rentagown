@@ -13,6 +13,9 @@ data class BaseResp<T> (
     @SerializedName("code")
     val code: Int? = null,
 
+    @field:SerializedName("error")
+    val error: String? = null,
+
     @SerializedName("data")
     val data: T? = null
 

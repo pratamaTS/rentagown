@@ -1,7 +1,9 @@
 package com.example.rentagown.Activity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
@@ -10,23 +12,32 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.rentagown.Connection.Constants
+import com.example.rentagown.Connection.Interface.EditProfileInterface
 import com.example.rentagown.Connection.Interface.ProfileInterface
 import com.example.rentagown.Connection.Interface.UploadPictInterface
+import com.example.rentagown.Connection.Presenter.EditProfilePresenter
 import com.example.rentagown.Connection.Presenter.ProfilePresenter
 import com.example.rentagown.Connection.Presenter.UploadPictPresenter
+import com.example.rentagown.Model.UpdateProfile
 import com.example.rentagown.R
+import com.example.rentagown.Response.EditProfile.DataEditProfile
 import com.example.rentagown.Response.EditProfile.DataPict
 import com.example.rentagown.Response.Profile.DataProfile
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,9 +45,10 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
-class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInterface, View.OnClickListener {
+class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInterface, EditProfileInterface, View.OnClickListener {
     var back: ImageButton? = null
     var profilePict: CircleImageView? = null
     var btnUpload: Button? = null
@@ -48,8 +60,9 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
     var myImage: Bitmap? = null
     var myImageJPG: Bitmap? = null
     private var imageData: ByteArray? = null
-
-
+    private lateinit var btnEdit: Button
+    private lateinit var btnSave: Button
+    private lateinit var loadingDialog: AlertDialog
 
     companion object {
 
@@ -84,21 +97,52 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         edtName = findViewById(R.id.et_edit_name)
         edtEmail = findViewById(R.id.et_edit_email)
         edtPhoneNumber = findViewById(R.id.et_edit_phone)
+        btnEdit = findViewById(R.id.btn_edit)
+        btnSave = findViewById(R.id.btn_save)
+
+        if(!this::loadingDialog.isInitialized) {
+            loadingDialog = AlertDialog.Builder(this)
+                    .setView(R.layout.layout_loading)
+                    .create()
+            loadingDialog.setCanceledOnTouchOutside(false)
+
+            val window = loadingDialog.window
+            window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+            window?.setGravity(Gravity.CENTER)
+        }
 
         getProfile()
 
         //SET LISTENER
         profilePict!!.setOnClickListener(this)
         btnUpload!!.setOnClickListener(this)
+        btnEdit.setOnClickListener(this)
+        btnSave.setOnClickListener(this)
         back!!.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.im_back -> finish()
+            R.id.btn_edit -> {
+                btnUpload?.visibility = View.VISIBLE
+                edtName?.isEnabled = true
+                edtPhoneNumber?.isEnabled = true
+                btnSave?.visibility = View.VISIBLE
+            }
             R.id.edit_foto_profile -> {
                 verifyStoragePermissions(this)
                 launchGallery()
+            }
+            R.id.btn_save -> {
+                btnUpload?.visibility = View.INVISIBLE
+                edtName?.isEnabled = false
+                edtPhoneNumber?.isEnabled = false
+                btnSave?.visibility = View.GONE
+
+                EditProfilePresenter(this).editProfile(this, UpdateProfile(edtPhoneNumber?.text.toString(), edtName?.text.toString(), ""))
+
+                loadingDialog.show()
             }
             R.id.btn_add_photo -> uploadImage()
         }
@@ -199,14 +243,27 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
     }
 
     override fun onErrorGetProfile(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT)
+        Toast.makeText(this, msg, Toast.LENGTH_LONG)
     }
 
     override fun onSuccessUploadPict(dataPict: ArrayList<DataPict>) {
-        Toast.makeText(this, "Upload Success", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Upload Success", Toast.LENGTH_LONG).show()
     }
 
     override fun onErrorGetUploadPict(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT)
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+    @SuppressLint("AutoDispose")
+    override fun onSuccessEditProfile(dataEditProfile: DataEditProfile) {
+        edtName?.setText(dataEditProfile.name)
+        edtPhoneNumber?.setText(dataEditProfile.phone)
+        loadingDialog.dismiss()
+        Toast.makeText(this, "Edit Profile Success", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onErrorEditProfile(msg: String) {
+        loadingDialog.dismiss()
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }

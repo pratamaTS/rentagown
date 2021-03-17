@@ -43,7 +43,7 @@ class SimilarCategoryAdapter(
         }
 
         if(productList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + productList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + productList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

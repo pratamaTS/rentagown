@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ReqCancelBooking (
 
-    @SerializedName("status")
-    val status: Int = 4
+    @SerializedName("id_transaction")
+    val transactionId: String? = null
 
 )

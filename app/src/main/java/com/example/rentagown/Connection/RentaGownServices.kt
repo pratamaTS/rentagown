@@ -2,11 +2,17 @@ package com.example.rentagown.Connection
 
 import android.graphics.Bitmap
 import com.example.rentagown.Body.*
+import com.example.rentagown.Model.ChangePassword
+import com.example.rentagown.Model.ForgotPassword
+import com.example.rentagown.Model.UpdateProfile
+import com.example.rentagown.Response.ChangePassword.ResponseChangePassword
 import com.example.rentagown.Response.CheckDate.ResponseCheckDate
 import com.example.rentagown.Response.CreateAddress.ResponseAddAddress
 import com.example.rentagown.Response.CreateWishlist.ResponseCreateWishlist
+import com.example.rentagown.Response.EditProfile.ResponseEditProfile
 import com.example.rentagown.Response.EditProfile.ResponseUploadPict
 import com.example.rentagown.Response.FavoriteGown.ResponseFavoriteGown
+import com.example.rentagown.Response.ForgotPassword.ResponseForgotPassword
 import com.example.rentagown.Response.GetAddress.ResponseGetAddress
 import com.example.rentagown.Response.GetBank.ResponseGetBank
 import com.example.rentagown.Response.GetWishlist.ResponseGetWishlist
@@ -22,6 +28,7 @@ import com.example.rentagown.Response.Profile.ResponseProfile
 import com.example.rentagown.Response.Promo.PromoDetail.ResponsePromoDetail
 import com.example.rentagown.Response.Promo.ResponsePromo
 import com.example.rentagown.Response.Register.ResponseRegister
+import com.example.rentagown.Response.Search.ResponseSearch
 import com.example.rentagown.Response.SeeUnDate.ResponseSeeUnDate
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -117,7 +124,24 @@ interface RentaGownServices {
     @POST(Constants.ADD_WISHLIST)
     fun addWishlist(@HeaderMap map: MutableMap<String, String>?, @Body wishlistBody: WishlistBody): Call<ResponseCreateWishlist>
 
+    //Search
+    @POST(Constants.SEARCH)
+    fun search(@QueryMap queryMap: MutableMap<String, String>?, @HeaderMap map: MutableMap<String, String>?): Call<ResponseSearch>
+
     //Get Check Date
     @POST
     fun checkDate(@Url url: String, @HeaderMap map: MutableMap<String, String>?, @Body checkDateBody: CheckDateBody): Call<ResponseCheckDate>
+
+    //Edit Profile
+    @PUT(Constants.UPDATE_PROFILE)
+    fun updateProfile(@HeaderMap map: MutableMap<String, String>?, @Body updateProfile: UpdateProfile): Call<ResponseEditProfile>
+
+    //Change Password
+    @PUT(Constants.CHANGE_PASSWORD)
+    fun changePassword(@HeaderMap map: MutableMap<String, String>?, @Body changePassword: ChangePassword): Call<ResponseChangePassword>
+
+    //Forgot Password
+    @POST(Constants.FORGOT_PASSWORD)
+    fun forgotPassword(@HeaderMap map: MutableMap<String, String>?, @Body forgotPassword: ForgotPassword): Call<ResponseForgotPassword>
+
 }

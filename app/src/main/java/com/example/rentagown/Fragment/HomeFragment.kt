@@ -1,8 +1,11 @@
 package com.example.rentagown.Fragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +27,7 @@ import com.example.rentagown.Model.*
 import com.example.rentagown.R
 import com.example.rentagown.Response.FavoriteGown.DataFavoriteGown
 import com.example.rentagown.Response.NewGown.DataNewGown
+import com.example.rentagown.Response.Notification.DataNotification
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.Response.ProductCategory.DataProductCategory
 import com.example.rentagown.Response.Promo.DataPromo
@@ -31,7 +35,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), View.OnClickListener,
-    ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, PromoInterface, FavoriteGownInterface, NewGownInterface, CategoryMenuAdapter.ReloadItemInterface {
+    ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, PromoInterface, FavoriteGownInterface, NewGownInterface, GetNotificationInterface, CategoryMenuAdapter.ReloadItemInterface {
     var imWishlist: ImageButton? = null
     var imNotification: ImageView? = null
     var btnSeeAllCategory: Button? = null
@@ -57,7 +61,6 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var promoList: ArrayList<DataPromo> = ArrayList()
     var favoriteGownList: ArrayList<DataFavoriteGown> = ArrayList()
     var newGownList: ArrayList<DataNewGown>?= null
-    var dummySliderMainMenus: ArrayList<DataProduct> = ArrayList()
     var itemDecorSet: Boolean = false
     var tvNoItemHome: TextView? = null
     var swipeRefreshHome: SwipeRefreshLayout? = null
@@ -65,11 +68,19 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var pbPromo: IndeterminateCenteredRoundCornerProgressBar? = null
     var pbFavGown: IndeterminateCenteredRoundCornerProgressBar? = null
     var pbNewGown: IndeterminateCenteredRoundCornerProgressBar? = null
+    var badgeNotif: View? = null
+    var countNotif: Int = 0
+
+    companion object {
+        private const val COUNT_NOTIF = "count_notif"
+        private const val STATUS_PAYMENT = "status_payment"
+        private const val READ_NOTIF = "read_notif"
+    }
 
     private var selectedCategoryMenu: DataProductCategory? = null
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
@@ -95,6 +106,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         pbPromo = view.findViewById(R.id.pb_promo)
         pbFavGown = view.findViewById(R.id.pb_fav_gown)
         pbNewGown = view.findViewById(R.id.pb_new_gown)
+        badgeNotif = view.findViewById(R.id.badge_notif)
 
         swipeRefreshHome!!.setOnRefreshListener {
             getData()
@@ -103,10 +115,23 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
         getData()
 
-        searchView!!.setOnSearchClickListener {
-            val search = Intent(activity, SearchViewActivity::class.java)
-            startActivity(search)
-        }
+        searchView!!.isEnabled = false
+
+        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                //use this action
+                val search = Intent(activity, SearchViewActivity::class.java)
+                search.putExtra("product_name", query)
+                startActivity(search)
+
+                searchView!!.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
 
         imWishlist!!.setOnClickListener(this@HomeFragment)
         imNotification!!.setOnClickListener(this@HomeFragment)
@@ -124,6 +149,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
         PromoPresenter(this).getAllPromo()
         FavoriteGownPresenter(this).getAllFavoriteGown()
         NewGownPresenter(this).getAllNewGown()
+        activity?.let { mAct ->
+            if(mAct is MainAfterActivity) {
+                GetNotificationPresenter(this).getAllNotification(context!!)
+            }
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -175,11 +205,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Bind Item to Adapter
             adapterMenu = CategoryMenuAdapter(this, categoryMenuList!!, this)
             rvTitleMenu!!.setLayoutManager(
-                    LinearLayoutManager(
-                            context,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                    )
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             )
             rvTitleMenu!!.setAdapter(adapterMenu)
             rvTitleMenu!!.addItemDecoration(ItemDecorationSlider(16))
@@ -192,12 +222,12 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Slider Main Menu
             ProductByCategoryPresenter(this).getAllProductByCategory(selectedCategoryMenu!!.nameProductCategory.toString())
         } else{
-            Toast.makeText(context, "There is no category data", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "There is no category data", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onErrorGetProductCategory(msg: String) {
-        Toast.makeText(context, "Failed to get data category", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data category", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
@@ -211,11 +241,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             rvSliderMenu!!.visibility = View.VISIBLE
             adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(it) }
             rvSliderMenu!!.setLayoutManager(
-                    LinearLayoutManager(
-                            context,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                    )
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             )
             rvSliderMenu!!.setAdapter(adapterMainMenu!!)
             if (itemDecorSet == false) {
@@ -228,7 +258,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onErrorGetProductByCategory(msg: String) {
-        Toast.makeText(context, "Failed to get data product", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data product", Toast.LENGTH_SHORT).show()
     }
 
     override fun passReloadItem(namaCategory: String) {
@@ -243,17 +273,17 @@ class HomeFragment : Fragment(), View.OnClickListener,
         //Setup Recycler View New Gown
         adapterNewGown = SliderNewGownAdapter(dataNewGown ?: arrayListOf())
         rvSliderNewGown!!.setLayoutManager(
-                LinearLayoutManager(
-                        context,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                )
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
         )
         rvSliderNewGown!!.setAdapter(adapterNewGown)
     }
 
     override fun onErrorGetNewGown(msg: String) {
-        Toast.makeText(context, "Failed to get data new gown", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data new gown", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
@@ -267,11 +297,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Setup Recycler View Favorite Gown
             adapterFavoriteGown = SliderFavoriteGownAdapter(favoriteGownList ?: arrayListOf())
             rvSliderFavoriteGown!!.setLayoutManager(
-                    LinearLayoutManager(
-                            context,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                    )
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             )
             rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
         } else {
@@ -281,7 +311,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onErrorGetFavoriteGown(msg: String) {
-        Toast.makeText(context, "Failed to get data favorite gown", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data favorite gown", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
@@ -297,11 +327,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             //Setup Recycler View Promo
             adapterPromo = SliderPromoAdapter(promoList ?: arrayListOf())
             rvSliderPromo!!.setLayoutManager(
-                    LinearLayoutManager(
-                            context,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                    )
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             )
 
             rvSliderPromo!!.setAdapter(adapterPromo)
@@ -311,8 +341,70 @@ class HomeFragment : Fragment(), View.OnClickListener,
         }
     }
 
-
     override fun onErrorGetPromo(msg: String) {
-        Toast.makeText(context, "Failed to get data promo", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Failed to get data promo", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSuccessGetNotification(dataNotification: ArrayList<DataNotification>?) {
+        var prefs: SharedPreferences = context!!.getSharedPreferences(
+            context!!.getString(R.string.app_name),
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        val oldNotifCount: Int = prefs.getInt(COUNT_NOTIF, 0)
+        var statusRead: Boolean = prefs.getBoolean(READ_NOTIF, false)
+        var statusConfirmPayment: Boolean = prefs.getBoolean(STATUS_PAYMENT, false)
+        var dumpStatus: Array<Int>? = null
+
+        if(dataNotification.isNullOrEmpty()){
+            countNotif = 0
+            editor.putInt(COUNT_NOTIF, countNotif)
+            editor.commit()
+        }else{
+            countNotif = dataNotification.size
+//            for (notif in dataNotification){
+//                dumpStatus = arrayOf(notif.status!!)
+//            }
+//            if(dataNotification.find { it.status == 3 }?.status == 3 || dataNotification.find { it.status == 5 }?.status == 5){
+//                editor.putBoolean(STATUS_PAYMENT, true)
+//                editor.putBoolean(READ_NOTIF, false)
+//                editor.commit()
+//                statusRead = false
+//                statusConfirmPayment = true
+//                if(statusRead == false){
+//                    setBadgeNotif(false)
+//                }
+//            }
+
+            Log.d("count notif", countNotif.toString())
+            Log.d("old count notif", oldNotifCount.toString())
+            Log.d("status notif", statusRead.toString())
+            Log.d("dump status notif", dumpStatus.toString())
+
+            if(countNotif > oldNotifCount){
+                editor.putInt(COUNT_NOTIF, countNotif)
+                editor.putBoolean(READ_NOTIF, false)
+                editor.commit()
+
+                setBadgeNotif(false)
+            }else {
+                if(statusRead == true){
+                    setBadgeNotif(true)
+                }else{
+                    setBadgeNotif(false)
+                }
+            }
+        }
+    }
+
+    override fun onErrorGetNotification(msg: String) {
+        Toast.makeText(context, "Failed to get notification", Toast.LENGTH_SHORT).show()
+    }
+
+    fun setBadgeNotif(readNotif: Boolean){
+        when(readNotif) {
+            false -> badgeNotif?.visibility = View.VISIBLE
+            true -> badgeNotif?.visibility = View.GONE
+        }
     }
 }

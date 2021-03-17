@@ -140,13 +140,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
-<!--                    <RelativeLayout-->
-<!--                        android:id="@+id/container_spinner_bank_name"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@drawable/style_spinner">-->
+                    <RelativeLayout
+                        android:id="@+id/container_spinner_bank_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_spinner">
 
-<!--                        <Spinner-->
+                        <com.skydoves.powerspinner.PowerSpinnerView
+                            android:id="@+id/spinner_bank_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:background="@android:color/transparent"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:hint="Select Bank"
+                            android:padding="10dp"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:textColorHint="?android:textColorHint"
+                            android:textSize="16sp"
+                            app:spinner_arrow_gravity="end"
+                            app:spinner_arrow_padding="8dp"
+                            app:spinner_divider_color="@color/colorDarkGray"
+                            app:spinner_divider_show="true"
+                            app:spinner_divider_size="0.4dp"
+                            app:spinner_popup_animation="normal"
+                            app:spinner_popup_background="@color/colorEditText"
+                            app:spinner_popup_elevation="14dp" />
+
+                        <!--                        <Spinner-->
 <!--                            android:id="@+id/spinner_bank_name"-->
 <!--                            android:layout_width="match_parent"-->
 <!--                            android:layout_height="56dp"-->
@@ -155,30 +177,16 @@
 <!--                            android:spinnerMode="dropdown"-->
 <!--                            android:background="@android:color/transparent"/>-->
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginEnd="16dp"-->
-<!--                            android:layout_alignParentEnd="true"-->
-<!--                            android:layout_centerVertical="true"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:src="@drawable/ic_round_arrow_drop_down" />-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_round_arrow_drop_down" />
 
-<!--                    </RelativeLayout>-->
-                    <EditText
-                        android:id="@+id/et_bank_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:layout_marginTop="@dimen/margin_md"
-                        android:autofillHints=""
-                        android:background="@drawable/bg_edit_text_filled"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:hint="@string/hint_your_bank_name"
-                        android:inputType="text"
-                        android:paddingStart="24dp"
-                        android:paddingEnd="24dp"
-                        android:textSize="16sp"
-                        tools:ignore="RtlSymmetry" />
+                    </RelativeLayout>
 
                     <EditText
                         android:id="@+id/et_account_number"

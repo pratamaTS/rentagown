@@ -18,7 +18,7 @@ class PromoByIdPresenter(val promoByIdInterface: PromoByIdInterface) {
         map["Host"] = "absdigital.id"
 
         //URL
-        val url: String = "api/v/1/promo/findid/" + idPromo
+        val url: String = "api/v/2/promo/findid/" + idPromo
 
         //Connect
         NetworkConfig.service()

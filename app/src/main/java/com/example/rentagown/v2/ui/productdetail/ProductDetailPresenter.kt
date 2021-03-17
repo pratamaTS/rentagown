@@ -46,7 +46,6 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
 
             view?.navigateToCart(ReqCreateBooking(
                     productId = productDetail?.productId,
-                    paidPrice = productDetail?.finalPrice,
                     startDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     endDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     oneDayService = if (view?.getSpecialTreatmentSelected() == true) 1 else 0

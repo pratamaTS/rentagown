@@ -9,15 +9,13 @@ class InvoiceDetailContract {
     interface View : BaseView<Presenter> {
 
         fun setDataInvoiceToView(invoice: Invoice)
-        fun getDataInvoice(): Invoice?
+        fun getInvoiceId(): String?
         fun showMsgInvoiceNotFound()
 
     }
 
     interface Presenter: BasePresenter {
-
-
-
+        fun getInvoiceDetail(id: String)
     }
 
 }

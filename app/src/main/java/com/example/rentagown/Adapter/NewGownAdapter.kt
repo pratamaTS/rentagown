@@ -43,7 +43,7 @@ class NewGownAdapter(private val mContext: Context, private val newGownList: Arr
         }
 
         if(newGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + newGownList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + newGownList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
@@ -56,6 +56,14 @@ class NewGownAdapter(private val mContext: Context, private val newGownList: Arr
             product.putExtra("category", newGownList[position].nameProductCategory)
             mContext.startActivity(product)
         })
+
+        holder.btnBooking.setOnClickListener{ v ->
+            val product = Intent(mContext, ProductDetailActivity::class.java)
+            product.putExtra("id_product", newGownList[position].idProduct)
+            product.putExtra("product_id", newGownList[position].idProduct)
+            product.putExtra("category", newGownList[position].nameProductCategory)
+            mContext.startActivity(product)
+        }
     }
 
     override fun getItemCount(): Int {

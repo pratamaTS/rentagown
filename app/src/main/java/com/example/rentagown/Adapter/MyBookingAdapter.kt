@@ -48,7 +48,7 @@ class MyBookingAdapter(private val mContext: Context, private val myBookingList:
         holder.tvRemainingBills.setText(myBookingList.remainingBills!!)
 
         if(myBookingList.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + myBookingList.pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + myBookingList.pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

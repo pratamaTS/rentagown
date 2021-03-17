@@ -1,13 +1,13 @@
 package com.example.rentagown.v2.data.enums
 
 enum class PaymentTypeEnum(
-        val typeId: String,
+        val typeId: Int,
         val typeName: String,
         val dpValue: Long,
         val isFullPayment: Boolean) {
 
-    DOWN_PAYMENT("Deposit Booking", "Deposit Booking (Transfer)", 500000, false),
-    FULL_PAYMENT("Full Payment", "Full Payment (Transfer)", 0, true);
+    DOWN_PAYMENT(1, "Deposit Booking (Transfer)", 500000, false),
+    FULL_PAYMENT(2, "Full Payment (Transfer)", 0, true);
 
     companion object {
 
@@ -21,7 +21,7 @@ enum class PaymentTypeEnum(
             return values()[ordinal]
         }
 
-        fun getByTypeId(typeId: String?): PaymentTypeEnum? {
+        fun getByTypeId(typeId: Int?): PaymentTypeEnum? {
             return values().find { pt -> pt.typeId == typeId }
         }
 

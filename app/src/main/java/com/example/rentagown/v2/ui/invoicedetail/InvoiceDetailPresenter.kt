@@ -1,20 +1,35 @@
 package com.example.rentagown.v2.ui.invoicedetail
 
 import com.example.rentagown.v2.base.BaseRAGPresenter
+import com.example.rentagown.v2.data.model.Invoice
+import com.example.rentagown.v2.data.model.Product
+import com.example.rentagown.v2.data.source.BookingDataSource
 
-class InvoiceDetailPresenter : BaseRAGPresenter<InvoiceDetailContract.View>(), InvoiceDetailContract.Presenter {
+class InvoiceDetailPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<InvoiceDetailContract.View>(), InvoiceDetailContract.Presenter {
 
     override fun start() {
         super.start()
 
-        val invoice = view?.getDataInvoice()
+        val invoiceId = view?.getInvoiceId()
 
-        if(invoice == null) {
+        if(invoiceId == null) {
             view?.showMsgInvoiceNotFound()
             return
         }
 
-        view?.setDataInvoiceToView(invoice)
+        getInvoiceDetail(invoiceId)
 
+    }
+
+    override fun getInvoiceDetail(id: String) {
+        view?.showLoadingContent(true)
+
+        safeCall(repository.getInvoiceDetail(id), object : Listener<Invoice> {
+            override fun onSuccess(data: Invoice?) {
+                if (data != null) {
+                    view?.setDataInvoiceToView(data)
+                }
+            }
+        })
     }
 }

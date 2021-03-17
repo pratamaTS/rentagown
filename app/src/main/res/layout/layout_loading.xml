@@ -25,7 +25,7 @@
         android:textColor="@color/colorBlack"
         android:layout_marginStart="@dimen/margin_md"
         android:fontFamily="@font/poppins_light"
-        android:text="Dalam Proses..."/>
+        android:text="On Progress..."/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

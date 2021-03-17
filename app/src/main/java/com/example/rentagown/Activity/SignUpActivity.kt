@@ -57,7 +57,7 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
         when (v.id) {
             R.id.btn_sign_up -> {
                 val email = etEmail!!.text.toString()
-                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && etName?.text?.isNotEmpty() ?: true && etEmail?.text?.isNotEmpty() ?: true && etPassword?.text?.isNotEmpty() ?: true && etNoHp?.text?.isNotEmpty() ?: true)
                 {
                     RegisterPresenter(this).register(
                         RegisterBody(
@@ -68,8 +68,16 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
                             "Android"
                         )
                     )
-                }else{
+                }else if(etName?.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Name is still empty", Toast.LENGTH_LONG).show()
+                }else if(etEmail?.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Email is still empty", Toast.LENGTH_LONG).show()
+                }else if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() == false){
                     Toast.makeText(this, "$email is INVALID EMAIL !!", Toast.LENGTH_LONG).show()
+                }else if(etNoHp?.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Phone number is still empty", Toast.LENGTH_LONG).show()
+                }else if(etPassword?.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Password is still empty", Toast.LENGTH_LONG).show()
                 }
             }
             R.id.btn_to_layout_signin -> {
@@ -87,12 +95,12 @@ class SignUpActivity : AppCompatActivity(), RegisterInterface, View.OnClickListe
 
         val mainActivity = Intent(this, MainActivity::class.java)
         mainActivity.putExtra("login_check", true)
-        mainActivity.putExtra("message", "Signup berhasil")
+        mainActivity.putExtra("message", "Sign up success")
         startActivity(mainActivity)
         finish()
     }
 
     override fun onErrorGetRegister(msg: String) {
-        Toast.makeText(this, "Failed to register", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Sign up Failed, email/phone number has been used", Toast.LENGTH_SHORT).show()
     }
 }

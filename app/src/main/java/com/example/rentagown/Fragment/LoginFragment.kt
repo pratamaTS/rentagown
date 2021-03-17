@@ -3,9 +3,11 @@ package com.example.rentagown.Fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,7 +73,7 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         message = arguments?.getString("message")
 
         if(message != null){
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
 
         //Set Listener
@@ -87,7 +89,18 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {
-                LoginPresenter(this).login(context!!, LoginBody(etEmail?.text.toString(), etPassword?.text.toString()))
+                if(isValidEmail(etEmail?.text.toString()) == true && etPassword?.text?.isNotEmpty() ?:true ) {
+                    LoginPresenter(this).login(
+                        requireContext(),
+                        LoginBody(etEmail?.text.toString(), etPassword?.text.toString())
+                    )
+                }else if(etEmail?.text.isNullOrEmpty()){
+                    Toast.makeText(context, "Email is still empty", Toast.LENGTH_SHORT).show()
+                }else if(etPassword?.text.isNullOrEmpty()){
+                    Toast.makeText(context, "Password is still empty", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context, "Email is not valid", Toast.LENGTH_SHORT).show()
+                }
             }
             R.id.btn_forgot_password -> {
                 val forgotPassword = Intent(activity, ForgotPasswordActivity::class.java)
@@ -112,16 +125,22 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         }
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
     override fun onSuccessGetLogin() {
         if(listener != null) {
             listener?.onLoggedIn()
         } else {
             val login = Intent(activity, MainAfterActivity::class.java)
             startActivity(login)
+            activity?.finish()
+            Toast.makeText(context, "Welcome to Rent a Gown", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onErrorGetLogin(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT)
+        Toast.makeText(context, "User doesn't exist/email or password doesn't match", Toast.LENGTH_SHORT).show()
     }
 }

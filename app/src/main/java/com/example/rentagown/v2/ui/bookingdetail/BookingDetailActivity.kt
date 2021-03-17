@@ -2,6 +2,7 @@ package com.example.rentagown.v2.ui.bookingdetail
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -101,7 +102,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
                 .into(ivProductImage)
 
         tvProductName.text = booking.productName ?: getString(R.string.lbl_no_text)
-        tvProductCategoryName.text = booking.bookingDetail?.productCategoryName ?: getString(R.string.lbl_no_text)
+        tvProductCategoryName.text = booking.productCategory ?: getString(R.string.lbl_no_text)
         tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(booking.startDate, booking.endDate)
         tvProductName2.text = booking.productName ?: getString(R.string.lbl_no_text)
 
@@ -114,6 +115,14 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorDarkGreen))
                 tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_done)
             }
+            BookingStatusEnum.isWaitingForPayment(booking.status) -> {
+                tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorSecondary))
+                tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)
+            }
+            BookingStatusEnum.isWaitingForConfirmation(booking.status) -> {
+                tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorSecondary))
+                tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)
+            }
             BookingStatusEnum.isOnGoing(booking.status) -> {
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorSecondary))
                 tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)
@@ -123,7 +132,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         tvBookingStatus.text = booking.statusTransaction
         
 
-        val productPrice = booking.bookingDetail?.productPrice ?: 0
+        val productPrice = booking.paidPrice ?: 0
         val paidPrice = booking.paidPrice ?: 0
 
         tvProductPrice.text = Utils.formatMoney(productPrice, "Rp - ", true)
@@ -131,7 +140,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         tvDiscountAmount.text = " - " + Utils.formatMoney(abs(productPrice - paidPrice),"Rp. 0 ", true)
         tvTotalPrice.text = Utils.formatMoney(booking.paidPrice, "Rp - ", true)
 
-        val firstPay = booking.paymentAmount ?: 0
+        val firstPay = booking.downPayment ?: 0
         if(PaymentTypeEnum.getByTypeId(booking.paymentMethod) == PaymentTypeEnum.DOWN_PAYMENT && firstPay > 0) {
             tvBookingDpPaid.text = Utils.formatMoney(firstPay)
         } else {
@@ -139,24 +148,28 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         }
 
         val remainingBill = booking.remainingBills ?: 0
-        val paymentAmount = booking.paymentAmount ?: 0
+        val paymentAmount = booking.lastPaymentAmount ?: 0
 
-        val isContainerConfirmPaymentVisible = if(BookingStatusEnum.isOnGoing(booking.status)) {
+        val isContainerConfirmPaymentVisible = if(BookingStatusEnum.isAbleToPay(booking.ableToPay)) {
             if(PaymentTypeEnum.DOWN_PAYMENT.typeId == booking.paymentMethod) {
                 remainingBill > 0
-            } else paymentAmount <= 0
+                true
+            } else {
+                paymentAmount <= 0
+                true
+            }
         } else {
             false
         }
 
-        containerConfirmPayment.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else View.GONE
+        containerConfirmPayment.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
+            View.GONE
 
-        btnAction.visibility = if((BookingStatusEnum.isCompleted(booking.status) && booking.ratingId.isNullOrBlank())
-                || BookingStatusEnum.isOnGoing(booking.status)) View.VISIBLE else View.GONE
+        btnAction.visibility = if((BookingStatusEnum.isAbleToFitting(booking.ableToFitting) || BookingStatusEnum.isAbleToRating(booking.ableToRating))) View.VISIBLE else View.GONE
 
-        val actionText = if(BookingStatusEnum.isOnGoing(booking.status)) {
+        val actionText = if(BookingStatusEnum.isAbleToFitting(booking.ableToFitting)) {
             getString(R.string.btn_fitting_size)
-        } else if(BookingStatusEnum.isCompleted(booking.status) && booking.ratingId.isNullOrBlank()) {
+        } else if(BookingStatusEnum.isAbleToRating(booking.ableToRating)) {
             getString(R.string.btn_review_booking)
         } else { "" }
         btnAction.text = actionText

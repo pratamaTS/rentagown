@@ -40,7 +40,7 @@ class SliderViewProductAdapter(
 
     override fun onBindViewHolder(viewHolder: SliderViewProductViewHolder, position: Int) {
 //        SliderItemProduct sliderItemProduct = mSliderItems.get(position);
-        val imgURL: String = "http://absdigital.id:5000" + mSliderItems[position].pathPhoto
+        val imgURL: String = "http://absdigital.id:55000" + mSliderItems[position].pathPhoto
         Picasso.get().load(imgURL).into(viewHolder.imageSlider)
 //        Glide.with(viewHolder.itemView)
 //                .load(sliderItemProduct.getImageProduct())

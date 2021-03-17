@@ -95,7 +95,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         tvConfirmAccountNumber.text = booking.accountNumber
         tvConfirmAccountName.text = booking.accountName
 
-        tvPaymentType.text = booking.paymentMethod
+        tvPaymentType.text = booking.paymentMethodName
 
     }
 

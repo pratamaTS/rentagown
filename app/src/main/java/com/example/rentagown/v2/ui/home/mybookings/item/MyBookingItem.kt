@@ -38,14 +38,14 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
         holder.tvProductName.text = model.productName
         holder.tvProductPrice.text = Utils.formatMoney(model.paidPrice)
 
-        val firstPay = model.paymentAmount ?: 0
+        val firstPay = model.downPayment ?: 0
         if(PaymentTypeEnum.getByTypeId(model.paymentMethod) == PaymentTypeEnum.DOWN_PAYMENT && firstPay > 0) {
             holder.tvDpPaid.text = Utils.formatMoney(firstPay)
         } else {
             holder.tvDpPaid.text = Utils.formatMoney(0)
         }
 
-        holder.tvRemainingBill.text = Utils.formatMoney(model.remainingBills)
+        holder.tvRemainingBill.text = Utils.formatMoney(model.nextPaymentAmount)
         holder.tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(model.startDate, model.endDate)
         holder.tvBookingStatus.text = model.statusTransaction
     }

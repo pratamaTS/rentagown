@@ -12,10 +12,10 @@ data class Address(
     @SerializedName("id_user")
     val userId: String? = null,
 
-    @SerializedName("name")
+    @SerializedName("receiver_name")
     val receiverName: String? = null,
 
-    @SerializedName("phone")
+    @SerializedName("receiver_phone")
     val receiverPhoneNumber: String? = null,
 
     @SerializedName("address_label")

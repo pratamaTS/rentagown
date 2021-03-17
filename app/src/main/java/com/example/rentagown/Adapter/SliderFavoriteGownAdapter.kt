@@ -47,7 +47,7 @@ class SliderFavoriteGownAdapter(
         }
 
         if(favoriteGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + favoriteGownList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + favoriteGownList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

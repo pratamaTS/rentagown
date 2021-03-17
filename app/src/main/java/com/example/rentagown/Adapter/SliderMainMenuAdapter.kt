@@ -32,7 +32,7 @@ class SliderMainMenuAdapter(
         holder.tvItemName.setText(sliderMainMenuList[position].productName?.capitalize()?.trimEnd())
         holder.tvPrice.setText(numberFormat.format(sliderMainMenuList[position].productPrice))
 
-        val imgURL: String = "http://absdigital.id:5000" + sliderMainMenuList[position].pathPhoto
+        val imgURL: String = "http://absdigital.id:55000" + sliderMainMenuList[position].pathPhoto
         Picasso.get().load(imgURL).into(holder.imContent)
 
         holder.itemView.setOnClickListener { v ->

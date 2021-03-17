@@ -1,7 +1,9 @@
 package com.example.rentagown.Activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.rentagown.Fragment.HomeFragment
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 selectedFragment = LoginFragment()
                 if(intent.hasExtra("message")){
                     message = intent.getStringExtra("message")
-                    bundle.putString("message", message)
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }
 
                 bottomNavigationView?.selectedItemId = R.id.nav_profile
@@ -45,7 +47,6 @@ class MainActivity : AppCompatActivity() {
     private val bottomNavMethod = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
         when (menuItem.itemId) {
             R.id.nav_home -> {
-                var bundle: Bundle = Bundle()
                 selectedFragment = HomeFragment()
                 bottomNavigationView!!.itemIconTintList = null
             }

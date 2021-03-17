@@ -11,6 +11,7 @@ import com.example.rentagown.Adapter.ViewHolder.WishlistViewHolder
 import com.example.rentagown.Model.Wishlist
 import com.example.rentagown.R
 import com.example.rentagown.Response.GetWishlist.DataWishlist
+import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
@@ -40,17 +41,27 @@ class WishlistAdapter(private val mContext: Context, private val wishlistList: A
         }
 
         if(wishlistList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + wishlistList[position].pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + wishlistList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
         }
 
         holder.itemView.setOnClickListener(View.OnClickListener { v ->
-            val product = Intent(mContext, ViewProductActivity::class.java)
+            val product = Intent(mContext, ProductDetailActivity::class.java)
             product.putExtra("id_product", wishlistList[position].idProduct)
+            product.putExtra("product_id", wishlistList[position].idProduct)
+            product.putExtra("category", wishlistList[position].nameProductCategory)
             mContext.startActivity(product)
         })
+
+        holder.btnBooking.setOnClickListener{ v ->
+            val product = Intent(mContext, ProductDetailActivity::class.java)
+            product.putExtra("id_product", wishlistList[position].idProduct)
+            product.putExtra("product_id", wishlistList[position].idProduct)
+            product.putExtra("category", wishlistList[position].nameProductCategory)
+            mContext.startActivity(product)
+        }
     }
 
     override fun getItemCount(): Int {

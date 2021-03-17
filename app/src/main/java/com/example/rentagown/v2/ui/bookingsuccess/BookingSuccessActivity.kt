@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.Button
 import com.example.rentagown.Activity.MainActivity
+import com.example.rentagown.Activity.MainAfterActivity
 import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGActivity
 
@@ -31,7 +32,7 @@ class BookingSuccessActivity : BaseRAGActivity<BookingSuccessContract.Presenter>
     }
 
     override fun navigateBackToHome() {
-        Intent(this, MainActivity::class.java).apply {
+        Intent(this, MainAfterActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(this)
             finish()

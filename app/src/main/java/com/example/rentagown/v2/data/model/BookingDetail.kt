@@ -18,13 +18,13 @@ data class BookingDetail (
     @SerializedName("product_name")
     val productName: String? = null,
 
-    @SerializedName("product_price")
+    @SerializedName("product_final_price")
     val productPrice: Long? = null,
 
     @SerializedName("promo_name")
     val promoName: String? = null,
 
-    @SerializedName("promo_amount")
+    @SerializedName("product_promo_amount")
     val promoAmount: Long? = null,
 
     @SerializedName("final_price")
@@ -33,7 +33,7 @@ data class BookingDetail (
     @SerializedName("id_product_category")
     val productIdCategory: String? = null,
 
-    @SerializedName("name_product_category")
+    @SerializedName("product_category")
     val productCategoryName: String? = null,
 
     @SerializedName("id_fitting")

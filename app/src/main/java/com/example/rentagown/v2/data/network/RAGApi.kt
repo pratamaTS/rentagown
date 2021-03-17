@@ -31,7 +31,7 @@ class RAGApi {
                 .build()
         }
 
-        private fun retrofit(context: Context): Retrofit {
+        fun retrofit(context: Context): Retrofit {
             val adapter = RxJava3CallAdapterFactory.create()
 
             return Retrofit.Builder()

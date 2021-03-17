@@ -10,6 +10,7 @@
     <color name="colorLightGold">#FFE599</color>
     <color name="selectedYellow">#FAE6AB</color>
     <color name="colorDarkGray">#707070</color>
+    <color name="colorHint">#808080</color>
     <color name="colorDarkGrey">#747474</color>
     <color name="colorGray">#B0B0B0</color>
     <color name="colorMistyGray">#DBDBDB</color>

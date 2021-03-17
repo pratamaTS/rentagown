@@ -69,6 +69,9 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
     private lateinit var tvProductFinalPrice: TextView
     private lateinit var tvTotalPayment: TextView
 
+    private lateinit var imDepositBook: ImageView
+    private lateinit var imFullBook: ImageView
+
     private lateinit var containerSpecialTreatment: View
 
     private lateinit var btnWhatsapp: ImageButton
@@ -101,6 +104,9 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         btnChangePaymentMethod = findViewById(R.id.btn_change_payment_method)
 
         btnChoosePaymentType = findViewById(R.id.btn_choose_payment_type)
+
+        imDepositBook = findViewById(R.id.iv_payment_type)
+        imFullBook = findViewById(R.id.iv_payment_type2)
 
         containerAddressDetail = findViewById(R.id.container_address_detail)
         tvAddressName = findViewById(R.id.tv_address_name)
@@ -294,6 +300,14 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
     override fun setPaymentTypeDataToView(paymentType: PaymentTypeEnum, reqCreateBooking: ReqCreateBooking?, product: Product?) {
         this.selectedPaymentType = paymentType
 
+        if(paymentType.isFullPayment){
+            imDepositBook.visibility = View.GONE
+            imFullBook.visibility = View.VISIBLE
+        }else{
+            imDepositBook.visibility = View.VISIBLE
+            imFullBook.visibility = View.GONE
+        }
+
         tvPaymentType.text = paymentType.typeName
         tvLblDefaultMethod.visibility = if(paymentType == PaymentTypeEnum.getDefaultPaymentType()) View.VISIBLE else View.GONE
 
@@ -302,12 +316,12 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         tvSelectedPaymentTypePrice.visibility = View.VISIBLE
 
         tvLblSelectedPaymentType.text = paymentType.typeName
-        tvSelectedPaymentTypePrice.text = if(paymentType.isFullPayment) Utils.formatMoney(reqCreateBooking?.paidPrice) else Utils.formatMoney(paymentType.dpValue)
+        tvSelectedPaymentTypePrice.text = if(paymentType.isFullPayment) Utils.formatMoney(product?.finalPrice) else Utils.formatMoney(paymentType.dpValue)
 
         tvProductName.text = product?.productName
         tvProductFinalPrice.text = " - ${Utils.formatMoney(product?.finalPrice)}"
 
-        tvTotalPayment.text = if(paymentType.isFullPayment) Utils.formatMoney(reqCreateBooking?.paidPrice) else Utils.formatMoney(paymentType.dpValue)
+        tvTotalPayment.text = if(paymentType.isFullPayment) Utils.formatMoney(product?.finalPrice) else Utils.formatMoney(paymentType.dpValue)
 
         containerSpecialTreatment.visibility = if(reqCreateBooking?.oneDayService == 1) View.VISIBLE else View.INVISIBLE
     }
@@ -324,7 +338,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         tvTotalPayment.text = getString(R.string.lbl_no_text)
 
         tvProductName.text = product?.productName
-        tvProductFinalPrice.text = " - ${Utils.formatMoney(reqCreateBooking?.paidPrice)}"
+        tvProductFinalPrice.text = " - ${Utils.formatMoney(product?.finalPrice)}"
 
         containerSpecialTreatment.visibility = if(reqCreateBooking?.oneDayService == 1) View.VISIBLE else View.INVISIBLE
     }
