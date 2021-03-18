@@ -141,6 +141,6 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     }
 
     override fun onErrorGetLogin(msg: String) {
-        Toast.makeText(context, "User doesn't exist/email or password doesn't match", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, msg.capitalize().trim(), Toast.LENGTH_SHORT).show()
     }
 }

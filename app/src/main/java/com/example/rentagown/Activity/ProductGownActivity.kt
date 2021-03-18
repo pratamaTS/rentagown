@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -146,13 +147,18 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onSuccessGetAllProduct(dataProduct: ArrayList<DataProduct>?) {
-        productList = dataProduct as ArrayList<DataProduct>
-
-        //Setup Recycler View Product
-        productAdapter = ProductAdapter(this, productList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        rvProduct?.setLayoutManager(gridLayoutManager)
-        rvProduct?.setAdapter(productAdapter)
+        if(dataProduct?.isNotEmpty() == true) {
+            rvProduct?.visibility = View.VISIBLE
+            productList = dataProduct as ArrayList<DataProduct>
+            //Setup Recycler View Product
+            productAdapter = ProductAdapter(this, productList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            rvProduct?.setLayoutManager(gridLayoutManager)
+            rvProduct?.setAdapter(productAdapter)
+        }else{
+            rvProduct?.visibility = View.INVISIBLE
+            Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onErrorGetAllProduct(msg: String) {
@@ -160,13 +166,18 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
-        productList = dataProductByCat as ArrayList<DataProduct>
-
-        //Setup Recycler View Product
-        productAdapter = ProductAdapter(this, productList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        rvProduct?.setLayoutManager(gridLayoutManager)
-        rvProduct?.setAdapter(productAdapter)
+        if(dataProductByCat?.isNotEmpty() == true) {
+            rvProduct?.visibility = View.VISIBLE
+            productList = dataProductByCat as ArrayList<DataProduct>
+            //Setup Recycler View Product
+            productAdapter = ProductAdapter(this, productList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            rvProduct?.setLayoutManager(gridLayoutManager)
+            rvProduct?.setAdapter(productAdapter)
+        } else{
+            rvProduct?.visibility = View.INVISIBLE
+            Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onErrorGetProductByCategory(msg: String) {
@@ -174,13 +185,18 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onSuccessGetProductByPromo(dataProductByCat: ArrayList<DataProduct>?) {
-        productList = dataProductByCat as ArrayList<DataProduct>
-
-        //Setup Recycler View Product
-        productAdapter = ProductAdapter(this, productList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        rvProduct?.setLayoutManager(gridLayoutManager)
-        rvProduct?.setAdapter(productAdapter)
+        if(dataProductByCat?.isNotEmpty() == true) {
+            rvProduct?.visibility = View.VISIBLE
+            productList = dataProductByCat as ArrayList<DataProduct>
+            //Setup Recycler View Product
+            productAdapter = ProductAdapter(this, productList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            rvProduct?.setLayoutManager(gridLayoutManager)
+            rvProduct?.setAdapter(productAdapter)
+        }else{
+            rvProduct?.visibility = View.INVISIBLE
+            Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onErrorGetProductByPromo(msg: String) {

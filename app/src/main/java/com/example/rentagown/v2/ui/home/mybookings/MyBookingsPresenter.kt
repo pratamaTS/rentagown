@@ -1,11 +1,15 @@
 package com.example.rentagown.v2.ui.home.mybookings
 
+import android.content.Context
+import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.enums.BookingStatusEnum
 import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.data.source.BookingDataSource
 
-class MyBookingsPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<MyBookingsContract.View>(), MyBookingsContract.Presenter {
+class MyBookingsPresenter(private val context: Context, private val repository: BookingDataSource) : BaseRAGPresenter<MyBookingsContract.View>(), MyBookingsContract.Presenter {
 
     override fun start() {
         super.start()
@@ -14,17 +18,28 @@ class MyBookingsPresenter(private val repository: BookingDataSource) : BaseRAGPr
     }
 
     override fun loadMyBookings() {
-        view?.showLoadingContent(true)
+        var token: String? = null
+        val sessionManager = SessionManager(context)
 
-        safeCallPaging(repository.getMyBookings(), object : Listener<List<Booking>> {
-            override fun onSuccess(data: List<Booking>?) {
-                val mData = data ?: listOf()
+        sessionManager.fetchAuthToken()?.let {
+            token = it
+        }
+        
+        if(token != null){
+            view?.showLoadingContent(true)
+            safeCallPaging(repository.getMyBookings(), object : Listener<List<Booking>> {
+                override fun onSuccess(data: List<Booking>?) {
+                    val mData = data ?: listOf()
 
-                view?.showEmptyPlaceHolder(mData.isEmpty())
-                view?.showMyBookings(mData)
-            }
+                    view?.showEmptyPlaceHolder(mData.isEmpty())
+                    view?.showMyBookings(mData)
+                }
 
-        }, RequestConfiguration(showErrorMessage = false, updateLoadingIndicator = false))
+            }, RequestConfiguration(showErrorMessage = false, updateLoadingIndicator = false))
+        }else{
+            view?.showLoadingContent(false)
+            view?.showEmptyPlaceHolder(true)
+        }
     }
 
     override fun onBtnBrowserClicked() {

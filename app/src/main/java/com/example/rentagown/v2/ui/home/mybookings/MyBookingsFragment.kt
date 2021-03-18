@@ -1,12 +1,14 @@
 package com.example.rentagown.v2.ui.home.mybookings
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Activity.MainActivity
 import com.example.rentagown.Activity.MainAfterActivity
+import com.example.rentagown.Connection.SessionManager
 import com.example.rentagown.R
 import com.example.rentagown.v2.base.BaseRAGFragment
 import com.example.rentagown.v2.data.model.Booking
@@ -52,7 +54,7 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
     override fun init() {
         super.init()
 
-        presenter = MyBookingsPresenter(
+        presenter = MyBookingsPresenter(requireContext(),
             RepositoryLocator.getInstance(
                 RemoteRepositoryLocator.getInstance(RAGApi.apiService(requireContext()))
             ).bookingRepository

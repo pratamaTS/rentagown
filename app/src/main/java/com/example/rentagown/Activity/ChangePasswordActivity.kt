@@ -109,6 +109,7 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, Vie
     override fun onSuccessChangePassword(dataChangePassword: DataChangePassword) {
         etNewPassword?.text?.clear()
         etRetypePassword?.text?.clear()
+        etRetypePassword?.clearFocus()
         loadingDialog.dismiss()
         Toast.makeText(this, "Change Password Success", Toast.LENGTH_LONG).show()
     }

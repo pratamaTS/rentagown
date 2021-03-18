@@ -107,6 +107,7 @@ abstract class BaseRAGPresenter<V: BaseView<*>> : BasePresenter {
                             if(requestConfiguration.updateLoadingContentIndicator) view?.showLoadingContent(false)
                             if(requestConfiguration.updateLoadingIndicator) view?.showLoading(false)
                             if(requestConfiguration.showErrorMessage) view?.showErrorMessage(if(e is ConnectException) "tidak dapat terhubung ke server" else "error")
+
                             listener.onFailed(e?.message)
                         }
 

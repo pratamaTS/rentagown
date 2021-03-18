@@ -72,7 +72,6 @@ interface RAGApiService {
     @GET("invoice/findid/{invoiceId}")
     fun getInvoiceDetail(@Path("invoiceId") productId: String): Single<BaseResp<Invoice>>
 
-
     @GET("rating/{productId}")
     fun getProductRatings(@Path("productId") productId: String): Single<BasePagingResp<ProductReview>>
 
