@@ -1,6 +1,7 @@
 package com.example.rentagown.v2.ui.bookingsummary
 
 import android.content.Intent
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -16,6 +17,11 @@ import com.example.rentagown.v2.data.repository.RepositoryLocator
 import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.util.Utils
+import java.lang.String
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>(), BookingSummaryContract.View,
         View.OnClickListener {
@@ -41,11 +47,17 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     private lateinit var btnBackToHome: Button
 
     override fun init() {
-        presenter = BookingSummaryPresenter(RepositoryLocator
-                .getInstance(RemoteRepositoryLocator
-                        .getInstance(RAGApi
-                                .apiService(this)))
-                .bookingRepository)
+        presenter = BookingSummaryPresenter(
+            RepositoryLocator
+                .getInstance(
+                    RemoteRepositoryLocator
+                        .getInstance(
+                            RAGApi
+                                .apiService(this)
+                        )
+                )
+                .bookingRepository
+        )
     }
 
     override fun setupWidgets() {
@@ -88,8 +100,38 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
                 .error(R.color.colorGray)
                 .into(ivPaymentBankLogo)
 
-        val paymentDeadlineDt = Utils.parseDateTime(booking.paymentDeadline, Utils.DATE_FORMAT_PAYMENT_DEADLINE)
-        tvPaymentDeadline.text = Utils.formatDateTime(booking.paymentDeadline, Utils.DATE_FORMAT_PAYMENT_DEADLINE, Utils.DATE_TIME_FORMAT_PAYMENT_DEADLINE)
+        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(booking.paymentDeadline)
+        val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy").format(date)
+//        val paymentDeadlineDt = Utils.parseDateTime(
+//            booking.paymentDeadline,
+//            Utils.DATE_TIME_FORMAT_PAYMENT_DEADLINE1
+//        )
+
+        val timer = object: CountDownTimer(86400000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val countDown = String.format(
+                    "%02d:%02d:%02d",
+                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                        TimeUnit.MILLISECONDS.toHours(
+                            millisUntilFinished
+                        )
+                    ),
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                    )
+                )
+                tvCountdownTimer.visibility = View.VISIBLE
+                tvCountdownTimer.text = countDown
+            }
+
+            override fun onFinish() {
+                tvCountdownTimer.text = "00:00:00"
+            }
+        }
+        timer.start()
+
+        tvPaymentDeadline.text = pDeadline.toString()
 
         tvTotalPrice.text = Utils.formatMoney(booking.paidPrice)
         tvConfirmAccountNumber.text = booking.accountNumber

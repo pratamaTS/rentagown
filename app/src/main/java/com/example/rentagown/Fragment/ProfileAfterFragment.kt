@@ -111,7 +111,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
             val imgURL: String = Constants.SERVER_URL + dataProfile?.pathPhoto
             Picasso.get().load(imgURL).into(imProfile)
         }else {
-            imProfile?.setImageResource(R.drawable.family_1)
+            imProfile?.setImageResource(R.drawable.bg_placeholder)
         }
     }
 

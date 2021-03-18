@@ -24,6 +24,7 @@ object Utils {
     val DATE_FORMAT_PRODUCT = DateTimeFormatter.ofPattern("dd'\\'MM'\\'yyyy", LOCALE)
     val DATE_FORMAT_PAYMENT_DEADLINE = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", LOCALE)
     val DATE_TIME_FORMAT_PAYMENT_DEADLINE = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy HH:mm:ss", LOCALE)
+    val DATE_TIME_FORMAT_PAYMENT_DEADLINE1 = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy", LOCALE)
     val DATE_TIME_FORMAT_PAYMENT_DEADLINE2 = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss", LOCALE)
     val DATE_FORMAT_CREATE_BOOKING = DateTimeFormatter.ofPattern("dd-MM-yyyy", LOCALE)
     val DATE_FORMAT_MY_BOOKING = DateTimeFormatter.ofPattern("dd MMM yyyy", LOCALE)

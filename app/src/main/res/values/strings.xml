@@ -367,7 +367,7 @@
     <string name="lbl_no_text">-</string>
 
     <string name="lbl_pick_date">Pick Date</string>
-    <string name="lbl_dates_not_available">Not available</string>
+    <string name="lbl_dates_not_available">Unavailable</string>
     <string name="lbl_unit_cm">cm</string>
     <string name="lbl_similar_category">Similar Product</string>
     <string name="lbl_one_day_service">One day service</string>
