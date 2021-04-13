@@ -22,6 +22,10 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.createBooking(createBooking)
     }
 
+    override fun checkDate(productID: String, reqCheckDate: ReqCheckDate): Single<DateResponse> {
+        return remoteRepository.checkDate(productID, reqCheckDate)
+    }
+
     override fun cancelBooking(reqCancel: ReqCancelBooking): Single<BaseResp<Booking>> {
         return remoteRepository.cancelBooking(reqCancel)
     }

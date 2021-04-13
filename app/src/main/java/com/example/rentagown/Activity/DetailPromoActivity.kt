@@ -81,7 +81,7 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
         }
 
         if(promoDetail!!.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:5000" + promoDetail!!.pathPhoto
+            val imgURL: String = "http://absdigital.id:55000" + promoDetail!!.pathPhoto
             Picasso.get().load(imgURL).resize(200, 200).into(imPromo)
         }else {
             imPromo!!.setImageResource(R.drawable.promo)

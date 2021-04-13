@@ -36,6 +36,9 @@ interface RAGApiService {
     @GET("fitting/{fittingId}")
     fun getFitting(@Path("fittingId") fittingId: String): Single<BaseResp<Fitting>>
 
+    @POST("booking/checkdate/{productId}")
+    fun checkDate(@Path("productId") productID: String, @Body reqCheckDate: ReqCheckDate): Single<DateResponse>
+
     @POST("fitting")
     fun saveFitting(@Body fitting: Fitting): Single<BaseResp<Fitting>>
 

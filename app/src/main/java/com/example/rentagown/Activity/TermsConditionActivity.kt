@@ -67,7 +67,7 @@ class TermsConditionActivity : AppCompatActivity(), View.OnClickListener {
         webView = findViewById(R.id.webview_terms_condition)
         webView.getSettings().javaScriptEnabled = true
         webView.getSettings().setAppCacheEnabled(true)
-        webView.loadUrl("https://rentagown.absdigital.co.id/terms-conditions/")
+        webView.loadUrl("https://rentagown.id/terms-conditions/")
         Run.after(2000, {
             loadingDialog.dismiss()
         })

@@ -72,7 +72,6 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
         tvConfirmationAmount = findViewById(R.id.tv_confirmation_amount)
         spBankName = findViewById(R.id.spinner_bank_name)
-//        etBankName = findViewById(R.id.et_bank_name)
         etAccountNumber = findViewById(R.id.et_account_number)
         etAccountName = findViewById(R.id.et_account_name)
         etPaymentAmount = findViewById(R.id.et_payment_amount)

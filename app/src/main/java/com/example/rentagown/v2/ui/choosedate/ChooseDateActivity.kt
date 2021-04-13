@@ -2,19 +2,29 @@ package com.example.rentagown.v2.ui.choosedate
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
 import com.applikeysolutions.cosmocalendar.model.Day
 import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener2
 import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager
 import com.applikeysolutions.cosmocalendar.selection.SelectionState
 import com.applikeysolutions.cosmocalendar.utils.DateUtils
 import com.applikeysolutions.cosmocalendar.view.CalendarView
+import com.example.rentagown.Connection.Interface.CheckDateInterface
+import com.example.rentagown.Connection.Presenter.CheckDatePresenter
 import com.example.rentagown.R
+import com.example.rentagown.Response.CheckDate.DataCheckDate
 import com.example.rentagown.v2.base.BaseRAGActivity
+import com.example.rentagown.v2.data.model.ReqCheckDate
+import com.example.rentagown.v2.data.network.RAGApi
+import com.example.rentagown.v2.data.remote.RemoteRepositoryLocator
+import com.example.rentagown.v2.data.repository.RepositoryLocator
+import com.example.rentagown.v2.ui.invoicedetail.InvoiceDetailPresenter
 import java.util.*
 
-class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), ChooseDateContract.View, View.OnClickListener {
+class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), ChooseDateContract.View, View.OnClickListener, CheckDateInterface {
 
     companion object {
 
@@ -37,8 +47,17 @@ class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), Choo
 
     override fun init() {
         super.init()
-
-        presenter = ChooseDatePresenter()
+        presenter = ChooseDatePresenter(
+                RepositoryLocator
+                        .getInstance(
+                                RemoteRepositoryLocator
+                                        .getInstance(
+                                                RAGApi
+                                                        .apiService(this)
+                                        )
+                        )
+                        .bookingRepository
+        )
     }
 
     override fun setupWidgets() {
@@ -93,12 +112,14 @@ class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), Choo
 
     }
 
+    private fun getSelectedProductId() = intent.getStringExtra("product_id")
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_choose -> {
                 val selectionManager = cvBookingCalendar.selectionManager
                 if(selectionManager is RangeSelectionManager) {
-                    presenter.chooseDate(selectedStartDate, selectedEndDate)
+                    presenter.chooseDate(getSelectedProductId().toString(), selectedStartDate, selectedEndDate)
                 }
             }
         }
@@ -112,6 +133,15 @@ class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), Choo
             setResult(RES_DATE_PICKED, this)
             finish()
         }
+    }
+
+    override fun showMessage(msg: String) {
+        Log.d("check date", msg)
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+    override fun checkingDate(productID: String, reqCheckDate: ReqCheckDate) {
+        CheckDatePresenter(this).checkDate(this, reqCheckDate, productID)
     }
 
     override fun selectDate(calendar: Calendar) {
@@ -128,6 +158,15 @@ class ChooseDateActivity : BaseRAGActivity<ChooseDateContract.Presenter>(), Choo
 //    private fun getSelectedStartDate() = intent.getLongExtra("selected_start_date", 1614145628098)
 
     private fun getSelectedEndDate() = intent.getLongExtra("selected_end_date", -1)
+
+    override fun onSuccessCheckDate(dataCheckDate: DataCheckDate) {
+        presenter.setSuccesCheckingDate(selectedStartDate, selectedEndDate)
+    }
+
+    override fun onErrorCheckDate(msg: String) {
+        presenter.closeLoading()
+        showMessage(msg)
+    }
 //    private fun getSelectedEndDate() = intent.getLongExtra("selected_end_date", 1614318428098)
 
 }

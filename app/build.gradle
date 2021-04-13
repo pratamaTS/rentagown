@@ -148,6 +148,13 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation "com.github.skydoves:powerspinner:1.1.7"
     implementation("io.coil-kt:coil:1.1.1")
+    implementation 'com.github.yalantis:ucrop:2.2.2'
+    //Butterknife
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    //dexter permissions
+    implementation "com.karumi:dexter:5.0.0"
 
 
 }

@@ -83,6 +83,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
     private var selectedAddress: Address? = null
     private var selectedBank: Bank? = null
     private var selectedPaymentType: PaymentTypeEnum? = null
+    private var remainsBill: Long? = null
 
 
     override fun init() {
@@ -182,7 +183,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         tvAddressName.text = address.addressLabel
         tvReceiverName.text = address.receiverName
         tvReceiverPhoneNumber.text = "(${address.receiverPhoneNumber})"
-        tvAddressDetail.text = address.addressDetail
+        tvAddressDetail.text = address.address
 
     }
 
@@ -315,8 +316,15 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         tvLblSelectedPaymentType.visibility = View.VISIBLE
         tvSelectedPaymentTypePrice.visibility = View.VISIBLE
 
-        tvLblSelectedPaymentType.text = paymentType.typeName
-        tvSelectedPaymentTypePrice.text = if(paymentType.isFullPayment) Utils.formatMoney(product?.finalPrice) else Utils.formatMoney(paymentType.dpValue)
+
+        if(!paymentType.isFullPayment){
+            remainsBill = product?.finalPrice?.minus(paymentType.dpValue)
+            tvLblSelectedPaymentType.text = "Remaining Bills"
+        }else{
+            tvLblSelectedPaymentType.text = paymentType.typeName
+        }
+
+        tvSelectedPaymentTypePrice.text = if(paymentType.isFullPayment) Utils.formatMoney(product?.finalPrice) else Utils.formatMoney(remainsBill)
 
         tvProductName.text = product?.productName
         tvProductFinalPrice.text = " - ${Utils.formatMoney(product?.finalPrice)}"

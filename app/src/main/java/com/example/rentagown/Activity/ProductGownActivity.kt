@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,20 +15,22 @@ import com.example.rentagown.Adapter.ProductAdapter
 import com.example.rentagown.Connection.Interface.ProductAllInterface
 import com.example.rentagown.Connection.Interface.ProductByCategoryInterface
 import com.example.rentagown.Connection.Interface.ProductByPromoInterface
+import com.example.rentagown.Connection.Interface.ProductCategoryInterface
 import com.example.rentagown.Connection.Presenter.ProductAllPresenter
 import com.example.rentagown.Connection.Presenter.ProductByCategoryPresenter
 import com.example.rentagown.Connection.Presenter.ProductByPromoPresenter
+import com.example.rentagown.Connection.Presenter.ProductCategoryPresenter
 import com.example.rentagown.Decoration.ItemDecorationSlider
 import com.example.rentagown.Interface.ItemClickListener
 import com.example.rentagown.Model.CategoryMenu
-import com.example.rentagown.Model.Product
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
+import com.example.rentagown.Response.ProductCategory.DataProductCategory
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
-    ItemClickListener, ProductAllInterface, ProductByCategoryInterface, ProductByPromoInterface {
+    ItemClickListener, ProductAllInterface, ProductByCategoryInterface, ProductByPromoInterface, ProductCategoryInterface, CategoryProductAdapter.ReloadItemInterface {
     var back: ImageButton? = null
     var filter: ImageButton? = null
     var rvMenuCategory: RecyclerView? = null
@@ -60,33 +61,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
                 }
             }
         }else{
-
-            //Title Menu
-            categoryMenuList?.add(CategoryMenu(0, "All"))
-            categoryMenuList?.add(CategoryMenu(1, "Prewedding"))
-            categoryMenuList?.add(CategoryMenu(2, "Wedding"))
-            categoryMenuList?.add(CategoryMenu(3, "Family"))
-            categoryMenuList?.add(CategoryMenu(4, "Maternity"))
-
-            //Setup Recycler View Title Menu
-            categoryProductAdapter = CategoryProductAdapter(categoryMenuList, this)
-            rvMenuCategory?.setLayoutManager(
-                LinearLayoutManager(
-                    this,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-            )
-            rvMenuCategory?.setAdapter(categoryProductAdapter)
-            rvMenuCategory?.addItemDecoration(ItemDecorationSlider(16))
-            categoryProductAdapter!!.selectCategory(0)
-
-            //Preselect first category
-            selectedCategoryMenu = categoryProductAdapter!!.getItem(0)
-
-            //Product
-            getCategoryProduct(selectedCategoryMenu!!.idCategory)
-
+            getCategory()
         }
 
         //SET LISTENER
@@ -94,24 +69,8 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         filter?.setOnClickListener(this)
     }
 
-    private fun getCategoryProduct(categoryId: Int) {
-        when (categoryId) {
-            0 -> {
-                getAllProduct()
-            }
-            1 -> {
-                getAllProductByCat("prewedding")
-            }
-            2 -> {
-                getAllProductByCat("wedding")
-            }
-            3 -> {
-                getAllProductByCat("family")
-            }
-            4 -> {
-                getAllProductByCat("maternity")
-            }
-        }
+    private fun getCategory(){
+        ProductCategoryPresenter(this).getAllProductCategory()
     }
 
     private fun getProductPromo() {
@@ -120,10 +79,6 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun getAllProduct() {
         ProductAllPresenter(this).getAllProduct()
-    }
-
-    private fun getAllProductByCat(category: String) {
-        ProductByCategoryPresenter(this).getAllProductByCategory(category)
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -141,7 +96,6 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         when (view!!.id) {
             R.id.category_menu_item_container -> {
                 val cm = categoryProductAdapter!!.getItem(position)
-                getCategoryProduct(cm.idCategory)
             }
         }
     }
@@ -180,6 +134,18 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
+    override fun passReloadItem(namaCategory: String) {
+        if(namaCategory == "all"){
+            getAllProduct()
+        }else{
+            getProductByCategory(namaCategory)
+        }
+    }
+
+    private fun getProductByCategory(namaCategory: String){
+        ProductByCategoryPresenter(this).getAllProductByCategory(namaCategory)
+    }
+
     override fun onErrorGetProductByCategory(msg: String) {
         Toast.makeText(this, "Failed to get data product by category", Toast.LENGTH_SHORT)
     }
@@ -201,5 +167,35 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onErrorGetProductByPromo(msg: String) {
         Toast.makeText(this, "Failed to get data product by category", Toast.LENGTH_SHORT)
+    }
+
+    override fun onSuccessGetProductCategory(dataProductCat: ArrayList<DataProductCategory>?) {
+        categoryMenuList.add(CategoryMenu(0, "All"))
+        var i = 1
+        if (dataProductCat != null) {
+            for(data in dataProductCat){
+                categoryMenuList.add(CategoryMenu(i, data.nameProductCategory?.capitalize().toString()))
+                i = i + 1
+            }
+        }
+
+        //Setup Recycler View Title Menu
+        categoryProductAdapter = CategoryProductAdapter(this, categoryMenuList, this)
+        rvMenuCategory?.setLayoutManager(
+            LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        rvMenuCategory?.setAdapter(categoryProductAdapter)
+        rvMenuCategory?.addItemDecoration(ItemDecorationSlider(16))
+
+        // preselect first category
+        selectedCategoryMenu = categoryProductAdapter!!.getItem(0)
+    }
+
+    override fun onErrorGetProductCategory(msg: String) {
+        Toast.makeText(this, "Failed to get data category", Toast.LENGTH_SHORT).show()
     }
 }

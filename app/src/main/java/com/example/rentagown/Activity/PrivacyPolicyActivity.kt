@@ -73,7 +73,7 @@ class PrivacyPolicyActivity : AppCompatActivity(), View.OnClickListener {
         webView = findViewById(R.id.webview_privacy_policy)
         webView.getSettings().javaScriptEnabled = true
         webView.getSettings().setAppCacheEnabled(true)
-        webView.loadUrl("https://rentagown.absdigital.co.id/privacy-policy/")
+        webView.loadUrl("https://rentagown.id/privacy-policy/")
         Run.after(2000, {
             loadingDialog.dismiss()
         })

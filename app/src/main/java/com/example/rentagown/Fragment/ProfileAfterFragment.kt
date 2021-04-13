@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.rentagown.Activity.*
@@ -23,6 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface {
     private lateinit var sessionManager: SessionManager
+    val TAG = ProfileAfterFragment::class.java.simpleName
 
     var invoiceHistory: ConstraintLayout? = null
     var transactionStatus: ConstraintLayout? = null

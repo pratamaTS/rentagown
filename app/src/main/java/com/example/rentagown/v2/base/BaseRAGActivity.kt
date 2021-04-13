@@ -1,6 +1,7 @@
 package com.example.rentagown.v2.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -126,6 +127,7 @@ abstract class BaseRAGActivity<P: BasePresenter> : AppCompatActivity(), BaseView
     }
 
     override fun showErrorMessage(message: String?) {
+        Log.d("failed error date", message.toString())
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 

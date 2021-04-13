@@ -6,7 +6,7 @@ enum class PaymentTypeEnum(
         val dpValue: Long,
         val isFullPayment: Boolean) {
 
-    DOWN_PAYMENT(1, "Deposit Booking (Transfer)", 500000, false),
+    DOWN_PAYMENT(1, "Down Payment (Transfer)", 1000000, false),
     FULL_PAYMENT(2, "Full Payment (Transfer)", 0, true);
 
     companion object {

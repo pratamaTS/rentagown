@@ -33,7 +33,7 @@ class AddressItem(model: Address, private val selectedAddressId: String? = null)
         holder.tvAddressName.text = if(model.addressLabel.isNullOrBlank()) "-" else model.addressLabel
         holder.tvReceiverName.text = if(model.receiverName.isNullOrBlank()) "-" else model.receiverName
         holder.tvReceiverPhoneNumber.text = if(model.receiverPhoneNumber.isNullOrBlank()) "-" else model.receiverPhoneNumber
-        holder.tvAddressDetail.text = if(model.addressDetail.isNullOrBlank()) "-" else model.addressDetail
+        holder.tvAddressDetail.text = if(model.address.isNullOrBlank()) "-" else model.address
 
         holder.btnChooseAddress.visibility = if(selectedAddressId != model.addressId) View.VISIBLE else View.GONE
     }

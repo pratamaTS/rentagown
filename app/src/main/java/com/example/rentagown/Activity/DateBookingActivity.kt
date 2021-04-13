@@ -121,7 +121,7 @@ class DateBookingActivity : AppCompatActivity(), View.OnClickListener, CheckDate
                         val startDateCheck: String = outputCheckFormat.format(startDateNew)
                         val endDateCheck: String = outputCheckFormat.format(endDateNew)
 
-                        CheckDatePresenter(this).checkDate(this, CheckDateBody(startDateCheck, endDateCheck), idProduct.toString())
+//                        CheckDatePresenter(this).checkDate(this, CheckDateBody(startDateCheck, endDateCheck), idProduct.toString())
 
                     } else {
                         Toast.makeText(this, "Invalid Selection", Toast.LENGTH_SHORT)

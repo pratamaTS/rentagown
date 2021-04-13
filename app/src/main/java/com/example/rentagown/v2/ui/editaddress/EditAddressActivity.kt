@@ -79,7 +79,7 @@ class EditAddressActivity : BaseRAGActivity<EditAddressContract.Presenter>(), Ed
 
     override fun setAddressData(address: Address) {
         etAddressName.setText(address.addressLabel)
-        etAddressDetail.setText(address.addressDetail)
+        etAddressDetail.setText(address.address)
         etReceiverName.setText(address.receiverName)
         etReceiverPhoneNumber.setText(address.receiverPhoneNumber)
     }
@@ -89,7 +89,7 @@ class EditAddressActivity : BaseRAGActivity<EditAddressContract.Presenter>(), Ed
         return Address(
             addressId = oldAddress?.addressId,
             addressLabel = etAddressName.text.toString().trim(),
-            addressDetail = etAddressDetail.text.toString().trim(),
+            address = etAddressDetail.text.toString().trim(),
             receiverName = etReceiverName.text.toString().trim(),
             receiverPhoneNumber = etReceiverPhoneNumber.text.toString().trim()
         )

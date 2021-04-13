@@ -159,6 +159,7 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
     override fun navigateToSelectDates(startDate: Long?, endDate: Long?) {
 
         Intent(activity, ChooseDateActivity::class.java).apply {
+            putExtra("product_id", getSelectedProductId())
             putExtra("selected_start_date", startDate)
             putExtra("selected_end_date", endDate)
             startActivityForResult(this, ChooseDateActivity.REQ_PICK_DATE_RANGE)

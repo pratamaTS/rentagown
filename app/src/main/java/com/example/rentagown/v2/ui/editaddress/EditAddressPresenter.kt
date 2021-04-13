@@ -38,17 +38,31 @@ class EditAddressPresenter(private val repository: AddressDataSource) :
                 })
             } else {
                 // add
-                safeCall(repository.addAddress(address), object : Listener<Address> {
-                    override fun onSuccess(data: Address?) {
-                        view?.showLoading(false)
-                        view?.successAddAddress(data)
-                    }
+                if(address.addressLabel!!.isNotEmpty() && address.address!!.isNotEmpty() && address.receiverName!!.isNotEmpty() && address.receiverPhoneNumber!!.isNotEmpty()) {
+                    safeCall(repository.addAddress(address), object : Listener<Address> {
+                        override fun onSuccess(data: Address?) {
+                            view?.showLoading(false)
+                            view?.successAddAddress(data)
+                        }
 
-                    override fun onFailed(message: String?) {
-                        view?.showLoading(false)
-                        super.onFailed(message)
-                    }
-                })
+                        override fun onFailed(message: String?) {
+                            view?.showLoading(false)
+                            super.onFailed(message)
+                        }
+                    })
+                }else if(address.addressLabel.isNullOrEmpty()){
+                    view?.showLoading(false)
+                    view?.showErrorMessage("Address label is still empty")
+                }else if(address.address.isNullOrEmpty()){
+                    view?.showLoading(false)
+                    view?.showErrorMessage("Address is still empty")
+                }else if(address.receiverName.isNullOrEmpty()){
+                    view?.showLoading(false)
+                    view?.showErrorMessage("Name is still empty")
+                }else {
+                    view?.showLoading(false)
+                    view?.showErrorMessage("Phone number is still empty")
+                }
             }
         }
     }

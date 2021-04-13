@@ -362,24 +362,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
             editor.commit()
         }else{
             countNotif = dataNotification.size
-//            for (notif in dataNotification){
-//                dumpStatus = arrayOf(notif.status!!)
-//            }
-//            if(dataNotification.find { it.status == 3 }?.status == 3 || dataNotification.find { it.status == 5 }?.status == 5){
-//                editor.putBoolean(STATUS_PAYMENT, true)
-//                editor.putBoolean(READ_NOTIF, false)
-//                editor.commit()
-//                statusRead = false
-//                statusConfirmPayment = true
-//                if(statusRead == false){
-//                    setBadgeNotif(false)
-//                }
-//            }
 
-            Log.d("count notif", countNotif.toString())
-            Log.d("old count notif", oldNotifCount.toString())
-            Log.d("status notif", statusRead.toString())
-            Log.d("dump status notif", dumpStatus.toString())
+//            Log.d("count notif", countNotif.toString())
+//            Log.d("old count notif", oldNotifCount.toString())
+//            Log.d("status notif", statusRead.toString())
+//            Log.d("dump status notif", dumpStatus.toString())
 
             if(countNotif > oldNotifCount){
                 editor.putInt(COUNT_NOTIF, countNotif)

@@ -12,6 +12,16 @@
     <string name="nav_booking">Booking</string>
     <string name="nav_profile">Profile</string>
 
+    <!-- image picker -->
+    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
+    <string name="lbl_set_profile_photo">Set profile image</string>
+    <string name="lbl_take_camera_picture">Take a picture</string>
+    <string name="lbl_choose_from_gallery">Choose from gallery</string>
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">Go To Settings</string>
+
     <!-- item booking -->
     <string name="price_booking">Price :</string>
     <string name="dp_paid_booking">DP Paid :</string>
@@ -110,7 +120,7 @@
     <!-- activity change address -->
     <string name="appbar_change_address">Change Address</string>
     <string name="appbar_change_bank">Change Bank</string>
-    <string name="btn_choose_address">Choose Address</string>
+    <string name="btn_choose_address">Select Address</string>
     <string name="btn_choose_bank">Choose Bank</string>
 
 
@@ -199,7 +209,7 @@
     <string name="appbar_payment">Payment</string>
     <string name="title_shipping_address">Shipping Address</string>
     <string name="btn_change_address">Change Address</string>
-    <string name="btn_add_address">Add Address</string>
+    <string name="btn_add_address">Select Address</string>
     <string name="label_rumah">Rumah</string>
     <string name="label_name">John Doe</string>
     <string name="label_no_hp">(6287871180436)</string>
@@ -212,12 +222,12 @@
     <string name="account_name">John Doe</string>
     <string name="account_number">5496523645</string>
     <string name="title_payment_summary">Payment Summary</string>
-    <string name="payment_deposit_booking">Deposit Booking</string>
+    <string name="payment_deposit_booking">Remaining Bills</string>
     <string name="payment_total">Total</string>
 
     <!-- activity bottom sheet bar payment -->
     <string name="title_select_payment_method">Select Payment Method</string>
-    <string name="deposit_booking_transfer">Deposit Booking (Transfer)</string>
+    <string name="deposit_booking_transfer">Down Payment (Transfer)</string>
     <string name="full_payment_transfer">Full Payment (Transfer)</string>
     <string name="btn_continue">Continue</string>
     <string name="btn_payment">Payment</string>
@@ -262,7 +272,7 @@
     <string name="title_total_price_invoice">Total Price</string>
     <string name="title_total_discount_invoice">Total Discount</string>
     <string name="title_late_charges">Late Charges</string>
-    <string name="title_total_deposit_booking">Total Deposit Booking</string>
+    <string name="title_total_deposit_booking">Total Down Payment</string>
     <string name="title_remaining_bill">Remaining Bill</string>
     <string name="transfer_manual">Transfer Manual</string>
     <string name="title_account_number_invoice">Account Number</string>
@@ -310,7 +320,7 @@
     <string name="title_price_detail_booking">Price</string>
     <string name="title_sub_total_detal_booking">Sub Total</string>
     <string name="title_total_discount_detail_booking">Total Discount</string>
-    <string name="title_dp_paid_detail_booking">Deposit Booking Paid</string>
+    <string name="title_dp_paid_detail_booking">Down Payment Paid</string>
     <string name="title_remaining_bills_detail_booking">Remaining Bills</string>
     <string name="pay_after_service">Down payment/Repayment</string>
     <string name="btn_pay">Confirm</string>
@@ -358,7 +368,7 @@
     <!--  added by raymon  -->
     <string name="title_add_address">Add Address</string>
     <string name="title_edit_address">Edit Address</string>
-    <string name="title_choose_address">Choose Address</string>
+    <string name="title_choose_address">Address Selection</string>
     <string name="title_choose_date">Choose Date</string>
     <string name="title_your_booking">Your Booking</string>
 

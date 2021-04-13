@@ -10,6 +10,7 @@ interface BookingDataSource {
     fun saveFitting(fitting: Fitting) : Single<BaseResp<Fitting>>
     fun getProductUnavailableDates(productId: String) : Single<BasePagingResp<UnavailableDate>>
     fun createBooking(createBooking: ReqCreateBooking) : Single<BaseResp<Booking>>
+    fun checkDate(productID: String, reqCheckDate: ReqCheckDate) : Single<DateResponse>
     fun cancelBooking(reqCancel: ReqCancelBooking) : Single<BaseResp<Booking>>
     fun getMyBookings() : Single<BasePagingResp<Booking>>
     fun getMyBookingsHistory() : Single<BasePagingResp<Booking>>

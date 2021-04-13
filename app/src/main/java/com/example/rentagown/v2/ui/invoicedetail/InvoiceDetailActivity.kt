@@ -2,6 +2,7 @@ package com.example.rentagown.v2.ui.invoicedetail
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -92,6 +93,8 @@ class InvoiceDetailActivity : BaseRAGActivity<InvoiceDetailContract.Presenter>()
                 .fitCenter()
                 .error(R.color.colorGray)
                 .into(ivDestBankLogo)
+
+        ivDestBankLogo.visibility = View.VISIBLE
 
         tvInvoice.text = invoice.invoice
         tvPaymentDate.text = Utils.formatDateTime(invoice.createdAt, Utils.DATE_TIME_FORMAT2)

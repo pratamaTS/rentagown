@@ -115,8 +115,8 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
                 mAct.setSelectedNavId(R.id.nav_home)
                 return
             }
-            if(mAct is MainAfterActivity) {
-                mAct.setSelectedNavId(R.id.nav_home)
+                if(mAct is MainAfterActivity) {
+                    mAct.setSelectedNavId(R.id.nav_home)
                 return
             }
         }

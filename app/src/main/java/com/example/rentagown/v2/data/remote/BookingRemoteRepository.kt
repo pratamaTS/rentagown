@@ -23,6 +23,10 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.createBooking(createBooking)
     }
 
+    override fun checkDate(productID: String, reqCheckDate: ReqCheckDate): Single<DateResponse> {
+        return apiService.checkDate(productID, reqCheckDate)
+    }
+
     override fun cancelBooking(reqCancel: ReqCancelBooking): Single<BaseResp<Booking>> {
         return apiService.cancelBooking(reqCancel)
     }

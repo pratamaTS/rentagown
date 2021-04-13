@@ -107,7 +107,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
 //            Utils.DATE_TIME_FORMAT_PAYMENT_DEADLINE1
 //        )
 
-        val timer = object: CountDownTimer(86400000, 1000) {
+        val timer = object: CountDownTimer(43200000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val countDown = String.format(
                     "%02d:%02d:%02d",

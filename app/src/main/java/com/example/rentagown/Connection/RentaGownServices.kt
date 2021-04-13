@@ -1,6 +1,5 @@
 package com.example.rentagown.Connection
 
-import android.graphics.Bitmap
 import com.example.rentagown.Body.*
 import com.example.rentagown.Model.ChangePassword
 import com.example.rentagown.Model.ForgotPassword
@@ -30,6 +29,7 @@ import com.example.rentagown.Response.Promo.ResponsePromo
 import com.example.rentagown.Response.Register.ResponseRegister
 import com.example.rentagown.Response.Search.ResponseSearch
 import com.example.rentagown.Response.SeeUnDate.ResponseSeeUnDate
+import com.example.rentagown.v2.data.model.ReqCheckDate
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -130,7 +130,7 @@ interface RentaGownServices {
 
     //Get Check Date
     @POST
-    fun checkDate(@Url url: String, @HeaderMap map: MutableMap<String, String>?, @Body checkDateBody: CheckDateBody): Call<ResponseCheckDate>
+    fun checkDate(@Url url: String, @HeaderMap map: MutableMap<String, String>?, @Body reqCheckDate: ReqCheckDate): Call<ResponseCheckDate>
 
     //Edit Profile
     @PUT(Constants.UPDATE_PROFILE)
