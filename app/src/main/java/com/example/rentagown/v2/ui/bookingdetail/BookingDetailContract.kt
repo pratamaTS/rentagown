@@ -14,6 +14,7 @@ class BookingDetailContract {
         fun navigateToConfirmPayment(booking: Booking)
         fun navigateToReviewBooking(booking: Booking)
         fun navigateToFitting(transactionId: String?, fittingId: String?)
+        fun showMsgSuccessCancelBooking()
         fun setResultBookingChanged(booking: Booking, finish: Boolean = true)
 
     }

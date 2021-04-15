@@ -10,6 +10,7 @@ import com.makeramen.roundedimageview.RoundedImageView
 
 class SliderFavoriteGownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvItemName: TextView
+    var tvPromoName: TextView
     var tvPrice: TextView
     var tvOldPrice: TextView
     var tvDisc: TextView
@@ -18,6 +19,7 @@ class SliderFavoriteGownViewHolder(itemView: View) : RecyclerView.ViewHolder(ite
 
     init {
         tvItemName = itemView.findViewById(R.id.tv_name_dress_product)
+        tvPromoName = itemView.findViewById(R.id.tv_label_promo_product)
         tvPrice = itemView.findViewById(R.id.tv_price_dress_product)
         tvOldPrice = itemView.findViewById(R.id.tv_price_old_dress_product)
         tvDisc = itemView.findViewById(R.id.tv_discount_product)

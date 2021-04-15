@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.chooseaddress
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -93,9 +94,35 @@ class ChooseAddressActivity : BaseRAGActivity<ChooseAddressContract.Presenter>()
     }
 
     override fun chooseAddress(address: Address) {
-        resultIntent.putExtra("selected_address", address)
-        setResult(RESULT_OK, resultIntent)
-        finish()
+        when(address.isDefault){
+            0 -> {
+                val msg1 = "Do you want to set this address to default?"
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Confirmation")
+                    .setMessage(msg1)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        resultIntent.putExtra("selected_address", address)
+                        resultIntent.putExtra("default", true)
+                        setResult(RESULT_OK, resultIntent)
+                        finish()
+                    }
+                    .setNegativeButton("No") { dialog, id ->
+                        resultIntent.putExtra("selected_address", address)
+                        resultIntent.putExtra("default", false)
+                        setResult(RESULT_OK, resultIntent)
+                        finish()
+                    }
+                val alert = builder.create()
+                alert.show()
+            }
+            1 -> {
+                resultIntent.putExtra("selected_address", address)
+                resultIntent.putExtra("default", false)
+                setResult(RESULT_OK, resultIntent)
+                finish()
+            }
+        }
     }
 
     override fun navigateToEditAddress(address: Address) {

@@ -2,6 +2,7 @@ package com.example.rentagown.v2.ui.bookingdetail
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -22,6 +23,12 @@ import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.ui.fittingsize.FittingSizeActivity
 import com.example.rentagown.v2.ui.reviewbooking.ReviewBookingActivity
 import com.example.rentagown.v2.util.Utils
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>(), BookingDetailContract.View,
@@ -52,7 +59,12 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
     private lateinit var tvDiscountAmount: TextView
     private lateinit var tvBookingDpPaid: TextView
     private lateinit var tvTotalPrice: TextView
+    private lateinit var tvTitleConfirmPayment: TextView
+    private lateinit var tvPaymentDeadline: TextView
+    private lateinit var tvCountPaymentDeadline: TextView
 
+    private lateinit var containerHeaderPaymentDeadline: View
+    private lateinit var containerPaymentDeadline: View
     private lateinit var containerConfirmPayment: View
 
     private lateinit var btnPay: Button
@@ -81,7 +93,12 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         tvDiscountAmount = findViewById(R.id.tv_discount_amount)
         tvBookingDpPaid = findViewById(R.id.tv_booking_dp_paid)
         tvTotalPrice = findViewById(R.id.tv_total_price)
+        tvTitleConfirmPayment = findViewById(R.id.tv_title_payment_booking_detail)
+        tvPaymentDeadline = findViewById(R.id.tv_payment_deadline_booking_detail)
+        tvCountPaymentDeadline = findViewById(R.id.tv_countdown_timer_booking_detail)
 
+        containerHeaderPaymentDeadline = findViewById(R.id.layout_header_deadline_booking_detail)
+        containerPaymentDeadline = findViewById(R.id.layout_footer_deadline_booking_detail)
         containerConfirmPayment = findViewById(R.id.container_confirm_payment)
 
         btnPay = findViewById(R.id.btn_pay)
@@ -106,6 +123,17 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         tvBookingStartEndDate.text = Utils.formatMyBookingStartEndDate(booking.startDate, booking.endDate)
         tvProductName2.text = booking.productName ?: getString(R.string.lbl_no_text)
 
+        when(booking.paymentMethod) {
+            1 -> {
+                if (booking.status == 3) {
+                    tvTitleConfirmPayment.text = "Remaining Bill Payment"
+                } else if (booking.status == 1) {
+                    tvTitleConfirmPayment.text = "Down Payment"
+                }
+            }
+            2 -> tvTitleConfirmPayment.text = "Full Payment"
+        }
+
         when {
             BookingStatusEnum.isCancelled(booking.status) -> {
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorWhite))
@@ -117,6 +145,51 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
             }
             BookingStatusEnum.isWaitingForPayment(booking.status) -> {
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorSecondary))
+
+                val currentDateTime: LocalDateTime = LocalDateTime.now()
+                val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(booking.paymentDeadline)
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+                val formatterDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy HH:mm:ss", Locale.ENGLISH)
+
+                //Deadline Timeinmilis
+                val deadlineDate = LocalDateTime.parse(booking.paymentDeadline, formatter)
+                val timeInMillisecondsDeadline = deadlineDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+
+                //Now Timeinmilis
+                val nowDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+                val localDate = LocalDateTime.parse(nowDate, formatter)
+                val timeInMillisecondsPhone = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+
+                //timeinmilis
+                val countMilis = timeInMillisecondsDeadline - timeInMillisecondsPhone - 1358000
+
+                val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
+
+                val timer = object: CountDownTimer(countMilis, 1000) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        val countDown = java.lang.String.format(
+                                "%02d:%02d:%02d",
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                        TimeUnit.MILLISECONDS.toHours(
+                                                millisUntilFinished
+                                        )
+                                ),
+                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                                )
+                        )
+                        tvCountPaymentDeadline.visibility = View.VISIBLE
+                        tvCountPaymentDeadline.text = countDown
+                    }
+
+                    override fun onFinish() {
+                        tvCountPaymentDeadline.text = "00:00:00"
+                    }
+                }
+                timer.start()
+
+                tvPaymentDeadline.text = pDeadline.toString()
                 tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)
             }
             BookingStatusEnum.isWaitingForConfirmation(booking.status) -> {
@@ -137,7 +210,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
 
         tvProductPrice.text = Utils.formatMoney(productPrice, "Rp - ", true)
         tvProductPrice2.text = Utils.formatMoney(productPrice, "Rp - ", true)
-        tvDiscountAmount.text = " - " + Utils.formatMoney(abs(productPrice - paidPrice),"Rp. 0 ", true)
+        tvDiscountAmount.text = " - " + Utils.formatMoney(abs(productPrice - paidPrice), "Rp. 0 ", true)
         tvTotalPrice.text = Utils.formatMoney(booking.paidPrice, "Rp - ", true)
 
         val firstPay = booking.downPayment ?: 0
@@ -162,15 +235,23 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
             false
         }
 
+        containerHeaderPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
+            View.GONE
+
+        containerPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
+            View.GONE
+
         containerConfirmPayment.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
             View.GONE
 
-        btnAction.visibility = if((BookingStatusEnum.isAbleToFitting(booking.ableToFitting) || BookingStatusEnum.isAbleToRating(booking.ableToRating))) View.VISIBLE else View.GONE
+        btnAction.visibility = if((BookingStatusEnum.isAbleToFitting(booking.ableToFitting) || BookingStatusEnum.isAbleToRating(booking.ableToRating)) || booking.status == 1) View.VISIBLE else View.INVISIBLE
 
         val actionText = if(BookingStatusEnum.isAbleToFitting(booking.ableToFitting)) {
             getString(R.string.btn_fitting_size)
         } else if(BookingStatusEnum.isAbleToRating(booking.ableToRating)) {
             getString(R.string.btn_review_booking)
+        } else if(booking.status == 1) {
+            getString(R.string.btn_cancel_transaction)
         } else { "" }
         btnAction.text = actionText
     }
@@ -196,6 +277,10 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
 
             startActivityForResult(this, FittingSizeActivity.REQ_EDIT_FITTING)
         }
+    }
+
+    override fun showMsgSuccessCancelBooking() {
+        showMessage(getString(R.string.msg_success_cancel_booking))
     }
 
     override fun setResultBookingChanged(booking: Booking, finish: Boolean) {

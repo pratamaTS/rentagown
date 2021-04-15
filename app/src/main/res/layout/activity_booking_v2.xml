@@ -148,6 +148,7 @@
                             android:id="@+id/tv_address_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:fontFamily="@font/poppins_medium"
@@ -156,9 +157,28 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv_label_default_address_booking"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@+id/tv_address_name"
+                            android:background="@drawable/bg_button_rounded_gold"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:paddingStart="16dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="6dp"
+                            android:text="@string/address_default"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:visibility="invisible"
+                            tools:ignore="MissingConstraints,SmallSp" />
+
+                        <TextView
                             android:id="@+id/tv_receiver_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:layout_below="@+id/tv_address_name"
                             android:fontFamily="@font/poppins_regular"
                             tools:text="@string/label_name"
@@ -171,6 +191,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_address_name"
                             android:layout_marginStart="@dimen/margin_xsm"
+                            android:layout_marginTop="10dp"
                             android:layout_toEndOf="@+id/tv_receiver_name"
                             android:fontFamily="@font/poppins_regular"
                             tools:text="@string/label_no_hp"
@@ -372,8 +393,7 @@
                                     android:id="@+id/iv_payment_method_logo"
                                     android:layout_width="56dp"
                                     android:layout_height="32dp"
-                                    android:contentDescription="@string/todo"
-                                    tools:src="@drawable/logo_bca" />
+                                    android:contentDescription="@string/todo" />
 
                             </LinearLayout>
 

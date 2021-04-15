@@ -24,6 +24,9 @@ data class Address(
     @SerializedName("address")
     val address: String? = null,
 
+    @SerializedName("is_default")
+    val isDefault: Int? = null,
+
     @SerializedName("address_detail")
     val addressDetail: String? = null,
 
@@ -37,6 +40,7 @@ data class Address(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString()
     )
 
@@ -47,6 +51,7 @@ data class Address(
         parcel.writeString(receiverPhoneNumber)
         parcel.writeString(addressLabel)
         parcel.writeString(address)
+        parcel.writeValue(isDefault)
         parcel.writeString(addressDetail)
     }
 

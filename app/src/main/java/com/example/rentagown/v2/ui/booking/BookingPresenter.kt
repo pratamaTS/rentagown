@@ -1,23 +1,34 @@
 package com.example.rentagown.v2.ui.booking
 
+import android.util.Log
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.enums.PaymentTypeEnum
-import com.example.rentagown.v2.data.model.Address
-import com.example.rentagown.v2.data.model.Bank
-import com.example.rentagown.v2.data.model.Booking
-import com.example.rentagown.v2.data.model.ReqCreateBooking
+import com.example.rentagown.v2.data.model.*
 import com.example.rentagown.v2.data.source.BookingDataSource
 
-class BookingPresenter(private val createBooking: ReqCreateBooking?,
-                       private val repository: BookingDataSource) : BaseRAGPresenter<BookingContract.View>(), BookingContract.Presenter {
+class BookingPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<BookingContract.View>(), BookingContract.Presenter {
 
 
     override fun start() {
         super.start()
 
+        onDefaultAddressLoaded()
+
         view?.setPaymentTypeDataToView(PaymentTypeEnum.getDefaultPaymentType(), view?.getReqCreateBookingData(), view?.getSelectedProduct())
     }
 
+    override fun onDefaultAddressLoaded() {
+        view?.showLoading(true)
+
+        safeCallDefaultAddress(repository.getDefaultAddress(), object : ListenerAddress {
+            override fun onSuccess(data: Address?) {
+                data?.let {address ->
+                    Log.d("run", address.addressId.toString())
+                    view?.setAddressDataToView(address)
+                }
+            }
+        }, RequestConfiguration(updateLoadingIndicator = false, updateLoadingContentIndicator = false))
+    }
 
     override fun onBtnChangeAddressClicked() {
         view?.navigateToChangeAddress(view?.getSelectedAddressData())
@@ -27,9 +38,27 @@ class BookingPresenter(private val createBooking: ReqCreateBooking?,
         view?.navigateToChangeAddress(view?.getSelectedAddressData())
     }
 
-    override fun onAddressSelected(address: Address?) {
+    override fun onAddressSelected(address: Address?, default: Boolean) {
         address?.let {
-            view?.setAddressDataToView(it)
+            val mReqSetAddress = ReqSetAddress(
+                    addressId = it.addressId
+                )
+
+            when(default) {
+                true -> {
+                    view?.showLoading(true)
+                    safeCall (repository.setDefaultAddress(mReqSetAddress), object :
+                        Listener<Address> {
+                        override fun onSuccess(data: Address?) {
+                            data?.let {
+                                view?.setAddressDataToView(it)
+                            }
+                        }
+                    }, RequestConfiguration(updateLoadingContentIndicator = false))
+                }
+                false -> view?.setAddressDataToView(it)
+
+            }
         }
     }
 

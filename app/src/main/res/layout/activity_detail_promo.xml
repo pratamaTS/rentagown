@@ -43,6 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_lg"
                         android:fontFamily="@font/poppins_regular"
                         android:text="@string/appbar_detail_promo"
                         android:textColor="@color/colorBlack"
@@ -78,28 +79,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="16dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/im_item_promo"
-                            android:layout_width="200dp"
+                            android:layout_width="match_parent"
                             android:layout_height="200dp"
                             app:riv_corner_radius="8dp"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitXY"
                             app:riv_mutate_background="true"
                             app:riv_oval="false"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/promo" />
+                            android:contentDescription="@string/todo" />
 
                         <RelativeLayout
                             android:id="@+id/desc_item_list_promo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingTop="5dp"
-                            android:paddingBottom="5dp">
+                            android:layout_marginTop="16dp">
 
                             <ImageView
                                 android:id="@+id/im_detail_discount"
@@ -112,7 +109,7 @@
                                 android:id="@+id/tv_title_item_detail_promo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/title_list_promo"
+                                tools:text="@string/title_list_promo"
                                 android:textSize="14sp"
                                 android:textColor="@color/colorBlack"
                                 android:fontFamily="@font/poppins_medium"
@@ -131,7 +128,7 @@
                                 android:textColor="@color/colorGray"
                                 android:textSize="12sp"
                                 tools:ignore="SmallSp,UnusedAttribute"
-                                android:text="@string/decs_promo" />
+                                tools:text="@string/decs_promo" />
 
                         </RelativeLayout>
 
@@ -159,7 +156,7 @@
                             android:id="@+id/field_tems_and_conditions_promo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/field_terms_conditions_promo"
+                            tools:text="@string/field_terms_conditions_promo"
                             android:textSize="12sp"
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="5sp"/>
@@ -167,33 +164,33 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layout_text_for_referrers_promo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/layout_text_for_referrers_promo"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="16dp">-->
 
-                        <TextView
-                            android:id="@+id/title_for_referrers_promo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/title_for_referrers_promo"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorBlack"
-                            android:fontFamily="@font/poppins_medium"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/title_for_referrers_promo"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/title_for_referrers_promo"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textColor="@color/colorBlack"-->
+<!--                            android:fontFamily="@font/poppins_medium"/>-->
 
-                        <TextView
-                            android:id="@+id/field_for_referrers_promo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/field_for_referrers_promo"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:lineSpacingExtra="5sp"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/field_for_referrers_promo"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            tools:text="@string/field_for_referrers_promo"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:fontFamily="@font/poppins_regular"-->
+<!--                            android:lineSpacingExtra="5sp"/>-->
 
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 

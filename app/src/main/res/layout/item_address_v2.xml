@@ -13,47 +13,71 @@
     app:cardBackgroundColor="@color/colorWhite"
     app:contentPadding="@dimen/padding_md"
     app:cardElevation="4dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageButton
             android:id="@+id/btn_delete_address"
             android:layout_width="@dimen/icon_button_sm"
             android:layout_height="@dimen/icon_button_sm"
+            android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/todo"
-            android:layout_marginStart="@dimen/margin_sm"
             android:src="@drawable/ic_delete"
-            app:layout_constraintTop_toTopOf="@id/tv_address_name"
-            app:layout_constraintStart_toEndOf="@id/btn_edit_address"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/btn_edit_address"
             android:layout_width="@dimen/icon_button_sm"
             android:layout_height="@dimen/icon_button_sm"
+            android:layout_marginEnd="12dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_edit"
-            app:layout_constraintTop_toTopOf="@id/btn_delete_address"
-            app:layout_constraintEnd_toStartOf="@id/btn_delete_address"
-            app:layout_constraintStart_toEndOf="@id/tv_address_name"/>
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete_address"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
             android:id="@+id/tv_address_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            tools:text="Rumah"
-            android:textColor="@color/colorMistyBlack"
-            android:textSize="@dimen/font_sm"
-            android:singleLine="true"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/poppins_medium"
+            android:singleLine="true"
+            android:textColor="@color/colorMistyBlack"
+            android:textSize="@dimen/font_md"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_edit_address" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Rumah" />
+
+        <TextView
+            android:id="@+id/tv_label_default_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_button_rounded_gold"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/tv_address_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints,SmallSp"
+            android:text="@string/address_default" />
+
         <TextView
             android:id="@+id/tv_receiver_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
             tools:text="John Doe"
             android:textColor="@color/colorMistyBlack"
@@ -61,8 +85,7 @@
             android:singleLine="true"
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/tv_address_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_edit_address"/>
+            app:layout_constraintStart_toStartOf="parent" />
         <TextView
             android:id="@+id/tv_receiver_phone_number"
             android:layout_width="0dp"

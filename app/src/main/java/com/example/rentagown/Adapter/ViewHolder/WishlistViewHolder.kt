@@ -13,6 +13,7 @@ class WishlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvPrice: TextView
     var tvPriceOld: TextView
     var tvDiscount: TextView
+    var tvPromoName: TextView
     var imProduct: RoundedImageView
     var btnBooking: Button
 
@@ -21,6 +22,7 @@ class WishlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvPrice = itemView.findViewById(R.id.tv_price_dress_product)
         tvPriceOld = itemView.findViewById(R.id.tv_price_old_dress_product)
         tvDiscount = itemView.findViewById(R.id.tv_discount_product)
+        tvPromoName = itemView.findViewById(R.id.tv_label_promo_product)
         imProduct = itemView.findViewById(R.id.im_image_product)
         btnBooking = itemView.findViewById(R.id.btn_booking_now)
     }

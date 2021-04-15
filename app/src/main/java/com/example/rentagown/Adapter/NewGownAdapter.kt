@@ -31,6 +31,7 @@ class NewGownAdapter(private val mContext: Context, private val newGownList: Arr
 
     override fun onBindViewHolder(holder: NewGownViewHolder, position: Int) {
         holder.tvItemName.setText(newGownList[position].productName?.capitalize()?.trim())
+        holder.tvPromoName.text = newGownList[position].promoName?.trim()
 
         if(newGownList[position].idPromo?.isNotEmpty() == true) {
             holder.tvPrice.setText(numberFormat.format(newGownList[position].finalPrice))

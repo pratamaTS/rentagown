@@ -31,6 +31,7 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.tvItemName.setText(productList[position].productName?.capitalize()?.trim())
+        holder.tvPromoName.text = productList[position].promoName?.trim()
 
         if(productList[position].idPromo?.isNotEmpty() == true) {
             holder.tvPrice.setText(numberFormat.format(productList[position].finalPrice))

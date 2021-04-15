@@ -11,12 +11,16 @@ import com.makeramen.roundedimageview.RoundedImageView
 class SliderMainMenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvItemName: TextView
     var tvPrice: TextView
+    var tvOldPrice: TextView
+    var tvDisc: TextView
     var imContent: RoundedImageView
     private val sliderMainMenu: SliderMainMenu? = null
 
     init {
         tvItemName = itemView.findViewById(R.id.tv_name_dress_main)
         tvPrice = itemView.findViewById(R.id.tv_harga_dress_main)
+        tvOldPrice = itemView.findViewById(R.id.tv_price_old_dress_main)
+        tvDisc = itemView.findViewById(R.id.tv_discount_main)
         imContent = itemView.findViewById(R.id.im_content_main)
     }
 }

@@ -30,18 +30,18 @@ class BookingSummaryPresenter(private val repository: BookingDataSource) : BaseR
         view?.closeView()
     }
 
-    override fun onBtnCancelTransactionClicked() {
-        view?.getBookingData()?.transactionId?.let { transactionId ->
-            view?.showLoading(true)
-
-            safeCall(repository.cancelBooking(ReqCancelBooking(transactionId)), object : Listener<Booking> {
-                override fun onSuccess(data: Booking?) {
-                    view?.showMsgSuccessCancelBooking()
-                    view?.closeView()
-                }
-            })
-        }
-    }
+//    override fun onBtnCancelTransactionClicked() {
+//        view?.getBookingData()?.transactionId?.let { transactionId ->
+//            view?.showLoading(true)
+//
+//            safeCall(repository.cancelBooking(ReqCancelBooking(transactionId)), object : Listener<Booking> {
+//                override fun onSuccess(data: Booking?) {
+//                    view?.showMsgSuccessCancelBooking()
+//                    view?.closeView()
+//                }
+//            })
+//        }
+//    }
 
     override fun onPaymentConfirmed(booking: Booking?) {
         view?.navigateToBookingSuccess()

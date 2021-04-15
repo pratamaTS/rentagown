@@ -29,7 +29,11 @@ import com.example.rentagown.Response.Promo.ResponsePromo
 import com.example.rentagown.Response.Register.ResponseRegister
 import com.example.rentagown.Response.Search.ResponseSearch
 import com.example.rentagown.Response.SeeUnDate.ResponseSeeUnDate
+import com.example.rentagown.v2.data.model.Address
+import com.example.rentagown.v2.data.model.BaseResp
 import com.example.rentagown.v2.data.model.ReqCheckDate
+import com.example.rentagown.v2.data.model.ReqSetAddress
+import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -91,6 +95,9 @@ interface RentaGownServices {
     @POST(Constants.ADD_ADDRESS)
     fun addAddress(@HeaderMap map: MutableMap<String, String>?, @Body addressBody: AddAddressBody): Call<ResponseAddAddress>
 
+    @PUT(Constants.SET_DEFAULT_ADDRESS)
+    fun setDefaultAddress(@Body reqSetAddress: ReqSetAddress): Call<Address>
+
     //Login
     @POST(Constants.REGISTER)
     fun register(@HeaderMap map: MutableMap<String, String>?, @Body registerBody: RegisterBody): Call<ResponseRegister>
@@ -101,6 +108,10 @@ interface RentaGownServices {
     fun uploadProfilePict(@Part body: MultipartBody.Part) : Call<ResponseUploadPict>
 
     //Get Address
+    @GET(Constants.GET_DEFAULT_ADDRESS)
+    fun getDefaultAddress(@HeaderMap map: MutableMap<String, String>?): Call<Address>
+
+    //Get Default Address
     @GET(Constants.GET_ADDRESS)
     fun getAddress(@HeaderMap map: MutableMap<String, String>?): Call<ResponseGetAddress>
 

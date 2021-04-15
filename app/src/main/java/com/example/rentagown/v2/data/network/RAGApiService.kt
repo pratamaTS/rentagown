@@ -11,11 +11,17 @@ interface RAGApiService {
     @GET("userdetail/find")
     fun getUserAddresses(): Single<BasePagingResp<Address>>
 
+    @GET("userdetail/find/default")
+    fun getDefaultAddress(): Single<Address>
+
     @POST("userdetail")
     fun addUserAddress(@Body address: Address): Single<BaseResp<Address>>
 
     @PUT("userdetail/update/{addressId}")
     fun updateUserAddress(@Path("addressId") addressId: String, @Body address: Address): Single<BaseResp<Address>>
+
+    @PUT("userdetail/default")
+    fun setDefaultAddress(@Body reqSetAddress: ReqSetAddress): Single<BaseResp<Address>>
 
     @HTTP(method = "DELETE", path = "userdetail/{addressId}", hasBody = true)
     fun deleteUserAddress(@Path("addressId") addressId: String, @Body reqDeleteAddress: ReqDeleteAddress): Single<BaseResp<Address>>

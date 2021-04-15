@@ -1,9 +1,11 @@
 package com.example.rentagown.v2.ui.booking
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -26,6 +28,7 @@ import com.example.rentagown.v2.ui.chooseaddress.ChooseAddressActivity
 import com.example.rentagown.v2.ui.choosebank.ChooseBankActivity
 import com.example.rentagown.v2.ui.choosepaymenttype.ChoosePaymentTypeDialog
 import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
+import com.example.rentagown.v2.ui.productdetail.ProductDetailPresenter
 import com.example.rentagown.v2.util.Utils
 
 class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingContract.View,
@@ -51,6 +54,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
 
     private lateinit var containerAddressDetail: View
     private lateinit var tvAddressName: TextView
+    private lateinit var tvDefaultAddress: TextView
     private lateinit var tvReceiverName: TextView
     private lateinit var tvReceiverPhoneNumber: TextView
     private lateinit var tvAddressDetail: TextView
@@ -89,10 +93,9 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
     override fun init() {
         super.init()
 
-        presenter = BookingPresenter(getReqCreateBooking(),
-                RepositoryLocator.getInstance(RemoteRepositoryLocator
-                        .getInstance(RAGApi.apiService(this)))
-                        .bookingRepository)
+        presenter = BookingPresenter(RepositoryLocator.getInstance(RemoteRepositoryLocator
+                .getInstance(RAGApi.apiService(this)))
+                .bookingRepository)
     }
 
     override fun setupWidgets() {
@@ -111,6 +114,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
 
         containerAddressDetail = findViewById(R.id.container_address_detail)
         tvAddressName = findViewById(R.id.tv_address_name)
+        tvDefaultAddress = findViewById(R.id.tv_label_default_address_booking)
         tvReceiverName = findViewById(R.id.tv_receiver_name)
         tvReceiverPhoneNumber = findViewById(R.id.tv_receiver_phone_number)
         tvAddressDetail = findViewById(R.id.tv_address_detail)
@@ -176,15 +180,28 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
     @SuppressLint("SetTextI18n")
     override fun setAddressDataToView(address: Address) {
         this.selectedAddress = address
-        btnChangeAddress.visibility = View.VISIBLE
-        btnAddAddress.visibility = View.GONE
-        containerAddressDetail.visibility = View.VISIBLE
+        Log.d("address", address.toString())
+        if(address.isDefault == 1) {
+            btnChangeAddress.visibility = View.VISIBLE
+            btnAddAddress.visibility = View.GONE
+            containerAddressDetail.visibility = View.VISIBLE
 
-        tvAddressName.text = address.addressLabel
-        tvReceiverName.text = address.receiverName
-        tvReceiverPhoneNumber.text = "(${address.receiverPhoneNumber})"
-        tvAddressDetail.text = address.address
+            tvAddressName.text = address.addressLabel
+            tvDefaultAddress.visibility = View.VISIBLE
+            tvReceiverName.text = address.receiverName
+            tvReceiverPhoneNumber.text = "(${address.receiverPhoneNumber})"
+            tvAddressDetail.text = address.address
+        }else if(address.addressId != "" && address.isDefault == 0) {
+            btnChangeAddress.visibility = View.VISIBLE
+            btnAddAddress.visibility = View.GONE
+            containerAddressDetail.visibility = View.VISIBLE
 
+            tvAddressName.text = address.addressLabel
+            tvDefaultAddress.visibility = View.INVISIBLE
+            tvReceiverName.text = address.receiverName
+            tvReceiverPhoneNumber.text = "(${address.receiverPhoneNumber})"
+            tvAddressDetail.text = address.address
+        }
     }
 
     override fun removeAddressDataFromView() {
@@ -359,7 +376,23 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
             R.id.btn_change_payment_method -> presenter.onBtnChangeBankClicked()
             R.id.btn_choose_payment_type -> presenter.onBtnChoosePaymentTypeClicked()
             R.id.btn_whatsapp -> presenter.onBtnWhatsappClicked()
-            R.id.btn_pay -> presenter.onBtnPayClicked()
+            R.id.btn_pay -> {
+                val msg1 = "Please make sure you fill a correct data"
+                val msg2 = "Are you sure you want to continue?"
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Confirmation")
+                        .setMessage(msg1 +"\n\n"+ msg2)
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { dialog, id ->
+                            presenter.onBtnPayClicked()
+                        }
+                        .setNegativeButton("No") { dialog, id ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                val alert = builder.create()
+                alert.show()
+            }
         }
     }
 
@@ -369,10 +402,11 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
                 val selectedAddress = data?.getParcelableExtra<Address>("selected_address")
                 val editedAddress = data?.getParcelableExtra<Address>("edited_address")
                 val deletedAddress = data?.getParcelableExtra<Address>("deleted_address")
+                val default: Boolean? = data?.getBooleanExtra("default", false)
 
                 when {
                     selectedAddress != null -> {
-                        presenter.onAddressSelected(selectedAddress)
+                        presenter.onAddressSelected(selectedAddress, default!!)
                     }
                     editedAddress != null -> {
                         presenter.onAddressEdited(editedAddress)

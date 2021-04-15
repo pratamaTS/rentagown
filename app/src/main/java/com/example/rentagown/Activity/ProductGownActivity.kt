@@ -40,6 +40,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     var productList: ArrayList<DataProduct> = ArrayList()
     var productAdapter: ProductAdapter? = null
     var checkPromo: Boolean = false
+    private var idPromo: String? = null
 
     private var selectedCategoryMenu: CategoryMenu? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,10 +55,11 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
         if(intent.hasExtra("check_promo")){
             checkPromo = intent.getBooleanExtra("check_promo", false)
+            idPromo = intent.getStringExtra("id_promo")
             when(checkPromo){
                 true -> {
                     rvMenuCategory?.visibility = View.INVISIBLE
-                    getProductPromo()
+                    getProductPromo(idPromo.toString())
                 }
             }
         }else{
@@ -73,8 +75,8 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         ProductCategoryPresenter(this).getAllProductCategory()
     }
 
-    private fun getProductPromo() {
-        ProductByPromoPresenter(this).getAllProductByPromo()
+    private fun getProductPromo(idPromo: String) {
+        ProductByPromoPresenter(this).getAllProductByPromo(idPromo)
     }
 
     private fun getAllProduct() {

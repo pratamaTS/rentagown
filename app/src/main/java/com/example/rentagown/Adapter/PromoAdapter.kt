@@ -26,13 +26,10 @@ class PromoAdapter(private val mContext: Context, private val promoList: ArrayLi
         if(promoList[position].pathPhoto?.isNotEmpty() == true) {
             val imgURL: String = "http://absdigital.id:55000" + promoList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imPromoList)
-        }else {
-            holder.imPromoList.setImageResource(R.drawable.promo)
         }
 
         holder.tvTitlePromoList.setText(promoList[position].promoName?.capitalize()?.trimEnd())
-        holder.tvDescPromoList.setText("The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), \" +\n" +
-                "                \"Booking period until 15 September 2020. Rental period until December 2021.")
+        holder.tvDescPromoList.setText(promoList[position].promoDesc)
 
         holder.itemView.setOnClickListener(View.OnClickListener { v ->
             val detailPromo = Intent(mContext, DetailPromoActivity::class.java)

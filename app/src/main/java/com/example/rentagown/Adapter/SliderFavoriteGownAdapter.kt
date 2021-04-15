@@ -35,6 +35,7 @@ class SliderFavoriteGownAdapter(
 
     override fun onBindViewHolder(holder: SliderFavoriteGownViewHolder, position: Int) {
         holder.tvItemName.setText(favoriteGownList[position].productName?.capitalize()?.trimEnd())
+        holder.tvPromoName.text = favoriteGownList[position].promoName?.trim()
 
         if(favoriteGownList[position].idPromo?.isNotEmpty() == true) {
             holder.tvPrice.setText(numberFormat.format(favoriteGownList[position].finalPrice))

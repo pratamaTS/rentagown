@@ -120,6 +120,7 @@
     <!-- activity change address -->
     <string name="appbar_change_address">Change Address</string>
     <string name="appbar_change_bank">Change Bank</string>
+    <string name="address_default">Default</string>
     <string name="btn_choose_address">Select Address</string>
     <string name="btn_choose_bank">Choose Bank</string>
 
@@ -235,6 +236,7 @@
     <!-- activity confirm payment -->
     <string name="appbar_confirm_payment">Confirm Payment</string>
     <string name="payment_deadline">Payment Deadline</string>
+    <string name="desc_payment_deadline">Please confirm your payment before</string>
     <string name="account_number_confirm">Account Number</string>
     <string name="atas_nama">a.n John Doe</string>
     <string name="btn_invoice">INVOICE</string>
@@ -322,7 +324,7 @@
     <string name="title_total_discount_detail_booking">Total Discount</string>
     <string name="title_dp_paid_detail_booking">Down Payment Paid</string>
     <string name="title_remaining_bills_detail_booking">Remaining Bills</string>
-    <string name="pay_after_service">Down payment/Repayment</string>
+    <string name="pay_after_service">Down payment</string>
     <string name="btn_pay">Confirm</string>
     <string name="btn_fitting_size_detail">Fitting Size</string>
 

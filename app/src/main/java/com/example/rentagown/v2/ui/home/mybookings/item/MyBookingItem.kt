@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.home.mybookings.item
 
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -13,6 +14,13 @@ import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.util.Utils
 import com.example.rentagown.v2.util.to64BitHash
 import com.mikepenz.fastadapter.items.ModelAbstractItem
+import java.lang.String
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.ViewHolder>(model) {
 
@@ -39,6 +47,54 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
         holder.tvProductPrice.text = Utils.formatMoney(model.paidPrice)
 
         val firstPay = model.downPayment ?: 0
+        if(model.ableToFitting == 1){
+            holder.btnFittingSize.visibility = View.VISIBLE
+        }
+
+        if(model.status == 1){
+            holder.tvPaymentDeadline.visibility = View.VISIBLE
+
+            val currentDateTime: LocalDateTime = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+
+            //Deadline Timeinmilis
+            val deadlineDate = LocalDateTime.parse(model.paymentDeadline, formatter)
+            val timeInMillisecondsDeadline = deadlineDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+
+            //Now Timeinmilis
+            val nowDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+            val localDate = LocalDateTime.parse(nowDate, formatter)
+            val timeInMillisecondsPhone = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+
+            //timeinmilis
+            val countMilis = timeInMillisecondsDeadline - timeInMillisecondsPhone - 1358000
+
+            val timer = object: CountDownTimer(countMilis, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val countDown = String.format(
+                        "%02d:%02d:%02d",
+                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                            TimeUnit.MILLISECONDS.toHours(
+                                millisUntilFinished
+                            )
+                        ),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                        )
+                    )
+                    holder.tvCountTimer.visibility = View.VISIBLE
+                    holder.tvCountTimer.text = countDown
+                }
+
+                override fun onFinish() {
+                    holder.tvCountTimer.text = "00:00:00"
+                }
+            }
+            timer.start()
+
+        }
+
         if(PaymentTypeEnum.getByTypeId(model.paymentMethod) == PaymentTypeEnum.DOWN_PAYMENT && firstPay > 0) {
             holder.tvDpPaid.text = Utils.formatMoney(firstPay)
         } else {
@@ -72,6 +128,8 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
         var tvRemainingBill: TextView = view.findViewById(R.id.tv_remaining_bill)
         var tvBookingStartEndDate: TextView = view.findViewById(R.id.tv_booking_start_end_date)
         var tvBookingStatus: TextView = view.findViewById(R.id.tv_booking_status)
+        var tvPaymentDeadline: TextView = view.findViewById(R.id.tv_lbl_payment_deadline_my_booking)
+        var tvCountTimer: TextView = view.findViewById(R.id.tv_countdown_timer_my_booking)
 
         var btnFittingSize: Button = view.findViewById(R.id.btn_fitting_size)
 

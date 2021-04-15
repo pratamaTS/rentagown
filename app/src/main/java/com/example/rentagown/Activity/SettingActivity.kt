@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.ImageButton
@@ -11,10 +12,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.rentagown.Connection.Interface.GetDefaultAddressInterface
+import com.example.rentagown.Connection.Interface.SetDefaultAddressInterface
+import com.example.rentagown.Connection.Presenter.GetDefaultAddressPresenter
+import com.example.rentagown.Connection.Presenter.SetDefaultAddressPresenter
 import com.example.rentagown.R
+import com.example.rentagown.v2.data.model.Address
+import com.example.rentagown.v2.data.model.Booking
+import com.example.rentagown.v2.data.model.ReqSetAddress
+import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.example.rentagown.v2.ui.chooseaddress.ChooseAddressActivity
+import com.example.rentagown.v2.ui.choosebank.ChooseBankActivity
+import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 
-class SettingActivity : AppCompatActivity(), View.OnClickListener,
+class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAddressInterface,
     CompoundButton.OnCheckedChangeListener {
     var back: ImageButton? = null
     var editProfile: ConstraintLayout? = null
@@ -24,6 +35,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
     var pushPromo: SwitchCompat? = null
     var pushTransactions: SwitchCompat? = null
     var sharedPreferences: SharedPreferences? = null
+    private var selectedAddress: Address? = null
     var PACKAGE_NAME = "com.example.rentagown"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +65,43 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
         pushTransactions!!.setOnCheckedChangeListener(this)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == ChooseAddressActivity.REQ_CHOOSE_ADDRESS) {
+            if(resultCode == RESULT_OK) {
+                selectedAddress = data?.getParcelableExtra("selected_address")
+                val editedAddress = data?.getParcelableExtra<Address>("edited_address")
+                val deletedAddress = data?.getParcelableExtra<Address>("deleted_address")
+
+                when {
+                    selectedAddress != null -> {
+                        onAddressSelected(selectedAddress)
+                    }
+//                    editedAddress != null -> {
+//                        presenter.onAddressEdited(editedAddress)
+//                    }
+//                    deletedAddress != null -> {
+//                        presenter.onAddressDeleted(deletedAddress)
+//                    }
+                }
+
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun onAddressSelected(address: Address?) {
+        address?.let {
+            val mReqSetAddress = ReqSetAddress(
+                    addressId = it.addressId
+            )
+
+            SetDefaultAddressPresenter(this).setDefaultAddress(this, mReqSetAddress)
+
+//            view?.showLoading(true)
+        }
+    }
+
     @SuppressLint("NonConstantResourceId")
     override fun onClick(v: View) {
         when (v.id) {
@@ -67,11 +116,15 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
                 startActivity(changePassword)
             }
             R.id.menu_change_address -> {
-                val changeAddress = Intent(this@SettingActivity, ChooseAddressActivity::class.java)
-                startActivity(changeAddress)
+                Intent(this, ChooseAddressActivity::class.java).apply {
+                    putExtra("selected_address_id", selectedAddress?.addressId)
+
+                    startActivityForResult(this, ChooseAddressActivity.REQ_CHOOSE_ADDRESS)
+                }
             }
         }
     }
+
 
     @SuppressLint("NonConstantResourceId")
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
@@ -138,5 +191,13 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,
         val editor = sharedPreferences!!.edit()
         editor.putBoolean("notif-"+tipe, notification)
         editor.apply()
+    }
+
+    override fun onSuccessSetDefaultAddress(address: Address) {
+        Toast.makeText(this, "Set default address success", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onErrorSetDefaultAddress(msg: String) {
+        Toast.makeText(this, "Set default address failed", Toast.LENGTH_LONG).show()
     }
 }

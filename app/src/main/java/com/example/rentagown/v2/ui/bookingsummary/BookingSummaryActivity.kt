@@ -42,7 +42,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     private lateinit var tvTotalPrice: TextView
     private lateinit var tvPaymentType: TextView
 
-    private lateinit var btnCancelTransaction: Button
+//    private lateinit var btnCancelTransaction: Button
     private lateinit var btnConfirmPayment: Button
     private lateinit var btnBackToHome: Button
 
@@ -74,11 +74,11 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         tvTotalPrice = findViewById(R.id.tv_total_price)
         tvPaymentType = findViewById(R.id.tv_payment_type)
 
-        btnCancelTransaction = findViewById(R.id.btn_cancel_transaction)
+//        btnCancelTransaction = findViewById(R.id.btn_cancel_transaction)
         btnConfirmPayment = findViewById(R.id.btn_confirm_payment)
         btnBackToHome = findViewById(R.id.btn_back_to_home)
 
-        btnCancelTransaction.setOnClickListener(this)
+//        btnCancelTransaction.setOnClickListener(this)
         btnConfirmPayment.setOnClickListener(this)
         btnBackToHome.setOnClickListener(this)
     }
@@ -101,11 +101,8 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
                 .into(ivPaymentBankLogo)
 
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(booking.paymentDeadline)
-        val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy").format(date)
-//        val paymentDeadlineDt = Utils.parseDateTime(
-//            booking.paymentDeadline,
-//            Utils.DATE_TIME_FORMAT_PAYMENT_DEADLINE1
-//        )
+        val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
+
 
         val timer = object: CountDownTimer(43200000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -143,9 +140,9 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
 
     override fun getBookingData(): Booking? = intent.getParcelableExtra("booking")
 
-    override fun showMsgSuccessCancelBooking() {
-        showMessage(getString(R.string.msg_success_cancel_booking))
-    }
+//    override fun showMsgSuccessCancelBooking() {
+//        showMessage(getString(R.string.msg_success_cancel_booking))
+//    }
 
     override fun showMsgBookingNotFound() {
         showMessage(getString(R.string.err_booking_not_found))
@@ -162,7 +159,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         when (v?.id) {
             R.id.btn_confirm_payment -> presenter.onBtnConfirmPaymentClicked()
             R.id.btn_back_to_home -> presenter.onBtnBackToHomeClicked()
-            R.id.btn_cancel_transaction -> presenter.onBtnCancelTransactionClicked()
+//            R.id.btn_cancel_transaction -> presenter.onBtnCancelTransactionClicked()
         }
     }
 

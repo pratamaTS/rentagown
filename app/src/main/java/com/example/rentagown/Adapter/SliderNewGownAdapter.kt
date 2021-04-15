@@ -35,6 +35,7 @@ class SliderNewGownAdapter(
 
     override fun onBindViewHolder(holder: SliderNewGownViewHolder, position: Int) {
         holder.tvItemName.setText(newGownList[position].productName?.capitalize()?.trimEnd())
+        holder.tvPromoName.text = newGownList[position].promoName?.trim()
 
         if(newGownList[position].idPromo?.isNotEmpty() == true) {
             holder.tvPrice.setText(numberFormat.format(newGownList[position].finalPrice))

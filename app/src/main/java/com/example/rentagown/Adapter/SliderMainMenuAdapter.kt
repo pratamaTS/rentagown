@@ -30,7 +30,16 @@ class SliderMainMenuAdapter(
 
     override fun onBindViewHolder(holder: SliderMainMenuViewHolder, position: Int) {
         holder.tvItemName.setText(sliderMainMenuList[position].productName?.capitalize()?.trimEnd())
-        holder.tvPrice.setText(numberFormat.format(sliderMainMenuList[position].productPrice))
+
+        if(sliderMainMenuList[position].idPromo?.isNotEmpty() == true) {
+            holder.tvPrice.setText(numberFormat.format(sliderMainMenuList[position].finalPrice))
+            holder.tvDisc.setText(sliderMainMenuList[position].promoAmount.toString() + "%")
+            holder.tvOldPrice.setText(numberFormat.format(sliderMainMenuList[position].productPrice))
+        }else{
+            holder.tvOldPrice.visibility = View.INVISIBLE
+            holder.tvDisc.visibility = View.INVISIBLE
+            holder.tvPrice.setText(numberFormat.format(sliderMainMenuList[position].productPrice))
+        }
 
         val imgURL: String = "http://absdigital.id:55000" + sliderMainMenuList[position].pathPhoto
         Picasso.get().load(imgURL).into(holder.imContent)

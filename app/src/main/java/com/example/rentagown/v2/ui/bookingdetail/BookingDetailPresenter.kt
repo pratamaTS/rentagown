@@ -3,9 +3,10 @@ package com.example.rentagown.v2.ui.bookingdetail
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.enums.BookingStatusEnum
 import com.example.rentagown.v2.data.model.Booking
+import com.example.rentagown.v2.data.model.ReqCancelBooking
 import com.example.rentagown.v2.data.source.BookingDataSource
 
-class BookingDetailPresenter(private val bookingDataSource: BookingDataSource) : BaseRAGPresenter<BookingDetailContract.View>(), BookingDetailContract.Presenter {
+class BookingDetailPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<BookingDetailContract.View>(), BookingDetailContract.Presenter {
 
     override fun onBtnPayClicked() {
         view?.getBookingData()?.let { booking ->
@@ -22,6 +23,17 @@ class BookingDetailPresenter(private val bookingDataSource: BookingDataSource) :
             } else if(BookingStatusEnum.isCompleted(status) && ratingId.isNullOrBlank()) {
                 // rate
                 view?.navigateToReviewBooking(this)
+            } else if(status == 1){
+                view?.getBookingData()?.transactionId?.let { transactionId ->
+                    view?.showLoading(true)
+
+                    safeCall(repository.cancelBooking(ReqCancelBooking(transactionId)), object : Listener<Booking> {
+                        override fun onSuccess(data: Booking?) {
+                            view?.showMsgSuccessCancelBooking()
+                            view?.setResultBookingChanged(data!!)
+                        }
+                    })
+                }
             }
 
         }

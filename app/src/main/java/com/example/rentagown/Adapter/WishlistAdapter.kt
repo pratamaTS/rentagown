@@ -31,12 +31,18 @@ class WishlistAdapter(private val mContext: Context, private val wishlistList: A
         holder.tvItemName.setText(wishlistList[position].productName)
 
         if(wishlistList[position].idPromo?.isNotEmpty() == true) {
+            holder.tvPriceOld.visibility = View.VISIBLE
+            holder.tvDiscount.visibility = View.VISIBLE
+            holder.tvPromoName.visibility = View.VISIBLE
+
+            holder.tvPromoName.text = wishlistList[position].promoName
             holder.tvPrice.setText(numberFormat.format(wishlistList[position].finalPrice))
             holder.tvDiscount.setText(wishlistList[position].promoAmount.toString() + "%")
             holder.tvPriceOld.setText(numberFormat.format(wishlistList[position].productPrice))
         }else{
             holder.tvPriceOld.visibility = View.INVISIBLE
             holder.tvDiscount.visibility = View.INVISIBLE
+            holder.tvPromoName.visibility = View.INVISIBLE
             holder.tvPrice.setText(numberFormat.format(wishlistList[position].productPrice))
         }
 

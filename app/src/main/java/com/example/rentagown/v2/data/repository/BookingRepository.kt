@@ -46,6 +46,10 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.confirmPayment(transactionId, reqConfirmPayment)
     }
 
+    override fun setDefaultAddress(reqSetAddress: ReqSetAddress): Single<BaseResp<Address>> {
+        return remoteRepository.setDefaultAddress(reqSetAddress)
+    }
+
     override fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment): Single<BaseResp<Booking>> {
         return remoteRepository.confirm2ndPayment(transactionId, reqConfirmPayment)
     }
@@ -60,6 +64,10 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
 
     override fun getInvoiceDetail(invoiceId: String): Single<BaseResp<Invoice>> {
         return remoteRepository.getInvoiceDetail(invoiceId)
+    }
+
+    override fun getDefaultAddress(): Single<Address> {
+        return remoteRepository.getDefaultAddress()
     }
 
 }

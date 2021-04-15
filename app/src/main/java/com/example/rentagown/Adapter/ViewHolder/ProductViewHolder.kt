@@ -10,6 +10,7 @@ import com.makeramen.roundedimageview.RoundedImageView
 
 class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvItemName: TextView
+    var tvPromoName: TextView
     var tvPrice: TextView
     var tvPriceOld: TextView
     var tvDiscount: TextView
@@ -18,6 +19,7 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     init {
         tvItemName = itemView.findViewById(R.id.tv_name_dress_product)
+        tvPromoName = itemView.findViewById(R.id.tv_label_promo_product)
         tvPrice = itemView.findViewById(R.id.tv_price_dress_product)
         tvPriceOld = itemView.findViewById(R.id.tv_price_old_dress_product)
         tvDiscount = itemView.findViewById(R.id.tv_discount_product)

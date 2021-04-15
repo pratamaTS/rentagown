@@ -28,8 +28,6 @@ class ChangeBankAdapter(
         if(changeAddressList[position].pathPhoto?.isNotEmpty() == true) {
             val imgURL: String = "http://absdigital.id:5000" + changeAddressList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imBank)
-        }else {
-            holder.imBank.setImageResource(R.drawable.logo_bca)
         }
         holder.tvAccountNumber.setText(changeAddressList[position].accountNumber)
         holder.tvAccountName.setText("a.n " + changeAddressList[position].accountName)

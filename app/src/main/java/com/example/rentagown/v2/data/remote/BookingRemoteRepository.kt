@@ -47,6 +47,10 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.confirmPayment(transactionId, reqConfirmPayment)
     }
 
+    override fun setDefaultAddress(reqSetAddress: ReqSetAddress): Single<BaseResp<Address>> {
+        return apiService.setDefaultAddress(reqSetAddress)
+    }
+
     override fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment): Single<BaseResp<Booking>> {
         return apiService.confirm2ndPayment(transactionId, reqConfirmPayment)
     }
@@ -61,6 +65,10 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
 
     override fun getInvoiceDetail(invoiceId: String): Single<BaseResp<Invoice>> {
         return apiService.getInvoiceDetail(invoiceId)
+    }
+
+    override fun getDefaultAddress(): Single<Address> {
+        return apiService.getDefaultAddress()
     }
 
 }

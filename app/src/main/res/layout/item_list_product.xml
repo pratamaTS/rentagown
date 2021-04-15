@@ -55,7 +55,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="5dp"
-            android:text="25%"
+            tools:text="25%"
             android:gravity="center"
             android:textSize="8sp"
             android:textColor="@color/colorWhite"
@@ -63,7 +63,7 @@
             android:fontFamily="@font/poppins_regular"
             app:layout_constraintStart_toEndOf="@+id/tv_price_dress_product"
             app:layout_constraintTop_toBottomOf="@+id/tv_name_dress_product"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints,SmallSp"/>
 
         <TextView
             android:id="@+id/tv_price_old_dress_product"
@@ -72,10 +72,22 @@
             android:textSize="12sp"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/colorDarkGrey"
-            android:text="Rp. 8.000.000"
+            tools:text="Rp. 8.000.000"
             android:foreground="@drawable/strikethrough_foreground"
             app:layout_constraintTop_toBottomOf="@+id/tv_price_dress_product"
             tools:ignore="MissingConstraints,UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/tv_label_promo_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textColor="@color/colorBlack"
+            tools:text="PROMO EVENT"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_old_dress_product"
+            tools:ignore="MissingConstraints,UnusedAttribute" />
+
 
         <Button
             android:id="@+id/btn_booking_now"
@@ -89,7 +101,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price_old_dress_product"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_promo_product"
             tools:ignore="MissingConstraints" />
 
 

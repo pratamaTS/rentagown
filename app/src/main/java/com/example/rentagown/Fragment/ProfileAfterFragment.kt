@@ -2,6 +2,7 @@ package com.example.rentagown.Fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -91,8 +92,12 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
                 startActivity(intent)
             }
             R.id.menu_help_center -> {
-                val helpCenterActivity = Intent(activity, HelpCenterActivity::class.java)
-                startActivity(helpCenterActivity)
+                val phoneNumber = "+6281806155676"
+                val url = "https://api.whatsapp.com/send/?phone=$phoneNumber"
+                Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(url)
+                    startActivity(this)
+                }
             }
             R.id.menu_privacy_policy -> {
                 val privacyPolicyActivity = Intent(activity, PrivacyPolicyActivity::class.java)

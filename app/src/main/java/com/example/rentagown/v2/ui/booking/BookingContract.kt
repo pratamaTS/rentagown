@@ -42,9 +42,10 @@ class BookingContract {
 
     interface Presenter : BasePresenter {
 
+        fun onDefaultAddressLoaded()
         fun onBtnChangeAddressClicked()
         fun onBtnAddAddressClicked()
-        fun onAddressSelected(address: Address?)
+        fun onAddressSelected(address: Address?, default: Boolean)
         fun onAddressEdited(address: Address?)
         fun onAddressDeleted(address: Address?)
 

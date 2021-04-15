@@ -52,6 +52,17 @@
             tools:text="Rp. 12.000.000" />
 
         <TextView
+            android:id="@+id/tv_label_promo_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textColor="@color/colorBlack"
+            tools:text="PROMO EVENT"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price_old_dress_product"
+            tools:ignore="MissingConstraints,UnusedAttribute" />
+
+        <TextView
             android:id="@+id/tv_discount_product"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -93,7 +104,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price_old_dress_product"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_promo_product"
             tools:ignore="MissingConstraints" />
 
 

@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.chooseaddress.item
 
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -31,11 +32,12 @@ class AddressItem(model: Address, private val selectedAddressId: String? = null)
 
         holder.cardViewContent.isEnabled = false
         holder.tvAddressName.text = if(model.addressLabel.isNullOrBlank()) "-" else model.addressLabel
+        holder.tvDefaultAddress.visibility = if(model.isDefault == 1) View.VISIBLE else View.INVISIBLE
         holder.tvReceiverName.text = if(model.receiverName.isNullOrBlank()) "-" else model.receiverName
         holder.tvReceiverPhoneNumber.text = if(model.receiverPhoneNumber.isNullOrBlank()) "-" else model.receiverPhoneNumber
         holder.tvAddressDetail.text = if(model.address.isNullOrBlank()) "-" else model.address
 
-        holder.btnChooseAddress.visibility = if(selectedAddressId != model.addressId) View.VISIBLE else View.GONE
+        holder.btnChooseAddress.visibility = View.VISIBLE
     }
 
     override fun unbindView(holder: ViewHolder) {
@@ -43,6 +45,7 @@ class AddressItem(model: Address, private val selectedAddressId: String? = null)
 
         holder.tvAddressName.text = null
         holder.tvReceiverName.text = null
+        holder.tvDefaultAddress.visibility = View.INVISIBLE
         holder.tvReceiverPhoneNumber.text = null
         holder.tvAddressDetail.text = null
 
@@ -53,6 +56,7 @@ class AddressItem(model: Address, private val selectedAddressId: String? = null)
         var cardViewContent: MaterialCardView = view.findViewById(R.id.cv_content)
         var tvAddressName: TextView = view.findViewById(R.id.tv_address_name)
         var tvReceiverName: TextView = view.findViewById(R.id.tv_receiver_name)
+        var tvDefaultAddress: TextView = view.findViewById(R.id.tv_label_default_address)
         var tvReceiverPhoneNumber: TextView = view.findViewById(R.id.tv_receiver_phone_number)
         var tvAddressDetail: TextView = view.findViewById(R.id.tv_address_detail)
         var btnChooseAddress: Button = view.findViewById(R.id.btn_choose_address)

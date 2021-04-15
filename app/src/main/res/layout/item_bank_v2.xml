@@ -26,8 +26,7 @@
                 android:id="@+id/iv_bank_logo"
                 android:layout_width="64dp"
                 android:layout_height="36dp"
-                android:contentDescription="@string/todo"
-                tools:src="@drawable/logo_bca" />
+                android:contentDescription="@string/todo" />
 
         </LinearLayout>
 

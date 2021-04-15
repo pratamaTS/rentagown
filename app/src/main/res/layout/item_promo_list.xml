@@ -23,8 +23,7 @@
             android:scaleType="centerCrop"
             app:riv_mutate_background="true"
             app:riv_oval="false"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/promo" />
+            android:contentDescription="@string/todo" />
 
         <RelativeLayout
             android:id="@+id/desc_item_list_promo"

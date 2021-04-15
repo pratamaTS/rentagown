@@ -58,6 +58,7 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
             R.id.btn_use_promo -> {
                 val categoryProduct = Intent(this, ProductGownActivity::class.java)
                 categoryProduct.putExtra("check_promo", true)
+                categoryProduct.putExtra("id_promo", idPromo)
                 startActivity(categoryProduct)
             }
         }
@@ -72,10 +73,6 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
             tvDescDetailPromo!!.text = promoDetail!!.promoDesc
         }
 
-        if(promoDetail!!.promoDesc?.isNotEmpty() == true){
-            tvDescDetailPromo!!.text = promoDetail!!.promoDesc
-        }
-
         if(promoDetail!!.termsConditions?.isNotEmpty() == true){
             tvTermCondition!!.text = promoDetail!!.termsConditions
         }
@@ -83,8 +80,6 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
         if(promoDetail!!.pathPhoto?.isNotEmpty() == true) {
             val imgURL: String = "http://absdigital.id:55000" + promoDetail!!.pathPhoto
             Picasso.get().load(imgURL).resize(200, 200).into(imPromo)
-        }else {
-            imPromo!!.setImageResource(R.drawable.promo)
         }
     }
 

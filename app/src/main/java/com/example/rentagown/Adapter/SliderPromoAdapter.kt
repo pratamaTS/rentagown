@@ -27,13 +27,10 @@ class SliderPromoAdapter(private val promoList: ArrayList<DataPromo>) :
         if(promoList[position].pathPhoto?.isNotEmpty() == true) {
             val imgURL: String = "http://absdigital.id:55000" + promoList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imPromo)
-        }else {
-            holder.imPromo.setImageResource(R.drawable.promo)
         }
 
         holder.tvTitlePromo.setText(promoList[position].promoName?.capitalize()?.trimEnd())
-        holder.tvDescPromo.setText("The wait is over Massive sale! 90% off for third purchase on any dress (except wedding dress), \" +\n" +
-                "                \"Booking period until 15 September 2020. Rental period until December 2021.")
+        holder.tvDescPromo.setText(promoList[position].promoDesc)
 
         holder.itemView.setOnClickListener { v ->
             val promo = Intent(v.context, DetailPromoActivity::class.java)

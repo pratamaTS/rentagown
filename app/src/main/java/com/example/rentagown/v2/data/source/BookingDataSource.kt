@@ -15,9 +15,11 @@ interface BookingDataSource {
     fun getMyBookings() : Single<BasePagingResp<Booking>>
     fun getMyBookingsHistory() : Single<BasePagingResp<Booking>>
     fun confirmPayment(transactionId: String, reqConfirmPayment: ReqConfirmPayment) : Single<BaseResp<Booking>>
+    fun setDefaultAddress(reqSetAddress: ReqSetAddress) : Single<BaseResp<Address>>
     fun confirm2ndPayment(transactionId: String, reqConfirmPayment: ReqConfirm2ndPayment) : Single<BaseResp<Booking>>
     fun reviewBooking(reqCreateReviewBooking: ReqReviewBooking) : Single<BaseResp<ProductReview>>
     fun getMyInvoices() : Single<BasePagingResp<InvoiceHistory>>
     fun getInvoiceDetail(invoiceId: String) : Single<BaseResp<Invoice>>
+    fun getDefaultAddress() : Single<Address>
 
 }

@@ -16,6 +16,7 @@ object Constants {
     const val MY_BOOKING = "api/v/2/booking/byuser"
     const val ADD_ADDRESS = "api/v/2/userdetail"
     const val GET_ADDRESS = "api/v/2/userdetail/find"
+    const val GET_DEFAULT_ADDRESS = "api/v/2/userdetail/find/default"
     const val GET_BANK = "api/v/2/bank/findall"
     const val ADD_WISHLIST = "api/v/2/wishlist"
     const val GET_WISHLIST = "api/v/2/wishlist/findid"
@@ -25,4 +26,5 @@ object Constants {
     const val UPDATE_PROFILE = "api/v/2/user/update"
     const val CHANGE_PASSWORD = "api/v/2/user/pass"
     const val FORGOT_PASSWORD = "api/v/2/user/forgotpass"
+    const val SET_DEFAULT_ADDRESS = "api/v/2/userdetail/default"
 }

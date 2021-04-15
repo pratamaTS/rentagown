@@ -24,6 +24,9 @@ class ChooseDatePresenter(private val repository: BookingDataSource) : BaseRAGPr
         if(mStartDate != null && mEndDate != null) {
             view?.showLoading(false)
             view?.setResultDateSelected(mStartDate.timeInMillis, mEndDate.timeInMillis)
+        }else{
+            view?.showLoading(false)
+            mStartDate?.let { view?.setResultDateSelected(it.timeInMillis, it.timeInMillis) }
         }
     }
 
@@ -35,20 +38,24 @@ class ChooseDatePresenter(private val repository: BookingDataSource) : BaseRAGPr
         val mStartDate = startDate
         val mEndDate = endDate
 
+        var reqCheckDate = ReqCheckDate(
+                startDate ="",
+                endDate = ""
+        )
+
+        // Format Date
+        val formatter = SimpleDateFormat("dd-MM-yyyy")
+        val convertStartDate = formatter.format(mStartDate?.timeInMillis)
+
         if(mStartDate != null && mEndDate != null) {
             // start end different date
-            // Format Date
-            val formatter = SimpleDateFormat("dd-MM-yyyy")
-            val convertStartDate = formatter.format(mStartDate.timeInMillis)
             val convertEndDate = formatter.format(mEndDate.timeInMillis)
-
             view?.showLoading(true)
 
-            val reqCheckDate = ReqCheckDate(
+            reqCheckDate = ReqCheckDate(
                     startDate = convertStartDate,
                     endDate = convertEndDate
             )
-
 //            safeCallDate(repository.checkDate(productID, reqCheckDate), object : ListenerDate {
 //                override fun onSuccess(message: String?) {
 //                    view?.setResultDateSelected(mStartDate.timeInMillis, mEndDate.timeInMillis)
@@ -60,16 +67,17 @@ class ChooseDatePresenter(private val repository: BookingDataSource) : BaseRAGPr
 //                }
 //
 //            }, RequestConfiguration(updateLoadingContentIndicator = false))
-
-            view?.checkingDate(productID, reqCheckDate)
         } else if(mStartDate != null && mEndDate == null) {
             // one day
-            view?.showLoading(true)
-            Handler(Looper.getMainLooper()).postDelayed({
-                view?.showLoading(false)
-                view?.setResultDateSelected(mStartDate.timeInMillis, mStartDate.timeInMillis)
-            }, 1000)
+
+            reqCheckDate = ReqCheckDate(
+                startDate = convertStartDate,
+                endDate = convertStartDate
+            )
         }
+
+        view?.showLoading(true)
+        view?.checkingDate(productID, reqCheckDate)
 
     }
 
