@@ -61,7 +61,6 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
     private lateinit var tvTotalPrice: TextView
     private lateinit var tvTitleConfirmPayment: TextView
     private lateinit var tvPaymentDeadline: TextView
-    private lateinit var tvCountPaymentDeadline: TextView
 
     private lateinit var containerHeaderPaymentDeadline: View
     private lateinit var containerPaymentDeadline: View
@@ -95,7 +94,6 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         tvTotalPrice = findViewById(R.id.tv_total_price)
         tvTitleConfirmPayment = findViewById(R.id.tv_title_payment_booking_detail)
         tvPaymentDeadline = findViewById(R.id.tv_payment_deadline_booking_detail)
-        tvCountPaymentDeadline = findViewById(R.id.tv_countdown_timer_booking_detail)
 
         containerHeaderPaymentDeadline = findViewById(R.id.layout_header_deadline_booking_detail)
         containerPaymentDeadline = findViewById(R.id.layout_footer_deadline_booking_detail)
@@ -134,6 +132,11 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
             2 -> tvTitleConfirmPayment.text = "Full Payment"
         }
 
+        when(booking.ableToRating){
+            0 -> btnAction.visibility = View.INVISIBLE
+            1-> btnAction.visibility = View.INVISIBLE
+        }
+
         when {
             BookingStatusEnum.isCancelled(booking.status) -> {
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorWhite))
@@ -146,48 +149,24 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
             BookingStatusEnum.isWaitingForPayment(booking.status) -> {
                 tvBookingStatus.setTextColor(ContextCompat.getColor(this, R.color.colorSecondary))
 
-                val currentDateTime: LocalDateTime = LocalDateTime.now()
+//                val currentDateTime: LocalDateTime = LocalDateTime.now()
                 val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(booking.paymentDeadline)
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
-                val formatterDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy HH:mm:ss", Locale.ENGLISH)
-
-                //Deadline Timeinmilis
-                val deadlineDate = LocalDateTime.parse(booking.paymentDeadline, formatter)
-                val timeInMillisecondsDeadline = deadlineDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
-
-                //Now Timeinmilis
-                val nowDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
-                val localDate = LocalDateTime.parse(nowDate, formatter)
-                val timeInMillisecondsPhone = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
-
-                //timeinmilis
-                val countMilis = timeInMillisecondsDeadline - timeInMillisecondsPhone - 1358000
+//                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+//                val formatterDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy HH:mm:ss", Locale.ENGLISH)
+//
+//                //Deadline Timeinmilis
+//                val deadlineDate = LocalDateTime.parse(booking.paymentDeadline, formatter)
+//                val timeInMillisecondsDeadline = deadlineDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+//
+//                //Now Timeinmilis
+//                val nowDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+//                val localDate = LocalDateTime.parse(nowDate, formatter)
+//                val timeInMillisecondsPhone = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+//
+//                //timeinmilis
+//                val countMilis = timeInMillisecondsDeadline - timeInMillisecondsPhone - 1358000
 
                 val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
-
-                val timer = object: CountDownTimer(countMilis, 1000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        val countDown = java.lang.String.format(
-                                "%02d:%02d:%02d",
-                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                                        TimeUnit.MILLISECONDS.toHours(
-                                                millisUntilFinished
-                                        )
-                                ),
-                                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
-                                )
-                        )
-                        tvCountPaymentDeadline.visibility = View.VISIBLE
-                        tvCountPaymentDeadline.text = countDown
-                    }
-
-                    override fun onFinish() {
-                        tvCountPaymentDeadline.text = "00:00:00"
-                    }
-                }
-                timer.start()
 
                 tvPaymentDeadline.text = pDeadline.toString()
                 tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)

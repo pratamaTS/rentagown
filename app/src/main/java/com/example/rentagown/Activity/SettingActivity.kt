@@ -17,6 +17,7 @@ import com.example.rentagown.Connection.Interface.SetDefaultAddressInterface
 import com.example.rentagown.Connection.Presenter.GetDefaultAddressPresenter
 import com.example.rentagown.Connection.Presenter.SetDefaultAddressPresenter
 import com.example.rentagown.R
+import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.model.Address
 import com.example.rentagown.v2.data.model.Booking
 import com.example.rentagown.v2.data.model.ReqSetAddress
@@ -71,10 +72,11 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
                 selectedAddress = data?.getParcelableExtra("selected_address")
                 val editedAddress = data?.getParcelableExtra<Address>("edited_address")
                 val deletedAddress = data?.getParcelableExtra<Address>("deleted_address")
+                val default: Boolean? = data?.getBooleanExtra("default", false)
 
                 when {
                     selectedAddress != null -> {
-                        onAddressSelected(selectedAddress)
+                        onAddressSelected(selectedAddress, default!!)
                     }
 //                    editedAddress != null -> {
 //                        presenter.onAddressEdited(editedAddress)
@@ -90,15 +92,23 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
         }
     }
 
-    private fun onAddressSelected(address: Address?) {
+    private fun onAddressSelected(address: Address?, default: Boolean) {
         address?.let {
             val mReqSetAddress = ReqSetAddress(
                     addressId = it.addressId
             )
 
-            SetDefaultAddressPresenter(this).setDefaultAddress(this, mReqSetAddress)
+            when(default) {
+                true -> {
+                    SetDefaultAddressPresenter(this).setDefaultAddress(this, mReqSetAddress)
+                }
+                false -> if(address.isDefault == 1)Toast.makeText(
+                    this,
+                    "The address is already set to default",
+                    Toast.LENGTH_LONG
+                ).show()
 
-//            view?.showLoading(true)
+            }
         }
     }
 

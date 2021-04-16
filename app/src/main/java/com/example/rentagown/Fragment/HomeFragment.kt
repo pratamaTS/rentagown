@@ -151,7 +151,7 @@ class HomeFragment : Fragment(), View.OnClickListener,
         NewGownPresenter(this).getAllNewGown()
         activity?.let { mAct ->
             if(mAct is MainAfterActivity) {
-                GetNotificationPresenter(this).getAllNotification(context!!)
+                GetNotificationPresenter(this).getAllNotification(requireContext())
             }
         }
     }
@@ -188,10 +188,12 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     @SuppressLint("NonConstantResourceId")
     override fun onClick(view: View?, position: Int, isLongClick: Boolean) {
-        when (view!!.id) {
-            R.id.category_menu_item_container -> {
-                val cm = adapterMenu!!.getItem(position)
-                adapterMainMenu!!.replaceItems(sliderMainMenuList!!)
+        if (view != null) {
+            when (view.id) {
+                R.id.category_menu_item_container -> {
+                    val cm = adapterMenu!!.getItem(position)
+                    adapterMainMenu!!.replaceItems(sliderMainMenuList!!)
+                }
             }
         }
     }
@@ -346,39 +348,41 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onSuccessGetNotification(dataNotification: ArrayList<DataNotification>?) {
-        var prefs: SharedPreferences = context!!.getSharedPreferences(
-            context!!.getString(R.string.app_name),
-            Context.MODE_PRIVATE
-        )
-        val editor = prefs.edit()
-        val oldNotifCount: Int = prefs.getInt(COUNT_NOTIF, 0)
-        var statusRead: Boolean = prefs.getBoolean(READ_NOTIF, false)
-        var statusConfirmPayment: Boolean = prefs.getBoolean(STATUS_PAYMENT, false)
-        var dumpStatus: Array<Int>? = null
+        if(context != null) {
+            var prefs: SharedPreferences = requireContext().getSharedPreferences(
+                requireContext().getString(R.string.app_name),
+                Context.MODE_PRIVATE
+            )
+            val editor = prefs.edit()
+            val oldNotifCount: Int = prefs.getInt(COUNT_NOTIF, 0)
+            var statusRead: Boolean = prefs.getBoolean(READ_NOTIF, false)
+            var statusConfirmPayment: Boolean = prefs.getBoolean(STATUS_PAYMENT, false)
+            var dumpStatus: Array<Int>? = null
 
-        if(dataNotification.isNullOrEmpty()){
-            countNotif = 0
-            editor.putInt(COUNT_NOTIF, countNotif)
-            editor.commit()
-        }else{
-            countNotif = dataNotification.size
+            if (dataNotification.isNullOrEmpty()) {
+                countNotif = 0
+                editor.putInt(COUNT_NOTIF, countNotif)
+                editor.commit()
+            } else {
+                countNotif = dataNotification.size
 
 //            Log.d("count notif", countNotif.toString())
 //            Log.d("old count notif", oldNotifCount.toString())
 //            Log.d("status notif", statusRead.toString())
 //            Log.d("dump status notif", dumpStatus.toString())
 
-            if(countNotif > oldNotifCount){
-                editor.putInt(COUNT_NOTIF, countNotif)
-                editor.putBoolean(READ_NOTIF, false)
-                editor.commit()
+                if (countNotif > oldNotifCount) {
+                    editor.putInt(COUNT_NOTIF, countNotif)
+                    editor.putBoolean(READ_NOTIF, false)
+                    editor.commit()
 
-                setBadgeNotif(false)
-            }else {
-                if(statusRead == true){
-                    setBadgeNotif(true)
-                }else{
                     setBadgeNotif(false)
+                } else {
+                    if (statusRead == true) {
+                        setBadgeNotif(true)
+                    } else {
+                        setBadgeNotif(false)
+                    }
                 }
             }
         }

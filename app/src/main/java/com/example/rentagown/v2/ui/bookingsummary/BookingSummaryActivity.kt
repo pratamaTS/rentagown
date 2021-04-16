@@ -32,7 +32,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     override lateinit var presenter: BookingSummaryContract.Presenter
 
     private lateinit var tvPaymentDeadline: TextView
-    private lateinit var tvCountdownTimer: TextView
+//    private lateinit var tvCountdownTimer: TextView
 
     private lateinit var ivPaymentBankLogo: ImageView
     private lateinit var tvConfirmAccountNumber: TextView
@@ -64,7 +64,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         super.setupWidgets()
 
         tvPaymentDeadline = findViewById(R.id.tv_payment_deadline)
-        tvCountdownTimer = findViewById(R.id.tv_countdown_timer)
+//        tvCountdownTimer = findViewById(R.id.tv_countdown_timer)
 
         ivPaymentBankLogo = findViewById(R.id.iv_payment_bank_logo)
         tvConfirmAccountNumber = findViewById(R.id.tv_confirm_account_number)
@@ -104,29 +104,29 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
 
 
-        val timer = object: CountDownTimer(43200000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val countDown = String.format(
-                    "%02d:%02d:%02d",
-                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
-                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                        TimeUnit.MILLISECONDS.toHours(
-                            millisUntilFinished
-                        )
-                    ),
-                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
-                    )
-                )
-                tvCountdownTimer.visibility = View.VISIBLE
-                tvCountdownTimer.text = countDown
-            }
-
-            override fun onFinish() {
-                tvCountdownTimer.text = "00:00:00"
-            }
-        }
-        timer.start()
+//        val timer = object: CountDownTimer(43200000, 1000) {
+//            override fun onTick(millisUntilFinished: Long) {
+//                val countDown = String.format(
+//                    "%02d:%02d:%02d",
+//                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+//                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+//                        TimeUnit.MILLISECONDS.toHours(
+//                            millisUntilFinished
+//                        )
+//                    ),
+//                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+//                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+//                    )
+//                )
+//                tvCountdownTimer.visibility = View.VISIBLE
+//                tvCountdownTimer.text = countDown
+//            }
+//
+//            override fun onFinish() {
+//                tvCountdownTimer.text = "00:00:00"
+//            }
+//        }
+//        timer.start()
 
         tvPaymentDeadline.text = pDeadline.toString()
 
