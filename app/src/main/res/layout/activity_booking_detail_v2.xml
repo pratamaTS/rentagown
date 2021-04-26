@@ -439,8 +439,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/font_md"
+                    android:textColor="@color/colorRed"
+                    android:textSize="15sp"
                     tools:text="Tuesday, 08 Sep 2020 12:30:30" />
 
             </LinearLayout>

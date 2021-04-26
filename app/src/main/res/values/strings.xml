@@ -190,7 +190,7 @@
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
     <string name="special_treatment">Special Treatment</string>
     <string name="one_day_service">One-day service</string>
-    <string name="harga_sudah_termasuk_veil_dan_balero_dan_gratis_peminjaman_aksesoris">Harga sudah termasuk veil dan balero, dan gratis peminjaman aksesoris</string>
+    <string name="harga_sudah_termasuk_veil_dan_balero_dan_gratis_peminjaman_aksesoris">Price includes veil and balero. Free borrowing accessories.</string>
     <string name="name_view_product">Selina Colourblock Camisole Dress</string>
     <string name="btn_booking_now">Book Now</string>
     <string name="btn_see_all_review">See All</string>
@@ -236,6 +236,15 @@
     <!-- activity confirm payment -->
     <string name="appbar_confirm_payment">Confirm Payment</string>
     <string name="payment_deadline">Payment Deadline</string>
+    <string name="full_payment">Payment - Full Payment</string>
+    <string name="p_down_payment">Payment - Down Payment</string>
+    <string name="booking_date">Booking Date</string>
+    <string name="gown_name">Gown</string>
+    <string name="start_date">Rent Date - start</string>
+    <string name="end_date">Rent Date - end</string>
+    <string name="title_pay_to">Please transfer the payment by:</string>
+    <string name="due_date">Down Payment - Due Date</string>
+    <string name="due_time">Down Payment - Due Time</string>
     <string name="desc_payment_deadline">Please confirm your payment before</string>
     <string name="account_number_confirm">Account Number</string>
     <string name="atas_nama">a.n John Doe</string>

@@ -389,7 +389,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onErrorGetNotification(msg: String) {
-        Toast.makeText(context, "Failed to get notification", Toast.LENGTH_SHORT).show()
+        if(context != null) {
+            Toast.makeText(requireContext(), "Failed to get notification", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun setBadgeNotif(readNotif: Boolean){

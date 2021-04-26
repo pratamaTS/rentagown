@@ -2,9 +2,11 @@ package com.example.rentagown.v2.ui.bookingsummary
 
 import android.content.Intent
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.rentagown.BuildConfig
@@ -19,6 +21,8 @@ import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.util.Utils
 import java.lang.String
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -31,7 +35,8 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
 
     override lateinit var presenter: BookingSummaryContract.Presenter
 
-    private lateinit var tvPaymentDeadline: TextView
+    private lateinit var tvPaymentDeadlineDate: TextView
+    private lateinit var tvPaymentDeadlineTime: TextView
 //    private lateinit var tvCountdownTimer: TextView
 
     private lateinit var ivPaymentBankLogo: ImageView
@@ -39,8 +44,22 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     private lateinit var tvConfirmAccountName: TextView
 
     private lateinit var btnInvoice: TextView
-    private lateinit var tvTotalPrice: TextView
-    private lateinit var tvPaymentType: TextView
+//    private lateinit var tvTotalPrice: TextView
+//    private lateinit var tvPaymentType: TextView
+    private lateinit var tvThanksConfirm: TextView
+    private lateinit var tvBookingDate: TextView
+    private lateinit var tvGownName: TextView
+    private lateinit var tvStartDate: TextView
+    private lateinit var tvEndDate: TextView
+    private lateinit var tvPrice: TextView
+    private lateinit var tvDownPayment: TextView
+    private lateinit var tvFullPayment: TextView
+    private lateinit var tvRemainningBills: TextView
+    private lateinit var tvTitleDeadlineDate: TextView
+    private lateinit var tvTitleDeadlineTime: TextView
+
+    private lateinit var layoutDP: LinearLayout
+    private lateinit var layoutFP: LinearLayout
 
 //    private lateinit var btnCancelTransaction: Button
     private lateinit var btnConfirmPayment: Button
@@ -63,16 +82,31 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
     override fun setupWidgets() {
         super.setupWidgets()
 
-        tvPaymentDeadline = findViewById(R.id.tv_payment_deadline)
+        tvPaymentDeadlineDate = findViewById(R.id.tv_payment_deadline_date)
+        tvPaymentDeadlineTime = findViewById(R.id.tv_payment_deadline_time)
+        tvTitleDeadlineDate = findViewById(R.id.tv_title_payment_deadline_date)
+        tvTitleDeadlineTime = findViewById(R.id.tv_title_payment_deadline_time)
 //        tvCountdownTimer = findViewById(R.id.tv_countdown_timer)
 
         ivPaymentBankLogo = findViewById(R.id.iv_payment_bank_logo)
         tvConfirmAccountNumber = findViewById(R.id.tv_confirm_account_number)
         tvConfirmAccountName = findViewById(R.id.tv_confirm_account_name)
+        tvThanksConfirm = findViewById(R.id.tv_thanks_confirm)
+        tvBookingDate = findViewById(R.id.tv_booking_date_cp)
+        tvGownName = findViewById(R.id.tv_gown_name_cp)
+        tvStartDate = findViewById(R.id.tv_booking_from_cp)
+        tvEndDate = findViewById(R.id.tv_booking_to_cp)
+        tvPrice = findViewById(R.id.tv_price_cp)
+        tvDownPayment = findViewById(R.id.tv_dp_cp)
+        tvFullPayment = findViewById(R.id.tv_full_payment_cp)
+        tvRemainningBills = findViewById(R.id.tv_remaining_bill_cp)
+
+        layoutDP = findViewById(R.id.layout_dp_cp)
+        layoutFP = findViewById(R.id.layout_fp_cp)
 
         btnInvoice = findViewById(R.id.btn_invoice)
-        tvTotalPrice = findViewById(R.id.tv_total_price)
-        tvPaymentType = findViewById(R.id.tv_payment_type)
+//        tvTotalPrice = findViewById(R.id.tv_total_price)
+//        tvPaymentType = findViewById(R.id.tv_payment_type)
 
 //        btnCancelTransaction = findViewById(R.id.btn_cancel_transaction)
         btnConfirmPayment = findViewById(R.id.btn_confirm_payment)
@@ -101,8 +135,38 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
                 .into(ivPaymentBankLogo)
 
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(booking.paymentDeadline)
-        val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
+        val createdDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX").parse(booking.bookingNow)
+        val bookingFrom = SimpleDateFormat("yyyy-MM-dd").parse(booking.startDate)
+        val bookingTo = SimpleDateFormat("yyyy-MM-dd").parse(booking.endDate)
+        val bookingDateTimeNow = SimpleDateFormat("dd-MM-yyyy").format(createdDate)
+        val pDeadlineDate = SimpleDateFormat("dd-MM-yyyy").format(date)
+        val pDeadlineTime = SimpleDateFormat("HH:mm:ss").format(date)
+        val bookingFromDate = SimpleDateFormat("dd-MM-yyyy").format(bookingFrom)
+        val bookingToDate = SimpleDateFormat("dd-MM-yyyy").format(bookingTo)
+        val cust = booking.name?.capitalize()?.trim()?.substring(0)
+        val index = cust?.indexOf(' ')
+        val firstName = index?.let { it1 -> cust?.substring(0, it1) }
 
+        tvThanksConfirm.text = "Thank you " + firstName + " for booking Rent a Gown, below is your summary:"
+        tvBookingDate.text = bookingDateTimeNow
+        tvGownName.text = booking.productName?.capitalize()?.trim()
+        tvStartDate.text = bookingFromDate
+        tvEndDate.text = bookingToDate
+        tvPrice.text = Utils.formatMoney(booking.paidPrice)
+        if(booking.paymentMethod == 1){
+            layoutFP.visibility = View.GONE
+            layoutDP.visibility = View.VISIBLE
+            tvDownPayment.text = Utils.formatMoney(booking.downPayment)
+            tvTitleDeadlineDate.text = "Down Payment - due date"
+            tvTitleDeadlineTime.text = "Down Payment - due time"
+        }else{
+            layoutDP.visibility = View.GONE
+            layoutFP.visibility = View.VISIBLE
+            tvFullPayment.text = Utils.formatMoney(booking.paidPrice)
+            tvTitleDeadlineDate.text = "Full Payment - due date"
+            tvTitleDeadlineTime.text = "Full Payment - due time"
+        }
+        tvRemainningBills.text = Utils.formatMoney(booking.remainingBills)
 
 //        val timer = object: CountDownTimer(43200000, 1000) {
 //            override fun onTick(millisUntilFinished: Long) {
@@ -128,13 +192,14 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
 //        }
 //        timer.start()
 
-        tvPaymentDeadline.text = pDeadline.toString()
+        tvPaymentDeadlineDate.text = pDeadlineDate.toString()
+        tvPaymentDeadlineTime.text = pDeadlineTime.toString()
 
-        tvTotalPrice.text = Utils.formatMoney(booking.paidPrice)
+//        tvTotalPrice.text = Utils.formatMoney(booking.paidPrice)
         tvConfirmAccountNumber.text = booking.accountNumber
         tvConfirmAccountName.text = booking.accountName
 
-        tvPaymentType.text = booking.paymentMethodName
+//        tvPaymentType.text = booking.paymentMethodName
 
     }
 

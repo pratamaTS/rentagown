@@ -89,10 +89,10 @@ class MyBookingsFragment : BaseRAGFragment<MyBookingsContract.Presenter>(), MyBo
             false
         }
 
-        adapter.addClickListener(resolveViews = { listOf() }, resolveView = { vh: MyBookingItem.ViewHolder -> vh.btnFittingSize }) {
-            _, _, _, item ->
-            presenter.onBtnFittingClicked(item.model)
-        }
+//        adapter.addClickListener(resolveViews = { listOf() }, resolveView = { vh: MyBookingItem.ViewHolder -> vh.btnFittingSize }) {
+//            _, _, _, item ->
+//            presenter.onBtnFittingClicked(item.model)
+//        }
 
     }
 

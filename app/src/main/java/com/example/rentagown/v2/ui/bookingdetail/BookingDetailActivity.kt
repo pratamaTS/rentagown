@@ -2,10 +2,12 @@ package com.example.rentagown.v2.ui.bookingdetail
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -68,6 +70,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
 
     private lateinit var btnPay: Button
     private lateinit var btnAction: Button
+    private lateinit var btnWhatsapp: ImageButton
 
     private var resultIntent: Intent? = null
 
@@ -101,9 +104,11 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
 
         btnPay = findViewById(R.id.btn_pay)
         btnAction = findViewById(R.id.btn_action)
+        btnWhatsapp = findViewById(R.id.btn_whatsapp)
 
         btnPay.setOnClickListener(this)
         btnAction.setOnClickListener(this)
+        btnWhatsapp.setOnClickListener(this)
 
     }
 
@@ -166,7 +171,7 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
 //                //timeinmilis
 //                val countMilis = timeInMillisecondsDeadline - timeInMillisecondsPhone - 1358000
 
-                val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
+                val pDeadline = SimpleDateFormat("dd MMM yyyy HH:mm:ss").format(date)
 
                 tvPaymentDeadline.text = pDeadline.toString()
                 tvBookingStatus.background = ContextCompat.getDrawable(this, R.drawable.bg_booking_status_on_going)
@@ -282,6 +287,14 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
         when (v?.id) {
             R.id.btn_pay -> presenter.onBtnPayClicked()
             R.id.btn_action -> presenter.onBtnActionClicked()
+            R.id.btn_whatsapp -> {
+                val phoneNumber = "+6281806155676"
+                val url = "https://api.whatsapp.com/send/?phone=$phoneNumber"
+                Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(url)
+                    startActivity(this)
+                }
+            }
         }
     }
 

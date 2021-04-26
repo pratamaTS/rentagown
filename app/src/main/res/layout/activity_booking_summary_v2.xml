@@ -84,15 +84,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/payment_deadline"
-                        android:textColor="@color/colorDarkGrey"
-                        android:textSize="12sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/poppins_regular"-->
+<!--                        android:text="@string/payment_deadline"-->
+<!--                        android:textColor="@color/colorDarkGrey"-->
+<!--                        android:textSize="12sp" />-->
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -100,13 +101,14 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_payment_deadline"
+                            android:id="@+id/tv_thanks_confirm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semi_bold"
+                            android:fontFamily="@font/poppins_regular"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/font_md"
-                            tools:text="Tuesday, 08 Sep 2020 12:30:30" />
+                            android:textAlignment="center"
+                            tools:text="Thank you Hardianto for booking Rent a Gown, below is your summary:" />
 
                     </LinearLayout>
 
@@ -144,6 +146,352 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_header_payment" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_md"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/booking_date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_booking_date_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm"
+                    tools:text="21 Apr 2021" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/gown_name"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_gown_name_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm"
+                    tools:text="Prewedding Item" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/start_date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_booking_from_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm"
+                    tools:text="21 Apr 2021" />
+
+            </LinearLayout><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_sm"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/end_date"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm" />
+
+            <TextView
+                android:id="@+id/tv_booking_to_cp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/margin_sm"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="end"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm"
+                tools:text="22 Apr 2021" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/title_price_detail_booking"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_price_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm"
+                    tools:text="Rp. 8.500.000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_dp_cp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/p_down_payment"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_dp_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm"
+                    tools:text="Rp. 8.500.000" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_fp_cp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_sm"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/full_payment"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm" />
+
+            <TextView
+                android:id="@+id/tv_full_payment_cp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/margin_sm"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="end"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm"
+                tools:text="Rp. 8.500.000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_sm"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/title_remaining_bills_detail_booking"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm" />
+
+            <TextView
+                android:id="@+id/tv_remaining_bill_cp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/margin_sm"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="end"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm"
+                tools:text="Rp. 1.000.000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_sm"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_md"
+            android:paddingEnd="@dimen/padding_md">
+
+            <TextView
+                android:id="@+id/tv_title_payment_deadline_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/due_date"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/font_sm" />
+
+            <TextView
+                android:id="@+id/tv_payment_deadline_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/margin_sm"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="end"
+                android:singleLine="true"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/font_md"
+                tools:text="21 Apr 2021" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:layout_marginBottom="@dimen/margin_md"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md">
+
+                <TextView
+                    android:id="@+id/tv_title_payment_deadline_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/due_date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/font_sm" />
+
+                <TextView
+                    android:id="@+id/tv_payment_deadline_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textColor="@color/colorRed"
+                    android:textSize="@dimen/font_md"
+                    tools:text="15:36:01" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_md"
+                android:paddingEnd="@dimen/padding_md"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/title_pay_to"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
                 android:id="@+id/layout_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,6 +504,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginStart="@dimen/margin_md"
                     android:gravity="center">
 
                     <ImageView
@@ -230,68 +579,68 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layout_account">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/total_price_confirm"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/font_md" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/poppins_regular"-->
+<!--                        android:text="@string/total_price_confirm"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="@dimen/font_md" />-->
 
-                    <TextView
-                        android:id="@+id/tv_total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/font_lg"
-                        tools:text="Rp. 500.050" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_total_price"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/poppins_semi_bold"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="@dimen/font_lg"-->
+<!--                        tools:text="Rp. 500.050" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_md"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/last_2_digit_is_unique_code_for_bank_transfer"
-                        android:textColor="@color/colorDarkGrey"
-                        android:textSize="8sp"
-                        android:visibility="gone"
-                        tools:ignore="SmallSp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/margin_md"-->
+<!--                        android:fontFamily="@font/poppins_regular"-->
+<!--                        android:text="@string/last_2_digit_is_unique_code_for_bank_transfer"-->
+<!--                        android:textColor="@color/colorDarkGrey"-->
+<!--                        android:textSize="8sp"-->
+<!--                        android:visibility="gone"-->
+<!--                        tools:ignore="SmallSp" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|end"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|end"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/payment_method_confirm"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/font_md" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/poppins_regular"-->
+<!--                        android:text="@string/payment_method_confirm"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="@dimen/font_md" />-->
 
-                    <TextView
-                        android:id="@+id/tv_payment_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16sp"
-                        tools:text="Down Payment" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_payment_type"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/poppins_semi_bold"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="16sp"-->
+<!--                        tools:text="Down Payment" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
             </LinearLayout>
         </LinearLayout>

@@ -42,25 +42,28 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
 
         val firstPay = model.downPayment ?: 0
 
-        if(model.ableToFitting == 1){
-            holder.btnFittingSize.visibility = View.VISIBLE
-        }else{
-            holder.btnFittingSize.visibility = View.GONE
-        }
+//        if(model.ableToFitting == 1){
+//            holder.btnFittingSize.visibility = View.VISIBLE
+//        }else{
+//            holder.btnFittingSize.visibility = View.GONE
+//        }
 
         if(model.ableToPay == 1){
-            holder.tvLayoutHeaderPayment.visibility = View.VISIBLE
-            holder.tvDeadline.visibility = View.VISIBLE
-            holder.viewLine.visibility = View.VISIBLE
+            holder.tvTitleDeadline.visibility = View.VISIBLE
+            holder.tvDeadlineDate.visibility = View.VISIBLE
+            holder.tvDeadlineTime.visibility = View.VISIBLE
 
             val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(model.paymentDeadline)
-            val pDeadline = SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss").format(date)
-            holder.tvDeadline.text = pDeadline
+            val pDeadline = SimpleDateFormat("dd MMM yyyy").format(date)
+            val timeDeadline = SimpleDateFormat("HH:mm:ss").format(date)
+
+            holder.tvDeadlineDate.text = pDeadline
+            holder.tvDeadlineTime.text = timeDeadline
 
         }else{
-            holder.tvLayoutHeaderPayment.visibility = View.GONE
-            holder.tvDeadline.visibility = View.GONE
-            holder.viewLine.visibility = View.GONE
+            holder.tvTitleDeadline.visibility = View.GONE
+            holder.tvDeadlineDate.visibility = View.GONE
+            holder.tvDeadlineTime.visibility = View.GONE
         }
 
         if(PaymentTypeEnum.getByTypeId(model.paymentMethod) == PaymentTypeEnum.DOWN_PAYMENT && firstPay > 0) {
@@ -96,11 +99,11 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
         var tvRemainingBill: TextView = view.findViewById(R.id.tv_remaining_bill)
         var tvBookingStartEndDate: TextView = view.findViewById(R.id.tv_booking_start_end_date)
         var tvBookingStatus: TextView = view.findViewById(R.id.tv_booking_status)
-        var tvLayoutHeaderPayment: LinearLayout = view.findViewById(R.id.layout_header_payment)
-        var tvDeadline: TextView = view.findViewById(R.id.tv_payment_deadline_mybooking)
-        var viewLine: View = view.findViewById(R.id.line_mybooking)
+        var tvDeadlineDate: TextView = view.findViewById(R.id.tv_payment_deadline_date_mybooking)
+        var tvDeadlineTime: TextView = view.findViewById(R.id.tv_payment_deadline_time_mybooking)
+        var tvTitleDeadline: View = view.findViewById(R.id.tv_title_payment_deadline)
 
-        var btnFittingSize: Button = view.findViewById(R.id.btn_fitting_size)
+//        var btnFittingSize: Button = view.findViewById(R.id.btn_fitting_size)
 
     }
 
