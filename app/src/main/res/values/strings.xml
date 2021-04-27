@@ -254,6 +254,7 @@
     <string name="payment_method_confirm">Payment Method</string>
     <string name="btn_confirmation">Confirmation</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="below_payment">below is your booking summary:</string>
 
     <!-- activity form confirmation -->
     <string name="appbar_confirmation">Confirmation</string>

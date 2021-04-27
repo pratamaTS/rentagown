@@ -19,7 +19,6 @@ import com.example.rentagown.v2.data.repository.RepositoryLocator
 import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 import com.example.rentagown.v2.util.Utils
-import java.lang.String
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -143,11 +142,17 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
         val pDeadlineTime = SimpleDateFormat("HH:mm:ss").format(date)
         val bookingFromDate = SimpleDateFormat("dd-MM-yyyy").format(bookingFrom)
         val bookingToDate = SimpleDateFormat("dd-MM-yyyy").format(bookingTo)
-        val cust = booking.name?.capitalize()?.trim()?.substring(0)
+        val cust = booking.name?.capitalize()?.trim()
         val index = cust?.indexOf(' ')
-        val firstName = index?.let { it1 -> cust?.substring(0, it1) }
+        var firstName: String?
 
-        tvThanksConfirm.text = "Thank you " + firstName + " for booking Rent a Gown, below is your summary:"
+        if(index != -1) {
+            firstName = index?.let { it -> cust.substring(0, it) }
+        }else{
+            firstName = cust
+        }
+
+        tvThanksConfirm.text = "Thank you " + firstName + " for booking Rent a Gown,"
         tvBookingDate.text = bookingDateTimeNow
         tvGownName.text = booking.productName?.capitalize()?.trim()
         tvStartDate.text = bookingFromDate
