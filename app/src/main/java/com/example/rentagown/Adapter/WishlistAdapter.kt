@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.WishlistViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.Wishlist
 import com.example.rentagown.R
 import com.example.rentagown.Response.GetWishlist.DataWishlist
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
+import com.example.rentagown.v2.util.Utils
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
@@ -23,7 +26,7 @@ class WishlistAdapter(private val mContext: Context, private val wishlistList: A
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
         val v: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list_product_wishlist, parent, false)
+            .inflate(R.layout.item_list_product, parent, false)
         return WishlistViewHolder(v)
     }
 
@@ -47,8 +50,12 @@ class WishlistAdapter(private val mContext: Context, private val wishlistList: A
         }
 
         if(wishlistList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + wishlistList[position].pathPhoto
-            Picasso.get().load(imgURL).into(holder.imProduct)
+            Glide.with(holder.itemView.context)
+                    .load(BuildConfig.BASE_PHOTO_URL + wishlistList[position].pathPhoto)
+                    .listener(Utils.getGlideException())
+                    .fitCenter()
+                    .error(R.color.colorGray)
+                    .into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
         }

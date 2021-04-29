@@ -32,7 +32,7 @@ class ProductItem(model: Product) : ModelAbstractItem<Product, ProductItem.ViewH
         Glide.with(holder.itemView.context)
             .load(BuildConfig.BASE_PHOTO_URL + model.photoPath)
             .listener(Utils.getGlideException())
-            .centerCrop()
+                .fitCenter()
             .error(R.color.colorGray)
             .into(holder.ivProduct)
 

@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.FavoriteGownViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.FavoriteGown
 import com.example.rentagown.R
 import com.example.rentagown.Response.FavoriteGown.DataFavoriteGown
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
+import com.example.rentagown.v2.util.Utils
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
@@ -47,8 +50,12 @@ class FavoriteGownAdapter(
         }
 
         if(favoriteGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + favoriteGownList[position].pathPhoto
-            Picasso.get().load(imgURL).into(holder.imProduct)
+            Glide.with(holder.itemView.context)
+                    .load(BuildConfig.BASE_PHOTO_URL + favoriteGownList[position].pathPhoto)
+                    .listener(Utils.getGlideException())
+                    .fitCenter()
+                    .error(R.color.colorGray)
+                    .into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
         }

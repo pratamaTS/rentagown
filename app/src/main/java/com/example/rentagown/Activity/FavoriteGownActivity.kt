@@ -49,13 +49,15 @@ class FavoriteGownActivity : AppCompatActivity(), View.OnClickListener, Favorite
     }
 
     override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
-        favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
+        if(dataFavoriteGown?.isNotEmpty() == true) {
+            favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
 
-        //Setup Recycler View Favorite
-        favoriteGownAdapter = FavoriteGownAdapter(this, favoriteGownList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        rvFavoriteGown?.setLayoutManager(gridLayoutManager)
-        rvFavoriteGown?.setAdapter(favoriteGownAdapter)
+            //Setup Recycler View Favorite
+            favoriteGownAdapter = FavoriteGownAdapter(this, favoriteGownList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            rvFavoriteGown?.setLayoutManager(gridLayoutManager)
+            rvFavoriteGown?.setAdapter(favoriteGownAdapter)
+        }
     }
 
     override fun onErrorGetFavoriteGown(msg: String) {

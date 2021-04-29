@@ -30,7 +30,7 @@ class SliderViewFullScreenAdapter(private var imagesPath: ArrayList<String?>) : 
         Glide.with(holder.itemView.context)
             .load(BuildConfig.BASE_PHOTO_URL + imagesPath[position])
             .listener(Utils.getGlideException())
-            .centerCrop()
+            .fitCenter()
             .error(R.color.colorGray)
             .listener(Utils.getGlideException())
             .into(holder.ivProduct)

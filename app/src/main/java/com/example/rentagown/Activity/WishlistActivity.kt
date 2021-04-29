@@ -73,16 +73,20 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistI
 }
 
     override fun onSuccessGetWishlist(dataWishlist: ArrayList<DataWishlist>?) {
-        wishlistList = dataWishlist as ArrayList<DataWishlist>
+        if(dataWishlist?.isNotEmpty() == true) {
+            wishlistList = dataWishlist as ArrayList<DataWishlist>
 
-        //Setup Adapter
-        wishlistAdapter = WishlistAdapter(this, wishlistList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        rvWishlist!!.setLayoutManager(gridLayoutManager)
-        rvWishlist!!.setAdapter(wishlistAdapter)
-        if (wishlistAdapter!!.getItemCount() > 0) {
-            layoutEmpty!!.setVisibility(View.GONE)
+            //Setup Adapter
+            wishlistAdapter = WishlistAdapter(this, wishlistList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
+            rvWishlist!!.setLayoutManager(gridLayoutManager)
+            rvWishlist!!.setAdapter(wishlistAdapter)
+            if (wishlistAdapter!!.getItemCount() > 0) {
+                layoutEmpty!!.setVisibility(View.GONE)
+            }
+        }else{
+            layoutEmpty!!.setVisibility(View.VISIBLE)
         }
     }
 

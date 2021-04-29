@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.NewGownViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.NewGown
 import com.example.rentagown.R
 import com.example.rentagown.Response.NewGown.DataNewGown
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
+import com.example.rentagown.v2.util.Utils
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
@@ -44,8 +47,12 @@ class NewGownAdapter(private val mContext: Context, private val newGownList: Arr
         }
 
         if(newGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + newGownList[position].pathPhoto
-            Picasso.get().load(imgURL).into(holder.imProduct)
+            Glide.with(holder.itemView.context)
+                    .load(BuildConfig.BASE_PHOTO_URL + newGownList[position].pathPhoto)
+                    .listener(Utils.getGlideException())
+                    .fitCenter()
+                    .error(R.color.colorGray)
+                    .into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)
         }

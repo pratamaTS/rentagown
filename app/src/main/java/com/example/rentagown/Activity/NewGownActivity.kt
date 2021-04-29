@@ -48,13 +48,16 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterf
     }
 
     override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown>?) {
-        newGownList = dataNewGown ?: arrayListOf()
 
-        //Setup Recycler View New Gown
-        newGownAdapter = NewGownAdapter(this, newGownList)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        rvNewGown?.setLayoutManager(gridLayoutManager)
-        rvNewGown?.setAdapter(newGownAdapter)
+        if(dataNewGown?.isNotEmpty() == true) {
+            newGownList = dataNewGown ?: arrayListOf()
+
+            //Setup Recycler View New Gown
+            newGownAdapter = NewGownAdapter(this, newGownList)
+            val gridLayoutManager = GridLayoutManager(this, 2)
+            rvNewGown?.setLayoutManager(gridLayoutManager)
+            rvNewGown?.setAdapter(newGownAdapter)
+        }
     }
 
     override fun onErrorGetNewGown(msg: String) {
