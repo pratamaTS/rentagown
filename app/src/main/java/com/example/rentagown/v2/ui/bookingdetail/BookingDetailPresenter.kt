@@ -17,7 +17,7 @@ class BookingDetailPresenter(private val repository: BookingDataSource) : BaseRA
     override fun onBtnActionClicked() {
         view?.getBookingData()?.apply {
 
-            if(BookingStatusEnum.isOnGoing(status)) {
+            if(BookingStatusEnum.isAbleToFitting(1)) {
                 // pay confirmation
                 view?.navigateToFitting(transactionId, fittingId)
             } else if(BookingStatusEnum.isCompleted(status) && ratingId.isNullOrBlank()) {

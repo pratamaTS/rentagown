@@ -3,10 +3,13 @@ package com.example.rentagown.v2.ui.confirmpayment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -24,6 +27,7 @@ import com.example.rentagown.v2.ui.bookingsuccess.BookingSuccessActivity
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.skydoves.powerspinner.PowerSpinnerView
+import java.text.NumberFormat
 
 
 class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>(), ConfirmPaymentContract.View,
@@ -76,10 +80,55 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
         etAccountName = findViewById(R.id.et_account_name)
         etPaymentAmount = findViewById(R.id.et_payment_amount)
 
+//        etPaymentAmount.setRawInputType(Configuration.KEYBOARD_12KEY)
+
+
         btnConfirm = findViewById(R.id.btn_confirm)
 
         btnConfirm.setOnClickListener(this)
     }
+
+//    private var current: String = ""
+//    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//        etPaymentAmount.text = ""
+//    }
+//
+//    override fun onTextChanged(
+//        s: CharSequence,
+//        start: Int,
+//        before: Int,
+//        count: Int
+//    ) {
+//        if (s.toString() != current) {
+//            etPaymentAmount.removeTextChangedListener(this)
+//
+//            val cleanString: String = s.replace("""[Rp,.]""".toRegex(), "")
+//
+//            val parsed = cleanString.toDouble()
+//            val formatted = NumberFormat.getCurrencyInstance().format((parsed / 100))
+//
+//            current = formatted
+//            etPaymentAmount.setText(formatted)
+//
+//            etPaymentAmount.addTextChangedListener(this)
+//        }
+//    }
+//
+//    override fun afterTextChanged(s: Editable?) {
+//        if (s.toString() != current) {
+//            etPaymentAmount.removeTextChangedListener(this)
+//
+//            val cleanString: String = s!!.replace("""[Rp,.]""".toRegex(), "")
+//
+//            val parsed = cleanString.toDouble()
+//            val formatted = NumberFormat.getCurrencyInstance().format((parsed / 100))
+//
+//            current = formatted
+//            etPaymentAmount.setText(formatted)
+//
+//            etPaymentAmount.addTextChangedListener(this)
+//        }
+//    }
 
     override fun onClick(v: View?) {
         when (v?.id) {

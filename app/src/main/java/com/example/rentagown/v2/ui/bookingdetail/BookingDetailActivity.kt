@@ -219,11 +219,24 @@ class BookingDetailActivity : BaseRAGActivity<BookingDetailContract.Presenter>()
             false
         }
 
-        containerHeaderPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
-            View.GONE
+        when(booking.paymentMethod) {
+            1 -> {
+                if (booking.status == 1) {
+                    containerHeaderPaymentDeadline.visibility = View.VISIBLE
+                    containerPaymentDeadline.visibility = View.VISIBLE
+                }else{
+                    containerHeaderPaymentDeadline.visibility = View.GONE
+                    containerPaymentDeadline.visibility = View.GONE
+                }
+            }
+            2 -> {
+                containerHeaderPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
+                    View.GONE
 
-        containerPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
-            View.GONE
+                containerPaymentDeadline.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
+                    View.GONE
+            }
+        }
 
         containerConfirmPayment.visibility = if(isContainerConfirmPaymentVisible) View.VISIBLE else
             View.GONE

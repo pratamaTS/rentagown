@@ -49,9 +49,21 @@ class MyBookingItem(model: Booking) : ModelAbstractItem<Booking, MyBookingItem.V
 //        }
 
         if(model.ableToPay == 1){
-            holder.tvTitleDeadline.visibility = View.VISIBLE
-            holder.tvDeadlineDate.visibility = View.VISIBLE
-            holder.tvDeadlineTime.visibility = View.VISIBLE
+            if(model.paymentMethod == 1){
+                if (model.status == 1){
+                    holder.tvTitleDeadline.visibility = View.VISIBLE
+                    holder.tvDeadlineDate.visibility = View.VISIBLE
+                    holder.tvDeadlineTime.visibility = View.VISIBLE
+                }else{
+                    holder.tvTitleDeadline.visibility = View.GONE
+                    holder.tvDeadlineDate.visibility = View.GONE
+                    holder.tvDeadlineTime.visibility = View.GONE
+                }
+            }else{
+                holder.tvTitleDeadline.visibility = View.VISIBLE
+                holder.tvDeadlineDate.visibility = View.VISIBLE
+                holder.tvDeadlineTime.visibility = View.VISIBLE
+            }
 
             val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(model.paymentDeadline)
             val pDeadline = SimpleDateFormat("dd MMM yyyy").format(date)
