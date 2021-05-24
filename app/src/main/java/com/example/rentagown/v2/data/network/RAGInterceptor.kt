@@ -11,7 +11,7 @@ class RAGInterceptor(private val sessionManager: SessionManager) : Interceptor {
 
         requestBuilder.addHeader("Accept-Encoding", "gzip, deflate, br")
         requestBuilder.addHeader("Content-Type", "application/json")
-        requestBuilder.addHeader("Host", "absdigital.id")
+        requestBuilder.addHeader("Host", "apps.rentagown.id")
 
         sessionManager.fetchAuthToken()?.let {
             requestBuilder.addHeader("Authorization", "Bearer $it")

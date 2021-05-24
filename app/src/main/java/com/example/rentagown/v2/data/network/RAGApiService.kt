@@ -12,7 +12,10 @@ interface RAGApiService {
     fun getUserAddresses(): Single<BasePagingResp<Address>>
 
     @GET("userdetail/find/default")
-    fun getDefaultAddress(): Single<Address>
+    fun getDefaultAddress(): Single<BaseResp<Address>>
+
+    @GET("bank/find/default")
+    fun getDefaultBank(): Single<BaseResp<Bank>>
 
     @POST("userdetail")
     fun addUserAddress(@Body address: Address): Single<BaseResp<Address>>

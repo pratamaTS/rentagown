@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ViewHolder.SliderNewGownViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
 import com.example.rentagown.Response.NewGown.DataNewGown
 import com.example.rentagown.v2.ui.home.mybookings.MyBookingsFragment
@@ -48,7 +49,7 @@ class SliderNewGownAdapter(
         }
 
         if(newGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + newGownList[position].pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + newGownList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

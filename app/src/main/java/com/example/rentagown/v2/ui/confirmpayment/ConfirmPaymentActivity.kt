@@ -47,13 +47,14 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
     private lateinit var tvConfirmationAmount: TextView
     private lateinit var spBankName: PowerSpinnerView
-//    private lateinit var etBankName: TextView
+    private lateinit var etOtherBankName: TextView
     private lateinit var etAccountNumber: TextView
     private lateinit var etAccountName: TextView
     private lateinit var etPaymentAmount: TextView
 
     private lateinit var btnConfirm: Button
     var idBank: String? = null
+    var otherBank: Boolean = false
 
     override fun init() {
         super.init()
@@ -76,6 +77,7 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
         tvConfirmationAmount = findViewById(R.id.tv_confirmation_amount)
         spBankName = findViewById(R.id.spinner_bank_name)
+        etOtherBankName = findViewById(R.id.et_other_payment_bank_name)
         etAccountNumber = findViewById(R.id.et_account_number)
         etAccountName = findViewById(R.id.et_account_name)
         etPaymentAmount = findViewById(R.id.et_payment_amount)
@@ -132,7 +134,7 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_confirm -> presenter.onBtnConfirmClicked()
+            R.id.btn_confirm -> presenter.onBtnConfirmClicked(otherBank)
         }
     }
 
@@ -170,6 +172,13 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
         spBankName.setOnSpinnerItemSelectedListener<IconSpinnerItem> { oldIndex, oldItem, newIndex, newItem ->
             val text = newItem.text
+            if(text == "OTHER BANK"){
+                otherBank = true
+                etOtherBankName.visibility = View.VISIBLE
+            }else{
+                otherBank = false
+                etOtherBankName.visibility = View.GONE
+            }
             idBank = bank.find { it.displayName == newItem.text }?.idMstBank
             Log.d("id bank", idBank.toString())
         }
@@ -185,6 +194,10 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
     override fun getBankID(): String {
         return idBank.toString()
+    }
+
+    override fun getOtherBankName(): String {
+        return etOtherBankName.text.toString().trim()
     }
 
     override fun getAccountNumber(): String {
@@ -209,6 +222,10 @@ class ConfirmPaymentActivity : BaseRAGActivity<ConfirmPaymentContract.Presenter>
 
     override fun showMsgBookingNotFound() {
         showMessage(getString(R.string.err_booking_not_found))
+    }
+
+    override fun showMsgOtherBankEmpty() {
+        showMessage(getString(R.string.err_source_otehr_bank_name_empty))
     }
 
     override fun showMsgBankEmpty() {

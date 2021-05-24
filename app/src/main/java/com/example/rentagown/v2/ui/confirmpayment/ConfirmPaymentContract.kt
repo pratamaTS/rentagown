@@ -15,12 +15,14 @@ class ConfirmPaymentContract {
         fun setPaymentValue(paymentValueStr: String?)
         fun getInvoice(): String
         fun getBankID(): String
+        fun getOtherBankName(): String
         fun getAccountNumber(): String
         fun getAccountName(): String
         fun getPaymentAmount(): String
         fun setResultPaymentSuccess(booking: Booking?)
 
         fun showMsgBookingNotFound()
+        fun showMsgOtherBankEmpty()
         fun showMsgBankEmpty()
         fun showMsgAccountNumberEmpty()
         fun showMsgAccountNameEmpty()
@@ -31,7 +33,7 @@ class ConfirmPaymentContract {
     interface Presenter : BasePresenter {
 
         fun loadBank()
-        fun onBtnConfirmClicked()
+        fun onBtnConfirmClicked(otherBank: Boolean)
 
     }
 

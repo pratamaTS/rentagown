@@ -47,18 +47,18 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
 
     var listener: Listener? = null
 
-    var etEmail: EditText? = null
-    var etPassword: EditText? = null
-    var btnSignIn: Button? = null
-    var btnForgotPassword: Button? = null
-    var btnToSignUp: Button? = null
-    var btnShowHidePass: ImageView? = null
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnSignIn: Button
+    private lateinit var btnForgotPassword: Button
+    private lateinit var btnToSignUp: Button
+    private lateinit var btnShowHidePass: ImageView
     var message: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_login, container, false)
 
@@ -77,10 +77,10 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
         }
 
         //Set Listener
-        btnSignIn?.setOnClickListener(this@LoginFragment)
-        btnForgotPassword?.setOnClickListener(this@LoginFragment)
-        btnToSignUp?.setOnClickListener(this@LoginFragment)
-        btnShowHidePass?.setOnClickListener(this@LoginFragment)
+        btnSignIn.setOnClickListener(this@LoginFragment)
+        btnForgotPassword.setOnClickListener(this@LoginFragment)
+        btnToSignUp.setOnClickListener(this@LoginFragment)
+        btnShowHidePass.setOnClickListener(this@LoginFragment)
 
         return view
     }
@@ -89,14 +89,14 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_sign_in -> {
-                if(isValidEmail(etEmail?.text.toString()) == true && etPassword?.text?.isNotEmpty() ?:true ) {
+                if(isValidEmail(etEmail.text.toString()) == true && etPassword.text?.isNotEmpty() ?:true ) {
                     LoginPresenter(this).login(
                         requireContext(),
-                        LoginBody(etEmail?.text.toString(), etPassword?.text.toString())
+                        LoginBody(etEmail.text.toString(), etPassword.text.toString())
                     )
-                }else if(etEmail?.text.isNullOrEmpty()){
+                }else if(etEmail.text.isNullOrEmpty()){
                     Toast.makeText(context, "Email is still empty", Toast.LENGTH_SHORT).show()
-                }else if(etPassword?.text.isNullOrEmpty()){
+                }else if(etPassword.text.isNullOrEmpty()){
                     Toast.makeText(context, "Password is still empty", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context, "Email is not valid", Toast.LENGTH_SHORT).show()
@@ -111,15 +111,15 @@ class LoginFragment : Fragment(), View.OnClickListener, LoginInterface {
                 startActivity(toRegister)
             }
             R.id.show_pass_btn -> if (v.id == R.id.show_pass_btn) {
-                if (etPassword!!.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                if (etPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
                     (v as ImageView).setImageResource(R.drawable.ic_show)
                     //Show Password
-                    etPassword!!.transformationMethod =
+                    etPassword.transformationMethod =
                         HideReturnsTransformationMethod.getInstance()
                 } else {
                     (v as ImageView).setImageResource(R.drawable.ic_hide)
                     //Hide Password
-                    etPassword!!.transformationMethod = PasswordTransformationMethod.getInstance()
+                    etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
                 }
             }
         }

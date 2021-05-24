@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager
 import butterknife.ButterKnife
 import com.example.rentagown.Activity.ImagePickerActivity.Companion.showImagePickerOptions
 import com.example.rentagown.Activity.ImagePickerActivity.PickerOptionListener
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Connection.Constants
 import com.example.rentagown.Connection.Interface.EditProfileInterface
 import com.example.rentagown.Connection.Interface.ProfileInterface
@@ -335,7 +336,7 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         oldPathPhoto = dataProfile?.pathPhoto
 
         if(dataProfile?.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = Constants.SERVER_URL + dataProfile?.pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + dataProfile?.pathPhoto
 
             Picasso.get().load(imgURL).into(profilePict)
         }else {
@@ -365,10 +366,10 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         edtName?.setText(dataEditProfile.name)
         edtPhoneNumber?.setText(dataEditProfile.phone)
         loadingDialog.dismiss()
-        val imgURL: String = "http://absdigital.id:55000" + dataEditProfile.pathPhoto
+        val imgURL: String = BuildConfig.BASE_PHOTO_URL + dataEditProfile.pathPhoto
 
         if(dataEditProfile?.pathPhoto?.isNotEmpty() == true || oldPathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = Constants.SERVER_URL + dataEditProfile?.pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + dataEditProfile?.pathPhoto
             Picasso.get().load(imgURL).into(profilePict)
         }else {
             profilePict?.setImageResource(R.drawable.bg_placholder_edit_profile)

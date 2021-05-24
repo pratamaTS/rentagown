@@ -1,15 +1,12 @@
 package com.example.rentagown.Adapter
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderFavoriteGownViewHolder
-import com.example.rentagown.Model.FavoriteGown
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
 import com.example.rentagown.Response.FavoriteGown.DataFavoriteGown
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
@@ -48,7 +45,7 @@ class SliderFavoriteGownAdapter(
         }
 
         if(favoriteGownList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + favoriteGownList[position].pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + favoriteGownList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

@@ -1,6 +1,7 @@
 package com.example.rentagown.Connection
 
 import android.content.Context
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Connection.Interceptor.AuthInterceptor
 import com.example.rentagown.v2.base.BasePresenter
 import com.example.rentagown.v2.base.BaseView
@@ -29,7 +30,7 @@ object NetworkConfigAfterLogin {
     //mengirim dan menerima response dari server
     fun getRetrofit(context: Context): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.SERVER_URL)
+            .baseUrl(BuildConfig.BASE_PHOTO_URL)
             .client(getInterceptor(context))
             .addConverterFactory(GsonConverterFactory.create()) //convert data Json yang diterima dari server menjadi objek
             .build()

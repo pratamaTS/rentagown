@@ -11,8 +11,8 @@ import com.example.rentagown.v2.ui.home.mybookings.MyBookingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainAfterActivity : AppCompatActivity() {
-    private var bottomNavigationView: BottomNavigationView? = null
-    var frameLayout: FrameLayout? = null
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var frameLayout: FrameLayout
     var selectedFragment: Fragment? = null
     var profileAfterFragment: ProfileAfterFragment = ProfileAfterFragment()
 
@@ -25,7 +25,7 @@ class MainAfterActivity : AppCompatActivity() {
         //INIT VIEW
         bottomNavigationView = findViewById(R.id.bot_nav)
         frameLayout = findViewById(R.id.fragment_container)
-        bottomNavigationView!!.setOnNavigationItemSelectedListener(bottomNavMethod)
+        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod)
 
     }
 
@@ -34,15 +34,15 @@ class MainAfterActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     selectedFragment = HomeFragment()
-                    bottomNavigationView!!.itemIconTintList = null
+                    bottomNavigationView.itemIconTintList = null
                 }
                 R.id.nav_booking -> {
                     selectedFragment = MyBookingsFragment.newInstance()
-                    bottomNavigationView!!.itemIconTintList = null
+                    bottomNavigationView.itemIconTintList = null
                 }
                 R.id.nav_profile -> {
                     selectedFragment = profileAfterFragment
-                    bottomNavigationView!!.itemIconTintList = null
+                    bottomNavigationView.itemIconTintList = null
                 }
             }
             if (selectedFragment != null) {
@@ -55,7 +55,7 @@ class MainAfterActivity : AppCompatActivity() {
         }
 
     fun setSelectedNavId(navId: Int) {
-        bottomNavigationView?.selectedItemId = R.id.nav_home
+        bottomNavigationView.selectedItemId = R.id.nav_home
     }
 
 }

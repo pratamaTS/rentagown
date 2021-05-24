@@ -17,8 +17,8 @@ import com.example.rentagown.Response.Promo.DataPromo
 import kotlin.collections.ArrayList
 
 class PromoActivity : AppCompatActivity(), View.OnClickListener, PromoInterface {
-    var back: ImageButton? = null
-    var rvListPromo: RecyclerView? = null
+    private lateinit var back: ImageButton
+    private lateinit var rvListPromo: RecyclerView
     var promoList: ArrayList<DataPromo> = ArrayList()
     var promoAdapter: PromoAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class PromoActivity : AppCompatActivity(), View.OnClickListener, PromoInterface 
         getPromo()
 
         //SET LISTENER
-        back?.setOnClickListener(this)
+        back.setOnClickListener(this)
     }
 
     private fun getPromo() {
@@ -51,8 +51,8 @@ class PromoActivity : AppCompatActivity(), View.OnClickListener, PromoInterface 
 
         //Setup Recycler View Product
         promoAdapter = PromoAdapter(this, promoList)
-        rvListPromo?.setLayoutManager(GridLayoutManager(this, 2))
-        rvListPromo?.setAdapter(promoAdapter)
+        rvListPromo.setLayoutManager(GridLayoutManager(this, 2))
+        rvListPromo.setAdapter(promoAdapter)
     }
 
     override fun onErrorGetPromo(msg: String) {

@@ -42,53 +42,57 @@ class NotifTransactionFragment : Fragment(), GetNotificationInterface {
         //INIT VIEW
         rvNotifTransaction = view.findViewById(R.id.rv_notif_transaction)
 
-        getPublicMethod()
-
         getNotif()
 
         return view
     }
 
-    private fun getPublicMethod() {
-        val fragment = HomeFragment()
-        var prefs: SharedPreferences = context!!.getSharedPreferences(
-            context!!.getString(R.string.app_name),
-            Context.MODE_PRIVATE
-        )
-        val editor = prefs.edit()
-
-        fragment.setBadgeNotif(true)
-        editor.putBoolean(READ_NOTIF, true)
-        editor.commit()
-
-        activity?.let { mAct ->
-            // sekarang langsung akses bottom nav dulu, bisa diubah nanti kalo sudah diperbaiki
-            if(mAct is MainActivity) {
-                fragment.setBadgeNotif(true)
-                editor.putBoolean(READ_NOTIF, true)
-                editor.commit()
-                Log.d("main act", "running")
-                return
-            }
-            if(mAct is MainAfterActivity) {
-                fragment.setBadgeNotif(true)
-                editor.putBoolean(READ_NOTIF, true)
-                editor.commit()
-                Log.d("main after act", "running")
-                return
-            }
-        }
-    }
+//    private fun getPublicMethod() {
+//        val fragment = HomeFragment()
+//        var prefs: SharedPreferences = requireContext().getSharedPreferences(
+//            requireContext().getString(R.string.app_name),
+//            Context.MODE_PRIVATE
+//        )
+//        val editor = prefs.edit()
+//
+//        fragment.setBadgeNotif(true)
+//        editor.putBoolean(READ_NOTIF, true)
+//        editor.commit()
+//
+//        activity?.let { mAct ->
+//            // sekarang langsung akses bottom nav dulu, bisa diubah nanti kalo sudah diperbaiki
+//            if(mAct is MainActivity) {
+//                fragment.setBadgeNotif(true)
+//                editor.putBoolean(READ_NOTIF, true)
+//                editor.commit()
+//                Log.d("main act", "running")
+//                return
+//            }
+//            if(mAct is MainAfterActivity) {
+//                fragment.setBadgeNotif(true)
+//                editor.putBoolean(READ_NOTIF, true)
+//                editor.commit()
+//                Log.d("main after act", "running")
+//                return
+//            }
+//        }
+//    }
 
     private fun getNotif() {
-        GetNotificationPresenter(this).getAllNotification(context!!)
+        GetNotificationPresenter(this).getAllNotification(requireContext())
     }
 
     override fun onSuccessGetNotification(dataNotification: ArrayList<DataNotification>?) {
-        notifTransactionList = dataNotification as ArrayList<DataNotification>
+//        if(dataNotification!!.isNotEmpty()){
+//            getPublicMethod()
+//        }
+
+        if (dataNotification != null) {
+            notifTransactionList = dataNotification
+        }
 
         //Setup Recycler View
-        notifTransactionAdapter = NotifTransactionAdapter(context!!, notifTransactionList!!)
+        notifTransactionAdapter = NotifTransactionAdapter(requireContext(), notifTransactionList)
         rvNotifTransaction!!.setLayoutManager(LinearLayoutManager(activity))
         rvNotifTransaction!!.setAdapter(notifTransactionAdapter)
 

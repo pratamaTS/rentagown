@@ -19,7 +19,7 @@ class GetSeeUnDatePresenter(val seeUnDateInterface: GetSeeUnDateInterface) {
         val map: MutableMap<String, String> = HashMap()
         map["Accept-Encoding"] = "gzip, deflate, br"
         map["Content-Type"] = "application/json"
-        map["Host"] = "absdigital.id"
+        map["Host"] = "apps.rentagown.id"
 
         //URL
         val url: String = "api/v/2/booking/date/" + idProduct

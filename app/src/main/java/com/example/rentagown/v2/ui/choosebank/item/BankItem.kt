@@ -27,6 +27,12 @@ class BankItem(model: Bank, private val selectedBankId: String? = null) : ModelA
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
 
+        if(model.isDefault == 1) {
+            holder.tvDefaultBank.visibility = View.VISIBLE
+        }else{
+            holder.tvDefaultBank.visibility = View.INVISIBLE
+        }
+
         Glide.with(holder.itemView.context)
             .load(BuildConfig.BASE_PHOTO_URL + model.photoPath)
             .listener(Utils.getGlideException())
@@ -55,6 +61,7 @@ class BankItem(model: Bank, private val selectedBankId: String? = null) : ModelA
         var container: View = view.findViewById(R.id.container)
         var ivBankLogo: ImageView = view.findViewById(R.id.iv_bank_logo)
         var tvMethodName: TextView = view.findViewById(R.id.tv_method_name)
+        var tvDefaultBank: TextView = view.findViewById(R.id.tv_label_default_bank)
         var tvAccountName: TextView = view.findViewById(R.id.tv_account_name)
         var tvAccountNumber: TextView = view.findViewById(R.id.tv_account_number)
 

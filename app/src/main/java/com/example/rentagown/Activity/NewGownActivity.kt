@@ -2,6 +2,7 @@ package com.example.rentagown.Activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -18,8 +19,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterface {
-    var back: ImageButton? = null
-    var rvNewGown: RecyclerView? = null
+    private lateinit var back: ImageButton
+    private lateinit var rvNewGown: RecyclerView
     var newGownAdapter: NewGownAdapter? = null
     var newGownList: ArrayList<DataNewGown> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,7 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterf
         getNewGown()
 
         //SET LISTENER
-        back?.setOnClickListener(this)
+        back.setOnClickListener(this)
     }
 
     private fun getNewGown() {
@@ -49,14 +50,15 @@ class NewGownActivity : AppCompatActivity(), View.OnClickListener, NewGownInterf
 
     override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown>?) {
 
+        Log.d("newgown", dataNewGown.toString())
         if(dataNewGown?.isNotEmpty() == true) {
-            newGownList = dataNewGown ?: arrayListOf()
+            newGownList = dataNewGown
 
             //Setup Recycler View New Gown
             newGownAdapter = NewGownAdapter(this, newGownList)
             val gridLayoutManager = GridLayoutManager(this, 2)
-            rvNewGown?.setLayoutManager(gridLayoutManager)
-            rvNewGown?.setAdapter(newGownAdapter)
+            rvNewGown.setLayoutManager(gridLayoutManager)
+            rvNewGown.setAdapter(newGownAdapter)
         }
     }
 

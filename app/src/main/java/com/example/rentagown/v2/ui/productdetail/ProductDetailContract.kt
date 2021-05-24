@@ -34,7 +34,7 @@ class ProductDetailContract {
 
         fun getProductDetail(productId: String)
         fun onBtnWhatsapClicked()
-        fun onBtnBookNowClicked()
+        fun onBtnBookNowClicked(orderType: Int)
         fun onUserLoggedIn()
 
         fun onBookingCreated()

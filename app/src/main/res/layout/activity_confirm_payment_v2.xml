@@ -189,6 +189,22 @@
                     </RelativeLayout>
 
                     <EditText
+                        android:id="@+id/et_other_payment_bank_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/margin_md"
+                        android:autofillHints=""
+                        android:background="@drawable/bg_edit_text_filled"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:hint="@string/hint_your_bank_name"
+                        android:inputType="text"
+                        android:paddingStart="24dp"
+                        android:visibility="gone"
+                        android:paddingEnd="24dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <EditText
                         android:id="@+id/et_account_number"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"

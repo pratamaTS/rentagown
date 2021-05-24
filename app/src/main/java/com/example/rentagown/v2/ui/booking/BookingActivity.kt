@@ -61,6 +61,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
 
     private lateinit var ivPaymentMethodLogo: ImageView
     private lateinit var tvPaymentMethod: TextView
+    private lateinit var tvDefaultBank: TextView
     private lateinit var tvAccountDestName: TextView
     private lateinit var tvAccountDestNumber: TextView
 
@@ -121,6 +122,7 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
 
         ivPaymentMethodLogo = findViewById(R.id.iv_payment_method_logo)
         tvPaymentMethod = findViewById(R.id.tv_payment_method)
+        tvDefaultBank = findViewById(R.id.tv_label_default_bank_payment)
         tvAccountDestName = findViewById(R.id.tv_account_dest_name)
         tvAccountDestNumber = findViewById(R.id.tv_account_dest_number)
 
@@ -222,22 +224,46 @@ class BookingActivity : BaseRAGActivity<BookingContract.Presenter>(), BookingCon
         return selectedAddress
     }
 
-    override fun setBankDataToView(bank: Bank) {
+    override fun setBankDataToView(bank: Bank, selected: Boolean) {
         this.selectedBank = bank
 
-        btnAddPaymentMethod.visibility = View.GONE
-        btnChangePaymentMethod.visibility = View.VISIBLE
+        if(bank.isDefault == 1) {
+            tvDefaultBank.visibility = View.VISIBLE
+            btnAddPaymentMethod.visibility = View.GONE
+            btnChangePaymentMethod.visibility = View.VISIBLE
 
-        Glide.with(this)
-            .load(BuildConfig.BASE_PHOTO_URL + bank.photoPath)
-            .listener(Utils.getGlideException())
-            .fitCenter()
-            .error(R.color.colorGray)
-            .into(ivPaymentMethodLogo)
+            Glide.with(this)
+                .load(BuildConfig.BASE_PHOTO_URL + bank.photoPath)
+                .listener(Utils.getGlideException())
+                .fitCenter()
+                .error(R.color.colorGray)
+                .into(ivPaymentMethodLogo)
 
-        tvPaymentMethod.text = bank.bankName
-        tvAccountDestName.text = bank.accountName
-        tvAccountDestNumber.text = bank.accountNumber
+            tvPaymentMethod.text = bank.bankName
+            tvAccountDestName.text = bank.accountName
+            tvAccountDestNumber.text = bank.accountNumber
+        }else{
+            if(selected == true){
+                tvDefaultBank.visibility = View.INVISIBLE
+                btnAddPaymentMethod.visibility = View.GONE
+                btnChangePaymentMethod.visibility = View.VISIBLE
+
+                Glide.with(this)
+                    .load(BuildConfig.BASE_PHOTO_URL + bank.photoPath)
+                    .listener(Utils.getGlideException())
+                    .fitCenter()
+                    .error(R.color.colorGray)
+                    .into(ivPaymentMethodLogo)
+
+                tvPaymentMethod.text = bank.bankName
+                tvAccountDestName.text = bank.accountName
+                tvAccountDestNumber.text = bank.accountNumber
+            }else{
+                tvDefaultBank.visibility = View.INVISIBLE
+                btnAddPaymentMethod.visibility = View.VISIBLE
+                btnChangePaymentMethod.visibility = View.GONE
+            }
+        }
     }
 
     override fun getSelectedProduct(): Product? = intent.getParcelableExtra("product")

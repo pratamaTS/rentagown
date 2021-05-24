@@ -18,6 +18,9 @@ data class Bank(
     @SerializedName("account_name")
     val accountName: String? = null,
 
+    @SerializedName("is_default")
+    val isDefault: Int = 0,
+
     @SerializedName("path_photo")
     val photoPath: String? = null
 
@@ -28,6 +31,7 @@ data class Bank(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readInt(),
         parcel.readString()
     )
 
@@ -36,6 +40,7 @@ data class Bank(
         parcel.writeString(bankName)
         parcel.writeString(accountNumber)
         parcel.writeString(accountName)
+        parcel.writeInt(isDefault)
         parcel.writeString(photoPath)
     }
 

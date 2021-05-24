@@ -98,7 +98,7 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
     override fun setupWidgets(v: View) {
         super.setupWidgets(v)
 
-        val sessionManager = SessionManager(context!!)
+        val sessionManager = SessionManager(requireContext())
 
         tvFinalPrice = v.findViewById(R.id.tv_final_price)
         tvDiscountValue = v.findViewById(R.id.tv_discount_value)
@@ -224,7 +224,7 @@ class ProductOverviewFragment : BaseRAGFragment<ProductOverviewContract.Presente
                 if(token != null) {
                     var productID = ""
                     getSelectedProductId()?.apply { productID = this }
-                    AddWishlistPresenter(this).addWishlist(context!!, WishlistBody(productID))
+                    AddWishlistPresenter(this).addWishlist(requireContext(), WishlistBody(productID))
                 }else{
                     activity?.let { act ->
                         Intent(act, MainActivity::class.java).apply {

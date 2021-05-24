@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Connection.Interface.PromoByIdInterface
 import com.example.rentagown.Connection.Presenter.PromoByIdPresenter
 import com.example.rentagown.R
@@ -78,7 +79,7 @@ class DetailPromoActivity : AppCompatActivity(), View.OnClickListener, PromoById
         }
 
         if(promoDetail!!.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + promoDetail!!.pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + promoDetail!!.pathPhoto
             Picasso.get().load(imgURL).resize(200, 200).into(imPromo)
         }
     }

@@ -134,7 +134,7 @@ class BookingSummaryActivity : BaseRAGActivity<BookingSummaryContract.Presenter>
                 .into(ivPaymentBankLogo)
 
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(booking.paymentDeadline)
-        val createdDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX").parse(booking.bookingNow)
+        val createdDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSSZ").parse(booking.bookingNow)
         val bookingFrom = SimpleDateFormat("yyyy-MM-dd").parse(booking.startDate)
         val bookingTo = SimpleDateFormat("yyyy-MM-dd").parse(booking.endDate)
         val bookingDateTimeNow = SimpleDateFormat("dd-MM-yyyy").format(createdDate)

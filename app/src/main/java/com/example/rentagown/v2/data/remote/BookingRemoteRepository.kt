@@ -67,8 +67,12 @@ class BookingRemoteRepository(private val apiService: RAGApiService) : BookingDa
         return apiService.getInvoiceDetail(invoiceId)
     }
 
-    override fun getDefaultAddress(): Single<Address> {
+    override fun getDefaultAddress(): Single<BaseResp<Address>> {
         return apiService.getDefaultAddress()
+    }
+
+    override fun getDefaultBank(): Single<BaseResp<Bank>> {
+        return apiService.getDefaultBank()
     }
 
 }

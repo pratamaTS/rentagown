@@ -1,5 +1,6 @@
 package com.example.rentagown.Connection
 
+import com.example.rentagown.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,7 +20,7 @@ object NetworkConfig {
     //mengirim dan menerima response dari server
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.SERVER_URL)
+            .baseUrl(BuildConfig.BASE_PHOTO_URL)
             .client(getInterceptor())
             .addConverterFactory(GsonConverterFactory.create()) //convert data Json yang diterima dari server menjadi objek
             .build()

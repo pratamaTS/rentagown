@@ -5,11 +5,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.ProductViewHolder
-import com.example.rentagown.Model.Product
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
@@ -44,7 +42,7 @@ class ProductAdapter(private val mContext: Context, private val productList: Arr
         }
 
         if(productList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + productList[position].pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + productList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

@@ -17,7 +17,7 @@ class ProductByPromoPresenter(val productByPromoInterface: ProductByPromoInterfa
         val map: MutableMap<String, String> = HashMap()
         map["Accept-Encoding"] = "gzip, deflate, br"
         map["Content-Type"] = "application/json"
-        map["Host"] = "absdigital.id"
+        map["Host"] = "apps.rentagown.id"
 
         //Connect
         NetworkConfig.service()

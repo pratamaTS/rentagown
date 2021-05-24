@@ -22,7 +22,7 @@ class SearchPresenter(val searchInterface: SearchInterface) {
         val map: MutableMap<String, String> = HashMap()
         map["Accept-Encoding"] = "gzip, deflate, br"
         map["Content-Type"] = "application/json"
-        map["Host"] = "absdigital.id"
+        map["Host"] = "apps.rentagown.id"
 
         // Query Param Map
         val queryMap: MutableMap<String, String> = HashMap()

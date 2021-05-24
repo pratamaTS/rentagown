@@ -1,14 +1,12 @@
 package com.example.rentagown.Adapter
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.SliderMainMenuViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
@@ -41,7 +39,7 @@ class SliderMainMenuAdapter(
             holder.tvPrice.setText(numberFormat.format(sliderMainMenuList[position].productPrice))
         }
 
-        val imgURL: String = "http://absdigital.id:55000" + sliderMainMenuList[position].pathPhoto
+        val imgURL: String = BuildConfig.BASE_PHOTO_URL + sliderMainMenuList[position].pathPhoto
         Picasso.get().load(imgURL).into(holder.imContent)
 
         holder.itemView.setOnClickListener { v ->

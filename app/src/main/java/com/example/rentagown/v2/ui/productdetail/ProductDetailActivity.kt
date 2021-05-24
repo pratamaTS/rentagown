@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.productdetail
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -208,7 +209,31 @@ class ProductDetailActivity : BaseRAGActivity<ProductDetailContract.Presenter>()
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_whatsapp -> presenter.onBtnWhatsapClicked()
-            R.id.btn_book_now -> presenter.onBtnBookNowClicked()
+            R.id.btn_book_now -> {
+                val bookingDates = getBookingDates()
+
+                val startDate = bookingDates.first
+                val endDate = bookingDates.second
+
+                if (startDate != null && endDate != null) {
+                    val msg1 = "How do you order?"
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Confirmation")
+                        .setMessage(msg1)
+                        .setCancelable(false)
+                        .setPositiveButton("Online") { dialog, id ->
+                            presenter.onBtnBookNowClicked(1)
+                        }
+                        .setNegativeButton("Walk-In") { dialog, id ->
+                            // Dismiss the dialog
+                            presenter.onBtnBookNowClicked(2)
+                        }
+                    val alert = builder.create()
+                    alert.show()
+                }else{
+                    showMsgBookingDateNotValid()
+                }
+            }
         }
     }
 

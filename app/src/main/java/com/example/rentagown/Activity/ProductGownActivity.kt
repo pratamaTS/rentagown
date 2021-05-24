@@ -31,10 +31,10 @@ import kotlin.collections.ArrayList
 
 class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
     ItemClickListener, ProductAllInterface, ProductByCategoryInterface, ProductByPromoInterface, ProductCategoryInterface, CategoryProductAdapter.ReloadItemInterface {
-    var back: ImageButton? = null
-    var filter: ImageButton? = null
-    var rvMenuCategory: RecyclerView? = null
-    var rvProduct: RecyclerView? = null
+    private lateinit var back: ImageButton
+    private lateinit var filter: ImageButton
+    private lateinit var rvMenuCategory: RecyclerView
+    private lateinit var rvProduct: RecyclerView
     var categoryProductAdapter: CategoryProductAdapter? = null
     var categoryMenuList: ArrayList<CategoryMenu> = ArrayList()
     var productList: ArrayList<DataProduct> = ArrayList()
@@ -58,7 +58,7 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
             idPromo = intent.getStringExtra("id_promo")
             when(checkPromo){
                 true -> {
-                    rvMenuCategory?.visibility = View.INVISIBLE
+                    rvMenuCategory.visibility = View.INVISIBLE
                     getProductPromo(idPromo.toString())
                 }
             }
@@ -67,8 +67,8 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
         }
 
         //SET LISTENER
-        back?.setOnClickListener(this)
-        filter?.setOnClickListener(this)
+        back.setOnClickListener(this)
+        filter.setOnClickListener(this)
     }
 
     private fun getCategory(){
@@ -104,15 +104,15 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onSuccessGetAllProduct(dataProduct: ArrayList<DataProduct>?) {
         if(dataProduct?.isNotEmpty() == true) {
-            rvProduct?.visibility = View.VISIBLE
+            rvProduct.visibility = View.VISIBLE
             productList = dataProduct as ArrayList<DataProduct>
             //Setup Recycler View Product
             productAdapter = ProductAdapter(this, productList)
             val gridLayoutManager = GridLayoutManager(this, 2)
-            rvProduct?.setLayoutManager(gridLayoutManager)
-            rvProduct?.setAdapter(productAdapter)
+            rvProduct.setLayoutManager(gridLayoutManager)
+            rvProduct.setAdapter(productAdapter)
         }else{
-            rvProduct?.visibility = View.INVISIBLE
+            rvProduct.visibility = View.INVISIBLE
             Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
         }
     }
@@ -123,15 +123,15 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
         if(dataProductByCat?.isNotEmpty() == true) {
-            rvProduct?.visibility = View.VISIBLE
+            rvProduct.visibility = View.VISIBLE
             productList = dataProductByCat as ArrayList<DataProduct>
             //Setup Recycler View Product
             productAdapter = ProductAdapter(this, productList)
             val gridLayoutManager = GridLayoutManager(this, 2)
-            rvProduct?.setLayoutManager(gridLayoutManager)
-            rvProduct?.setAdapter(productAdapter)
+            rvProduct.setLayoutManager(gridLayoutManager)
+            rvProduct.setAdapter(productAdapter)
         } else{
-            rvProduct?.visibility = View.INVISIBLE
+            rvProduct.visibility = View.INVISIBLE
             Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
         }
     }
@@ -154,15 +154,15 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onSuccessGetProductByPromo(dataProductByCat: ArrayList<DataProduct>?) {
         if(dataProductByCat?.isNotEmpty() == true) {
-            rvProduct?.visibility = View.VISIBLE
+            rvProduct.visibility = View.VISIBLE
             productList = dataProductByCat as ArrayList<DataProduct>
             //Setup Recycler View Product
             productAdapter = ProductAdapter(this, productList)
             val gridLayoutManager = GridLayoutManager(this, 2)
-            rvProduct?.setLayoutManager(gridLayoutManager)
-            rvProduct?.setAdapter(productAdapter)
+            rvProduct.setLayoutManager(gridLayoutManager)
+            rvProduct.setAdapter(productAdapter)
         }else{
-            rvProduct?.visibility = View.INVISIBLE
+            rvProduct.visibility = View.INVISIBLE
             Toast.makeText(this, "There is no item", Toast.LENGTH_SHORT).show()
         }
     }
@@ -183,15 +183,15 @@ class ProductGownActivity : AppCompatActivity(), View.OnClickListener,
 
         //Setup Recycler View Title Menu
         categoryProductAdapter = CategoryProductAdapter(this, categoryMenuList, this)
-        rvMenuCategory?.setLayoutManager(
+        rvMenuCategory.setLayoutManager(
             LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
         )
-        rvMenuCategory?.setAdapter(categoryProductAdapter)
-        rvMenuCategory?.addItemDecoration(ItemDecorationSlider(16))
+        rvMenuCategory.setAdapter(categoryProductAdapter)
+        rvMenuCategory.addItemDecoration(ItemDecorationSlider(16))
 
         // preselect first category
         selectedCategoryMenu = categoryProductAdapter!!.getItem(0)

@@ -31,26 +31,27 @@ import com.example.rentagown.Response.Notification.DataNotification
 import com.example.rentagown.Response.Product.DataProduct
 import com.example.rentagown.Response.ProductCategory.DataProductCategory
 import com.example.rentagown.Response.Promo.DataPromo
+import com.example.rentagown.v2.ui.choosedate.ChooseDateActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), View.OnClickListener,
     ItemClickListener, ProductCategoryInterface, ProductByCategoryInterface, PromoInterface, FavoriteGownInterface, NewGownInterface, GetNotificationInterface, CategoryMenuAdapter.ReloadItemInterface {
-    var imWishlist: ImageButton? = null
-    var imNotification: ImageView? = null
-    var btnSeeAllCategory: Button? = null
-    var btnSeeAllPromo: Button? = null
-    var btnSeeAllFavoriteGown: Button? = null
-    var btnSeeAllNewGown: Button? = null
-    var rvTitleMenu: RecyclerView? = null
-    var rvSliderMenu: RecyclerView? = null
-    var rvSliderPromo: RecyclerView? = null
-    var layoutPromoEmpty: ImageView? = null
-    var searchView: SearchView? = null
-    var layoutPromo: ConstraintLayout? = null
-    var layoutFavoriteGown: ConstraintLayout? = null
-    var rvSliderFavoriteGown: RecyclerView? = null
-    var rvSliderNewGown: RecyclerView? = null
+    private lateinit var imWishlist: ImageButton
+    private lateinit var imNotification: ImageView
+    private lateinit var btnSeeAllCategory: Button
+    private lateinit var btnSeeAllPromo: Button
+    private lateinit var btnSeeAllFavoriteGown: Button
+    private lateinit var btnSeeAllNewGown: Button
+    private lateinit var rvTitleMenu: RecyclerView
+    private lateinit var rvSliderMenu: RecyclerView
+    private lateinit var rvSliderPromo: RecyclerView
+    private lateinit var layoutPromoEmpty: ImageView
+    private lateinit var searchView: SearchView
+    private lateinit  var layoutPromo: ConstraintLayout
+    private lateinit var layoutFavoriteGown: ConstraintLayout
+    private lateinit var rvSliderFavoriteGown: RecyclerView
+    private lateinit var rvSliderNewGown: RecyclerView
     var adapterMenu: CategoryMenuAdapter? = null
     var adapterMainMenu: SliderMainMenuAdapter? = null
     var adapterPromo: SliderPromoAdapter? = null
@@ -63,11 +64,11 @@ class HomeFragment : Fragment(), View.OnClickListener,
     var newGownList: ArrayList<DataNewGown>?= null
     var itemDecorSet: Boolean = false
     var tvNoItemHome: TextView? = null
-    var swipeRefreshHome: SwipeRefreshLayout? = null
-    var pbProcat: IndeterminateCenteredRoundCornerProgressBar? = null
-    var pbPromo: IndeterminateCenteredRoundCornerProgressBar? = null
-    var pbFavGown: IndeterminateCenteredRoundCornerProgressBar? = null
-    var pbNewGown: IndeterminateCenteredRoundCornerProgressBar? = null
+    private lateinit var swipeRefreshHome: SwipeRefreshLayout
+    private lateinit var pbProcat: IndeterminateCenteredRoundCornerProgressBar
+    private lateinit var pbPromo: IndeterminateCenteredRoundCornerProgressBar
+    private lateinit var pbFavGown: IndeterminateCenteredRoundCornerProgressBar
+    private lateinit var pbNewGown: IndeterminateCenteredRoundCornerProgressBar
     var badgeNotif: View? = null
     var countNotif: Int = 0
 
@@ -108,23 +109,24 @@ class HomeFragment : Fragment(), View.OnClickListener,
         pbNewGown = view.findViewById(R.id.pb_new_gown)
         badgeNotif = view.findViewById(R.id.badge_notif)
 
-        swipeRefreshHome!!.setOnRefreshListener {
+        swipeRefreshHome.setOnRefreshListener {
+            itemDecorSet = true
             getData()
-            swipeRefreshHome!!.isRefreshing = false
+            swipeRefreshHome.isRefreshing = false
         }
 
         getData()
 
-        searchView!!.isEnabled = false
+        searchView.isEnabled = false
 
-        searchView!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //use this action
                 val search = Intent(activity, SearchViewActivity::class.java)
                 search.putExtra("product_name", query)
                 startActivity(search)
 
-                searchView!!.clearFocus()
+                searchView.clearFocus()
                 return true
             }
 
@@ -133,12 +135,12 @@ class HomeFragment : Fragment(), View.OnClickListener,
             }
         })
 
-        imWishlist!!.setOnClickListener(this@HomeFragment)
-        imNotification!!.setOnClickListener(this@HomeFragment)
-        btnSeeAllCategory!!.setOnClickListener(this@HomeFragment)
-        btnSeeAllPromo!!.setOnClickListener(this@HomeFragment)
-        btnSeeAllFavoriteGown!!.setOnClickListener(this@HomeFragment)
-        btnSeeAllNewGown!!.setOnClickListener(this@HomeFragment)
+        imWishlist.setOnClickListener(this@HomeFragment)
+        imNotification.setOnClickListener(this@HomeFragment)
+        btnSeeAllCategory.setOnClickListener(this@HomeFragment)
+        btnSeeAllPromo.setOnClickListener(this@HomeFragment)
+        btnSeeAllFavoriteGown.setOnClickListener(this@HomeFragment)
+        btnSeeAllNewGown.setOnClickListener(this@HomeFragment)
 
 
         return view
@@ -164,8 +166,9 @@ class HomeFragment : Fragment(), View.OnClickListener,
                 startActivity(wishlist)
             }
             R.id.im_notification -> {
-                val notification = Intent(activity, NotificationActivity::class.java)
-                startActivity(notification)
+                Intent(activity, NotificationActivity::class.java).apply {
+                    startActivityForResult(this, NotificationActivity.REQ_READ_NOTIFICATION)
+                }
             }
             R.id.btn_see_all_category -> {
                 val categoryProduct = Intent(activity, ProductGownActivity::class.java)
@@ -198,6 +201,14 @@ class HomeFragment : Fragment(), View.OnClickListener,
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == NotificationActivity.REQ_READ_NOTIFICATION) {
+            setBadgeNotif(true)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
     override fun onSuccessGetProductCategory(dataProductCat: ArrayList<DataProductCategory>?) {
 
         //Title Menu
@@ -206,16 +217,19 @@ class HomeFragment : Fragment(), View.OnClickListener,
         if(categoryMenuList?.isNotEmpty() == true) {
             //Bind Item to Adapter
             adapterMenu = CategoryMenuAdapter(this, categoryMenuList!!, this)
-            rvTitleMenu!!.setLayoutManager(
+            rvTitleMenu.setLayoutManager(
                 LinearLayoutManager(
                     context,
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
             )
-            rvTitleMenu!!.setAdapter(adapterMenu)
-            rvTitleMenu!!.addItemDecoration(ItemDecorationSlider(16))
-            adapterMenu!!.selectCategory(0)
+            rvTitleMenu.setAdapter(adapterMenu)
+
+            if (itemDecorSet == false) {
+                rvTitleMenu.addItemDecoration(ItemDecorationSlider(16))
+            }
+            adapterMenu?.selectCategory(0)
 
             // preselect first category
             selectedCategoryMenu = adapterMenu!!.getItem(0)
@@ -234,28 +248,28 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetProductByCategory(dataProductByCat: ArrayList<DataProduct>?) {
 
-        pbProcat!!.visibility = View.GONE
+        pbProcat.visibility = View.GONE
         sliderMainMenuList = dataProductByCat
-        rvSliderMenu!!.visibility = View.VISIBLE
+        rvSliderMenu.visibility = View.VISIBLE
 
         //Setup Recycler View Slider Main Menu
         if(dataProductByCat?.isNotEmpty() == true) {
-            rvSliderMenu!!.visibility = View.VISIBLE
+            rvSliderMenu.visibility = View.VISIBLE
             adapterMainMenu = sliderMainMenuList?.let { SliderMainMenuAdapter(it) }
-            rvSliderMenu!!.setLayoutManager(
+            rvSliderMenu.setLayoutManager(
                 LinearLayoutManager(
                     context,
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
             )
-            rvSliderMenu!!.setAdapter(adapterMainMenu!!)
+            rvSliderMenu.setAdapter(adapterMainMenu!!)
             if (itemDecorSet == false) {
-                rvSliderMenu!!.addItemDecoration(ItemDecorationSlider(16))
-                itemDecorSet = true
+                rvSliderMenu.addItemDecoration(ItemDecorationSlider(16))
+                Log.d("decor padding", "true")
             }
         }else{
-            rvSliderMenu!!.visibility = View.GONE
+            rvSliderMenu.visibility = View.GONE
         }
     }
 
@@ -264,24 +278,25 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun passReloadItem(namaCategory: String) {
+        itemDecorSet = true
         ProductByCategoryPresenter(this).getAllProductByCategory(namaCategory)
     }
 
     override fun onSuccessGetNewGown(dataNewGown: ArrayList<DataNewGown>?) {
         //Slider New Gown
-        pbNewGown!!.visibility = View.GONE
-        rvSliderNewGown!!.visibility = View.VISIBLE
+        pbNewGown.visibility = View.GONE
+        rvSliderNewGown.visibility = View.VISIBLE
 
         //Setup Recycler View New Gown
         adapterNewGown = SliderNewGownAdapter(dataNewGown ?: arrayListOf())
-        rvSliderNewGown!!.setLayoutManager(
+        rvSliderNewGown.setLayoutManager(
             LinearLayoutManager(
                 context,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
         )
-        rvSliderNewGown!!.setAdapter(adapterNewGown)
+        rvSliderNewGown.setAdapter(adapterNewGown)
     }
 
     override fun onErrorGetNewGown(msg: String) {
@@ -290,24 +305,24 @@ class HomeFragment : Fragment(), View.OnClickListener,
 
     override fun onSuccessGetFavoriteGown(dataFavoriteGown: ArrayList<DataFavoriteGown?>?) {
         //Slider Favorite Gown
-        pbFavGown!!.visibility = View.GONE
+        pbFavGown.visibility = View.GONE
         if(dataFavoriteGown?.isNotEmpty() == true){
             favoriteGownList = dataFavoriteGown as ArrayList<DataFavoriteGown>
-            rvSliderFavoriteGown!!.visibility = View.VISIBLE
+            rvSliderFavoriteGown.visibility = View.VISIBLE
 
 
             //Setup Recycler View Favorite Gown
             adapterFavoriteGown = SliderFavoriteGownAdapter(favoriteGownList ?: arrayListOf())
-            rvSliderFavoriteGown!!.setLayoutManager(
+            rvSliderFavoriteGown.setLayoutManager(
                 LinearLayoutManager(
                     context,
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
             )
-            rvSliderFavoriteGown!!.setAdapter(adapterFavoriteGown)
+            rvSliderFavoriteGown.setAdapter(adapterFavoriteGown)
         } else {
-            layoutFavoriteGown!!.visibility = View.GONE
+            layoutFavoriteGown.visibility = View.GONE
         }
 
     }
@@ -317,18 +332,18 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onSuccessGetPromo(dataPromo: ArrayList<DataPromo>?) {
-        pbPromo!!.visibility = View.GONE
+        pbPromo.visibility = View.GONE
 
         promoList = dataPromo ?: arrayListOf()
 
         if(promoList.isNotEmpty()){
 
-            layoutPromoEmpty?.visibility = View.GONE
-            rvSliderPromo!!.visibility = View.VISIBLE
+            layoutPromoEmpty.visibility = View.GONE
+            rvSliderPromo.visibility = View.VISIBLE
 
             //Setup Recycler View Promo
             adapterPromo = SliderPromoAdapter(promoList ?: arrayListOf())
-            rvSliderPromo!!.setLayoutManager(
+            rvSliderPromo.setLayoutManager(
                 LinearLayoutManager(
                     context,
                     LinearLayoutManager.HORIZONTAL,
@@ -336,10 +351,10 @@ class HomeFragment : Fragment(), View.OnClickListener,
                 )
             )
 
-            rvSliderPromo!!.setAdapter(adapterPromo)
+            rvSliderPromo.setAdapter(adapterPromo)
         }else {
-            layoutPromoEmpty?.setVisibility(View.VISIBLE)
-            layoutPromo?.setVisibility(View.GONE)
+            layoutPromoEmpty.setVisibility(View.VISIBLE)
+            layoutPromo.setVisibility(View.GONE)
         }
     }
 
@@ -348,6 +363,8 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     override fun onSuccessGetNotification(dataNotification: ArrayList<DataNotification>?) {
+        Log.d("data notif", dataNotification?.size.toString())
+        Log.d("data notif isi", dataNotification.toString())
         if(context != null) {
             var prefs: SharedPreferences = requireContext().getSharedPreferences(
                 requireContext().getString(R.string.app_name),
@@ -395,9 +412,19 @@ class HomeFragment : Fragment(), View.OnClickListener,
     }
 
     fun setBadgeNotif(readNotif: Boolean){
+        var prefs: SharedPreferences = requireContext().getSharedPreferences(
+            requireContext().getString(R.string.app_name),
+            Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+
+        editor.putBoolean(READ_NOTIF, true)
+        editor.commit()
+
         when(readNotif) {
             false -> badgeNotif?.visibility = View.VISIBLE
             true -> badgeNotif?.visibility = View.GONE
         }
+
     }
 }

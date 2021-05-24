@@ -66,8 +66,12 @@ class BookingRepository(private val remoteRepository: BookingDataSource) : Booki
         return remoteRepository.getInvoiceDetail(invoiceId)
     }
 
-    override fun getDefaultAddress(): Single<Address> {
+    override fun getDefaultAddress(): Single<BaseResp<Address>> {
         return remoteRepository.getDefaultAddress()
+    }
+
+    override fun getDefaultBank(): Single<BaseResp<Bank>> {
+        return remoteRepository.getDefaultBank()
     }
 
 }

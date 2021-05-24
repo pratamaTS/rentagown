@@ -2,10 +2,7 @@
 
 import android.util.Log
 import com.example.rentagown.Model.ResponseError
-import com.example.rentagown.v2.data.model.Address
-import com.example.rentagown.v2.data.model.BasePagingResp
-import com.example.rentagown.v2.data.model.BaseResp
-import com.example.rentagown.v2.data.model.DateResponse
+import com.example.rentagown.v2.data.model.*
 import com.example.rentagown.v2.util.ErrorUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
@@ -125,35 +122,6 @@ abstract class BaseRAGPresenter<V: BaseView<*>> : BasePresenter {
                 }
     }
 
-    protected inline fun safeCallDefaultAddress(obs: Single<Address>, listener: ListenerAddress, requestConfiguration: RequestConfiguration = RequestConfiguration()) {
-        Completable.timer(1000, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe {
-                    cd?.add(obs
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeWith(object : DisposableSingleObserver<Address>() {
-
-                                override fun onError(e: Throwable?) {
-                                    if(requestConfiguration.updateLoadingContentIndicator) view?.showLoadingContent(false)
-                                    if(requestConfiguration.updateLoadingIndicator) view?.showLoading(false)
-                                    if(requestConfiguration.showErrorMessage) view?.showErrorMessage(if(e is ConnectException) "tidak dapat terhubung ke server" else "error")
-
-                                    listener.onFailed(e?.message)
-                                }
-
-                                override fun onSuccess(t: Address?) {
-                                    if(requestConfiguration.updateLoadingContentIndicator) view?.showLoadingContent(false)
-                                    if(requestConfiguration.updateLoadingIndicator) view?.showLoading(false)
-
-                                    Log.d("address", t.toString())
-                                    listener.onSuccess(t)
-                                }
-                            }))
-                }
-    }
-
     protected inline fun <reified D> safeCallPaging(obs: Single<BasePagingResp<D>>, listener: Listener<List<D>>, requestConfiguration: RequestConfiguration = RequestConfiguration()) {
         Completable.timer(1000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
@@ -200,6 +168,13 @@ abstract class BaseRAGPresenter<V: BaseView<*>> : BasePresenter {
     interface ListenerAddress {
 
         fun onSuccess(address: Address?)
+        fun onFailed(message: String?) { }
+
+    }
+
+    interface ListenerBank {
+
+        fun onSuccess(address: Bank?)
         fun onFailed(message: String?) { }
 
     }

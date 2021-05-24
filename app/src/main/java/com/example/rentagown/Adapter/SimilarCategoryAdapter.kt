@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Adapter.ViewHolder.SimilarCategoryViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.Product
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataProduct
@@ -43,7 +44,7 @@ class SimilarCategoryAdapter(
         }
 
         if(productList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + productList[position].pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + productList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imProduct)
         }else {
             holder.imProduct.setImageResource(R.drawable.family_1)

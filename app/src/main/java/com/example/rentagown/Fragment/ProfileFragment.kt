@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.rentagown.Activity.SettingActivity
-import com.example.rentagown.Activity.TransactionStatusActivity
 import com.example.rentagown.R
 import com.example.rentagown.v2.ui.myinvoices.MyInvoicesActivity
 import java.util.*
@@ -55,7 +54,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 startActivity(invoiceHistory)
             }
             R.id.menu_setting -> {
-                Toast.makeText(Objects.requireNonNull(activity)!!, "Settings", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Settings", Toast.LENGTH_SHORT).show()
                 val settings = Intent(activity, SettingActivity::class.java)
                 startActivity(settings)
             }

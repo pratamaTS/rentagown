@@ -15,7 +15,7 @@ class BookingContract {
         fun getSelectedAddressData(): Address?
 
         fun navigateToChangeBank(selectedBank: Bank?)
-        fun setBankDataToView(bank: Bank)
+        fun setBankDataToView(bank: Bank, selected: Boolean)
         fun removeBankDataFromView()
         fun getSelectedBankData(): Bank?
 
@@ -43,6 +43,7 @@ class BookingContract {
     interface Presenter : BasePresenter {
 
         fun onDefaultAddressLoaded()
+        fun onDefaultBankLoaded()
         fun onBtnChangeAddressClicked()
         fun onBtnAddAddressClicked()
         fun onAddressSelected(address: Address?, default: Boolean)

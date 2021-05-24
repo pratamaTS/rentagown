@@ -20,6 +20,7 @@ interface BookingDataSource {
     fun reviewBooking(reqCreateReviewBooking: ReqReviewBooking) : Single<BaseResp<ProductReview>>
     fun getMyInvoices() : Single<BasePagingResp<InvoiceHistory>>
     fun getInvoiceDetail(invoiceId: String) : Single<BaseResp<Invoice>>
-    fun getDefaultAddress() : Single<Address>
+    fun getDefaultAddress() : Single<BaseResp<Address>>
+    fun getDefaultBank() : Single<BaseResp<Bank>>
 
 }

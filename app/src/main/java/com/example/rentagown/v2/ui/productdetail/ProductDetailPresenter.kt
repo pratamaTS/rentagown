@@ -31,7 +31,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
         view?.navigateToWhatsapp(number)
     }
 
-    override fun onBtnBookNowClicked() {
+    override fun onBtnBookNowClicked(orderType: Int) {
 
         val bookingDates = view?.getBookingDates()
 
@@ -39,6 +39,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
         val endDate = bookingDates?.second
 
         if (startDate != null && endDate != null) {
+
             if (view?.isUserLoggedIn() == false) {
                 view?.navigateToLogin()
                 return
@@ -48,7 +49,8 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
                     productId = productDetail?.productId,
                     startDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     endDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
-                    oneDayService = if (view?.getSpecialTreatmentSelected() == true) 1 else 0
+                    oneDayService = if (view?.getSpecialTreatmentSelected() == true) 1 else 0,
+                    bookingType = orderType
             ), productDetail)
         } else {
             view?.showMsgBookingDateNotValid()
@@ -57,7 +59,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
 
     override fun onUserLoggedIn() {
         view?.showBaseContent()
-        onBtnBookNowClicked()
+        onBtnBookNowClicked(1)
     }
 
     override fun onBookingCreated() {

@@ -28,13 +28,13 @@ import com.example.rentagown.v2.ui.confirmpayment.ConfirmPaymentActivity
 
 class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAddressInterface,
     CompoundButton.OnCheckedChangeListener {
-    var back: ImageButton? = null
-    var editProfile: ConstraintLayout? = null
-    var changePassword: ConstraintLayout? = null
-    var changeAddress: ConstraintLayout? = null
-    var pushCatalogUpdate: SwitchCompat? = null
-    var pushPromo: SwitchCompat? = null
-    var pushTransactions: SwitchCompat? = null
+    private lateinit var back: ImageButton
+    private lateinit var editProfile: ConstraintLayout
+    private lateinit var changePassword: ConstraintLayout
+    private lateinit var changeAddress: ConstraintLayout
+    private lateinit var pushCatalogUpdate: SwitchCompat
+    private lateinit var pushPromo: SwitchCompat
+    private lateinit var pushTransactions: SwitchCompat
     var sharedPreferences: SharedPreferences? = null
     private var selectedAddress: Address? = null
     var PACKAGE_NAME = "com.example.rentagown"
@@ -52,18 +52,18 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
         pushCatalogUpdate = findViewById(R.id.toogle_switch_catalog_update)
         pushPromo = findViewById(R.id.toogle_switch_promo)
         pushTransactions = findViewById(R.id.toogle_switch_transactions)
-        pushCatalogUpdate!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"catalog_update", false)
-        pushPromo!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"promo", true)
-        pushTransactions!!.isChecked = sharedPreferences!!.getBoolean("notif-"+"transactions", true)
+        pushCatalogUpdate.isChecked = sharedPreferences!!.getBoolean("notif-"+"catalog_update", false)
+        pushPromo.isChecked = sharedPreferences!!.getBoolean("notif-"+"promo", true)
+        pushTransactions.isChecked = sharedPreferences!!.getBoolean("notif-"+"transactions", true)
 
         //SET LISTENER
-        back!!.setOnClickListener(this)
-        editProfile!!.setOnClickListener(this)
-        changePassword!!.setOnClickListener(this)
-        changeAddress!!.setOnClickListener(this)
-        pushCatalogUpdate!!.setOnCheckedChangeListener(this)
-        pushPromo!!.setOnCheckedChangeListener(this)
-        pushTransactions!!.setOnCheckedChangeListener(this)
+        back.setOnClickListener(this)
+        editProfile.setOnClickListener(this)
+        changePassword.setOnClickListener(this)
+        changeAddress.setOnClickListener(this)
+        pushCatalogUpdate.setOnCheckedChangeListener(this)
+        pushPromo.setOnCheckedChangeListener(this)
+        pushTransactions.setOnCheckedChangeListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -148,12 +148,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
                 if (isChecked) {
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
-                    pushCatalogUpdate!!.isChecked = true
+                    pushCatalogUpdate.isChecked = true
                     saveNotifSetting(true,"catalog_update")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
-                    pushCatalogUpdate!!.isChecked = false
+                    pushCatalogUpdate.isChecked = false
                     saveNotifSetting(false,"catalog_update")
                 }
             }
@@ -166,12 +166,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
                 if (isChecked) {
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
-                    pushPromo!!.isChecked = true
+                    pushPromo.isChecked = true
                     saveNotifSetting(true,"promo")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
-                    pushPromo!!.isChecked = false
+                    pushPromo.isChecked = false
                     saveNotifSetting(false,"promo")
                 }
             }
@@ -184,12 +184,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener, SetDefaultAdd
                 if (isChecked) {
                     Toast.makeText(this@SettingActivity, "Notification On", Toast.LENGTH_SHORT)
                         .show()
-                    pushTransactions!!.isChecked = true
+                    pushTransactions.isChecked = true
                     saveNotifSetting(true,"transactions")
                 } else {
                     Toast.makeText(this@SettingActivity, "Notification Off", Toast.LENGTH_SHORT)
                         .show()
-                    pushTransactions!!.isChecked = false
+                    pushTransactions.isChecked = false
                     saveNotifSetting(false,"transactions")
                 }
             }

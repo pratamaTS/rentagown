@@ -3,7 +3,6 @@ package com.example.rentagown.Connection
 object Constants {
 
     // Endpoints
-    const val SERVER_URL ="http://absdigital.id:55000"
     const val ALL_PRODUCT = "api/v/2/product/findall"
     const val ALL_PROMO = "api/v/2/promo/findall"
     const val PRODUCT_CATEGORY = "api/v/2/prodcat/findall"

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentagown.Activity.DetailPromoActivity
 import com.example.rentagown.Adapter.ViewHolder.PromoViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.Promo
 import com.example.rentagown.R
 import com.example.rentagown.Response.Promo.DataPromo
@@ -24,7 +25,7 @@ class PromoAdapter(private val mContext: Context, private val promoList: ArrayLi
 
     override fun onBindViewHolder(holder: PromoViewHolder, position: Int) {
         if(promoList[position].pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = "http://absdigital.id:55000" + promoList[position].pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + promoList[position].pathPhoto
             Picasso.get().load(imgURL).into(holder.imPromoList)
         }
 

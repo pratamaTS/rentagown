@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.rentagown.Adapter.ViewHolder.SliderViewProductViewHolder
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Model.SliderItemProduct
 import com.example.rentagown.R
 import com.example.rentagown.Response.Product.DataDetailProduct
@@ -40,7 +41,7 @@ class SliderViewProductAdapter(
 
     override fun onBindViewHolder(viewHolder: SliderViewProductViewHolder, position: Int) {
 //        SliderItemProduct sliderItemProduct = mSliderItems.get(position);
-        val imgURL: String = "http://absdigital.id:55000" + mSliderItems[position].pathPhoto
+        val imgURL: String = BuildConfig.BASE_PHOTO_URL + mSliderItems[position].pathPhoto
         Picasso.get().load(imgURL).into(viewHolder.imageSlider)
 //        Glide.with(viewHolder.itemView)
 //                .load(sliderItemProduct.getImageProduct())

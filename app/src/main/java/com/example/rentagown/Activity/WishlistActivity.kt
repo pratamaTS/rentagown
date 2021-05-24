@@ -22,9 +22,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistInterface {
-    var back: ImageButton? = null
-    var rvWishlist: RecyclerView? = null
-    var layoutEmpty: LinearLayout? = null
+    private lateinit var back: ImageButton
+    private lateinit var rvWishlist: RecyclerView
+    private lateinit var layoutEmpty: LinearLayout
     var wishlistList: ArrayList<DataWishlist> = ArrayList()
     var wishlistAdapter: WishlistAdapter? = null
     private lateinit var btnBrowse: Button
@@ -49,7 +49,7 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistI
         getWishlist()
 
         //SET LISTENER
-        back!!.setOnClickListener(this)
+        back.setOnClickListener(this)
         btnBrowse.setOnClickListener(this)
     }
 
@@ -80,13 +80,13 @@ class WishlistActivity : AppCompatActivity(), View.OnClickListener, GetWishlistI
             wishlistAdapter = WishlistAdapter(this, wishlistList)
             val gridLayoutManager = GridLayoutManager(this, 2)
             gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
-            rvWishlist!!.setLayoutManager(gridLayoutManager)
-            rvWishlist!!.setAdapter(wishlistAdapter)
+            rvWishlist.setLayoutManager(gridLayoutManager)
+            rvWishlist.setAdapter(wishlistAdapter)
             if (wishlistAdapter!!.getItemCount() > 0) {
-                layoutEmpty!!.setVisibility(View.GONE)
+                layoutEmpty.setVisibility(View.GONE)
             }
         }else{
-            layoutEmpty!!.setVisibility(View.VISIBLE)
+            layoutEmpty.setVisibility(View.VISIBLE)
         }
     }
 

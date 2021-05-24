@@ -40,16 +40,16 @@ android {
             dimension "default"
             applicationIdSuffix = ".dev"
 
-            buildConfigField 'String', 'API_URL', '"http://absdigital.id:55000/api/v/2/"'
-            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:55000"'
+            buildConfigField 'String', 'API_URL', '"https://apps.rentagown.id:50443/api/v/2/"'
+            buildConfigField 'String', 'BASE_PHOTO_URL', '"https://apps.rentagown.id:50443"'
 
         }
 
         prod {
             dimension "default"
 
-            buildConfigField 'String', 'API_URL', '"http://absdigital.id:55000/api/v/2/"'
-            buildConfigField 'String', 'BASE_PHOTO_URL', '"http://absdigital.id:55000"'
+            buildConfigField 'String', 'API_URL', '"https://apps.rentagown.id:50443/api/v/2/"'
+            buildConfigField 'String', 'BASE_PHOTO_URL', '"https://apps.rentagown.id:50443"'
         }
     }
 

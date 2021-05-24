@@ -39,8 +39,16 @@ class ConfirmPaymentPresenter(private val repository: BookingDataSource) : BaseR
         }, RequestConfiguration(showErrorMessage = false, updateLoadingIndicator = false))
     }
 
-    override fun onBtnConfirmClicked() {
+    override fun onBtnConfirmClicked(otherBank: Boolean) {
 
+        var otherBankName = ""
+        if(otherBank == true) {
+            otherBankName = view?.getOtherBankName().toString()
+            if(otherBankName == "" || otherBankName.isNullOrEmpty()) {
+                view?.showMsgBankEmpty()
+                return
+            }
+        }
         val invoice = view?.getInvoice()
         val sourceBankName = view?.getBankID()
         val sourceAccountNumber = view?.getAccountNumber()
@@ -81,6 +89,7 @@ class ConfirmPaymentPresenter(private val repository: BookingDataSource) : BaseR
                 val reqConfirmPayment = ReqConfirmPayment(
                         invoice = invoice,
                         idBank = sourceBankName,
+                        otherPaymentBankName = otherBankName,
                         sourceAccountNumber = sourceAccountNumber,
                         sourceAccountName = sourceAccountName,
                         paymentAmount = paymentAmountStr.toLongOrNull() ?: 0L
@@ -97,6 +106,7 @@ class ConfirmPaymentPresenter(private val repository: BookingDataSource) : BaseR
                 val reqConfirmPayment = ReqConfirmPayment(
                     invoice = invoice,
                     idBank = sourceBankName,
+                    otherPaymentBankName = otherBankName,
                     sourceAccountNumber = sourceAccountNumber,
                     sourceAccountName = sourceAccountName,
                     paymentAmount = paymentAmountStr.toLongOrNull() ?: 0L

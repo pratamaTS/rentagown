@@ -19,13 +19,13 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 
 class OnBoardingActivity : AppCompatActivity() {
-    private var screenPager: ViewPager? = null
-    var onBoardingAdapter: OnBoardingAdapter? = null
-    var tabIndicator: TabLayout? = null
-    var btnNext: Button? = null
-    var btnGetStarted: Button? = null
-    var btnSkip: Button? = null
-    var btnAnim: Animation? = null
+    private lateinit var screenPager: ViewPager
+    private lateinit var onBoardingAdapter: OnBoardingAdapter
+    private lateinit var tabIndicator: TabLayout
+    private lateinit var btnNext: Button
+    private lateinit var btnGetStarted: Button
+    private lateinit var btnSkip: Button
+    private lateinit var btnAnim: Animation
     var position = 0
     var mList: MutableList<OnBoardingItem> = ArrayList<OnBoardingItem>()
     var token: String? = null
@@ -113,27 +113,25 @@ class OnBoardingActivity : AppCompatActivity() {
 
         //Setup View Pager
         onBoardingAdapter = OnBoardingAdapter(this, mList as ArrayList<OnBoardingItem>)
-        screenPager!!.setAdapter(onBoardingAdapter)
+        screenPager.setAdapter(onBoardingAdapter)
 
         //Setup TabLayout with ViewPager
-        tabIndicator!!.setupWithViewPager(screenPager)
+        tabIndicator.setupWithViewPager(screenPager)
 
         //Next Button Click Listener
-        btnNext!!.setOnClickListener(View.OnClickListener {
-            position = screenPager!!.getCurrentItem()
+        btnNext.setOnClickListener(View.OnClickListener {
+            position = screenPager.getCurrentItem()
             if (position < mList.size) {
                 position++
-                screenPager!!.setCurrentItem(position)
+                screenPager.setCurrentItem(position)
             }
             if (position == mList.size - 1) {
-
-                //TODO : show the GET STARTED Button and hide next Button
                 loadLastScreen()
             }
         })
 
         //Skip Button Click Listener
-        btnSkip!!.setOnClickListener(View.OnClickListener {
+        btnSkip.setOnClickListener(View.OnClickListener {
             //ketika activiy ini akan di launch, kita perlu memeriksa apakah sudah dibuka sebelumnya atau tidak
             finishOnboarding()
 
@@ -145,7 +143,7 @@ class OnBoardingActivity : AppCompatActivity() {
         })
 
         //Get Started Button Click Listener
-        btnGetStarted!!.setOnClickListener(View.OnClickListener { //also we need to save a boolean value to storage so next time when the user run the app
+        btnGetStarted.setOnClickListener(View.OnClickListener { //also we need to save a boolean value to storage so next time when the user run the app
             //we could know that he is already checked the intro screen activity
             //use shared preferences to that process
             finishOnboarding()
@@ -154,7 +152,7 @@ class OnBoardingActivity : AppCompatActivity() {
             //                savePrefsData();
             finish()
         })
-        tabIndicator!!.addOnTabSelectedListener(object : OnTabSelectedListener {
+        tabIndicator.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab.position == mList.size - 1) {
                     loadLastScreen()
@@ -215,12 +213,11 @@ class OnBoardingActivity : AppCompatActivity() {
 
     //show the GET STARTED Button and hide next Button
     private fun loadLastScreen() {
-        btnNext!!.visibility = View.INVISIBLE
+        btnNext.visibility = View.INVISIBLE
         //        tabIndicator.setVisibility(View.INVISIBLE);
-        btnGetStarted!!.visibility = View.VISIBLE
+        btnGetStarted.visibility = View.VISIBLE
 
-        //TODO: ADD an animation the get started button
-        btnGetStarted!!.animation = btnAnim
+        btnGetStarted.animation = btnAnim
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

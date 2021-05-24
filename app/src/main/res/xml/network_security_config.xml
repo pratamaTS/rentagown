@@ -2,4 +2,10 @@
 <network-security-config>
     <!--Set application-wide security config using base-config tag.-->
     <base-config cleartextTrafficPermitted="true"/>
+    <domain-config>
+        <domain includeSubdomains="true">apps.rentagown.id</domain>
+        <trust-anchors>
+            <certificates src="@raw/rag_cert"/>
+        </trust-anchors>
+    </domain-config>
 </network-security-config>

@@ -28,7 +28,10 @@ data class ReqCreateBooking (
     val paymentMethod: Int? = null,
 
     @SerializedName("one_day_service")
-    val oneDayService: Int? = null
+    val oneDayService: Int? = null,
+
+    @SerializedName("booking_type")
+    val bookingType: Int? = null
 
 ) : Parcelable {
 
@@ -39,6 +42,7 @@ data class ReqCreateBooking (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int
     ) {
@@ -53,6 +57,7 @@ data class ReqCreateBooking (
         parcel.writeString(endDate)
         parcel.writeValue(paymentMethod)
         parcel.writeValue(oneDayService)
+        parcel.writeValue(bookingType)
     }
 
     override fun describeContents(): Int {

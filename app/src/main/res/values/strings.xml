@@ -411,6 +411,7 @@
     <string name="err_booking_not_found">Booking data not found…</string>
     <string name="err_invoice_not_found">Invoice data not found…</string>
     <string name="err_product_not_found">Product not found…</string>
+    <string name="err_source_otehr_bank_name_empty">Other Bank Name cannot be empty…</string>
     <string name="err_source_bank_name_empty">Bank cannot be empty…</string>
     <string name="err_source_acc_number_empty">Account number cannot be empty…</string>
     <string name="err_source_acc_name_empty">Account name cannot be empty…</string>

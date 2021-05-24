@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.enums.PaymentTypeEnum
 import com.example.rentagown.v2.data.model.*
+import com.example.rentagown.v2.data.source.BankDataSource
 import com.example.rentagown.v2.data.source.BookingDataSource
 
 class BookingPresenter(private val repository: BookingDataSource) : BaseRAGPresenter<BookingContract.View>(), BookingContract.Presenter {
@@ -14,17 +15,30 @@ class BookingPresenter(private val repository: BookingDataSource) : BaseRAGPrese
 
         onDefaultAddressLoaded()
 
+        onDefaultBankLoaded()
+
         view?.setPaymentTypeDataToView(PaymentTypeEnum.getDefaultPaymentType(), view?.getReqCreateBookingData(), view?.getSelectedProduct())
     }
 
     override fun onDefaultAddressLoaded() {
         view?.showLoading(true)
 
-        safeCallDefaultAddress(repository.getDefaultAddress(), object : ListenerAddress {
+        safeCall(repository.getDefaultAddress(), object : Listener<Address> {
             override fun onSuccess(data: Address?) {
                 data?.let {address ->
-                    Log.d("run", address.addressId.toString())
                     view?.setAddressDataToView(address)
+                }
+            }
+        }, RequestConfiguration(updateLoadingIndicator = false, updateLoadingContentIndicator = false))
+    }
+
+    override fun onDefaultBankLoaded() {
+        view?.showLoading(true)
+
+        safeCall(repository.getDefaultBank(), object : Listener<Bank> {
+            override fun onSuccess(data: Bank?) {
+                data?.let {bank ->
+                    view?.setBankDataToView(bank, false)
                 }
             }
         }, RequestConfiguration(updateLoadingIndicator = false, updateLoadingContentIndicator = false))
@@ -88,7 +102,7 @@ class BookingPresenter(private val repository: BookingDataSource) : BaseRAGPrese
 
     override fun onBankSelected(bank: Bank?) {
         bank?.let {
-            view?.setBankDataToView(it)
+            view?.setBankDataToView(it, true)
         }
     }
 

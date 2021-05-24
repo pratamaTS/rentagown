@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.rentagown.Activity.*
+import com.example.rentagown.BuildConfig
 import com.example.rentagown.Connection.Constants
 import com.example.rentagown.Connection.Interface.ProfileInterface
 import com.example.rentagown.Connection.Presenter.ProfilePresenter
@@ -115,7 +116,7 @@ class ProfileAfterFragment : Fragment(), View.OnClickListener, ProfileInterface 
         tvEmail?.text = dataProfile?.email
 
         if(dataProfile?.pathPhoto?.isNotEmpty() == true) {
-            val imgURL: String = Constants.SERVER_URL + dataProfile?.pathPhoto
+            val imgURL: String = BuildConfig.BASE_PHOTO_URL + dataProfile?.pathPhoto
             Picasso.get().load(imgURL).into(imProfile)
         }else {
             imProfile?.setImageResource(R.drawable.bg_placeholder)

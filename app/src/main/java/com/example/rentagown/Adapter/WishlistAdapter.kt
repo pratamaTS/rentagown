@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.rentagown.Activity.ViewProductActivity
 import com.example.rentagown.Adapter.ViewHolder.WishlistViewHolder
 import com.example.rentagown.BuildConfig
-import com.example.rentagown.Model.Wishlist
 import com.example.rentagown.R
 import com.example.rentagown.Response.GetWishlist.DataWishlist
 import com.example.rentagown.v2.ui.productdetail.ProductDetailActivity
 import com.example.rentagown.v2.util.Utils
-import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList

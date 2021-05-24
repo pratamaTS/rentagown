@@ -13,8 +13,8 @@ import com.example.rentagown.v2.ui.home.mybookings.MyBookingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private var bottomNavigationView: BottomNavigationView? = null
-    var frameLayout: FrameLayout? = null
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var frameLayout: FrameLayout
     var selectedFragment: Fragment? = null
     var loginCheck: Boolean = false
     var message: String? = null
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         //INIT VIEW
         bottomNavigationView = findViewById(R.id.bot_nav)
         frameLayout = findViewById(R.id.fragment_container)
-        bottomNavigationView?.setOnNavigationItemSelectedListener(bottomNavMethod)
+        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod)
         if(intent?.hasExtra("login_check") == true) {
             loginCheck = intent?.getBooleanExtra("login_check", false) == true
             if(loginCheck == true) {
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }
 
-                bottomNavigationView?.selectedItemId = R.id.nav_profile
+                bottomNavigationView.selectedItemId = R.id.nav_profile
             }
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.nav_home -> {
                 selectedFragment = HomeFragment()
-                bottomNavigationView!!.itemIconTintList = null
+                bottomNavigationView.itemIconTintList = null
             }
             R.id.nav_booking -> {
                 selectedFragment = MyBookingsFragment.newInstance()
-                bottomNavigationView!!.itemIconTintList = null
+                bottomNavigationView.itemIconTintList = null
             }
             R.id.nav_profile -> {
                 selectedFragment = LoginFragment()
-                bottomNavigationView!!.itemIconTintList = null
+                bottomNavigationView.itemIconTintList = null
             }
         }
         if (selectedFragment != null) {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setSelectedNavId(navId: Int) {
-        bottomNavigationView?.selectedItemId = R.id.nav_home
+        bottomNavigationView.selectedItemId = R.id.nav_home
     }
 
 }

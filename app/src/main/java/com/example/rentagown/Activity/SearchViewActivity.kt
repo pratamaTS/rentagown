@@ -39,12 +39,12 @@ class SearchViewActivity : AppCompatActivity(), SearchInterface {
             search(productName.toString())
         }
 
-        searchViewProduct!!.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        searchViewProduct.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //use this action
                 search(query)
 
-                searchViewProduct!!.clearFocus()
+                searchViewProduct.clearFocus()
                 return true
             }
 
@@ -66,7 +66,7 @@ class SearchViewActivity : AppCompatActivity(), SearchInterface {
             tvNoItemFound.visibility = View.GONE
             rvSearchView.visibility = View.VISIBLE
 
-            adapterProductSearch = dataProductBySearch?.let { ProductSearchAdapter(this, it) }
+            adapterProductSearch = dataProductBySearch.let { ProductSearchAdapter(this, it) }
             val gridLayoutManager = GridLayoutManager(this, 2)
             rvSearchView.setLayoutManager(gridLayoutManager)
             rvSearchView.setAdapter(adapterProductSearch)

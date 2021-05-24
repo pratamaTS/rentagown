@@ -12,7 +12,7 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/im_image_product"
         android:layout_width="match_parent"
-        android:layout_height="232dp"
+        android:layout_height="280dp"
         android:contentDescription="@string/todo"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"

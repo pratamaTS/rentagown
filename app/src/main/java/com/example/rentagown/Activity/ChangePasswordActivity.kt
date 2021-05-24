@@ -16,9 +16,9 @@ import com.example.rentagown.R
 import com.example.rentagown.Response.ChangePassword.DataChangePassword
 
 class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, View.OnClickListener {
-    var etNewPassword: EditText? = null
-    var etRetypePassword: EditText? = null
-    var back: ImageButton? = null
+    private lateinit var etNewPassword: EditText
+    private lateinit var etRetypePassword: EditText
+    private lateinit var back: ImageButton
     private lateinit var loadingDialog: AlertDialog
     private lateinit var btnSavePass: Button
 
@@ -44,32 +44,32 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, Vie
         }
 
         //SET LISTENER
-        back!!.setOnClickListener(this)
+        back.setOnClickListener(this)
         btnSavePass.setOnClickListener(this)
     }
 
     fun ShowHidePass(view: View) {
         if (view.id == R.id.show_pass_btn_1) {
-            if (etNewPassword!!.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            if (etNewPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
                 (view as ImageView).setImageResource(R.drawable.ic_show)
                 //Show Password
-                etNewPassword!!.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                etNewPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
             } else {
                 (view as ImageView).setImageResource(R.drawable.ic_hide)
                 //Hide Password
-                etNewPassword!!.transformationMethod = PasswordTransformationMethod.getInstance()
+                etNewPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
         if (view.id == R.id.show_pass_btn_2) {
-            if (etRetypePassword!!.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            if (etRetypePassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
                 (view as ImageView).setImageResource(R.drawable.ic_show)
                 //Show Password
-                etRetypePassword!!.transformationMethod =
+                etRetypePassword.transformationMethod =
                     HideReturnsTransformationMethod.getInstance()
             } else {
                 (view as ImageView).setImageResource(R.drawable.ic_hide)
                 //Hide Password
-                etRetypePassword!!.transformationMethod = PasswordTransformationMethod.getInstance()
+                etRetypePassword.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
     }
@@ -78,8 +78,8 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, Vie
         when (v.id) {
             R.id.im_back -> finish()
             R.id.btn_save_password -> {
-                if(etNewPassword?.text?.isNotEmpty() ?: true && etRetypePassword?.text?.isNotEmpty() ?: true) {
-                    if (etNewPassword?.text.toString() == etRetypePassword?.text.toString()) {
+                if(etNewPassword.text?.isNotEmpty() ?: true && etRetypePassword.text?.isNotEmpty() ?: true) {
+                    if (etNewPassword.text.toString() == etRetypePassword.text.toString()) {
                         loadingDialog.show()
                         ChangePasswordPresenter(this).changePassword(this, ChangePassword(etNewPassword?.text.toString()))
                     } else {
@@ -89,7 +89,7 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, Vie
                                 Toast.LENGTH_LONG
                         ).show()
                     }
-                }else if(etNewPassword?.text.isNullOrEmpty()){
+                }else if(etNewPassword.text.isNullOrEmpty()){
                     Toast.makeText(
                             this,
                             "New Password is still empty",
@@ -107,9 +107,9 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordInterface, Vie
     }
 
     override fun onSuccessChangePassword(dataChangePassword: DataChangePassword) {
-        etNewPassword?.text?.clear()
-        etRetypePassword?.text?.clear()
-        etRetypePassword?.clearFocus()
+        etNewPassword.text?.clear()
+        etRetypePassword.text?.clear()
+        etRetypePassword.clearFocus()
         loadingDialog.dismiss()
         Toast.makeText(this, "Change Password Success", Toast.LENGTH_LONG).show()
     }
