@@ -1,5 +1,6 @@
 package com.example.rentagown.v2.ui.productdetail
 
+import android.util.Log
 import com.example.rentagown.v2.base.BaseRAGPresenter
 import com.example.rentagown.v2.data.model.Product
 import com.example.rentagown.v2.data.model.ReqCreateBooking
@@ -11,6 +12,7 @@ import java.time.ZoneId
 class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRAGPresenter<ProductDetailContract.View>(), ProductDetailContract.Presenter {
 
     private var productDetail: Product? = null
+    private var orderTypes: Int = 1
 
     override fun getProductDetail(productId: String) {
         safeCall(repository.getProductDetail(productId), object : Listener<Product> {
@@ -34,6 +36,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
     override fun onBtnBookNowClicked(orderType: Int) {
 
         val bookingDates = view?.getBookingDates()
+        orderTypes = orderType
 
         val startDate = bookingDates?.first
         val endDate = bookingDates?.second
@@ -50,7 +53,7 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
                     startDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     endDate = Utils.formatDateCreateBooking(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).toLocalDate()),
                     oneDayService = if (view?.getSpecialTreatmentSelected() == true) 1 else 0,
-                    bookingType = orderType
+                    bookingType = orderTypes
             ), productDetail)
         } else {
             view?.showMsgBookingDateNotValid()
@@ -59,7 +62,8 @@ class ProductDetailPresenter(private val repository: ProductDataSource) : BaseRA
 
     override fun onUserLoggedIn() {
         view?.showBaseContent()
-        onBtnBookNowClicked(1)
+        Log.d("category", orderTypes.toString())
+        onBtnBookNowClicked(orderTypes)
     }
 
     override fun onBookingCreated() {

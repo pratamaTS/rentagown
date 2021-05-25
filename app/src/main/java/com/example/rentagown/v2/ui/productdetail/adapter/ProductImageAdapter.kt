@@ -37,7 +37,6 @@ class ProductImageAdapter(private var context: Context, private var idProduct: S
         Glide.with(holder.itemView.context)
             .load(BuildConfig.BASE_PHOTO_URL + imagesPath[position])
             .listener(Utils.getGlideException())
-            .fitCenter()
             .error(R.color.colorGray)
             .listener(Utils.getGlideException())
             .into(holder.ivProduct)
