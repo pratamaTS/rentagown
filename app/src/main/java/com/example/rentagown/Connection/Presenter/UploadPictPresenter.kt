@@ -5,7 +5,9 @@ import android.widget.Toast
 import com.example.rentagown.Connection.Interface.UploadPictInterface
 import com.example.rentagown.Connection.NetworkConfigAfterLogin
 import com.example.rentagown.Connection.Run
+import com.example.rentagown.Model.ResponseError
 import com.example.rentagown.Response.EditProfile.ResponseUploadPict
+import com.example.rentagown.v2.util.ErrorUtils
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,8 +35,8 @@ import retrofit2.Response
                                     Toast.makeText(context, "Error after upload, please contact admin", Toast.LENGTH_SHORT)
                                 }
                             }else{
-                                val error = response.errorBody().toString()
-                                uploadPictInterface.onErrorGetUploadPict(error)
+                                val error: ResponseError? = ErrorUtils.parseError(response, context)
+                                uploadPictInterface.onErrorGetUploadPict(error?.error.toString())
                             }
                         }
 

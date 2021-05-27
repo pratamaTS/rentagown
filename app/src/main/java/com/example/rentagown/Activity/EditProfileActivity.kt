@@ -143,10 +143,9 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
         when (v.id) {
             R.id.im_back -> finish()
             R.id.btn_edit -> {
-//                btnUpload?.visibility = View.VISIBLE
                 edtName?.isEnabled = true
                 edtPhoneNumber?.isEnabled = true
-                btnSave?.visibility = View.VISIBLE
+                btnSave.visibility = View.VISIBLE
                 canEdit = true
             }
             R.id.edit_foto_profile -> {
@@ -179,7 +178,7 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
                 btnUpload?.visibility = View.INVISIBLE
                 edtName?.isEnabled = false
                 edtPhoneNumber?.isEnabled = false
-                btnSave?.visibility = View.GONE
+                btnSave.visibility = View.GONE
 
                 if (pathPhoto == null) {
                     EditProfilePresenter(this).editProfile(
@@ -293,6 +292,7 @@ class EditProfileActivity : AppCompatActivity(), ProfileInterface, UploadPictInt
                     // You can update this bitmap to your server
 //                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
                     val url = uri.toString()
+                    Log.d("url", url)
                     val newUrl = url.replace("file:///", "/")
 
                     val sourceFile = File(newUrl)
